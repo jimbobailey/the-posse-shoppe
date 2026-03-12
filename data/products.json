@@ -1,12 +1,12 @@
 [
   {
-    "id": "example-3d-print",
-    "name": "Example 3D Print",
+    "id": "dragon-head-display",
+    "name": "Dragon Head Display",
     "category": "3d",
-    "price": 15,
-    "description": "Example 3D printed product.",
+    "price": 24.99,
+    "description": "Detailed 3D printed dragon head display piece.",
     "mediaType": "image",
-    "media": "/images/3d/example-3d-print.jpg",
+    "media": "/images/3d/dragon-head-display.jpg",
     "colors": [
       {
         "name": "Orange",
@@ -20,13 +20,13 @@
     "active": true
   },
   {
-    "id": "example-laser-item",
-    "name": "Example Laser Item",
+    "id": "custom-laser-sign",
+    "name": "Custom Laser Sign",
     "category": "laser",
-    "price": 25,
-    "description": "Example laser engraved product.",
-    "mediaType": "video",
-    "media": "/videos/laser/example-laser-item.mp4",
+    "price": 29.99,
+    "description": "Custom laser engraved sign for shop, home, or gifts.",
+    "mediaType": "image",
+    "media": "/images/laser/custom-laser-sign.jpg",
     "colors": [],
     "active": true
   }
