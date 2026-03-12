@@ -9,9 +9,7 @@
             --primary: #121212;
             --glow: #ff8c00;
             --bg: #ffffff;
-            --muted: #666;
             --danger: #c62828;
-            --success: #167c3b;
         }
 
         * {
@@ -50,71 +48,18 @@
         }
 
         .nav-btn {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--glow);
             color: white;
             padding: 8px 15px;
             cursor: pointer;
             border-radius: 4px;
+            font-weight: bold;
         }
 
         .nav-btn.active {
             background: var(--glow);
             color: black;
-            font-weight: bold;
-        }
-
-        .admin-link {
-            background: none;
-            color: #ff8c00;
-            border: 2px solid #ff8c00;
-            padding: 8px 16px;
-            cursor: pointer;
-            margin: 20px auto 0;
-            display: block;
-            border-radius: 4px;
-        }
-
-        #admin-panel {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 10000;
-            color: white;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .admin-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .admin-form input,
-        .admin-form select,
-        .admin-form textarea {
-            width: 100%;
-            padding: 10px;
-            background: #222;
-            border: 1px solid var(--glow);
-            color: white;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .admin-form textarea {
-            min-height: 120px;
-            resize: vertical;
         }
 
         .main-layout {
@@ -183,120 +128,6 @@
             top: 20px;
         }
 
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .save-btn {
-            background: var(--glow);
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        .cancel-btn {
-            background: #555;
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        .muted {
-            color: #aaa;
-            font-size: 14px;
-        }
-
-        .checkbox-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #111;
-            border: 1px solid #333;
-            padding: 10px;
-            border-radius: 4px;
-        }
-
-        .checkbox-row input[type="checkbox"] {
-            width: auto;
-            transform: scale(1.2);
-        }
-
-        #color-builder {
-            display: none;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 12px;
-        }
-
-        .color-add-row {
-            display: grid;
-            grid-template-columns: 1.3fr 0.8fr auto;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .color-add-row input[type="color"] {
-            height: 42px;
-            padding: 4px;
-            border-radius: 4px;
-            border: 1px solid var(--glow);
-            background: #222;
-        }
-
-        .small-btn {
-            background: var(--glow);
-            color: black;
-            border: none;
-            padding: 10px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .color-pill {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 8px 10px;
-            margin-bottom: 8px;
-        }
-
-        .swatch {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            box-shadow: 0 0 0 1px #000 inset;
-            flex-shrink: 0;
-        }
-
-        .remove-color-btn {
-            margin-left: auto;
-            background: #a61b1b;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
         .product-option-wrap {
             margin-top: 12px;
         }
@@ -331,41 +162,6 @@
             border: 1px solid #444;
             display: inline-block;
             vertical-align: middle;
-        }
-
-        .helper-box {
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .helper-box h3,
-        .helper-box h4 {
-            margin-top: 0;
-            color: var(--glow);
-        }
-
-        .helper-output {
-            width: 100%;
-            min-height: 280px;
-            padding: 12px;
-            background: #050505;
-            border: 1px solid #444;
-            color: #9ff59f;
-            border-radius: 6px;
-            font-family: Consolas, monospace;
-            resize: vertical;
-        }
-
-        .helper-steps {
-            background: #111;
-            border: 1px solid #333;
-            padding: 12px;
-            border-radius: 6px;
-            color: #bbb;
-            font-size: 14px;
-            line-height: 1.5;
         }
 
         .cart-item {
@@ -508,10 +304,6 @@
                 width: 100%;
                 min-width: 0;
             }
-
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -523,83 +315,7 @@
         <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
         <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
     </nav>
-    <button class="admin-link" onclick="openAdmin()">MERCHANT ACCESS</button>
 </header>
-
-<div id="admin-panel">
-    <div class="admin-grid">
-        <div>
-            <button class="close-btn" onclick="closeAdmin()">CLOSE</button>
-
-            <div class="admin-form">
-                <h2 id="form-title">Product Entry Helper</h2>
-
-                <select id="p-page">
-                    <option value="3d">3D Prints</option>
-                    <option value="laser">Laser Engraving</option>
-                </select>
-
-                <input type="text" id="p-id" placeholder="Product ID (example: dragon-bust-black)">
-                <input type="text" id="p-name" placeholder="Product name">
-                <input type="number" id="p-price" placeholder="Price" step="0.01">
-                <textarea id="p-desc" placeholder="Description"></textarea>
-
-                <select id="p-media-type">
-                    <option value="image">Image</option>
-                    <option value="video">MP4 Video</option>
-                </select>
-
-                <input type="text" id="p-file" placeholder="Filename only (example: dragon.jpg or dragon.mp4)">
-
-                <div class="checkbox-row">
-                    <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()">
-                    <label for="p-enable-colors">Enable color options for this product</label>
-                </div>
-
-                <div id="color-builder">
-                    <h3>Available Colors</h3>
-
-                    <div class="color-add-row">
-                        <input type="text" id="new-color-name" placeholder="Color name (example: Orange, Matte Black)">
-                        <input type="color" id="new-color-hex" value="#ff8c00">
-                        <button type="button" class="small-btn" onclick="addColorOption()">ADD</button>
-                    </div>
-
-                    <div id="color-list-editor"></div>
-                </div>
-
-                <button class="save-btn" onclick="generateProductJson()">GENERATE PRODUCT JSON</button>
-                <button class="cancel-btn" onclick="clearForm()">CLEAR FORM</button>
-            </div>
-        </div>
-
-        <div>
-            <div class="helper-box">
-                <h3>Generated Product Block</h3>
-                <textarea id="json-output" class="helper-output" readonly placeholder="Your generated product JSON will appear here."></textarea>
-                <button class="save-btn" style="margin-top:12px;" onclick="copyJsonOutput()">COPY JSON</button>
-            </div>
-
-            <div class="helper-steps" style="margin-top:20px;">
-                <strong>How to add a product:</strong>
-                <br><br>
-                1. Put the image or MP4 file in the correct folder:
-                <br>• <strong>images/3d</strong>
-                <br>• <strong>images/laser</strong>
-                <br>• <strong>videos/3d</strong>
-                <br>• <strong>videos/laser</strong>
-                <br><br>
-                2. Fill out the form here and click <strong>GENERATE PRODUCT JSON</strong>
-                <br><br>
-                3. Copy the generated block
-                <br><br>
-                4. Paste it into <strong>data/products.json</strong>
-                <br><br>
-                5. Commit and push in GitHub Desktop
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="main-layout">
     <div id="product-list">
@@ -609,7 +325,6 @@
     <aside class="cart-sidebar">
         <h2 style="margin-top:0;">Your Order</h2>
         <div id="cart-items">Empty</div>
-
         <div class="cart-total" id="cart-total">$0.00</div>
 
         <div class="checkout-box">
@@ -647,16 +362,7 @@
 <script>
     let currentCategory = '3d';
     let cart = [];
-    let editingColors = [];
     let allProducts = [];
-
-    function openAdmin() {
-        document.getElementById('admin-panel').style.display = 'block';
-    }
-
-    function closeAdmin() {
-        document.getElementById('admin-panel').style.display = 'none';
-    }
 
     function view(v) {
         currentCategory = v;
@@ -664,122 +370,6 @@
         document.getElementById('btn-laser').classList.remove('active');
         document.getElementById('btn-' + v).classList.add('active');
         renderShop();
-    }
-
-    function toggleColorBuilder() {
-        const enabled = document.getElementById('p-enable-colors').checked;
-        document.getElementById('color-builder').style.display = enabled ? 'block' : 'none';
-    }
-
-    function renderColorEditor() {
-        const box = document.getElementById('color-list-editor');
-
-        if (!editingColors.length) {
-            box.innerHTML = '<div class="muted">No colors added yet.</div>';
-            return;
-        }
-
-        box.innerHTML = editingColors.map((color, index) => `
-            <div class="color-pill">
-                <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
-                <div>
-                    <div><strong>${escapeHtml(color.name)}</strong></div>
-                    <div class="muted">${escapeHtml(color.hex)}</div>
-                </div>
-                <button type="button" class="remove-color-btn" onclick="removeColorOption(${index})">REMOVE</button>
-            </div>
-        `).join('');
-    }
-
-    function addColorOption() {
-        const name = document.getElementById('new-color-name').value.trim();
-        const hex = document.getElementById('new-color-hex').value;
-
-        if (!name) {
-            alert('Enter a color name first.');
-            return;
-        }
-
-        editingColors.push({ name, hex });
-        document.getElementById('new-color-name').value = '';
-        document.getElementById('new-color-hex').value = '#ff8c00';
-        renderColorEditor();
-    }
-
-    function removeColorOption(index) {
-        editingColors.splice(index, 1);
-        renderColorEditor();
-    }
-
-    function clearForm() {
-        document.getElementById('p-page').value = '3d';
-        document.getElementById('p-id').value = '';
-        document.getElementById('p-name').value = '';
-        document.getElementById('p-price').value = '';
-        document.getElementById('p-desc').value = '';
-        document.getElementById('p-media-type').value = 'image';
-        document.getElementById('p-file').value = '';
-        document.getElementById('p-enable-colors').checked = false;
-        document.getElementById('json-output').value = '';
-        editingColors = [];
-        toggleColorBuilder();
-        renderColorEditor();
-    }
-
-    function buildMediaPath(category, mediaType, filename) {
-        if (!filename) return '';
-        if (mediaType === 'video') {
-            return `/videos/${category}/${filename}`;
-        }
-        return `/images/${category}/${filename}`;
-    }
-
-    function generateProductJson() {
-        const category = document.getElementById('p-page').value;
-        const id = document.getElementById('p-id').value.trim();
-        const name = document.getElementById('p-name').value.trim();
-        const priceValue = document.getElementById('p-price').value.trim();
-        const description = document.getElementById('p-desc').value.trim();
-        const mediaType = document.getElementById('p-media-type').value;
-        const filename = document.getElementById('p-file').value.trim();
-        const colorsEnabled = document.getElementById('p-enable-colors').checked;
-
-        if (!id || !name || !priceValue || !filename) {
-            alert('Enter product ID, name, price, and filename.');
-            return;
-        }
-
-        if (colorsEnabled && editingColors.length === 0) {
-            alert('You enabled color options, but no colors were added.');
-            return;
-        }
-
-        const product = {
-            id,
-            name,
-            category,
-            price: Number(priceValue),
-            description,
-            mediaType,
-            media: buildMediaPath(category, mediaType, filename),
-            colors: colorsEnabled ? editingColors.map(c => ({ ...c })) : [],
-            active: true
-        };
-
-        document.getElementById('json-output').value = JSON.stringify(product, null, 2) + ',';
-    }
-
-    function copyJsonOutput() {
-        const output = document.getElementById('json-output');
-        if (!output.value.trim()) {
-            alert('Nothing to copy yet.');
-            return;
-        }
-
-        output.select();
-        output.setSelectionRange(0, 999999);
-        document.execCommand('copy');
-        alert('JSON copied.');
     }
 
     async function loadProducts() {
@@ -803,7 +393,7 @@
             document.getElementById('product-list').innerHTML = `
                 <div class="card">
                     <b>Could not load products</b>
-                    <p>Please check <strong>data/products.json</strong>.</p>
+                    <p>Please check <strong>data/products.json</strong> and your media file paths.</p>
                 </div>
             `;
         }
@@ -864,7 +454,13 @@
             `;
         }
 
-        return `<img src="${safeMedia}" alt="${escapeHtml(item.name || 'Product image')}">`;
+        return `
+            <img
+                src="${safeMedia}"
+                alt="${escapeHtml(item.name || 'Product image')}"
+                onerror="this.onerror=null; this.src=''; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Media not found</div>';"
+            >
+        `;
     }
 
     function addToCart(itemId, itemIndex) {
@@ -1032,7 +628,7 @@
             let data = {};
             try {
                 data = await response.json();
-            } catch (jsonError) {
+            } catch {
                 data = {};
             }
 
@@ -1101,8 +697,6 @@
     }
 
     window.onload = async () => {
-        clearForm();
-        renderColorEditor();
         renderCart();
         await loadProducts();
     };
