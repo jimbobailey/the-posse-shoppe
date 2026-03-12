@@ -26,15 +26,19 @@
     }
 
     header {
-      background: linear-gradient(180deg, #111 0%, #1a1a1a 100%);
-      padding: 18px 20px 24px;
+      padding: 20px 20px 28px;
       text-align: center;
       border-bottom: 2px solid var(--glow);
+      background:
+        linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.88)),
+        url("images/hex-bg.png") center center / cover no-repeat;
     }
 
     .header-banner-wrap {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto 18px;
+      padding: 14px;
+      border-radius: 12px;
     }
 
     .header-banner {
@@ -44,8 +48,8 @@
       margin: 0 auto;
       height: auto;
       border-radius: 10px;
-      border: 1px solid rgba(255, 140, 0, 0.35);
-      box-shadow: 0 0 18px rgba(255, 140, 0, 0.18);
+      border: 1px solid rgba(255, 140, 0, 0.45);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.22);
       background: #111;
     }
 
@@ -78,7 +82,7 @@
     }
 
     .nav-btn {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       border: 1px solid var(--glow);
       color: white;
       padding: 8px 15px;
@@ -93,7 +97,7 @@
     }
 
     .admin-link {
-      background: none;
+      background: rgba(0, 0, 0, 0.45);
       color: #ff8c00;
       border: 2px solid #ff8c00;
       padding: 8px 16px;
@@ -578,11 +582,7 @@
 <body>
   <header>
     <div class="header-banner-wrap">
-      <img
-        src="images/header.png"
-        alt="The Posse Shoppe"
-        class="header-banner"
-      />
+      <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
     </div>
 
     <h1 class="sr-only">The Posse Shoppe</h1>
@@ -660,7 +660,6 @@
     <aside class="cart-sidebar">
       <h2 style="margin-top:0;">Your Order</h2>
       <div id="cart-items">Empty</div>
-
       <div class="cart-total" id="cart-total">$0.00</div>
 
       <div class="checkout-box">
@@ -689,7 +688,6 @@
         </div>
 
         <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">SEND ORDER REQUEST</button>
-
         <div id="order-status" class="status-message"></div>
       </div>
     </aside>
