@@ -1,0 +1,33 @@
+[
+  {
+    "id": "example-3d-print",
+    "name": "Example 3D Print",
+    "category": "3d",
+    "price": 15,
+    "description": "Example 3D printed product.",
+    "mediaType": "image",
+    "media": "/images/3d/example-3d-print.jpg",
+    "colors": [
+      {
+        "name": "Orange",
+        "hex": "#ff8c00"
+      },
+      {
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "example-laser-item",
+    "name": "Example Laser Item",
+    "category": "laser",
+    "price": 25,
+    "description": "Example laser engraved product.",
+    "mediaType": "video",
+    "media": "/videos/laser/example-laser-item.mp4",
+    "colors": [],
+    "active": true
+  }
+]
