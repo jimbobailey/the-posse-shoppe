@@ -340,6 +340,7 @@
   <script>
     let editingColors = [];
     let allProducts = [];
+    const adminPassword = prompt("Enter admin password:");
 
     function toggleColorBuilder() {
       const enabled = document.getElementById("p-enable-colors").checked;
@@ -462,9 +463,10 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            action,
-            product: item
-          })
+          action,
+          password: adminPassword,
+          product: item
+        })
         });
 
         const data = await response.json();
@@ -513,10 +515,10 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            action: "delete",
-            id
-          })
-        });
+          action: "delete",
+          password: adminPassword,
+          id
+        })
 
         const data = await response.json();
 
