@@ -15,7 +15,32 @@ exports.handler = async (event) => {
   }
 
   if (event.httpMethod === "POST") {
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+    if (!ADMIN_PASSWORD) {
+      return {
+        statusCode: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          success: false,
+          message: "ADMIN_PASSWORD is missing in Netlify environment variables."
+        })
+      };
+    }
+
     const body = JSON.parse(event.body || "{}");
+
+    if (String(body.password || "") !== String(ADMIN_PASSWORD)) {
+      return {
+        statusCode: 401,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          success: false,
+          message: "Unauthorized"
+        })
+      };
+    }
+
     let products = (await store.get("catalog", { type: "json" })) || [];
 
     if (body.action === "add" && body.product) {
