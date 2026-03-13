@@ -719,6 +719,7 @@
     let cart = [];
     let editingColors = [];
     let allProducts = [];
+    let globalColors = [];
 
     function openAdmin() {
       document.getElementById("admin-panel").style.display = "block";
@@ -805,7 +806,18 @@
         }
 
         const data = await response.json();
-        allProducts = Array.isArray(data) ? data : [];
+        const rawProducts = Array.isArray(data) ? data : [];
+
+        const globalColorItem = rawProducts.find(
+          (item) => String(item.id) === "__global_colors__"
+        );
+
+        globalColors = Array.isArray(globalColorItem?.colors) ? globalColorItem.colors : [];
+
+        allProducts = rawProducts.filter(
+          (item) => String(item.id) !== "__global_colors__"
+        );
+
         renderShop();
         renderAdmin();
       } catch (error) {
@@ -831,10 +843,21 @@
       return `/images/${item.category}/${filename}`;
     }
 
-    function buildColorDropdown(item, itemIndex) {
-      if (!item.hasColors || !item.colors || !item.colors.length) return "";
+    function getProductColors(item) {
+      if (item.useGlobalColors) {
+        return globalColors;
+      }
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
+        return item.colors;
+      }
+      return [];
+    }
 
-      const options = item.colors.map((c, idx) => `
+    function buildColorDropdown(item, itemIndex) {
+      const colors = getProductColors(item);
+      if (!colors.length) return "";
+
+      const options = colors.map((c, idx) => `
         <option value="${idx}" ${idx === 0 ? "selected" : ""}>
           ${escapeHtml(c.name)}
         </option>
@@ -847,8 +870,8 @@
             ${options}
           </select>
           <div class="selected-color-preview" id="color-preview-${itemIndex}">
-            <span class="inline-swatch" style="background:${escapeHtml(item.colors[0].hex)};"></span>
-            <span>${escapeHtml(item.colors[0].name)}</span>
+            <span class="inline-swatch" style="background:${escapeHtml(colors[0].hex)};"></span>
+            <span>${escapeHtml(colors[0].name)}</span>
           </div>
         </div>
       `;
@@ -857,9 +880,12 @@
     function updateSelectedColorPreview(itemIndex, selectEl) {
       const items = getCurrentProducts();
       const item = items[itemIndex];
-      if (!item || !item.colors || !item.colors.length) return;
+      if (!item) return;
 
-      const selected = item.colors[Number(selectEl.value)];
+      const colors = getProductColors(item);
+      if (!colors.length) return;
+
+      const selected = colors[Number(selectEl.value)];
       const preview = document.getElementById("color-preview-" + itemIndex);
 
       if (preview && selected) {
@@ -875,8 +901,7 @@
 
       if (item.mediaType === "video") {
         return `
-          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';"> 
-
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
             <source src="${mediaPath}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -1024,10 +1049,11 @@
           html += `<div class="muted">No products yet.</div>`;
         } else {
           items.forEach(item => {
-            const colorSwatches = item.hasColors && item.colors?.length
+            const itemColors = getProductColors(item);
+            const colorSwatches = itemColors.length
               ? `
                 <div class="inventory-color-row">
-                  ${item.colors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
+                  ${itemColors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
                 </div>
               `
               : `<div class="muted" style="margin-top:8px;">No color options</div>`;
@@ -1058,11 +1084,12 @@
       if (!item) return;
 
       let selectedColor = null;
+      const colors = getProductColors(item);
 
-      if (item.hasColors && item.colors && item.colors.length) {
+      if (colors.length) {
         const select = document.getElementById(`color-select-${itemIndex}`);
         const selectedIndex = select ? Number(select.value) : 0;
-        selectedColor = item.colors[selectedIndex] || item.colors[0];
+        selectedColor = colors[selectedIndex] || colors[0];
       }
 
       const existingIndex = cart.findIndex(cartItem =>
