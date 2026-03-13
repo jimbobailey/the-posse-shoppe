@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Posse Shoppe Admin</title>
+  <style>
+    :root {
+      --primary: #121212;
+      --glow: #ff8c00;
+      --bg: #000000;
+      --muted: #666;
+      --danger: #c62828;
+      --success: #167c3b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: white;
+    }
+
+    header {
+      padding: 20px 20px 28px;
+      text-align: center;
+      border-bottom: 2px solid var(--glow);
+      background:
+        linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.88)),
+        url("images/hex-bg.png") center center / cover no-repeat;
+    }
+
+    .header-banner-wrap {
+      max-width: 1120px;
+      margin: 0 auto 18px;
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    .header-banner {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 140, 0, 0.45);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.22);
+      background: #111;
+    }
+
+    .admin-shell {
+      padding: 40px 20px;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .admin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+      width: 100%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid var(--glow);
+      color: white;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .admin-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .admin-inv-card {
+      background: #222;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .edit-btn {
+      background: #ff8c00;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .delete-btn {
+      background: #d62828;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .save-btn {
+      background: var(--glow);
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      color: black;
+    }
+
+    .cancel-btn {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .muted {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+      transform: scale(1.2);
+    }
+
+    #color-builder {
+      display: none;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .color-add-row {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .color-add-row input[type="color"] {
+      height: 42px;
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid var(--glow);
+      background: #222;
+    }
+
+    .small-btn {
+      background: var(--glow);
+      color: black;
+      border: none;
+      padding: 10px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .color-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #000 inset;
+      flex-shrink: 0;
+    }
+
+    .remove-color-btn {
+      margin-left: auto;
+      background: #a61b1b;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .inventory-color-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .inventory-mini-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+
+    .media-note {
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .admin-media-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      background: #444;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 980px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-banner-wrap">
+      <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <div class="admin-grid">
+      <div>
+        <div class="admin-form">
+          <h2 id="form-title">Add New Product</h2>
+
+          <input type="hidden" id="p-id" />
+
+          <select id="p-page">
+            <option value="3d">3D Prints</option>
+            <option value="laser">Laser Engraving</option>
+          </select>
+
+          <input type="text" id="p-name" placeholder="Name" />
+          <input type="number" id="p-price" placeholder="Price" step="0.01" />
+          <textarea id="p-desc" placeholder="Description"></textarea>
+
+          <select id="p-media-type">
+            <option value="image">Image</option>
+            <option value="video">MP4 Video</option>
+          </select>
+
+          <input type="text" id="p-img" placeholder="Media Filename (example: dragon.jpg or dragon.mp4)" />
+
+          <div class="media-note">
+            Put product files in:
+            <br>images/3d/
+            <br>images/laser/
+            <br>videos/3d/
+            <br>videos/laser/
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
+            <label for="p-enable-colors">Enable color options for this product</label>
+          </div>
+
+          <div id="color-builder">
+            <h3 style="margin-top:0; color:var(--glow);">Available Colors</h3>
+
+            <div class="color-add-row">
+              <input type="text" id="new-color-name" placeholder="Color name (example: Orange, Matte Black)" />
+              <input type="color" id="new-color-hex" value="#ff8c00" />
+              <button type="button" class="small-btn" onclick="addColorOption()">ADD</button>
+            </div>
+
+            <div id="color-list-editor"></div>
+          </div>
+
+          <button class="save-btn" onclick="saveItem()">SAVE PRODUCT</button>
+          <button class="cancel-btn" onclick="clearForm()">CLEAR / CANCEL EDIT</button>
+        </div>
+      </div>
+
+      <div id="admin-inventory-list"></div>
+    </div>
+  </div>
+
+  <script>
+    let editingColors = [];
+    let allProducts = [];
+
+    function toggleColorBuilder() {
+      const enabled = document.getElementById("p-enable-colors").checked;
+      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+    }
+
+    function renderColorEditor() {
+      const box = document.getElementById("color-list-editor");
+
+      if (!editingColors.length) {
+        box.innerHTML = '<div class="muted">No colors added yet.</div>';
+        return;
+      }
+
+      box.innerHTML = editingColors.map((color, index) => `
+        <div class="color-pill">
+          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+          <div>
+            <div><strong>${escapeHtml(color.name)}</strong></div>
+            <div class="muted">${escapeHtml(color.hex)}</div>
+          </div>
+          <button type="button" class="remove-color-btn" onclick="removeColorOption(${index})">REMOVE</button>
+        </div>
+      `).join("");
+    }
+
+    function addColorOption() {
+      const name = document.getElementById("new-color-name").value.trim();
+      const hex = document.getElementById("new-color-hex").value;
+
+      if (!name) {
+        alert("Please enter a color name.");
+        return;
+      }
+
+      editingColors.push({ name, hex });
+      document.getElementById("new-color-name").value = "";
+      document.getElementById("new-color-hex").value = "#ff8c00";
+      renderColorEditor();
+    }
+
+    function removeColorOption(index) {
+      editingColors.splice(index, 1);
+      renderColorEditor();
+    }
+
+    function clearForm() {
+      document.getElementById("p-id").value = "";
+      document.getElementById("p-page").value = "3d";
+      document.getElementById("p-name").value = "";
+      document.getElementById("p-price").value = "";
+      document.getElementById("p-desc").value = "";
+      document.getElementById("p-media-type").value = "image";
+      document.getElementById("p-img").value = "";
+      document.getElementById("p-enable-colors").checked = false;
+      document.getElementById("form-title").textContent = "Add New Product";
+      editingColors = [];
+      toggleColorBuilder();
+      renderColorEditor();
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        allProducts = Array.isArray(data) ? data : [];
+        renderAdmin();
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      }
+    }
+
+    async function saveItem() {
+      const idField = document.getElementById("p-id").value.trim();
+      const category = document.getElementById("p-page").value;
+      const name = document.getElementById("p-name").value.trim();
+      const priceValue = document.getElementById("p-price").value.trim();
+      const desc = document.getElementById("p-desc").value.trim();
+      const mediaType = document.getElementById("p-media-type").value;
+      const img = document.getElementById("p-img").value.trim();
+      const colorsEnabled = document.getElementById("p-enable-colors").checked;
+
+      if (!name || !priceValue) {
+        alert("Please enter at least a product name and price.");
+        return;
+      }
+
+      if (!img) {
+        alert("Please enter the media filename.");
+        return;
+      }
+
+      if (colorsEnabled && editingColors.length === 0) {
+        alert("You enabled color options, but no colors were added.");
+        return;
+      }
+
+      const item = {
+        id: idField || String(Date.now()),
+        category,
+        name,
+        price: Number(priceValue),
+        desc,
+        mediaType,
+        img,
+        hasColors: colorsEnabled,
+        colors: colorsEnabled ? [...editingColors] : []
+      };
+
+      const action = idField ? "edit" : "add";
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action,
+            product: item
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        clearForm();
+        await loadProducts();
+        alert(action === "add" ? "Product added." : "Product updated.");
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem saving the product.");
+      }
+    }
+
+    function editItem(id) {
+      const item = allProducts.find(x => String(x.id) === String(id));
+      if (!item) return;
+
+      document.getElementById("p-id").value = item.id || "";
+      document.getElementById("p-page").value = item.category || "3d";
+      document.getElementById("p-name").value = item.name || "";
+      document.getElementById("p-price").value = item.price ?? "";
+      document.getElementById("p-desc").value = item.desc || "";
+      document.getElementById("p-media-type").value = item.mediaType || "image";
+      document.getElementById("p-img").value = item.img || "";
+      document.getElementById("p-enable-colors").checked = !!item.hasColors;
+      document.getElementById("form-title").textContent = "Edit Product";
+
+      editingColors = Array.isArray(item.colors) ? [...item.colors] : [];
+      toggleColorBuilder();
+      renderColorEditor();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function deleteItem(id) {
+      const confirmed = confirm("Delete this listing?");
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "delete",
+            id
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        if (document.getElementById("p-id").value === String(id)) {
+          clearForm();
+        }
+
+        await loadProducts();
+        alert("Product deleted.");
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem deleting the product.");
+      }
+    }
+
+    function renderAdmin() {
+      const list = document.getElementById("admin-inventory-list");
+      let html = "<h3>Inventory</h3>";
+
+      ["3d", "laser"].forEach(cat => {
+        const items = allProducts.filter(x => x.category === cat);
+
+        html += `<h4 style="color: var(--glow); margin-top:20px;">${cat === "3d" ? "3D Prints" : "Laser Engraving"}</h4>`;
+
+        if (items.length === 0) {
+          html += `<div class="muted">No products yet.</div>`;
+        } else {
+          items.forEach(item => {
+            const colorSwatches = item.hasColors && item.colors?.length
+              ? `
+                <div class="inventory-color-row">
+                  ${item.colors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
+                </div>
+              `
+              : `<div class="muted" style="margin-top:8px;">No color options</div>`;
+
+            html += `
+              <div class="admin-inv-card">
+                <div><strong>${escapeHtml(item.name || "Unnamed Product")}</strong></div>
+                <div class="muted">$${Number(item.price || 0).toFixed(2)}</div>
+                <div class="muted">${escapeHtml(item.img || "No media file set")}</div>
+                <div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>
+                ${colorSwatches}
+                <div class="admin-actions">
+                  <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
+                  <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
+                </div>
+              </div>
+            `;
+          });
+        }
+      });
+
+      list.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    window.onload = async () => {
+      clearForm();
+      renderColorEditor();
+      await loadProducts();
+    };
+  </script>
+</body>
+</html>
