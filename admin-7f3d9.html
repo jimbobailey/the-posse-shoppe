@@ -371,6 +371,25 @@
     let hasGlobalColorRecord = false;
     const adminPassword = window.prompt("Enter admin password:") || "";
 
+    function normalizeProduct(item) {
+      const mediaPath = item.media || "";
+      const fallbackImg = mediaPath ? mediaPath.split("/").pop() : "";
+
+      return {
+        ...item,
+        id: item.id || String(Date.now()),
+        category: item.category || "3d",
+        name: item.name || "",
+        price: Number(item.price || 0),
+        desc: item.desc ?? item.description ?? "",
+        mediaType: item.mediaType || (String(mediaPath).endsWith(".mp4") ? "video" : "image"),
+        img: item.img || fallbackImg || "",
+        hasColors: !!item.hasColors,
+        useGlobalColors: !!item.useGlobalColors,
+        colors: Array.isArray(item.colors) ? item.colors : []
+      };
+    }
+
     function toggleColorBuilder() {
       const enabled = document.getElementById("p-enable-colors").checked;
       const useGlobal = document.getElementById("p-use-global-colors").checked;
@@ -467,6 +486,15 @@
       return [];
     }
 
+    function upsertLocalProduct(product) {
+      const index = allProducts.findIndex((p) => String(p.id) === String(product.id));
+      if (index === -1) {
+        allProducts.push(product);
+      } else {
+        allProducts[index] = product;
+      }
+    }
+
     function clearForm() {
       document.getElementById("p-id").value = "";
       document.getElementById("p-page").value = "3d";
@@ -497,7 +525,10 @@
         hasGlobalColorRecord = !!globalItem;
         globalColors = Array.isArray(globalItem?.colors) ? globalItem.colors : [];
 
-        allProducts = rawItems.filter((item) => String(item.id) !== "__global_colors__");
+        allProducts = rawItems
+          .filter((item) => String(item.id) !== "__global_colors__")
+          .map(normalizeProduct);
+
         renderGlobalColorEditor();
         renderAdmin();
       } catch (error) {
@@ -540,7 +571,8 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        await loadProducts();
+        hasGlobalColorRecord = true;
+        renderAdmin();
         alert("Global colors saved.");
       } catch (error) {
         console.error(error);
@@ -579,7 +611,7 @@
         return;
       }
 
-      const item = {
+      const item = normalizeProduct({
         id: idField || String(Date.now()),
         category,
         name,
@@ -590,7 +622,7 @@
         hasColors: colorsEnabled,
         useGlobalColors: colorsEnabled ? useGlobalColors : false,
         colors: colorsEnabled && !useGlobalColors ? [...editingColors] : []
-      };
+      });
 
       const action = idField ? "edit" : "add";
 
@@ -613,8 +645,9 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        upsertLocalProduct(item);
+        renderAdmin();
         clearForm();
-        await loadProducts();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -666,11 +699,13 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = allProducts.filter((p) => String(p.id) !== String(id));
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
+        renderAdmin();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
