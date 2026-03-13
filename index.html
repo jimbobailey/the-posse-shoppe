@@ -96,6 +96,25 @@
       font-weight: bold;
     }
 
+    .contact-link {
+      background: rgba(0, 0, 0, 0.45);
+      color: #ff8c00;
+      border: 2px solid #ff8c00;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin: 20px auto 0;
+      display: block;
+      width: fit-content;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .contact-link:hover {
+      background: #ff8c00;
+      color: black;
+    }
+
     .admin-link {
       background: rgba(0, 0, 0, 0.45);
       color: #ff8c00;
@@ -591,6 +610,8 @@
       <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
       <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
     </nav>
+
+    <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
     
   </header>
 
@@ -854,7 +875,7 @@
 
       if (item.mediaType === "video") {
         return `
-          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';"> 
 
             <source src="${mediaPath}" type="video/mp4">
             Your browser does not support the video tag.
