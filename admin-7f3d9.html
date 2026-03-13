@@ -469,6 +469,15 @@
       return [];
     }
 
+    function upsertLocalProduct(product) {
+      const index = allProducts.findIndex((p) => String(p.id) === String(product.id));
+      if (index === -1) {
+        allProducts.unshift(product);
+      } else {
+        allProducts[index] = product;
+      }
+    }
+
     function clearForm() {
       document.getElementById("p-id").value = "";
       document.getElementById("p-page").value = "3d";
@@ -546,7 +555,7 @@
         hasGlobalColorRecord = true;
         renderGlobalColorEditor();
         renderAdmin();
-        await loadProducts();
+        loadProducts();
         alert("Global colors saved.");
       } catch (error) {
         console.error(error);
@@ -619,8 +628,10 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        await loadProducts();
+        upsertLocalProduct(item);
+        renderAdmin();
         clearForm();
+        loadProducts();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -672,11 +683,14 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = allProducts.filter((p) => String(p.id) !== String(id));
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
+        renderAdmin();
+        loadProducts();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
