@@ -96,6 +96,60 @@
       font-weight: bold;
     }
 
+    .admin-link {
+      background: rgba(0, 0, 0, 0.45);
+      color: #ff8c00;
+      border: 2px solid #ff8c00;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin: 20px auto 0;
+      display: block;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    #admin-panel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 10000;
+      color: white;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .admin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+      width: 100%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid var(--glow);
+      color: white;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .admin-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
     .main-layout {
       display: flex;
       max-width: 1500px;
@@ -162,6 +216,158 @@
       top: 20px;
     }
 
+    .admin-inv-card {
+      background: #222;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .edit-btn {
+      background: #ff8c00;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .delete-btn {
+      background: #d62828;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .save-btn {
+      background: var(--glow);
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      color: black;
+    }
+
+    .cancel-btn {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .muted {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+      transform: scale(1.2);
+    }
+
+    #color-builder {
+      display: none;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .color-add-row {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .color-add-row input[type="color"] {
+      height: 42px;
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid var(--glow);
+      background: #222;
+    }
+
+    .small-btn {
+      background: var(--glow);
+      color: black;
+      border: none;
+      padding: 10px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .color-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #000 inset;
+      flex-shrink: 0;
+    }
+
+    .remove-color-btn {
+      margin-left: auto;
+      background: #a61b1b;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
     .product-option-wrap {
       margin-top: 12px;
     }
@@ -196,6 +402,41 @@
       border: 1px solid #444;
       display: inline-block;
       vertical-align: middle;
+    }
+
+    .inventory-color-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .inventory-mini-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+
+    .media-note {
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .admin-media-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      background: #444;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-top: 8px;
     }
 
     .cart-item {
@@ -331,6 +572,10 @@
         width: 100%;
         min-width: 0;
       }
+
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -346,7 +591,68 @@
       <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
       <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
     </nav>
+    <button class="admin-link" onclick="openAdmin()">MERCHANT ACCESS</button>
   </header>
+
+  <div id="admin-panel">
+    <div class="admin-grid">
+      <div>
+        <button class="close-btn" onclick="closeAdmin()">CLOSE</button>
+
+        <div class="admin-form">
+          <h2 id="form-title">Add New Product</h2>
+
+          <input type="hidden" id="p-id" />
+
+          <select id="p-page">
+            <option value="3d">3D Prints</option>
+            <option value="laser">Laser Engraving</option>
+          </select>
+
+          <input type="text" id="p-name" placeholder="Name" />
+          <input type="number" id="p-price" placeholder="Price" step="0.01" />
+          <textarea id="p-desc" placeholder="Description"></textarea>
+
+          <select id="p-media-type">
+            <option value="image">Image</option>
+            <option value="video">MP4 Video</option>
+          </select>
+
+          <input type="text" id="p-img" placeholder="Media Filename (example: dragon.jpg or dragon.mp4)" />
+
+          <div class="media-note">
+            Put product files in:
+            <br>images/3d/
+            <br>images/laser/
+            <br>videos/3d/
+            <br>videos/laser/
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
+            <label for="p-enable-colors">Enable color options for this product</label>
+          </div>
+
+          <div id="color-builder">
+            <h3 style="margin-top:0; color:var(--glow);">Available Colors</h3>
+
+            <div class="color-add-row">
+              <input type="text" id="new-color-name" placeholder="Color name (example: Orange, Matte Black)" />
+              <input type="color" id="new-color-hex" value="#ff8c00" />
+              <button type="button" class="small-btn" onclick="addColorOption()">ADD</button>
+            </div>
+
+            <div id="color-list-editor"></div>
+          </div>
+
+          <button class="save-btn" onclick="saveItem()">SAVE PRODUCT</button>
+          <button class="cancel-btn" onclick="clearForm()">CLEAR / CANCEL EDIT</button>
+        </div>
+      </div>
+
+      <div id="admin-inventory-list"></div>
+    </div>
+  </div>
 
   <div class="main-layout">
     <div id="product-list"></div>
@@ -390,7 +696,17 @@
   <script>
     let currentCategory = "3d";
     let cart = [];
+    let editingColors = [];
     let allProducts = [];
+
+    function openAdmin() {
+      document.getElementById("admin-panel").style.display = "block";
+      renderAdmin();
+    }
+
+    function closeAdmin() {
+      document.getElementById("admin-panel").style.display = "none";
+    }
 
     function view(v) {
       currentCategory = v;
@@ -398,6 +714,66 @@
       document.getElementById("btn-laser").classList.remove("active");
       document.getElementById("btn-" + v).classList.add("active");
       renderShop();
+    }
+
+    function toggleColorBuilder() {
+      const enabled = document.getElementById("p-enable-colors").checked;
+      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+    }
+
+    function renderColorEditor() {
+      const box = document.getElementById("color-list-editor");
+
+      if (!editingColors.length) {
+        box.innerHTML = '<div class="muted">No colors added yet.</div>';
+        return;
+      }
+
+      box.innerHTML = editingColors.map((color, index) => `
+        <div class="color-pill">
+          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+          <div>
+            <div><strong>${escapeHtml(color.name)}</strong></div>
+            <div class="muted">${escapeHtml(color.hex)}</div>
+          </div>
+          <button type="button" class="remove-color-btn" onclick="removeColorOption(${index})">REMOVE</button>
+        </div>
+      `).join("");
+    }
+
+    function addColorOption() {
+      const name = document.getElementById("new-color-name").value.trim();
+      const hex = document.getElementById("new-color-hex").value;
+
+      if (!name) {
+        alert("Please enter a color name.");
+        return;
+      }
+
+      editingColors.push({ name, hex });
+      document.getElementById("new-color-name").value = "";
+      document.getElementById("new-color-hex").value = "#ff8c00";
+      renderColorEditor();
+    }
+
+    function removeColorOption(index) {
+      editingColors.splice(index, 1);
+      renderColorEditor();
+    }
+
+    function clearForm() {
+      document.getElementById("p-id").value = "";
+      document.getElementById("p-page").value = "3d";
+      document.getElementById("p-name").value = "";
+      document.getElementById("p-price").value = "";
+      document.getElementById("p-desc").value = "";
+      document.getElementById("p-media-type").value = "image";
+      document.getElementById("p-img").value = "";
+      document.getElementById("p-enable-colors").checked = false;
+      document.getElementById("form-title").textContent = "Add New Product";
+      editingColors = [];
+      toggleColorBuilder();
+      renderColorEditor();
     }
 
     async function loadProducts() {
@@ -410,6 +786,7 @@
         const data = await response.json();
         allProducts = Array.isArray(data) ? data : [];
         renderShop();
+        renderAdmin();
       } catch (error) {
         console.error("Failed to load products:", error);
         document.getElementById("product-list").innerHTML = `
@@ -428,23 +805,15 @@
     function buildMediaPath(item) {
       const filename = item.img || "";
       if (item.mediaType === "video") {
-        return \`/videos/\${item.category}/\${filename}\`;
+        return `/videos/${item.category}/${filename}`;
       }
-      return \`/images/\${item.category}/\${filename}\`;
-    }
-
-    function getItemColors(item) {
-      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
-        return item.colors;
-      }
-      return [];
+      return `/images/${item.category}/${filename}`;
     }
 
     function buildColorDropdown(item, itemIndex) {
-      const colors = getItemColors(item);
-      if (!colors.length) return "";
+      if (!item.hasColors || !item.colors || !item.colors.length) return "";
 
-      const options = colors.map((c, idx) => `
+      const options = item.colors.map((c, idx) => `
         <option value="${idx}" ${idx === 0 ? "selected" : ""}>
           ${escapeHtml(c.name)}
         </option>
@@ -457,8 +826,8 @@
             ${options}
           </select>
           <div class="selected-color-preview" id="color-preview-${itemIndex}">
-            <span class="inline-swatch" style="background:${escapeHtml(colors[0].hex)};"></span>
-            <span>${escapeHtml(colors[0].name)}</span>
+            <span class="inline-swatch" style="background:${escapeHtml(item.colors[0].hex)};"></span>
+            <span>${escapeHtml(item.colors[0].name)}</span>
           </div>
         </div>
       `;
@@ -467,12 +836,9 @@
     function updateSelectedColorPreview(itemIndex, selectEl) {
       const items = getCurrentProducts();
       const item = items[itemIndex];
-      if (!item) return;
+      if (!item || !item.colors || !item.colors.length) return;
 
-      const colors = getItemColors(item);
-      if (!colors.length) return;
-
-      const selected = colors[Number(selectEl.value)];
+      const selected = item.colors[Number(selectEl.value)];
       const preview = document.getElementById("color-preview-" + itemIndex);
 
       if (preview && selected) {
@@ -489,6 +855,7 @@
       if (item.mediaType === "video") {
         return `
           <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
+
             <source src="${mediaPath}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -504,18 +871,177 @@
       `;
     }
 
+    async function saveItem() {
+      const idField = document.getElementById("p-id").value.trim();
+      const category = document.getElementById("p-page").value;
+      const name = document.getElementById("p-name").value.trim();
+      const priceValue = document.getElementById("p-price").value.trim();
+      const desc = document.getElementById("p-desc").value.trim();
+      const mediaType = document.getElementById("p-media-type").value;
+      const img = document.getElementById("p-img").value.trim();
+      const colorsEnabled = document.getElementById("p-enable-colors").checked;
+
+      if (!name || !priceValue) {
+        alert("Please enter at least a product name and price.");
+        return;
+      }
+
+      if (!img) {
+        alert("Please enter the media filename.");
+        return;
+      }
+
+      if (colorsEnabled && editingColors.length === 0) {
+        alert("You enabled color options, but no colors were added.");
+        return;
+      }
+
+      const item = {
+        id: idField || String(Date.now()),
+        category,
+        name,
+        price: Number(priceValue),
+        desc,
+        mediaType,
+        img,
+        hasColors: colorsEnabled,
+        colors: colorsEnabled ? [...editingColors] : []
+      };
+
+      const action = idField ? "edit" : "add";
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action,
+            product: item
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        clearForm();
+        await loadProducts();
+        alert(action === "add" ? "Product added." : "Product updated.");
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem saving the product.");
+      }
+    }
+
+    function editItem(id) {
+      const item = allProducts.find(x => String(x.id) === String(id));
+      if (!item) return;
+
+      document.getElementById("p-id").value = item.id || "";
+      document.getElementById("p-page").value = item.category || "3d";
+      document.getElementById("p-name").value = item.name || "";
+      document.getElementById("p-price").value = item.price ?? "";
+      document.getElementById("p-desc").value = item.desc || "";
+      document.getElementById("p-media-type").value = item.mediaType || "image";
+      document.getElementById("p-img").value = item.img || "";
+      document.getElementById("p-enable-colors").checked = !!item.hasColors;
+      document.getElementById("form-title").textContent = "Edit Product";
+
+      editingColors = Array.isArray(item.colors) ? [...item.colors] : [];
+      toggleColorBuilder();
+      renderColorEditor();
+    }
+
+    async function deleteItem(id) {
+      const confirmed = confirm("Delete this listing?");
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "delete",
+            id
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        if (document.getElementById("p-id").value === String(id)) {
+          clearForm();
+        }
+
+        await loadProducts();
+        alert("Product deleted.");
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem deleting the product.");
+      }
+    }
+
+    function renderAdmin() {
+      const list = document.getElementById("admin-inventory-list");
+      let html = "<h3>Inventory</h3>";
+
+      ["3d", "laser"].forEach(cat => {
+        const items = allProducts.filter(x => x.category === cat);
+
+        html += `<h4 style="color: var(--glow); margin-top:20px;">${cat === "3d" ? "3D Prints" : "Laser Engraving"}</h4>`;
+
+        if (items.length === 0) {
+          html += `<div class="muted">No products yet.</div>`;
+        } else {
+          items.forEach(item => {
+            const colorSwatches = item.hasColors && item.colors?.length
+              ? `
+                <div class="inventory-color-row">
+                  ${item.colors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
+                </div>
+              `
+              : `<div class="muted" style="margin-top:8px;">No color options</div>`;
+
+            html += `
+              <div class="admin-inv-card">
+                <div><strong>${escapeHtml(item.name || "Unnamed Product")}</strong></div>
+                <div class="muted">$${Number(item.price || 0).toFixed(2)}</div>
+                <div class="muted">${escapeHtml(item.img || "No media file set")}</div>
+                <div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>
+                ${colorSwatches}
+                <div class="admin-actions">
+                  <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
+                  <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
+                </div>
+              </div>
+            `;
+          });
+        }
+      });
+
+      list.innerHTML = html;
+    }
+
     function addToCart(itemId, itemIndex) {
       const items = getCurrentProducts();
       const item = items.find(x => String(x.id) === String(itemId));
       if (!item) return;
 
       let selectedColor = null;
-      const colors = getItemColors(item);
 
-      if (colors.length) {
-        const select = document.getElementById(\`color-select-\${itemIndex}\`);
+      if (item.hasColors && item.colors && item.colors.length) {
+        const select = document.getElementById(`color-select-${itemIndex}`);
         const selectedIndex = select ? Number(select.value) : 0;
-        selectedColor = colors[selectedIndex] || colors[0];
+        selectedColor = item.colors[selectedIndex] || item.colors[0];
       }
 
       const existingIndex = cart.findIndex(cartItem =>
@@ -671,7 +1197,7 @@
         }
 
         if (!response.ok || !data.success) {
-          throw new Error(data.message || \`HTTP \${response.status}\`);
+          throw new Error(data.message || `HTTP ${response.status}`);
         }
 
         cart = [];
@@ -735,6 +1261,8 @@
     }
 
     window.onload = async () => {
+      clearForm();
+      renderColorEditor();
       renderCart();
       await loadProducts();
     };
