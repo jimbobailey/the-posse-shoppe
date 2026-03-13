@@ -65,6 +65,14 @@
       margin: 0 auto;
     }
 
+    .admin-block {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
     .admin-form {
       display: flex;
       flex-direction: column;
@@ -265,6 +273,29 @@
       margin-top: 8px;
     }
 
+    .status-box {
+      display: none;
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .status-box.success {
+      display: block;
+      background: #17361f;
+      border: 1px solid #2f7a45;
+      color: #d9ffe5;
+    }
+
+    .status-box.error {
+      display: block;
+      background: #3a1717;
+      border: 1px solid #8f3434;
+      color: #ffd3d3;
+    }
+
     @media (max-width: 980px) {
       .admin-grid {
         grid-template-columns: 1fr;
@@ -282,6 +313,22 @@
   <div class="admin-shell">
     <div class="admin-grid">
       <div>
+        <div id="admin-status" class="status-box"></div>
+
+        <div class="admin-block">
+          <h2 style="margin-top:0; color:var(--glow);">Global Shared Colors</h2>
+
+          <div class="color-add-row">
+            <input type="text" id="global-color-name" placeholder="Color name (example: Orange, Matte Black)" />
+            <input type="color" id="global-color-hex" value="#ff8c00" />
+            <button type="button" class="small-btn" onclick="addGlobalColor()">ADD</button>
+          </div>
+
+          <div id="global-color-list"></div>
+
+          <button class="save-btn" style="margin-top:10px;" onclick="saveGlobalColors()">SAVE GLOBAL COLORS</button>
+        </div>
+
         <div class="admin-form">
           <h2 id="form-title">Add New Product</h2>
 
@@ -316,8 +363,13 @@
             <label for="p-enable-colors">Enable color options for this product</label>
           </div>
 
+          <div class="checkbox-row">
+            <input type="checkbox" id="p-use-global-colors" onchange="toggleColorBuilder()" />
+            <label for="p-use-global-colors">Use global shared color list for this product</label>
+          </div>
+
           <div id="color-builder">
-            <h3 style="margin-top:0; color:var(--glow);">Available Colors</h3>
+            <h3 style="margin-top:0; color:var(--glow);">Custom Product Colors</h3>
 
             <div class="color-add-row">
               <input type="text" id="new-color-name" placeholder="Color name (example: Orange, Matte Black)" />
@@ -339,19 +391,33 @@
 
   <script>
     let editingColors = [];
+    let globalColors = [];
     let allProducts = [];
     const adminPassword = window.prompt("Enter admin password:") || "";
 
+    function showStatus(type, message) {
+      const box = document.getElementById("admin-status");
+      if (!message) {
+        box.className = "status-box";
+        box.textContent = "";
+        box.style.display = "none";
+        return;
+      }
+      box.className = `status-box ${type}`;
+      box.textContent = message;
+    }
+
     function toggleColorBuilder() {
       const enabled = document.getElementById("p-enable-colors").checked;
-      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+      const useGlobal = document.getElementById("p-use-global-colors").checked;
+      document.getElementById("color-builder").style.display = enabled && !useGlobal ? "block" : "none";
     }
 
     function renderColorEditor() {
       const box = document.getElementById("color-list-editor");
 
       if (!editingColors.length) {
-        box.innerHTML = '<div class="muted">No colors added yet.</div>';
+        box.innerHTML = '<div class="muted">No custom colors added yet.</div>';
         return;
       }
 
@@ -367,12 +433,32 @@
       `).join("");
     }
 
+    function renderGlobalColorEditor() {
+      const box = document.getElementById("global-color-list");
+
+      if (!globalColors.length) {
+        box.innerHTML = '<div class="muted">No global colors saved yet.</div>';
+        return;
+      }
+
+      box.innerHTML = globalColors.map((color, index) => `
+        <div class="color-pill">
+          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+          <div>
+            <div><strong>${escapeHtml(color.name)}</strong></div>
+            <div class="muted">${escapeHtml(color.hex)}</div>
+          </div>
+          <button type="button" class="remove-color-btn" onclick="removeGlobalColor(${index})">REMOVE</button>
+        </div>
+      `).join("");
+    }
+
     function addColorOption() {
       const name = document.getElementById("new-color-name").value.trim();
       const hex = document.getElementById("new-color-hex").value;
 
       if (!name) {
-        alert("Please enter a color name.");
+        showStatus("error", "Please enter a custom color name.");
         return;
       }
 
@@ -380,11 +466,34 @@
       document.getElementById("new-color-name").value = "";
       document.getElementById("new-color-hex").value = "#ff8c00";
       renderColorEditor();
+      showStatus("success", "Custom color added.");
     }
 
     function removeColorOption(index) {
       editingColors.splice(index, 1);
       renderColorEditor();
+    }
+
+    function addGlobalColor() {
+      const name = document.getElementById("global-color-name").value.trim();
+      const hex = document.getElementById("global-color-hex").value;
+
+      if (!name) {
+        showStatus("error", "Please enter a global color name.");
+        return;
+      }
+
+      globalColors.push({ name, hex });
+      document.getElementById("global-color-name").value = "";
+      document.getElementById("global-color-hex").value = "#ff8c00";
+      renderGlobalColorEditor();
+      showStatus("success", "Global color added. Click SAVE GLOBAL COLORS to keep it.");
+    }
+
+    function removeGlobalColor(index) {
+      globalColors.splice(index, 1);
+      renderGlobalColorEditor();
+      showStatus("success", "Global color removed. Click SAVE GLOBAL COLORS to keep it.");
     }
 
     function clearForm() {
@@ -396,10 +505,12 @@
       document.getElementById("p-media-type").value = "image";
       document.getElementById("p-img").value = "";
       document.getElementById("p-enable-colors").checked = false;
+      document.getElementById("p-use-global-colors").checked = false;
       document.getElementById("form-title").textContent = "Add New Product";
       editingColors = [];
       toggleColorBuilder();
       renderColorEditor();
+      showStatus("", "");
     }
 
     async function loadProducts() {
@@ -410,10 +521,89 @@
         }
 
         const data = await response.json();
-        allProducts = Array.isArray(data) ? data : [];
+        const rawItems = Array.isArray(data) ? data : [];
+
+        const globalItem = rawItems.find(item => String(item.id) === "__global_colors__");
+        globalColors = Array.isArray(globalItem?.colors) ? globalItem.colors : [];
+
+        allProducts = rawItems.filter(item => String(item.id) !== "__global_colors__");
+
+        renderGlobalColorEditor();
         renderAdmin();
       } catch (error) {
         console.error("Failed to load products:", error);
+        showStatus("error", "Failed to load products.");
+      }
+    }
+
+    function getProductColors(item) {
+      if (item.useGlobalColors) {
+        return Array.isArray(globalColors) ? globalColors : [];
+      }
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
+        return item.colors;
+      }
+      return [];
+    }
+
+    async function saveGlobalColors() {
+      const globalProduct = {
+        id: "__global_colors__",
+        category: "settings",
+        name: "Global Shared Colors",
+        price: 0,
+        desc: "",
+        mediaType: "image",
+        img: "",
+        hasColors: true,
+        useGlobalColors: false,
+        colors: [...globalColors]
+      };
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "add",
+            password: adminPassword,
+            product: globalProduct
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          if ((data.message || "").toLowerCase().includes("already")) {
+            const editResponse = await fetch("/.netlify/functions/products", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                action: "edit",
+                password: adminPassword,
+                product: globalProduct
+              })
+            });
+
+            const editData = await editResponse.json();
+
+            if (!editResponse.ok || !editData.success) {
+              throw new Error(editData.message || `HTTP ${editResponse.status}`);
+            }
+          } else {
+            throw new Error(data.message || `HTTP ${response.status}`);
+          }
+        }
+
+        await loadProducts();
+        showStatus("success", "Global colors saved.");
+      } catch (error) {
+        console.error(error);
+        showStatus("error", error.message || "There was a problem saving global colors.");
       }
     }
 
@@ -426,19 +616,25 @@
       const mediaType = document.getElementById("p-media-type").value;
       const img = document.getElementById("p-img").value.trim();
       const colorsEnabled = document.getElementById("p-enable-colors").checked;
+      const useGlobalColors = document.getElementById("p-use-global-colors").checked;
 
       if (!name || !priceValue) {
-        alert("Please enter at least a product name and price.");
+        showStatus("error", "Please enter at least a product name and price.");
         return;
       }
 
       if (!img) {
-        alert("Please enter the media filename.");
+        showStatus("error", "Please enter the media filename.");
         return;
       }
 
-      if (colorsEnabled && editingColors.length === 0) {
-        alert("You enabled color options, but no colors were added.");
+      if (colorsEnabled && !useGlobalColors && editingColors.length === 0) {
+        showStatus("error", "You enabled colors, but no custom colors were added.");
+        return;
+      }
+
+      if (colorsEnabled && useGlobalColors && globalColors.length === 0) {
+        showStatus("error", "Global colors are turned on, but the global color list is empty.");
         return;
       }
 
@@ -451,7 +647,8 @@
         mediaType,
         img,
         hasColors: colorsEnabled,
-        colors: colorsEnabled ? [...editingColors] : []
+        useGlobalColors: colorsEnabled ? useGlobalColors : false,
+        colors: colorsEnabled && !useGlobalColors ? [...editingColors] : []
       };
 
       const action = idField ? "edit" : "add";
@@ -477,10 +674,10 @@
 
         clearForm();
         await loadProducts();
-        alert(action === "add" ? "Product added." : "Product updated.");
+        showStatus("success", action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
-        alert(error.message || "There was a problem saving the product.");
+        showStatus("error", error.message || "There was a problem saving the product.");
       }
     }
 
@@ -496,12 +693,14 @@
       document.getElementById("p-media-type").value = item.mediaType || "image";
       document.getElementById("p-img").value = item.img || "";
       document.getElementById("p-enable-colors").checked = !!item.hasColors;
+      document.getElementById("p-use-global-colors").checked = !!item.useGlobalColors;
       document.getElementById("form-title").textContent = "Edit Product";
 
       editingColors = Array.isArray(item.colors) ? [...item.colors] : [];
       toggleColorBuilder();
       renderColorEditor();
       window.scrollTo({ top: 0, behavior: "smooth" });
+      showStatus("success", "Editing product.");
     }
 
     async function deleteItem(id) {
@@ -532,10 +731,10 @@
         }
 
         await loadProducts();
-        alert("Product deleted.");
+        showStatus("success", "Product deleted.");
       } catch (error) {
         console.error(error);
-        alert(error.message || "There was a problem deleting the product.");
+        showStatus("error", error.message || "There was a problem deleting the product.");
       }
     }
 
@@ -552,13 +751,18 @@
           html += `<div class="muted">No products yet.</div>`;
         } else {
           items.forEach(item => {
-            const colorSwatches = item.hasColors && item.colors?.length
+            const itemColors = getProductColors(item);
+            const colorSwatches = itemColors.length
               ? `
                 <div class="inventory-color-row">
-                  ${item.colors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
+                  ${itemColors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
                 </div>
               `
               : `<div class="muted" style="margin-top:8px;">No color options</div>`;
+
+            const modeText = item.useGlobalColors
+              ? "Uses global colors"
+              : (item.hasColors ? "Uses custom colors" : "Colors off");
 
             html += `
               <div class="admin-inv-card">
@@ -566,6 +770,7 @@
                 <div class="muted">$${Number(item.price || 0).toFixed(2)}</div>
                 <div class="muted">${escapeHtml(item.img || "No media file set")}</div>
                 <div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>
+                <div class="muted" style="margin-top:8px;">${escapeHtml(modeText)}</div>
                 ${colorSwatches}
                 <div class="admin-actions">
                   <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
@@ -592,6 +797,7 @@
     window.onload = async () => {
       clearForm();
       renderColorEditor();
+      renderGlobalColorEditor();
       await loadProducts();
     };
   </script>
