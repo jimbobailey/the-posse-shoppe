@@ -447,10 +447,10 @@
       }
 
       globalColors.push({ name, hex });
-      renderGlobalColorEditor();
-      renderAdmin();
       document.getElementById("global-color-name").value = "";
       document.getElementById("global-color-hex").value = "#ff8c00";
+      renderGlobalColorEditor();
+      renderAdmin();
     }
 
     function removeGlobalColor(index) {
@@ -463,7 +463,7 @@
       if (item.useGlobalColors) {
         return globalColors;
       }
-      if (item.hasColors && item.colors?.length) {
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
         return item.colors;
       }
       return [];
@@ -483,21 +483,6 @@
       editingColors = [];
       toggleColorBuilder();
       renderColorEditor();
-    }
-
-    function upsertLocalProduct(product) {
-      const index = allProducts.findIndex((p) => String(p.id) === String(product.id));
-      if (index === -1) {
-        allProducts.push(product);
-      } else {
-        allProducts[index] = product;
-      }
-    }
-
-    function refreshSoon() {
-      setTimeout(() => {
-        loadProducts();
-      }, 350);
     }
 
     async function loadProducts() {
@@ -561,7 +546,7 @@
         hasGlobalColorRecord = true;
         renderGlobalColorEditor();
         renderAdmin();
-        refreshSoon();
+        await loadProducts();
         alert("Global colors saved.");
       } catch (error) {
         console.error(error);
@@ -634,10 +619,8 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        upsertLocalProduct(item);
-        renderAdmin();
+        await loadProducts();
         clearForm();
-        refreshSoon();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -689,14 +672,11 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        allProducts = allProducts.filter((p) => String(p.id) !== String(id));
-
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        renderAdmin();
-        refreshSoon();
+        await loadProducts();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
