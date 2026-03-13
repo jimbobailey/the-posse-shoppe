@@ -447,14 +447,16 @@
       }
 
       globalColors.push({ name, hex });
+      renderGlobalColorEditor();
+      renderAdmin();
       document.getElementById("global-color-name").value = "";
       document.getElementById("global-color-hex").value = "#ff8c00";
-      renderGlobalColorEditor();
     }
 
     function removeGlobalColor(index) {
       globalColors.splice(index, 1);
       renderGlobalColorEditor();
+      renderAdmin();
     }
 
     function getProductColors(item) {
@@ -481,6 +483,21 @@
       editingColors = [];
       toggleColorBuilder();
       renderColorEditor();
+    }
+
+    function upsertLocalProduct(product) {
+      const index = allProducts.findIndex((p) => String(p.id) === String(product.id));
+      if (index === -1) {
+        allProducts.push(product);
+      } else {
+        allProducts[index] = product;
+      }
+    }
+
+    function refreshSoon() {
+      setTimeout(() => {
+        loadProducts();
+      }, 350);
     }
 
     async function loadProducts() {
@@ -541,7 +558,10 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        await loadProducts();
+        hasGlobalColorRecord = true;
+        renderGlobalColorEditor();
+        renderAdmin();
+        refreshSoon();
         alert("Global colors saved.");
       } catch (error) {
         console.error(error);
@@ -614,8 +634,10 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        await loadProducts();
+        upsertLocalProduct(item);
+        renderAdmin();
         clearForm();
+        refreshSoon();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -667,11 +689,14 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = allProducts.filter((p) => String(p.id) !== String(id));
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
+        renderAdmin();
+        refreshSoon();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
