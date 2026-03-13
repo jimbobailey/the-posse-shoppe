@@ -340,7 +340,7 @@
   <script>
     let editingColors = [];
     let allProducts = [];
-    const adminPassword = prompt("Enter admin password:");
+    const adminPassword = window.prompt("Enter admin password:") || "";
 
     function toggleColorBuilder() {
       const enabled = document.getElementById("p-enable-colors").checked;
@@ -463,10 +463,10 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-          action,
-          password: adminPassword,
-          product: item
-        })
+            action,
+            password: adminPassword,
+            product: item
+          })
         });
 
         const data = await response.json();
@@ -480,7 +480,7 @@
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
-        alert("There was a problem saving the product.");
+        alert(error.message || "There was a problem saving the product.");
       }
     }
 
@@ -515,10 +515,11 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-          action: "delete",
-          password: adminPassword,
-          id
-        })
+            action: "delete",
+            password: adminPassword,
+            id
+          })
+        });
 
         const data = await response.json();
 
@@ -534,7 +535,7 @@
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
-        alert("There was a problem deleting the product.");
+        alert(error.message || "There was a problem deleting the product.");
       }
     }
 
