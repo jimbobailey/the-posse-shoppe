@@ -11,7 +11,6 @@
       --bg: #000000;
       --muted: #666;
       --danger: #c62828;
-      --success: #167c3b;
     }
 
     * {
@@ -474,12 +473,8 @@
     }
 
     function getProductColors(item) {
-      if (item.useGlobalColors) {
-        return Array.isArray(globalColors) ? globalColors : [];
-      }
-      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
-        return item.colors;
-      }
+      if (item.useGlobalColors) return globalColors;
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) return item.colors;
       return [];
     }
 
@@ -500,13 +495,12 @@
     }
 
     function upsertLocalProduct(product) {
-      const normalized = normalizeProduct(product);
-      const index = allProducts.findIndex((p) => String(p.id) === String(normalized.id));
-
+      const item = normalizeProduct(product);
+      const index = allProducts.findIndex((p) => String(p.id) === String(item.id));
       if (index === -1) {
-        allProducts.unshift(normalized);
+        allProducts.unshift(item);
       } else {
-        allProducts[index] = normalized;
+        allProducts[index] = item;
       }
     }
 
@@ -522,12 +516,8 @@
         }
 
         const data = await response.json();
-        const products = Array.isArray(data.products) ? data.products.map(normalizeProduct) : [];
-        const sharedColors = Array.isArray(data.globalColors) ? data.globalColors : [];
-
-        allProducts = products;
-        globalColors = sharedColors;
-
+        allProducts = Array.isArray(data.products) ? data.products.map(normalizeProduct) : [];
+        globalColors = Array.isArray(data.globalColors) ? data.globalColors : [];
         renderGlobalColorEditor();
         renderAdmin();
       } catch (error) {
@@ -539,9 +529,7 @@
       try {
         const response = await fetch("/.netlify/functions/products", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "saveGlobalColors",
             password: adminPassword,
@@ -614,9 +602,7 @@
       try {
         const response = await fetch("/.netlify/functions/products", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action,
             password: adminPassword,
@@ -669,9 +655,7 @@
       try {
         const response = await fetch("/.netlify/functions/products", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "delete",
             password: adminPassword,
