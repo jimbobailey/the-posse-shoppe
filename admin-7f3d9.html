@@ -475,8 +475,9 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = Array.isArray(data.products) ? data.products : allProducts;
         clearForm();
-        await loadProducts();
+        renderAdmin();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -527,11 +528,13 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = Array.isArray(data.products) ? data.products : allProducts;
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
+        renderAdmin();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
