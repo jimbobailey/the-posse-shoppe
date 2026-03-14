@@ -9,22 +9,21 @@ function cleanString(value) {
 }
 
 function normalizeColor(color) {
-  if (!color || typeof color !== "object") {
-    return null;
-  }
+  if (!color || typeof color !== "object") return null;
 
   const name = cleanString(color.name);
   const hex = cleanString(color.hex);
 
-  if (!name || !hex) {
-    return null;
-  }
+  if (!name || !hex) return null;
 
   return { name, hex };
 }
 
 function normalizeProduct(product) {
-  const requestedColors = toArray(product.colors).map(normalizeColor).filter(Boolean);
+  const requestedColors = toArray(product.colors)
+    .map(normalizeColor)
+    .filter(Boolean);
+
   const hasColors = !!product.hasColors && requestedColors.length > 0;
 
   return {
@@ -41,7 +40,7 @@ function normalizeProduct(product) {
 }
 
 async function loadProducts(store) {
-  let raw = await store.get("catalog", { type: "json" });
+  const raw = await store.get("catalog", { type: "json" });
   let products = toArray(raw);
 
   products = products
@@ -52,10 +51,8 @@ async function loadProducts(store) {
       delete cleaned.globalColors;
       delete cleaned.useGlobalColors;
       return normalizeProduct(cleaned);
-    })
-    .filter((item) => item.name && item.img);
+    });
 
-  await store.set("catalog", JSON.stringify(products));
   return products;
 }
 
@@ -76,7 +73,6 @@ function json(statusCode, body) {
 
 exports.handler = async (event) => {
   connectLambda(event);
-
   const store = getStore("products");
 
   try {
@@ -92,10 +88,10 @@ exports.handler = async (event) => {
       if (body.action === "add" && body.product) {
         const incoming = normalizeProduct(body.product);
 
-        if (!incoming.name || !incoming.img) {
+        if (!incoming.name) {
           return json(400, {
             success: false,
-            message: "Product name and media filename are required."
+            message: "Product name is required."
           });
         }
 
@@ -116,10 +112,10 @@ exports.handler = async (event) => {
       if (body.action === "edit" && body.product) {
         const incoming = normalizeProduct(body.product);
 
-        if (!incoming.name || !incoming.img) {
+        if (!incoming.name) {
           return json(400, {
             success: false,
-            message: "Product name and media filename are required."
+            message: "Product name is required."
           });
         }
 
