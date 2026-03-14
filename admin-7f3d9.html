@@ -300,11 +300,13 @@
 
     .color-library-list,
     .product-color-picker-list {
-      display: grid;
-      gap: 8px;
-      max-height: none;
-      overflow: visible;
-    }
+     display: block;
+     gap: 0;
+     max-height: none !important;
+     height: auto !important;
+     min-height: 0 !important;
+     overflow: visible !important;
+}
 
     .product-color-row {
       display: flex;
