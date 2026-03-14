@@ -429,7 +429,14 @@
         }
 
         const data = await response.json();
-        allProducts = Array.isArray(data) ? data : [];
+
+        // Supports either the clean array response OR an object with { products: [...] }
+        allProducts = Array.isArray(data)
+          ? data
+          : Array.isArray(data.products)
+            ? data.products
+            : [];
+
         renderShop();
       } catch (error) {
         console.error("Failed to load products:", error);
@@ -739,7 +746,7 @@
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
-        .replaceAll('"", "&quot;")
+        .replaceAll('"', "&quot;")
         .replaceAll("'", "&#39;");
     }
 
