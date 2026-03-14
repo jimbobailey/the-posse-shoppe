@@ -302,6 +302,8 @@
     .product-color-picker-list {
       display: grid;
       gap: 8px;
+      max-height: none;
+      overflow: visible;
     }
 
     .product-color-row {
@@ -474,6 +476,15 @@
       });
 
       return merged;
+    }
+
+    function applyProductsFromResponse(data) {
+      if (Array.isArray(data?.products)) {
+        allProducts = data.products;
+        renderAdmin();
+        return true;
+      }
+      return false;
     }
 
     async function loadColorLibrary() {
@@ -810,8 +821,8 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        applyProductsFromResponse(data);
         clearForm();
-        await loadProducts();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -866,11 +877,12 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        applyProductsFromResponse(data);
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
