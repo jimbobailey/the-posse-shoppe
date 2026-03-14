@@ -469,6 +469,15 @@
       return [];
     }
 
+    function upsertLocalProduct(product) {
+      const index = allProducts.findIndex((p) => String(p.id) === String(product.id));
+      if (index === -1) {
+        allProducts.unshift(product);
+      } else {
+        allProducts[index] = product;
+      }
+    }
+
     function clearForm() {
       document.getElementById("p-id").value = "";
       document.getElementById("p-page").value = "3d";
@@ -485,19 +494,6 @@
       renderColorEditor();
     }
 
-    function insertOrReplaceProduct(product) {
-      const index = allProducts.findIndex(p => String(p.id) === String(product.id));
-      if (index === -1) {
-        allProducts.unshift(product);
-      } else {
-        allProducts[index] = product;
-      }
-    }
-
-    function removeProductById(id) {
-      allProducts = allProducts.filter(p => String(p.id) !== String(id));
-    }
-
     async function loadProducts() {
       try {
         const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
@@ -508,11 +504,11 @@
         const data = await response.json();
         const rawItems = Array.isArray(data) ? data : [];
 
-        const globalItem = rawItems.find(item => String(item.id) === "__global_colors__");
+        const globalItem = rawItems.find((item) => String(item.id) === "__global_colors__");
         hasGlobalColorRecord = !!globalItem;
         globalColors = Array.isArray(globalItem?.colors) ? globalItem.colors : [];
 
-        allProducts = rawItems.filter(item => String(item.id) !== "__global_colors__");
+        allProducts = rawItems.filter((item) => String(item.id) !== "__global_colors__");
 
         renderGlobalColorEditor();
         renderAdmin();
@@ -632,7 +628,7 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        insertOrReplaceProduct(item);
+        upsertLocalProduct(item);
         renderAdmin();
         clearForm();
         loadProducts();
@@ -687,7 +683,7 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        removeProductById(id);
+        allProducts = allProducts.filter((p) => String(p.id) !== String(id));
 
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
