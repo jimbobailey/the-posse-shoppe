@@ -160,38 +160,81 @@
 
     .product-option-wrap {
       margin-top: 12px;
+      border: 1px solid #e3e3e3;
+      border-radius: 6px;
+      padding: 10px;
+      background: #fafafa;
     }
 
-    .product-option-wrap label {
+    .product-option-wrap label.option-title {
       display: block;
       font-size: 14px;
       font-weight: bold;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    .product-option-wrap select {
+    .product-option-note {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .color-checkbox-list {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .color-checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .color-checkbox-row input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+
+    .inline-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #444;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .selected-color-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .selected-color-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #f1f1f1;
+      font-size: 13px;
+      border: 1px solid #ddd;
+    }
+
+    .product-color-notes {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
       background: white;
-    }
-
-    .selected-color-preview {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .inline-swatch {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid #444;
-      display: inline-block;
-      vertical-align: middle;
+      resize: vertical;
+      min-height: 70px;
+      font: inherit;
     }
 
     .add-btn {
@@ -230,6 +273,18 @@
       justify-content: space-between;
       gap: 10px;
       align-items: start;
+    }
+
+    .cart-item-subline {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .cart-color-line {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #444;
     }
 
     .cart-controls {
@@ -430,7 +485,6 @@
 
         const data = await response.json();
 
-        // Supports either the clean array response OR an object with { products: [...] }
         allProducts = Array.isArray(data)
           ? data
           : Array.isArray(data.products)
@@ -450,7 +504,7 @@
     }
 
     function getCurrentProducts() {
-      return allProducts.filter(product => product.category === currentCategory);
+      return allProducts.filter((product) => product.category === currentCategory);
     }
 
     function buildMediaPath(item) {
@@ -482,62 +536,108 @@
       `;
     }
 
-    function buildColorDropdown(item, itemIndex) {
+    function buildColorChooser(item, itemIndex) {
       if (!item.hasColors || !item.colors || !item.colors.length) return "";
 
-      const options = item.colors.map((c, idx) => `
-        <option value="${idx}" ${idx === 0 ? "selected" : ""}>
-          ${escapeHtml(c.name)}
-        </option>
+      const colorRows = item.colors.map((color, colorIndex) => `
+        <label class="color-checkbox-row">
+          <input
+            type="checkbox"
+            name="product-color-${itemIndex}"
+            value="${colorIndex}"
+            onchange="updateSelectedColorPreview(${itemIndex})"
+          />
+          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
+          <span>${escapeHtml(color.name)}</span>
+        </label>
       `).join("");
 
       return `
         <div class="product-option-wrap">
-          <label for="color-select-${itemIndex}">Choose Color</label>
-          <select id="color-select-${itemIndex}" onchange="updateSelectedColorPreview(${itemIndex}, this)">
-            ${options}
-          </select>
-          <div class="selected-color-preview" id="color-preview-${itemIndex}">
-            <span class="inline-swatch" style="background:${escapeHtml(item.colors[0].hex)};"></span>
-            <span>${escapeHtml(item.colors[0].name)}</span>
+          <label class="option-title">Choose One or More Colors</label>
+          <div class="product-option-note">Select as many colors as you want for this item.</div>
+
+          <div class="color-checkbox-list">
+            ${colorRows}
           </div>
+
+          <label class="option-title" for="color-notes-${itemIndex}" style="margin-top:10px;">Color Notes / Placement Notes</label>
+          <textarea
+            id="color-notes-${itemIndex}"
+            class="product-color-notes"
+            placeholder="Example: red front, white back / white text on red base / split colors left and right"
+          ></textarea>
+
+          <div class="selected-color-preview" id="color-preview-${itemIndex}"></div>
         </div>
       `;
     }
 
-    function updateSelectedColorPreview(itemIndex, selectEl) {
+    function updateSelectedColorPreview(itemIndex) {
       const items = getCurrentProducts();
       const item = items[itemIndex];
-      if (!item || !item.colors || !item.colors.length) return;
+      const preview = document.getElementById(`color-preview-${itemIndex}`);
 
-      const selected = item.colors[Number(selectEl.value)];
-      const preview = document.getElementById("color-preview-" + itemIndex);
+      if (!item || !preview || !item.colors || !item.colors.length) return;
 
-      if (preview && selected) {
-        preview.innerHTML = `
-          <span class="inline-swatch" style="background:${escapeHtml(selected.hex)};"></span>
-          <span>${escapeHtml(selected.name)}</span>
-        `;
+      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
+
+      if (!selectedColors.length) {
+        preview.innerHTML = "";
+        return;
       }
+
+      preview.innerHTML = selectedColors.map((color) => `
+        <span class="selected-color-chip">
+          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
+          <span>${escapeHtml(color.name)}</span>
+        </span>
+      `).join("");
+    }
+
+    function getSelectedColorsForProduct(itemIndex, item) {
+      const checks = document.querySelectorAll(`input[name="product-color-${itemIndex}"]:checked`);
+      return Array.from(checks)
+        .map((checkbox) => item.colors[Number(checkbox.value)])
+        .filter(Boolean)
+        .map((color) => ({ name: color.name, hex: color.hex }));
+    }
+
+    function getColorNotesForProduct(itemIndex) {
+      const field = document.getElementById(`color-notes-${itemIndex}`);
+      return field ? field.value.trim() : "";
     }
 
     function addToCart(itemId, itemIndex) {
       const items = getCurrentProducts();
-      const item = items.find(x => String(x.id) === String(itemId));
+      const item = items.find((x) => String(x.id) === String(itemId));
       if (!item) return;
 
-      let selectedColor = null;
+      let selectedColors = [];
+      let colorNotes = "";
 
       if (item.hasColors && item.colors && item.colors.length) {
-        const select = document.getElementById(`color-select-${itemIndex}`);
-        const selectedIndex = select ? Number(select.value) : 0;
-        selectedColor = item.colors[selectedIndex] || item.colors[0];
+        selectedColors = getSelectedColorsForProduct(itemIndex, item);
+        colorNotes = getColorNotesForProduct(itemIndex);
+
+        if (!selectedColors.length) {
+          alert("Please select at least one color for this item.");
+          return;
+        }
       }
 
-      const existingIndex = cart.findIndex(cartItem =>
+      const colorKey = selectedColors
+        .map((color) => `${color.name}|${color.hex}`)
+        .sort()
+        .join("||");
+
+      const noteKey = colorNotes.trim().toLowerCase();
+
+      const existingIndex = cart.findIndex((cartItem) =>
         String(cartItem.id) === String(item.id) &&
         cartItem.category === item.category &&
-        (cartItem.selectedColor?.name || "") === (selectedColor?.name || "")
+        (cartItem.colorKey || "") === colorKey &&
+        (cartItem.noteKey || "") === noteKey
       );
 
       if (existingIndex !== -1) {
@@ -549,7 +649,10 @@
           name: item.name,
           price: Number(item.price),
           qty: 1,
-          selectedColor: selectedColor ? { ...selectedColor } : null
+          selectedColors,
+          colorNotes,
+          colorKey,
+          noteKey
         });
       }
 
@@ -588,14 +691,17 @@
         const lineTotal = item.price * item.qty;
         total += lineTotal;
 
+        const selectedColorNames = Array.isArray(item.selectedColors) && item.selectedColors.length
+          ? item.selectedColors.map((color) => escapeHtml(color.name)).join(", ")
+          : "";
+
         return `
           <div class="cart-item">
             <div class="cart-item-top">
               <div>
-                <strong>${escapeHtml(item.name)}</strong><br>
-                <span style="color:${item.selectedColor ? escapeHtml(item.selectedColor.hex) : "inherit"};">
-                  ${item.selectedColor ? "Color: " + escapeHtml(item.selectedColor.name) : ""}
-                </span>
+                <strong>${escapeHtml(item.name)}</strong>
+                ${selectedColorNames ? `<div class="cart-color-line"><strong>Colors:</strong> ${selectedColorNames}</div>` : ""}
+                ${item.colorNotes ? `<div class="cart-item-subline"><strong>Notes:</strong> ${escapeHtml(item.colorNotes)}</div>` : ""}
               </div>
               <div><strong>$${lineTotal.toFixed(2)}</strong></div>
             </div>
@@ -655,13 +761,18 @@
         notes,
         paymentMethods: ["PayPal", "Venmo", "Cash App", "Zelle"],
         offsiteFulfillment: true,
-        items: cart.map(item => ({
+        items: cart.map((item) => ({
           name: item.name,
           category: item.category,
           qty: item.qty,
           price: item.price,
-          selectedColor: item.selectedColor ? item.selectedColor.name : "",
-          colorHex: item.selectedColor ? item.selectedColor.hex : ""
+          selectedColor: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.name).join(", ") : "",
+          colorHex: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.hex).join(", ") : "",
+          selectedColors: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => ({
+            name: color.name,
+            hex: color.hex
+          })) : [],
+          colorNotes: item.colorNotes || ""
         })),
         total: Number(orderTotal.toFixed(2))
       };
@@ -735,7 +846,7 @@
           <b>${escapeHtml(item.name)}</b>
           <p><strong>$${Number(item.price).toFixed(2)}</strong></p>
           <p>${escapeHtml(item.desc || "")}</p>
-          ${buildColorDropdown(item, index)}
+          ${buildColorChooser(item, index)}
           <button class="add-btn" onclick="addToCart('${escapeHtml(String(item.id))}', ${index})">ADD TO ORDER</button>
         </div>
       `).join("");
