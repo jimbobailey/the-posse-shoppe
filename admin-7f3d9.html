@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Posse Shoppe Admin</title>
+  <title>The Posse Shoppe</title>
   <style>
     :root {
       --primary: #121212;
       --glow: #ff8c00;
-      --bg: #000000;
+      --bg: #ffffff;
       --muted: #666;
       --danger: #c62828;
       --success: #167c3b;
@@ -22,7 +22,7 @@
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
       background: var(--bg);
-      color: white;
+      color: #111;
     }
 
     header {
@@ -53,229 +53,294 @@
       background: #111;
     }
 
-    .admin-shell {
-      padding: 40px 20px;
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    .admin-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .admin-block {
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-
-    .admin-form {
+    nav {
+      margin-top: 15px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       gap: 10px;
-    }
-
-    .admin-form input,
-    .admin-form select,
-    .admin-form textarea {
-      width: 100%;
-      padding: 10px;
-      background: #222;
-      border: 1px solid var(--glow);
-      color: white;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .admin-form textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .admin-inv-card {
-      background: #222;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #444;
-      border-radius: 6px;
-    }
-
-    .admin-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
       flex-wrap: wrap;
     }
 
-    .edit-btn {
+    .nav-btn {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid var(--glow);
+      color: white;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .nav-btn.active {
+      background: var(--glow);
+      color: black;
+      font-weight: bold;
+    }
+
+    .contact-link {
+      background: rgba(0, 0, 0, 0.45);
+      color: #ff8c00;
+      border: 2px solid #ff8c00;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin: 20px auto 0;
+      display: block;
+      width: fit-content;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .contact-link:hover {
       background: #ff8c00;
       color: black;
-      border: none;
-      padding: 8px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: bold;
     }
 
-    .delete-btn {
-      background: #d62828;
+    .main-layout {
+      display: flex;
+      max-width: 1500px;
+      margin: 20px auto;
+      gap: 30px;
+      padding: 0 20px 30px;
+      align-items: flex-start;
+    }
+
+    #product-list {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .img-box {
+      width: 100%;
+      height: 250px;
+      background: #f4f4f4;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    .img-box img,
+    .img-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #f4f4f4;
+    }
+
+    .add-btn {
+      background: var(--primary);
       color: white;
-      border: none;
-      padding: 8px 12px;
+      padding: 14px;
+      width: 100%;
       cursor: pointer;
+      margin-top: 12px;
+      border: none;
       border-radius: 4px;
-      font-size: 12px;
       font-weight: bold;
     }
 
-    .save-btn {
-      background: var(--glow);
-      border: none;
-      padding: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 4px;
-      color: black;
+    .cart-sidebar {
+      flex: 1;
+      min-width: 340px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 18px;
+      background: #fafafa;
+      position: sticky;
+      top: 20px;
     }
 
-    .cancel-btn {
-      background: #555;
-      color: white;
-      border: none;
-      padding: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 4px;
+    .product-option-wrap {
+      margin-top: 12px;
     }
 
-    .muted {
-      color: #aaa;
+    .product-option-wrap label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .product-option-wrap select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: white;
+    }
+
+    .selected-color-preview {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
       font-size: 14px;
     }
 
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #111;
-      border: 1px solid #333;
-      padding: 10px;
-      border-radius: 4px;
-    }
-
-    .checkbox-row input[type="checkbox"] {
-      width: auto;
-      transform: scale(1.2);
-    }
-
-    #color-builder {
-      display: none;
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 12px;
-    }
-
-    .color-add-row {
-      display: grid;
-      grid-template-columns: 1.3fr 0.8fr auto;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .color-add-row input[type="color"] {
-      height: 42px;
-      padding: 4px;
-      border-radius: 4px;
-      border: 1px solid var(--glow);
-      background: #222;
-    }
-
-    .small-btn {
-      background: var(--glow);
-      color: black;
-      border: none;
-      padding: 10px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-
-    .color-pill {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 8px 10px;
-      margin-bottom: 8px;
-    }
-
-    .swatch {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 1px #000 inset;
-      flex-shrink: 0;
-    }
-
-    .remove-color-btn {
-      margin-left: auto;
-      background: #a61b1b;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 12px;
-    }
-
-    .inventory-color-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .inventory-mini-swatch {
+    .inline-swatch {
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      border: 1px solid white;
-    }
-
-    .media-note {
-      background: #111;
-      border: 1px solid #333;
-      padding: 10px;
-      border-radius: 4px;
-      color: #bbb;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .admin-media-tag {
+      border: 1px solid #444;
       display: inline-block;
-      font-size: 11px;
-      font-weight: bold;
-      background: #444;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 999px;
+      vertical-align: middle;
+    }
+
+    .cart-item {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: white;
+    }
+
+    .cart-item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .cart-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
       margin-top: 8px;
     }
 
+    .qty-btn,
+    .remove-cart-btn {
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 6px 10px;
+    }
+
+    .qty-btn {
+      background: #eee;
+      font-weight: bold;
+    }
+
+    .remove-cart-btn {
+      background: var(--danger);
+      color: white;
+      margin-left: auto;
+    }
+
+    .cart-total {
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin: 12px 0 16px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .checkout-box label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    .checkout-box input,
+    .checkout-box textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font: inherit;
+    }
+
+    .checkout-box textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .notice-box {
+      background: #fff7ef;
+      border: 1px solid #ffc58c;
+      color: #5a3a12;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .submit-order-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      border: none;
+      border-radius: 4px;
+      background: var(--glow);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .submit-order-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .status-message {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 6px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .status-message.success {
+      display: block;
+      background: #eaf8ef;
+      border: 1px solid #9cd4ad;
+      color: #14532d;
+    }
+
+    .status-message.error {
+      display: block;
+      background: #fdecec;
+      border: 1px solid #ef9a9a;
+      color: #7f1d1d;
+    }
+
     @media (max-width: 980px) {
-      .admin-grid {
-        grid-template-columns: 1fr;
+      .main-layout {
+        flex-direction: column;
+      }
+
+      .cart-sidebar {
+        position: static;
+        width: 100%;
+        min-width: 0;
       }
     }
   </style>
@@ -285,217 +350,83 @@
     <div class="header-banner-wrap">
       <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
     </div>
+
+    <h1 class="sr-only">The Posse Shoppe</h1>
+
+    <nav>
+      <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
+      <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
+    </nav>
+
+    <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
   </header>
 
-  <div class="admin-shell">
-    <div class="admin-grid">
-      <div>
-        <div class="admin-block">
-          <h2 style="margin-top:0; color:var(--glow);">Global Shared Colors</h2>
+  <div class="main-layout">
+    <div id="product-list"></div>
 
-          <div class="color-add-row">
-            <input type="text" id="global-color-name" placeholder="Color name (example: Orange, Matte Black)" />
-            <input type="color" id="global-color-hex" value="#ff8c00" />
-            <button type="button" class="small-btn" onclick="addGlobalColor()">ADD</button>
-          </div>
+    <aside class="cart-sidebar">
+      <h2 style="margin-top:0;">Your Order</h2>
+      <div id="cart-items">Empty</div>
+      <div class="cart-total" id="cart-total">$0.00</div>
 
-          <div id="global-color-list"></div>
+      <div class="checkout-box">
+        <label for="cust-name">Your Name</label>
+        <input type="text" id="cust-name" placeholder="Enter your name" />
 
-          <button class="save-btn" style="margin-top:10px;" onclick="saveGlobalColors()">SAVE GLOBAL COLORS</button>
+        <label for="cust-email">Email</label>
+        <input type="email" id="cust-email" placeholder="Enter your email" />
+
+        <label for="cust-phone">Phone</label>
+        <input type="text" id="cust-phone" placeholder="Enter your phone number" />
+
+        <label for="cust-notes">Custom Requests / Notes</label>
+        <textarea id="cust-notes" placeholder="Request custom designs, custom colors, engraving changes, quantity changes, or anything else here."></textarea>
+
+        <div class="notice-box">
+          Orders submitted here are reviewed and completed <strong>offsite by email</strong>.
+          After you send your order, The Posse Shoppe will contact you to confirm details, answer custom requests, and arrange payment.
+
+          <br><br>
+          <strong>Accepted payment methods:</strong> PayPal, Venmo, Cash App, and Zelle.
+
+          <br><br>
+          You may request <strong>custom designs</strong> and <strong>colors not listed</strong>.
+          If a requested color is unavailable or a design is beyond current design capability, you will be notified by email or phone.
         </div>
 
-        <div class="admin-form">
-          <h2 id="form-title">Add New Product</h2>
-
-          <input type="hidden" id="p-id" />
-
-          <select id="p-page">
-            <option value="3d">3D Prints</option>
-            <option value="laser">Laser Engraving</option>
-          </select>
-
-          <input type="text" id="p-name" placeholder="Name" />
-          <input type="number" id="p-price" placeholder="Price" step="0.01" />
-          <textarea id="p-desc" placeholder="Description"></textarea>
-
-          <select id="p-media-type">
-            <option value="image">Image</option>
-            <option value="video">MP4 Video</option>
-          </select>
-
-          <input type="text" id="p-img" placeholder="Media Filename (example: dragon.jpg or dragon.mp4)" />
-
-          <div class="media-note">
-            Put product files in:
-            <br>images/3d/
-            <br>images/laser/
-            <br>videos/3d/
-            <br>videos/laser/
-          </div>
-
-          <div class="checkbox-row">
-            <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
-            <label for="p-enable-colors">Enable color options for this product</label>
-          </div>
-
-          <div class="checkbox-row">
-            <input type="checkbox" id="p-use-global-colors" onchange="toggleColorBuilder()" />
-            <label for="p-use-global-colors">Use global shared color list for this product</label>
-          </div>
-
-          <div id="color-builder">
-            <h3 style="margin-top:0; color:var(--glow);">Available Colors</h3>
-
-            <div class="color-add-row">
-              <input type="text" id="new-color-name" placeholder="Color name (example: Orange, Matte Black)" />
-              <input type="color" id="new-color-hex" value="#ff8c00" />
-              <button type="button" class="small-btn" onclick="addColorOption()">ADD</button>
-            </div>
-
-            <div id="color-list-editor"></div>
-          </div>
-
-          <button class="save-btn" onclick="saveItem()">SAVE PRODUCT</button>
-          <button class="cancel-btn" onclick="clearForm()">CLEAR / CANCEL EDIT</button>
-        </div>
+        <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">SEND ORDER REQUEST</button>
+        <div id="order-status" class="status-message"></div>
       </div>
-
-      <div id="admin-inventory-list"></div>
-    </div>
+    </aside>
   </div>
 
   <script>
-    let editingColors = [];
-    let globalColors = [];
+    let currentCategory = "3d";
+    let cart = [];
     let allProducts = [];
-    let hasGlobalColorRecord = false;
-    const adminPassword = window.prompt("Enter admin password:") || "";
+    let globalColors = [];
 
-    function toggleColorBuilder() {
-      const enabled = document.getElementById("p-enable-colors").checked;
-      const useGlobal = document.getElementById("p-use-global-colors").checked;
-      document.getElementById("color-builder").style.display = enabled && !useGlobal ? "block" : "none";
+    function normalizeProduct(item) {
+      return {
+        id: item.id || String(Date.now()),
+        category: item.category || "3d",
+        name: item.name || "",
+        price: Number(item.price || 0),
+        desc: item.desc ?? item.description ?? "",
+        mediaType: item.mediaType || "image",
+        img: item.img || "",
+        hasColors: !!item.hasColors,
+        useGlobalColors: !!item.useGlobalColors,
+        colors: Array.isArray(item.colors) ? item.colors : []
+      };
     }
 
-    function renderColorEditor() {
-      const box = document.getElementById("color-list-editor");
-
-      if (!editingColors.length) {
-        box.innerHTML = '<div class="muted">No colors added yet.</div>';
-        return;
-      }
-
-      box.innerHTML = editingColors.map((color, index) => `
-        <div class="color-pill">
-          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
-          <div>
-            <div><strong>${escapeHtml(color.name)}</strong></div>
-            <div class="muted">${escapeHtml(color.hex)}</div>
-          </div>
-          <button type="button" class="remove-color-btn" onclick="removeColorOption(${index})">REMOVE</button>
-        </div>
-      `).join("");
-    }
-
-    function renderGlobalColorEditor() {
-      const box = document.getElementById("global-color-list");
-
-      if (!globalColors.length) {
-        box.innerHTML = '<div class="muted">No global colors added yet.</div>';
-        return;
-      }
-
-      box.innerHTML = globalColors.map((color, index) => `
-        <div class="color-pill">
-          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
-          <div>
-            <div><strong>${escapeHtml(color.name)}</strong></div>
-            <div class="muted">${escapeHtml(color.hex)}</div>
-          </div>
-          <button type="button" class="remove-color-btn" onclick="removeGlobalColor(${index})">REMOVE</button>
-        </div>
-      `).join("");
-    }
-
-    function addColorOption() {
-      const name = document.getElementById("new-color-name").value.trim();
-      const hex = document.getElementById("new-color-hex").value;
-
-      if (!name) {
-        alert("Please enter a color name.");
-        return;
-      }
-
-      editingColors.push({ name, hex });
-      document.getElementById("new-color-name").value = "";
-      document.getElementById("new-color-hex").value = "#ff8c00";
-      renderColorEditor();
-    }
-
-    function removeColorOption(index) {
-      editingColors.splice(index, 1);
-      renderColorEditor();
-    }
-
-    function addGlobalColor() {
-      const name = document.getElementById("global-color-name").value.trim();
-      const hex = document.getElementById("global-color-hex").value;
-
-      if (!name) {
-        alert("Please enter a global color name.");
-        return;
-      }
-
-      globalColors.push({ name, hex });
-      document.getElementById("global-color-name").value = "";
-      document.getElementById("global-color-hex").value = "#ff8c00";
-      renderGlobalColorEditor();
-      renderAdmin();
-    }
-
-    function removeGlobalColor(index) {
-      globalColors.splice(index, 1);
-      renderGlobalColorEditor();
-      renderAdmin();
-    }
-
-    function getProductColors(item) {
-      if (item.useGlobalColors) {
-        return globalColors;
-      }
-      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
-        return item.colors;
-      }
-      return [];
-    }
-
-    function clearForm() {
-      document.getElementById("p-id").value = "";
-      document.getElementById("p-page").value = "3d";
-      document.getElementById("p-name").value = "";
-      document.getElementById("p-price").value = "";
-      document.getElementById("p-desc").value = "";
-      document.getElementById("p-media-type").value = "image";
-      document.getElementById("p-img").value = "";
-      document.getElementById("p-enable-colors").checked = false;
-      document.getElementById("p-use-global-colors").checked = false;
-      document.getElementById("form-title").textContent = "Add New Product";
-      editingColors = [];
-      toggleColorBuilder();
-      renderColorEditor();
-    }
-
-    function insertOrReplaceProduct(product) {
-      const index = allProducts.findIndex(p => String(p.id) === String(product.id));
-      if (index === -1) {
-        allProducts.unshift(product);
-      } else {
-        allProducts[index] = product;
-      }
-    }
-
-    function removeProductById(id) {
-      allProducts = allProducts.filter(p => String(p.id) !== String(id));
+    function view(v) {
+      currentCategory = v;
+      document.getElementById("btn-3d").classList.remove("active");
+      document.getElementById("btn-laser").classList.remove("active");
+      document.getElementById("btn-" + v).classList.add("active");
+      renderShop();
     }
 
     async function loadProducts() {
@@ -506,248 +437,325 @@
         }
 
         const data = await response.json();
-        const rawItems = Array.isArray(data) ? data : [];
-
-        const globalItem = rawItems.find(item => String(item.id) === "__global_colors__");
-        hasGlobalColorRecord = !!globalItem;
-        globalColors = Array.isArray(globalItem?.colors) ? globalItem.colors : [];
-
-        allProducts = rawItems.filter(item => String(item.id) !== "__global_colors__");
-
-        renderGlobalColorEditor();
-        renderAdmin();
+        allProducts = Array.isArray(data.products) ? data.products.map(normalizeProduct) : [];
+        globalColors = Array.isArray(data.globalColors) ? data.globalColors : [];
+        renderShop();
       } catch (error) {
         console.error("Failed to load products:", error);
+        document.getElementById("product-list").innerHTML = `
+          <div class="card">
+            <b>Could not load products</b>
+            <p>Please try again in a minute.</p>
+          </div>
+        `;
       }
     }
 
-    async function saveGlobalColors() {
-      const globalItem = {
-        id: "__global_colors__",
-        category: "settings",
-        name: "Global Shared Colors",
-        price: 0,
-        desc: "",
-        mediaType: "image",
-        img: "",
-        hasColors: true,
-        useGlobalColors: false,
-        colors: [...globalColors]
-      };
-
-      const action = hasGlobalColorRecord ? "edit" : "add";
-
-      try {
-        const response = await fetch("/.netlify/functions/products", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            action,
-            password: adminPassword,
-            product: globalItem
-          })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-          throw new Error(data.message || `HTTP ${response.status}`);
-        }
-
-        hasGlobalColorRecord = true;
-        renderGlobalColorEditor();
-        renderAdmin();
-        loadProducts();
-        alert("Global colors saved.");
-      } catch (error) {
-        console.error(error);
-        alert(error.message || "There was a problem saving global colors.");
-      }
+    function getCurrentProducts() {
+      return allProducts.filter(product => product.category === currentCategory);
     }
 
-    async function saveItem() {
-      const idField = document.getElementById("p-id").value.trim();
-      const category = document.getElementById("p-page").value;
-      const name = document.getElementById("p-name").value.trim();
-      const priceValue = document.getElementById("p-price").value.trim();
-      const desc = document.getElementById("p-desc").value.trim();
-      const mediaType = document.getElementById("p-media-type").value;
-      const img = document.getElementById("p-img").value.trim();
-      const colorsEnabled = document.getElementById("p-enable-colors").checked;
-      const useGlobalColors = document.getElementById("p-use-global-colors").checked;
-
-      if (!name || !priceValue) {
-        alert("Please enter at least a product name and price.");
-        return;
+    function buildMediaPath(item) {
+      const filename = item.img || "";
+      if (item.mediaType === "video") {
+        return `/videos/${item.category}/${filename}`;
       }
-
-      if (!img) {
-        alert("Please enter the media filename.");
-        return;
-      }
-
-      if (colorsEnabled && useGlobalColors && globalColors.length === 0) {
-        alert("You selected global colors, but the global color list is empty.");
-        return;
-      }
-
-      if (colorsEnabled && !useGlobalColors && editingColors.length === 0) {
-        alert("You enabled color options, but no colors were added.");
-        return;
-      }
-
-      const item = {
-        id: idField || String(Date.now()),
-        category,
-        name,
-        price: Number(priceValue),
-        desc,
-        mediaType,
-        img,
-        hasColors: colorsEnabled,
-        useGlobalColors: colorsEnabled ? useGlobalColors : false,
-        colors: colorsEnabled && !useGlobalColors ? [...editingColors] : []
-      };
-
-      const action = idField ? "edit" : "add";
-
-      try {
-        const response = await fetch("/.netlify/functions/products", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            action,
-            password: adminPassword,
-            product: item
-          })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-          throw new Error(data.message || `HTTP ${response.status}`);
-        }
-
-        insertOrReplaceProduct(item);
-        renderAdmin();
-        clearForm();
-        loadProducts();
-        alert(action === "add" ? "Product added." : "Product updated.");
-      } catch (error) {
-        console.error(error);
-        alert(error.message || "There was a problem saving the product.");
-      }
+      return `/images/${item.category}/${filename}`;
     }
 
-    function editItem(id) {
-      const item = allProducts.find(x => String(x.id) === String(id));
+    function getProductColors(item) {
+      if (item.useGlobalColors) {
+        return Array.isArray(globalColors) ? globalColors : [];
+      }
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
+        return item.colors;
+      }
+      return [];
+    }
+
+    function buildColorDropdown(item, itemIndex) {
+      const colors = getProductColors(item);
+      if (!colors.length) return "";
+
+      const options = colors.map((c, idx) => `
+        <option value="${idx}" ${idx === 0 ? "selected" : ""}>
+          ${escapeHtml(c.name)}
+        </option>
+      `).join("");
+
+      return `
+        <div class="product-option-wrap">
+          <label for="color-select-${itemIndex}">Choose Color</label>
+          <select id="color-select-${itemIndex}" onchange="updateSelectedColorPreview(${itemIndex}, this)">
+            ${options}
+          </select>
+          <div class="selected-color-preview" id="color-preview-${itemIndex}">
+            <span class="inline-swatch" style="background:${escapeHtml(colors[0].hex)};"></span>
+            <span>${escapeHtml(colors[0].name)}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateSelectedColorPreview(itemIndex, selectEl) {
+      const items = getCurrentProducts();
+      const item = items[itemIndex];
       if (!item) return;
 
-      document.getElementById("p-id").value = item.id || "";
-      document.getElementById("p-page").value = item.category || "3d";
-      document.getElementById("p-name").value = item.name || "";
-      document.getElementById("p-price").value = item.price ?? "";
-      document.getElementById("p-desc").value = item.desc || "";
-      document.getElementById("p-media-type").value = item.mediaType || "image";
-      document.getElementById("p-img").value = item.img || "";
-      document.getElementById("p-enable-colors").checked = !!item.hasColors;
-      document.getElementById("p-use-global-colors").checked = !!item.useGlobalColors;
-      document.getElementById("form-title").textContent = "Edit Product";
+      const colors = getProductColors(item);
+      if (!colors.length) return;
 
-      editingColors = Array.isArray(item.colors) ? [...item.colors] : [];
-      toggleColorBuilder();
-      renderColorEditor();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      const selected = colors[Number(selectEl.value)];
+      const preview = document.getElementById("color-preview-" + itemIndex);
+
+      if (preview && selected) {
+        preview.innerHTML = `
+          <span class="inline-swatch" style="background:${escapeHtml(selected.hex)};"></span>
+          <span>${escapeHtml(selected.name)}</span>
+        `;
+      }
     }
 
-    async function deleteItem(id) {
-      const confirmed = confirm("Delete this listing?");
-      if (!confirmed) return;
+    function buildMedia(item) {
+      const mediaPath = escapeHtml(buildMediaPath(item));
+
+      if (item.mediaType === "video") {
+        return `
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
+            <source src="${mediaPath}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      }
+
+      return `
+        <img
+          src="${mediaPath}"
+          alt="${escapeHtml(item.name || "Product image")}"
+          onerror="this.onerror=null; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Image not found</div>';"
+        >
+      `;
+    }
+
+    function addToCart(itemId, itemIndex) {
+      const items = getCurrentProducts();
+      const item = items.find(x => String(x.id) === String(itemId));
+      if (!item) return;
+
+      let selectedColor = null;
+      const colors = getProductColors(item);
+
+      if (colors.length) {
+        const select = document.getElementById(`color-select-${itemIndex}`);
+        const selectedIndex = select ? Number(select.value) : 0;
+        selectedColor = colors[selectedIndex] || colors[0];
+      }
+
+      const existingIndex = cart.findIndex(cartItem =>
+        String(cartItem.id) === String(item.id) &&
+        cartItem.category === item.category &&
+        (cartItem.selectedColor?.name || "") === (selectedColor?.name || "")
+      );
+
+      if (existingIndex !== -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({
+          id: item.id,
+          category: item.category,
+          name: item.name,
+          price: Number(item.price),
+          qty: 1,
+          selectedColor: selectedColor ? { ...selectedColor } : null
+        });
+      }
+
+      renderCart();
+    }
+
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+
+      renderCart();
+    }
+
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+
+      if (!cart.length) {
+        cartItems.innerHTML = "Empty";
+        cartTotal.textContent = "$0.00";
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.innerHTML = cart.map((item, index) => {
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+
+        return `
+          <div class="cart-item">
+            <div class="cart-item-top">
+              <div>
+                <strong>${escapeHtml(item.name)}</strong><br>
+                <span style="color:${item.selectedColor ? escapeHtml(item.selectedColor.hex) : "inherit"};">
+                  ${item.selectedColor ? "Color: " + escapeHtml(item.selectedColor.name) : ""}
+                </span>
+              </div>
+              <div><strong>$${lineTotal.toFixed(2)}</strong></div>
+            </div>
+
+            <div class="cart-controls">
+              <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+              <button class="remove-cart-btn" onclick="removeCartItem(${index})">REMOVE</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      cartTotal.textContent = `Estimated Total: $${total.toFixed(2)}`;
+    }
+
+    function showOrderStatus(type, message) {
+      const box = document.getElementById("order-status");
+      box.className = `status-message ${type}`;
+      box.innerHTML = message;
+    }
+
+    function clearOrderForm() {
+      document.getElementById("cust-name").value = "";
+      document.getElementById("cust-email").value = "";
+      document.getElementById("cust-phone").value = "";
+      document.getElementById("cust-notes").value = "";
+    }
+
+    async function submitOrder() {
+      const name = document.getElementById("cust-name").value.trim();
+      const email = document.getElementById("cust-email").value.trim();
+      const phone = document.getElementById("cust-phone").value.trim();
+      const notes = document.getElementById("cust-notes").value.trim();
+      const submitBtn = document.getElementById("submit-order-btn");
+
+      if (!cart.length) {
+        showOrderStatus("error", "Please add at least one item to your order.");
+        return;
+      }
+
+      if (!name) {
+        showOrderStatus("error", "Please enter your name.");
+        return;
+      }
+
+      if (!email && !phone) {
+        showOrderStatus("error", "Please enter an email address, a phone number, or both.");
+        return;
+      }
+
+      const orderTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      const payload = {
+        customer: { name, email, phone },
+        notes,
+        paymentMethods: ["PayPal", "Venmo", "Cash App", "Zelle"],
+        offsiteFulfillment: true,
+        items: cart.map(item => ({
+          name: item.name,
+          category: item.category,
+          qty: item.qty,
+          price: item.price,
+          selectedColor: item.selectedColor ? item.selectedColor.name : "",
+          colorHex: item.selectedColor ? item.selectedColor.hex : ""
+        })),
+        total: Number(orderTotal.toFixed(2))
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "SENDING...";
+      showOrderStatus("success", "Sending your order request...");
 
       try {
-        const response = await fetch("/.netlify/functions/products", {
+        const response = await fetch("/.netlify/functions/submit-order", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            action: "delete",
-            password: adminPassword,
-            id
-          })
+          body: JSON.stringify(payload)
         });
 
-        const data = await response.json();
+        let data = {};
+        try {
+          data = await response.json();
+        } catch {
+          data = {};
+        }
 
         if (!response.ok || !data.success) {
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        removeProductById(id);
+        cart = [];
+        renderCart();
+        clearOrderForm();
 
-        if (document.getElementById("p-id").value === String(id)) {
-          clearForm();
-        }
-
-        renderAdmin();
-        loadProducts();
-        alert("Product deleted.");
+        showOrderStatus(
+          "success",
+          "Your order request was sent successfully.<br><br>" +
+          "Please expect an email from The Posse Shoppe to confirm details, custom requests, and payment options. " +
+          "Orders are completed offsite. You may pay with PayPal, Venmo, Cash App, or Zelle."
+        );
       } catch (error) {
+        showOrderStatus(
+          "error",
+          "There was a problem sending your order.<br><br>" +
+          escapeHtml(error && error.message ? error.message : "Unknown error")
+        );
         console.error(error);
-        alert(error.message || "There was a problem deleting the product.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "SEND ORDER REQUEST";
       }
     }
 
-    function renderAdmin() {
-      const list = document.getElementById("admin-inventory-list");
-      let html = "<h3>Inventory</h3>";
+    function renderShop() {
+      const list = document.getElementById("product-list");
+      const items = getCurrentProducts();
 
-      ["3d", "laser"].forEach(cat => {
-        const items = allProducts.filter(x => x.category === cat);
+      if (items.length === 0) {
+        list.innerHTML = `
+          <div class="card">
+            <b>No products added yet</b>
+            <p>Add products from the merchant page.</p>
+          </div>
+        `;
+        return;
+      }
 
-        html += `<h4 style="color: var(--glow); margin-top:20px;">${cat === "3d" ? "3D Prints" : "Laser Engraving"}</h4>`;
-
-        if (items.length === 0) {
-          html += `<div class="muted">No products yet.</div>`;
-        } else {
-          items.forEach(item => {
-            const resolvedColors = getProductColors(item);
-
-            const colorSwatches = resolvedColors.length
-              ? `
-                <div class="inventory-color-row">
-                  ${resolvedColors.map(c => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
-                </div>
-              `
-              : `<div class="muted" style="margin-top:8px;">No color options</div>`;
-
-            const colorModeText = item.useGlobalColors
-              ? `<div class="muted" style="margin-top:8px;">Uses global colors</div>`
-              : (item.hasColors ? `<div class="muted" style="margin-top:8px;">Uses custom colors</div>` : `<div class="muted" style="margin-top:8px;">Colors off</div>`);
-
-            html += `
-              <div class="admin-inv-card">
-                <div><strong>${escapeHtml(item.name || "Unnamed Product")}</strong></div>
-                <div class="muted">$${Number(item.price || 0).toFixed(2)}</div>
-                <div class="muted">${escapeHtml(item.img || "No media file set")}</div>
-                <div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>
-                ${colorModeText}
-                ${colorSwatches}
-                <div class="admin-actions">
-                  <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
-                  <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
-                </div>
-              </div>
-            `;
-          });
-        }
-      });
-
-      list.innerHTML = html;
+      list.innerHTML = items.map((item, index) => `
+        <div class="card">
+          <div class="img-box">
+            ${buildMedia(item)}
+          </div>
+          <b>${escapeHtml(item.name)}</b>
+          <p><strong>$${Number(item.price).toFixed(2)}</strong></p>
+          <p>${escapeHtml(item.desc || "")}</p>
+          ${buildColorDropdown(item, index)}
+          <button class="add-btn" onclick="addToCart('${escapeHtml(String(item.id))}', ${index})">ADD TO ORDER</button>
+        </div>
+      `).join("");
     }
 
     function escapeHtml(str) {
@@ -760,9 +768,7 @@
     }
 
     window.onload = async () => {
-      clearForm();
-      renderColorEditor();
-      renderGlobalColorEditor();
+      renderCart();
       await loadProducts();
     };
   </script>
