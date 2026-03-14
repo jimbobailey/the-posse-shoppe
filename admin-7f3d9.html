@@ -543,9 +543,7 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        renderGlobalColorEditor();
-        renderAdmin();
-        setTimeout(loadProducts, 250);
+        await loadProducts();
         alert("Global colors saved.");
       } catch (error) {
         console.error(error);
@@ -616,10 +614,8 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        upsertLocalProduct(item);
-        renderAdmin();
+        await loadProducts();
         clearForm();
-        setTimeout(loadProducts, 250);
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -669,14 +665,12 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        removeLocalProduct(id);
+        await loadProducts();
 
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        renderAdmin();
-        setTimeout(loadProducts, 250);
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
