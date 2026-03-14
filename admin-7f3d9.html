@@ -211,7 +211,7 @@
 
     .color-add-row {
       display: grid;
-      grid-template-columns: 1.3fr 0.8fr auto;
+      grid-template-columns: 1.2fr 0.8fr auto auto;
       gap: 10px;
       align-items: center;
       margin-bottom: 12px;
@@ -388,10 +388,13 @@
           <div class="section-box">
             <h3 class="section-title">Color Library</h3>
 
+            <input type="hidden" id="library-edit-index" />
+
             <div class="color-add-row">
               <input type="text" id="library-color-name" placeholder="Add your color name" />
               <input type="color" id="library-color-hex" value="#ff8c00" />
-              <button type="button" class="small-btn" onclick="addLibraryColor()">ADD COLOR</button>
+              <button type="button" class="small-btn" onclick="saveLibraryColor()">SAVE COLOR</button>
+              <button type="button" class="small-btn alt" onclick="resetLibraryColorForm()">CANCEL</button>
             </div>
 
             <div id="color-library-list" class="color-library-list"></div>
@@ -406,12 +409,11 @@
             <h3 style="margin-top:0; color:var(--glow);">Select Product Colors</h3>
 
             <div class="color-picker-actions">
-              <button type="button" class="small-btn" onclick="selectAllLibraryColors()">SELECT ALL</button>
-              <button type="button" class="small-btn alt" onclick="clearAllLibraryColors()">CLEAR ALL</button>
+              <button type="button" class="small-btn" onclick="selectAllColors()">SELECT ALL</button>
+              <button type="button" class="small-btn alt" onclick="clearAllColors()">CLEAR ALL</button>
             </div>
 
             <div id="product-color-picker-list" class="product-color-picker-list"></div>
-
             <div id="color-list-editor" style="margin-top:12px;"></div>
           </div>
 
@@ -425,36 +427,18 @@
   </div>
 
   <script>
-    const COLOR_LIBRARY_KEY = "posseShoppeColorLibrary";
     let editingColors = [];
     let allProducts = [];
     let colorLibrary = [];
+    let selectableColors = [];
     const adminPassword = window.prompt("Enter admin password:") || "";
-
-    function loadColorLibrary() {
-      try {
-        const raw = localStorage.getItem(COLOR_LIBRARY_KEY);
-        const parsed = raw ? JSON.parse(raw) : [];
-        colorLibrary = Array.isArray(parsed)
-          ? parsed
-              .map(normalizeColor)
-              .filter(Boolean)
-          : [];
-      } catch (error) {
-        console.error("Failed to load color library:", error);
-        colorLibrary = [];
-      }
-    }
-
-    function saveColorLibrary() {
-      localStorage.setItem(COLOR_LIBRARY_KEY, JSON.stringify(colorLibrary));
-    }
 
     function normalizeColor(color) {
       if (!color || typeof color !== "object") return null;
 
       const name = String(color.name || "").trim();
-      const hex = String(color.hex || "").trim();
+      const hexRaw = String(color.hex || "").trim();
+      const hex = hexRaw ? (hexRaw.startsWith("#") ? hexRaw : "#" + hexRaw) : "";
 
       if (!name || !hex) return null;
 
@@ -470,12 +454,42 @@
       return editingColors.some((c) => sameColor(c, color));
     }
 
-    function toggleColorBuilder() {
-      const enabled = document.getElementById("p-enable-colors").checked;
-      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+    function getSelectableColors() {
+      const merged = [];
 
-      if (enabled) {
-        renderProductColorPicker();
+      colorLibrary.forEach((color) => {
+        const normalized = normalizeColor(color);
+        if (!normalized) return;
+        if (!merged.some((existing) => sameColor(existing, normalized))) {
+          merged.push({ ...normalized, source: "library" });
+        }
+      });
+
+      editingColors.forEach((color) => {
+        const normalized = normalizeColor(color);
+        if (!normalized) return;
+        if (!merged.some((existing) => sameColor(existing, normalized))) {
+          merged.push({ ...normalized, source: "product" });
+        }
+      });
+
+      return merged;
+    }
+
+    async function loadColorLibrary() {
+      try {
+        const response = await fetch("/.netlify/functions/products?type=colors", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        colorLibrary = Array.isArray(data) ? data.map(normalizeColor).filter(Boolean) : [];
+        renderColorLibrary();
+      } catch (error) {
+        console.error("Failed to load color library:", error);
+        colorLibrary = [];
+        renderColorLibrary();
       }
     }
 
@@ -483,7 +497,7 @@
       const box = document.getElementById("color-library-list");
 
       if (!colorLibrary.length) {
-        box.innerHTML = '<div class="muted">No colors added yet. Build your own library here.</div>';
+        box.innerHTML = '<div class="muted">No colors added yet.</div>';
         renderProductColorPicker();
         return;
       }
@@ -495,11 +509,123 @@
             <div><strong>${escapeHtml(color.name)}</strong></div>
             <div class="library-color-code">${escapeHtml(color.hex)}</div>
           </div>
-          <button type="button" class="remove-color-btn" onclick="removeLibraryColor(${index})">REMOVE</button>
+          <button type="button" class="edit-btn" onclick="editLibraryColor(${index})">EDIT</button>
+          <button type="button" class="remove-color-btn" onclick="deleteLibraryColor(${index})">DELETE</button>
         </div>
       `).join("");
 
       renderProductColorPicker();
+    }
+
+    function resetLibraryColorForm() {
+      document.getElementById("library-edit-index").value = "";
+      document.getElementById("library-color-name").value = "";
+      document.getElementById("library-color-hex").value = "#ff8c00";
+    }
+
+    function editLibraryColor(index) {
+      const color = colorLibrary[index];
+      if (!color) return;
+
+      document.getElementById("library-edit-index").value = String(index);
+      document.getElementById("library-color-name").value = color.name || "";
+      document.getElementById("library-color-hex").value = color.hex || "#ff8c00";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function saveLibraryColor() {
+      const name = document.getElementById("library-color-name").value.trim();
+      const hex = document.getElementById("library-color-hex").value;
+      const editIndexRaw = document.getElementById("library-edit-index").value.trim();
+      const color = normalizeColor({ name, hex });
+
+      if (!color) {
+        alert("Please enter a valid color name and hex.");
+        return;
+      }
+
+      const isEdit = editIndexRaw !== "";
+      const action = isEdit ? "updateColor" : "addColor";
+      const payload = {
+        action,
+        password: adminPassword,
+        color
+      };
+
+      if (isEdit) {
+        payload.index = Number(editIndexRaw);
+      }
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        colorLibrary = Array.isArray(data.colors) ? data.colors.map(normalizeColor).filter(Boolean) : [];
+        resetLibraryColorForm();
+        renderColorLibrary();
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem saving the color.");
+      }
+    }
+
+    async function deleteLibraryColor(index) {
+      const color = colorLibrary[index];
+      if (!color) return;
+
+      const confirmed = confirm(`Delete "${color.name}" from the color library?`);
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "deleteColor",
+            password: adminPassword,
+            index
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        colorLibrary = Array.isArray(data.colors) ? data.colors.map(normalizeColor).filter(Boolean) : [];
+        editingColors = editingColors.filter((existing) => !sameColor(existing, color));
+        resetLibraryColorForm();
+        renderColorLibrary();
+        renderColorEditor();
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem deleting the color.");
+      }
+    }
+
+    function toggleColorBuilder() {
+      const enabled = document.getElementById("p-enable-colors").checked;
+      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+
+      if (enabled) {
+        renderProductColorPicker();
+      } else {
+        renderColorEditor();
+      }
     }
 
     function renderProductColorPicker() {
@@ -512,20 +638,24 @@
         return;
       }
 
-      if (!colorLibrary.length) {
-        box.innerHTML = '<div class="muted">Your color library is empty. Add colors above first.</div>';
+      selectableColors = getSelectableColors();
+
+      if (!selectableColors.length) {
+        box.innerHTML = '<div class="muted">No colors in the library yet.</div>';
         renderColorEditor();
         return;
       }
 
-      box.innerHTML = colorLibrary.map((color, index) => {
+      box.innerHTML = selectableColors.map((color, index) => {
         const checked = editingHasColor(color) ? "checked" : "";
+        const sourceNote = color.source === "product" ? ' <span class="library-color-code">(saved on product)</span>' : "";
+
         return `
           <label class="product-color-row">
             <input type="checkbox" data-color-index="${index}" ${checked} onchange="syncEditingColorsFromChecks()" />
             <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
             <div class="library-color-meta">
-              <div class="product-color-name">${escapeHtml(color.name)}</div>
+              <div class="product-color-name">${escapeHtml(color.name)}${sourceNote}</div>
               <div class="library-color-code">${escapeHtml(color.hex)}</div>
             </div>
           </label>
@@ -541,15 +671,15 @@
         .filter((checkbox) => checkbox.checked)
         .map((checkbox) => {
           const idx = Number(checkbox.getAttribute("data-color-index"));
-          return colorLibrary[idx];
+          return selectableColors[idx];
         })
         .filter(Boolean)
-        .map((color) => ({ ...color }));
+        .map((color) => ({ name: color.name, hex: color.hex }));
 
       renderColorEditor();
     }
 
-    function selectAllLibraryColors() {
+    function selectAllColors() {
       const checks = document.querySelectorAll('#product-color-picker-list input[type="checkbox"]');
       checks.forEach((checkbox) => {
         checkbox.checked = true;
@@ -557,7 +687,7 @@
       syncEditingColorsFromChecks();
     }
 
-    function clearAllLibraryColors() {
+    function clearAllColors() {
       const checks = document.querySelectorAll('#product-color-picker-list input[type="checkbox"]');
       checks.forEach((checkbox) => {
         checkbox.checked = false;
@@ -567,6 +697,12 @@
 
     function renderColorEditor() {
       const box = document.getElementById("color-list-editor");
+      const enabled = document.getElementById("p-enable-colors").checked;
+
+      if (!enabled) {
+        box.innerHTML = "";
+        return;
+      }
 
       if (!editingColors.length) {
         box.innerHTML = '<div class="muted">No colors selected for this product.</div>';
@@ -584,50 +720,6 @@
       `).join("");
     }
 
-    function addLibraryColor() {
-      const name = document.getElementById("library-color-name").value.trim();
-      const hex = document.getElementById("library-color-hex").value;
-
-      if (!name) {
-        alert("Please enter a color name.");
-        return;
-      }
-
-      const newColor = normalizeColor({ name, hex });
-      if (!newColor) {
-        alert("Please enter a valid color.");
-        return;
-      }
-
-      const exists = colorLibrary.some((color) => sameColor(color, newColor));
-      if (exists) {
-        alert("That color is already in your library.");
-        return;
-      }
-
-      colorLibrary.push(newColor);
-      saveColorLibrary();
-      document.getElementById("library-color-name").value = "";
-      document.getElementById("library-color-hex").value = "#ff8c00";
-      renderColorLibrary();
-    }
-
-    function removeLibraryColor(index) {
-      const color = colorLibrary[index];
-      if (!color) return;
-
-      const confirmed = confirm(`Remove "${color.name}" from your library?`);
-      if (!confirmed) return;
-
-      colorLibrary.splice(index, 1);
-      saveColorLibrary();
-
-      editingColors = editingColors.filter((existing) => !sameColor(existing, color));
-
-      renderColorLibrary();
-      renderColorEditor();
-    }
-
     function clearForm() {
       document.getElementById("p-id").value = "";
       document.getElementById("p-page").value = "3d";
@@ -638,6 +730,7 @@
       document.getElementById("p-img").value = "";
       document.getElementById("p-enable-colors").checked = false;
       document.getElementById("form-title").textContent = "Add New Product";
+
       editingColors = [];
       toggleColorBuilder();
       renderProductColorPicker();
@@ -740,7 +833,10 @@
       document.getElementById("p-enable-colors").checked = !!item.hasColors;
       document.getElementById("form-title").textContent = "Edit Product";
 
-      editingColors = Array.isArray(item.colors) ? item.colors.map((color) => ({ ...color })) : [];
+      editingColors = Array.isArray(item.colors)
+        ? item.colors.map((color) => normalizeColor(color)).filter(Boolean)
+        : [];
+
       toggleColorBuilder();
       renderProductColorPicker();
       renderColorEditor();
@@ -833,8 +929,8 @@
     }
 
     window.onload = async () => {
-      loadColorLibrary();
-      renderColorLibrary();
+      resetLibraryColorForm();
+      await loadColorLibrary();
       clearForm();
       await loadProducts();
     };
