@@ -8,15 +8,28 @@ function cleanString(value) {
   return String(value ?? "").trim();
 }
 
+function normalizeHex(value) {
+  const hex = cleanString(value);
+  if (!hex) return "";
+  return hex.startsWith("#") ? hex : `#${hex}`;
+}
+
 function normalizeColor(color) {
   if (!color || typeof color !== "object") return null;
 
   const name = cleanString(color.name);
-  const hex = cleanString(color.hex);
+  const hex = normalizeHex(color.hex);
 
   if (!name || !hex) return null;
 
   return { name, hex };
+}
+
+function sameColor(a, b) {
+  return (
+    cleanString(a?.name).toLowerCase() === cleanString(b?.name).toLowerCase() &&
+    normalizeHex(a?.hex).toLowerCase() === normalizeHex(b?.hex).toLowerCase()
+  );
 }
 
 function normalizeProduct(product) {
@@ -60,6 +73,16 @@ async function saveProducts(store, products) {
   await store.set("catalog", JSON.stringify(products));
 }
 
+async function loadColorLibrary(store) {
+  const raw = await store.get("colorLibrary", { type: "json" });
+  const colors = toArray(raw).map(normalizeColor).filter(Boolean);
+  return colors;
+}
+
+async function saveColorLibrary(store, colors) {
+  await store.set("colorLibrary", JSON.stringify(colors));
+}
+
 function json(statusCode, body) {
   return {
     statusCode,
@@ -76,102 +99,186 @@ exports.handler = async (event) => {
   const store = getStore("products");
 
   try {
+    const type = cleanString(event.queryStringParameters?.type).toLowerCase();
+
+    if (event.httpMethod === "GET" && type === "colors") {
+      const colors = await loadColorLibrary(store);
+      return json(200, colors);
+    }
+
     if (event.httpMethod === "GET") {
       const products = await loadProducts(store);
       return json(200, products);
     }
 
-    if (event.httpMethod === "POST") {
-      const body = JSON.parse(event.body || "{}");
-      let products = await loadProducts(store);
-
-      if (body.action === "add" && body.product) {
-        const incoming = normalizeProduct(body.product);
-
-        if (!incoming.name) {
-          return json(400, {
-            success: false,
-            message: "Product name is required."
-          });
-        }
-
-        const exists = products.some((p) => String(p.id) === String(incoming.id));
-        if (exists) {
-          incoming.id = String(Date.now());
-        }
-
-        products.push(incoming);
-        await saveProducts(store, products);
-
-        return json(200, {
-          success: true,
-          products
-        });
-      }
-
-      if (body.action === "edit" && body.product) {
-        const incoming = normalizeProduct(body.product);
-
-        if (!incoming.name) {
-          return json(400, {
-            success: false,
-            message: "Product name is required."
-          });
-        }
-
-        let found = false;
-
-        products = products.map((p) => {
-          if (String(p.id) === String(incoming.id)) {
-            found = true;
-            return incoming;
-          }
-          return p;
-        });
-
-        if (!found) {
-          return json(404, {
-            success: false,
-            message: "Product not found for edit."
-          });
-        }
-
-        await saveProducts(store, products);
-
-        return json(200, {
-          success: true,
-          products
-        });
-      }
-
-      if (body.action === "delete" && body.id) {
-        const beforeCount = products.length;
-        products = products.filter((p) => String(p.id) !== String(body.id));
-
-        if (products.length === beforeCount) {
-          return json(404, {
-            success: false,
-            message: "Product not found for delete."
-          });
-        }
-
-        await saveProducts(store, products);
-
-        return json(200, {
-          success: true,
-          products
-        });
-      }
-
-      return json(400, {
+    if (event.httpMethod !== "POST") {
+      return json(405, {
         success: false,
-        message: "Invalid action."
+        message: "Method not allowed."
       });
     }
 
-    return json(405, {
+    const body = JSON.parse(event.body || "{}");
+
+    // COLOR LIBRARY ACTIONS
+    if (body.action === "addColor" && body.color) {
+      const colors = await loadColorLibrary(store);
+      const incoming = normalizeColor(body.color);
+
+      if (!incoming) {
+        return json(400, {
+          success: false,
+          message: "Valid color name and hex are required."
+        });
+      }
+
+      const exists = colors.some((color) => sameColor(color, incoming));
+      if (exists) {
+        return json(400, {
+          success: false,
+          message: "That color already exists in the library."
+        });
+      }
+
+      colors.push(incoming);
+      await saveColorLibrary(store, colors);
+
+      return json(200, {
+        success: true,
+        colors
+      });
+    }
+
+    if (body.action === "updateColor" && body.color && Number.isInteger(body.index)) {
+      const colors = await loadColorLibrary(store);
+      const incoming = normalizeColor(body.color);
+
+      if (!incoming) {
+        return json(400, {
+          success: false,
+          message: "Valid color name and hex are required."
+        });
+      }
+
+      if (body.index < 0 || body.index >= colors.length) {
+        return json(404, {
+          success: false,
+          message: "Color not found for update."
+        });
+      }
+
+      colors[body.index] = incoming;
+      await saveColorLibrary(store, colors);
+
+      return json(200, {
+        success: true,
+        colors
+      });
+    }
+
+    if (body.action === "deleteColor" && Number.isInteger(body.index)) {
+      const colors = await loadColorLibrary(store);
+
+      if (body.index < 0 || body.index >= colors.length) {
+        return json(404, {
+          success: false,
+          message: "Color not found for delete."
+        });
+      }
+
+      colors.splice(body.index, 1);
+      await saveColorLibrary(store, colors);
+
+      return json(200, {
+        success: true,
+        colors
+      });
+    }
+
+    // PRODUCT ACTIONS
+    let products = await loadProducts(store);
+
+    if (body.action === "add" && body.product) {
+      const incoming = normalizeProduct(body.product);
+
+      if (!incoming.name) {
+        return json(400, {
+          success: false,
+          message: "Product name is required."
+        });
+      }
+
+      const exists = products.some((p) => String(p.id) === String(incoming.id));
+      if (exists) {
+        incoming.id = String(Date.now());
+      }
+
+      products.push(incoming);
+      await saveProducts(store, products);
+
+      return json(200, {
+        success: true,
+        products
+      });
+    }
+
+    if (body.action === "edit" && body.product) {
+      const incoming = normalizeProduct(body.product);
+
+      if (!incoming.name) {
+        return json(400, {
+          success: false,
+          message: "Product name is required."
+        });
+      }
+
+      let found = false;
+
+      products = products.map((p) => {
+        if (String(p.id) === String(incoming.id)) {
+          found = true;
+          return incoming;
+        }
+        return p;
+      });
+
+      if (!found) {
+        return json(404, {
+          success: false,
+          message: "Product not found for edit."
+        });
+      }
+
+      await saveProducts(store, products);
+
+      return json(200, {
+        success: true,
+        products
+      });
+    }
+
+    if (body.action === "delete" && body.id) {
+      const beforeCount = products.length;
+      products = products.filter((p) => String(p.id) !== String(body.id));
+
+      if (products.length === beforeCount) {
+        return json(404, {
+          success: false,
+          message: "Product not found for delete."
+        });
+      }
+
+      await saveProducts(store, products);
+
+      return json(200, {
+        success: true,
+        products
+      });
+    }
+
+    return json(400, {
       success: false,
-      message: "Method not allowed."
+      message: "Invalid action."
     });
   } catch (error) {
     console.error("products function error:", error);
