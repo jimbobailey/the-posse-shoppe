@@ -875,8 +875,7 @@
 
       if (item.mediaType === "video") {
         return `
-          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';"> 
-
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
             <source src="${mediaPath}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -949,8 +948,10 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = Array.isArray(data.products) ? data.products : allProducts;
         clearForm();
-        await loadProducts();
+        renderShop();
+        renderAdmin();
         alert(action === "add" ? "Product added." : "Product updated.");
       } catch (error) {
         console.error(error);
@@ -999,11 +1000,14 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
+        allProducts = Array.isArray(data.products) ? data.products : allProducts;
+
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
-        await loadProducts();
+        renderShop();
+        renderAdmin();
         alert("Product deleted.");
       } catch (error) {
         console.error(error);
