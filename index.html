@@ -464,12 +464,8 @@
     }
 
     function getProductColors(item) {
-      if (item.useGlobalColors) {
-        return Array.isArray(globalColors) ? globalColors : [];
-      }
-      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) {
-        return item.colors;
-      }
+      if (item.useGlobalColors) return globalColors;
+      if (item.hasColors && Array.isArray(item.colors) && item.colors.length) return item.colors;
       return [];
     }
 
@@ -690,9 +686,7 @@
       try {
         const response = await fetch("/.netlify/functions/submit-order", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
 
