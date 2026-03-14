@@ -475,7 +475,7 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        allProducts = Array.isArray(data.products) ? data.products : allProducts;
+        allProducts = Array.isArray(data.products) ? data.products : [];
         clearForm();
         renderAdmin();
         alert(action === "add" ? "Product added." : "Product updated.");
@@ -528,7 +528,7 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        allProducts = Array.isArray(data.products) ? data.products : allProducts;
+        allProducts = Array.isArray(data.products) ? data.products : [];
 
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
