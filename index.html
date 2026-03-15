@@ -30,6 +30,10 @@
       --muted: #666;
       --danger: #c62828;
       --success: #167c3b;
+      --panel-dark: #111;
+      --panel-dark-2: #1a1a1a;
+      --text-light: #f5f5f5;
+      --border-dark: #333;
     }
 
     * {
@@ -147,32 +151,73 @@
 
     .info-section-wrap {
       max-width: 1500px;
-      margin: 20px auto 0;
+      margin: 18px auto 0;
       padding: 0 20px;
     }
 
     .info-section {
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255, 140, 0, 0.35);
       border-radius: 10px;
-      background: #fff;
-      padding: 22px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      background:
+        linear-gradient(rgba(10, 10, 10, 0.95), rgba(18, 18, 18, 0.95)),
+        url("images/hex-bg.png") center center / cover no-repeat;
+      color: var(--text-light);
+      overflow: hidden;
+      box-shadow: 0 0 18px rgba(255, 140, 0, 0.10);
     }
 
-    .info-section h2 {
-      margin-top: 0;
-      color: #111;
+    .info-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 18px;
+      font-weight: bold;
+      color: var(--glow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
     }
 
-    .info-section h3 {
-      margin-bottom: 6px;
-      color: #111;
+    .info-summary::-webkit-details-marker {
+      display: none;
     }
 
-    .info-section p {
-      line-height: 1.6;
-      margin-top: 0;
-      margin-bottom: 16px;
+    .info-summary:hover {
+      background: rgba(255, 140, 0, 0.08);
+    }
+
+    .info-summary-text {
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .info-summary-icon {
+      color: white;
+      font-size: 13px;
+      transition: transform 0.2s ease;
+    }
+
+    details[open] .info-summary-icon {
+      transform: rotate(180deg);
+    }
+
+    .info-content {
+      padding: 0 18px 18px;
+      border-top: 1px solid rgba(255, 140, 0, 0.18);
+    }
+
+    .info-content h3 {
+      margin: 14px 0 6px;
+      color: var(--glow);
+      font-size: 16px;
+    }
+
+    .info-content p {
+      line-height: 1.55;
+      margin: 0 0 12px;
+      color: #f2f2f2;
+      font-size: 14px;
     }
 
     .main-layout {
@@ -522,23 +567,29 @@
   </header>
 
   <section class="info-section-wrap" id="what-we-do">
-    <div class="info-section">
-      <h2>What We Do at THE POSSE SHOPPE</h2>
-      <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
+    <details class="info-section">
+      <summary class="info-summary">
+        <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE</span>
+        <span class="info-summary-icon">▼</span>
+      </summary>
 
-      <h3>3D Printing</h3>
-      <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
+      <div class="info-content">
+        <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
 
-      <h3>Laser Engraving</h3>
-      <p>I use two different types of lasers depending on the job:</p>
-      <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
-      <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
-      <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
-      <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+        <h3>3D Printing</h3>
+        <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
 
-      <h3>A Quick Note on Orders</h3>
-      <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
-    </div>
+        <h3>Laser Engraving</h3>
+        <p>I use two different types of lasers depending on the job.</p>
+        <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
+        <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
+        <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
+        <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+
+        <h3>A Quick Note on Orders</h3>
+        <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
+      </div>
+    </details>
   </section>
 
   <div class="main-layout">
