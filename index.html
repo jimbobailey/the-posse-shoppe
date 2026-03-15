@@ -26,14 +26,28 @@
     :root {
       --primary: #121212;
       --glow: #ff8c00;
-      --bg: #ffffff;
-      --muted: #666;
+      --glow-strong: #ff9f1c;
+      --bg: #0d0d0f;
+      --bg-soft: #151518;
+      --bg-elevated: #1b1c20;
+      --bg-panel: #121316;
+      --muted: #b7b7b7;
+      --muted-dark: #8f8f8f;
       --danger: #c62828;
       --success: #167c3b;
       --panel-dark: #111;
       --panel-dark-2: #1a1a1a;
       --text-light: #f5f5f5;
+      --text-main: #f3f3f3;
       --border-dark: #333;
+      --border-soft: rgba(255, 140, 0, 0.18);
+      --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.28);
+      --shadow-glow: 0 0 24px rgba(255, 140, 0, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --max-width: 1500px;
     }
 
     * {
@@ -47,24 +61,39 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      background: var(--bg);
-      color: #111;
+      background:
+        radial-gradient(circle at top, rgba(255, 140, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, #0b0b0d 0%, #111215 35%, #0d0d0f 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
     }
 
     header {
-      padding: 20px 20px 28px;
+      padding: 18px 20px 24px;
       text-align: center;
-      border-bottom: 2px solid var(--glow);
+      border-bottom: 1px solid rgba(255, 140, 0, 0.28);
       background:
-        linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.88)),
+        linear-gradient(rgba(8, 8, 8, 0.88), rgba(10, 10, 10, 0.92)),
         url("images/hex-bg.png") center center / cover no-repeat;
+      box-shadow: inset 0 -1px 0 rgba(255, 140, 0, 0.14);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
     }
 
     .header-banner-wrap {
       max-width: 1120px;
-      margin: 0 auto 18px;
-      padding: 14px;
-      border-radius: 12px;
+      margin: 0 auto 14px;
+      padding: 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 140, 0, 0.08), rgba(255, 140, 0, 0.03));
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      box-shadow: var(--shadow-glow);
     }
 
     .header-banner {
@@ -73,9 +102,9 @@
       max-width: 1000px;
       margin: 0 auto;
       height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255, 140, 0, 0.45);
-      box-shadow: 0 0 22px rgba(255, 140, 0, 0.22);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.18);
       background: #111;
     }
 
@@ -99,8 +128,16 @@
       font-size: 3rem;
     }
 
+    .header-subline {
+      max-width: 760px;
+      margin: 4px auto 0;
+      color: #d7d7d7;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
     nav {
-      margin-top: 15px;
+      margin-top: 16px;
       display: flex;
       justify-content: center;
       gap: 10px;
@@ -108,62 +145,111 @@
     }
 
     .nav-btn {
-      background: rgba(0, 0, 0, 0.65);
-      border: 1px solid var(--glow);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 140, 0, 0.55);
       color: white;
-      padding: 8px 15px;
+      padding: 10px 18px;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: var(--radius-pill);
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 140, 0, 0.12);
     }
 
     .nav-btn.active {
-      background: var(--glow);
+      background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
       color: black;
       font-weight: bold;
+      border-color: #ffb24f;
+      box-shadow: 0 8px 20px rgba(255, 140, 0, 0.22);
     }
 
     .contact-link,
     .info-link {
-      background: rgba(0, 0, 0, 0.45);
-      color: #ff8c00;
-      border: 2px solid #ff8c00;
-      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #ff9a1a;
+      border: 1px solid rgba(255, 140, 0, 0.65);
+      padding: 10px 16px;
       cursor: pointer;
       display: inline-block;
-      border-radius: 4px;
+      border-radius: var(--radius-pill);
       font-weight: bold;
       text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
     }
 
     .contact-link:hover,
     .info-link:hover {
       background: #ff8c00;
       color: black;
+      transform: translateY(-1px);
     }
 
     .header-links {
-      margin: 20px auto 0;
+      margin: 16px auto 0;
       display: flex;
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
     }
 
-    .info-section-wrap {
-      max-width: 1500px;
+    .mini-intro-wrap {
+      max-width: var(--max-width);
       margin: 18px auto 0;
       padding: 0 20px;
     }
 
+    .mini-intro {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-intro-card {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(24, 24, 28, 0.96), rgba(16, 16, 19, 0.96));
+      border: 1px solid rgba(255, 140, 0, 0.16);
+      box-shadow: var(--shadow-soft);
+      min-height: 92px;
+    }
+
+    .mini-intro-card strong {
+      display: block;
+      color: var(--glow);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    .mini-intro-card span {
+      color: #dddddd;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .info-section-wrap {
+      max-width: var(--max-width);
+      margin: 16px auto 0;
+      padding: 0 20px;
+    }
+
     .info-section {
-      border: 1px solid rgba(255, 140, 0, 0.35);
-      border-radius: 10px;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+      border-radius: var(--radius-lg);
       background:
-        linear-gradient(rgba(10, 10, 10, 0.95), rgba(18, 18, 18, 0.95)),
+        linear-gradient(rgba(10, 10, 10, 0.94), rgba(18, 18, 18, 0.95)),
         url("images/hex-bg.png") center center / cover no-repeat;
       color: var(--text-light);
       overflow: hidden;
-      box-shadow: 0 0 18px rgba(255, 140, 0, 0.10);
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
     }
 
     .info-summary {
@@ -188,8 +274,8 @@
     }
 
     .info-summary-text {
-      font-size: 1rem;
-      letter-spacing: 0.5px;
+      font-size: 0.98rem;
+      letter-spacing: 0.6px;
     }
 
     .info-summary-icon {
@@ -204,55 +290,131 @@
 
     .info-content {
       padding: 0 18px 18px;
-      border-top: 1px solid rgba(255, 140, 0, 0.18);
+      border-top: 1px solid rgba(255, 140, 0, 0.14);
     }
 
-    .info-content h3 {
-      margin: 14px 0 6px;
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+      margin-top: 14px;
+    }
+
+    .info-block {
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 140, 0, 0.1);
+    }
+
+    .info-block h3 {
+      margin: 0 0 8px;
       color: var(--glow);
-      font-size: 16px;
+      font-size: 15px;
+      letter-spacing: 0.3px;
     }
 
-    .info-content p {
+    .info-block p {
       line-height: 1.55;
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       color: #f2f2f2;
       font-size: 14px;
     }
 
+    .info-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .shop-shell {
+      max-width: var(--max-width);
+      margin: 18px auto 0;
+      padding: 0 20px 30px;
+    }
+
+    .shop-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+
+    .shop-heading h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      color: #fff;
+      letter-spacing: 0.4px;
+    }
+
+    .shop-heading p {
+      margin: 0;
+      color: #c8c8c8;
+      font-size: 0.95rem;
+    }
+
     .main-layout {
       display: flex;
-      max-width: 1500px;
-      margin: 20px auto;
-      gap: 30px;
-      padding: 0 20px 30px;
+      gap: 24px;
       align-items: flex-start;
     }
 
-    #product-list {
+    .products-column {
       flex: 3;
+      min-width: 0;
+    }
+
+    #product-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
+      gap: 20px;
     }
 
     .card {
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 8px;
-      background: white;
+      border: 1px solid rgba(255, 140, 0, 0.14);
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(30, 31, 35, 0.98), rgba(18, 19, 22, 0.98));
+      box-shadow: var(--shadow-soft);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .card b {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .price-line {
+      margin: 0 0 8px;
+      color: var(--glow);
+      font-size: 1rem;
+    }
+
+    .desc-line {
+      margin: 0;
+      color: #d0d0d0;
+      font-size: 0.94rem;
+      line-height: 1.5;
     }
 
     .img-box {
       width: 100%;
       height: 250px;
-      background: #f4f4f4;
-      margin-bottom: 15px;
+      background: linear-gradient(180deg, #0f1012 0%, #17181c 100%);
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      border-radius: 6px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
     .img-box img,
@@ -260,15 +422,15 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background: #f4f4f4;
+      background: transparent;
     }
 
     .product-option-wrap {
       margin-top: 12px;
-      border: 1px solid #e3e3e3;
-      border-radius: 6px;
-      padding: 10px;
-      background: #fafafa;
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .product-option-wrap label.option-title {
@@ -276,11 +438,12 @@
       font-size: 14px;
       font-weight: bold;
       margin-bottom: 8px;
+      color: #fff;
     }
 
     .product-option-note {
       font-size: 13px;
-      color: #555;
+      color: #cfcfcf;
       margin-bottom: 10px;
     }
 
@@ -291,26 +454,26 @@
       justify-content: space-between;
       gap: 10px;
       padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: white;
+      border: 1px solid rgba(255, 140, 0, 0.22);
+      border-radius: 10px;
+      background: #111216;
       cursor: pointer;
       font: inherit;
       font-weight: bold;
-      color: #111;
+      color: #f5f5f5;
     }
 
     .color-dropdown-toggle span:last-child {
       font-size: 12px;
-      color: #555;
+      color: #cfcfcf;
     }
 
     .color-dropdown-panel {
       display: none;
       margin-top: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      background: white;
+      border: 1px solid rgba(255, 140, 0, 0.16);
+      border-radius: 10px;
+      background: #121317;
       padding: 10px;
     }
 
@@ -330,6 +493,7 @@
       gap: 8px;
       font-size: 14px;
       cursor: pointer;
+      color: #efefef;
     }
 
     .color-checkbox-row input[type="checkbox"] {
@@ -360,51 +524,77 @@
       gap: 6px;
       padding: 5px 8px;
       border-radius: 999px;
-      background: #f1f1f1;
+      background: rgba(255, 140, 0, 0.08);
       font-size: 13px;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255, 140, 0, 0.18);
+      color: #f5f5f5;
     }
 
     .product-color-notes {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: white;
+      border: 1px solid rgba(255, 140, 0, 0.16);
+      border-radius: 10px;
+      background: #0f1014;
+      color: #f4f4f4;
       resize: vertical;
       min-height: 70px;
       font: inherit;
     }
 
     .add-btn {
-      background: var(--primary);
+      background: linear-gradient(180deg, #1d1e22 0%, #111216 100%);
       color: white;
-      padding: 14px;
+      padding: 13px;
       width: 100%;
       cursor: pointer;
-      margin-top: 12px;
-      border: none;
-      border-radius: 4px;
+      margin-top: 14px;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+      border-radius: 12px;
       font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+    }
+
+    .add-btn:hover {
+      background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
+      color: black;
+      transform: translateY(-1px);
     }
 
     .cart-sidebar {
       flex: 1;
       min-width: 340px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border: 1px solid rgba(255, 140, 0, 0.16);
+      border-radius: 18px;
       padding: 18px;
-      background: #fafafa;
+      background: linear-gradient(180deg, rgba(25, 26, 30, 0.98), rgba(17, 18, 22, 0.98));
       position: sticky;
       top: 20px;
+      box-shadow: var(--shadow-soft);
+      color: var(--text-main);
+    }
+
+    .cart-sidebar h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #fff;
+      font-size: 1.25rem;
+    }
+
+    .cart-subtext {
+      margin: 0 0 14px;
+      color: #c8c8c8;
+      font-size: 0.92rem;
+      line-height: 1.45;
     }
 
     .cart-item {
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 10px;
+      border: 1px solid rgba(255, 140, 0, 0.14);
+      border-radius: 12px;
+      padding: 12px;
       margin-bottom: 10px;
-      background: white;
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .cart-item-top {
@@ -417,33 +607,36 @@
     .cart-item-subline {
       margin-top: 6px;
       font-size: 14px;
-      color: #444;
+      color: #cfcfcf;
+      line-height: 1.4;
     }
 
     .cart-color-line {
       margin-top: 6px;
       font-size: 14px;
-      color: #444;
+      color: #cfcfcf;
     }
 
     .cart-controls {
       display: flex;
       gap: 6px;
       align-items: center;
-      margin-top: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
     .qty-btn,
     .remove-cart-btn {
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
-      padding: 6px 10px;
+      padding: 7px 11px;
+      font-weight: bold;
     }
 
     .qty-btn {
-      background: #eee;
-      font-weight: bold;
+      background: #2a2c31;
+      color: #fff;
     }
 
     .remove-cart-btn {
@@ -453,11 +646,12 @@
     }
 
     .cart-total {
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: bold;
-      margin: 12px 0 16px;
-      padding-top: 10px;
-      border-top: 1px solid #ddd;
+      margin: 14px 0 16px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 140, 0, 0.14);
+      color: var(--glow);
     }
 
     .checkout-box label {
@@ -465,15 +659,25 @@
       display: block;
       margin-top: 10px;
       margin-bottom: 6px;
+      color: #f5f5f5;
+      font-size: 0.94rem;
     }
 
     .checkout-box input,
     .checkout-box textarea {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      padding: 11px 12px;
+      border: 1px solid rgba(255, 140, 0, 0.15);
+      border-radius: 10px;
       font: inherit;
+      background: #101115;
+      color: #f5f5f5;
+    }
+
+    .checkout-box input::placeholder,
+    .checkout-box textarea::placeholder,
+    .product-color-notes::placeholder {
+      color: #9f9f9f;
     }
 
     .checkout-box textarea {
@@ -482,14 +686,14 @@
     }
 
     .notice-box {
-      background: #fff7ef;
-      border: 1px solid #ffc58c;
-      color: #5a3a12;
+      background: rgba(255, 140, 0, 0.08);
+      border: 1px solid rgba(255, 140, 0, 0.24);
+      color: #f2dfcb;
       padding: 12px;
-      border-radius: 6px;
+      border-radius: 12px;
       margin-top: 14px;
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .submit-order-btn {
@@ -497,12 +701,14 @@
       margin-top: 16px;
       padding: 14px;
       border: none;
-      border-radius: 4px;
-      background: var(--glow);
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
       color: black;
       font-weight: bold;
       cursor: pointer;
       font-size: 15px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 10px 18px rgba(255, 140, 0, 0.18);
     }
 
     .submit-order-btn:disabled {
@@ -513,10 +719,10 @@
     .status-message {
       margin-top: 12px;
       padding: 12px;
-      border-radius: 6px;
+      border-radius: 12px;
       display: none;
       font-size: 14px;
-      line-height: 1.4;
+      line-height: 1.45;
       word-break: break-word;
     }
 
@@ -534,7 +740,29 @@
       color: #7f1d1d;
     }
 
+    .empty-card-message {
+      color: #d8d8d8;
+    }
+
+    @media (max-width: 1180px) {
+      .main-layout {
+        gap: 18px;
+      }
+
+      .cart-sidebar {
+        min-width: 320px;
+      }
+    }
+
     @media (max-width: 980px) {
+      .mini-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
       .main-layout {
         flex-direction: column;
       }
@@ -544,92 +772,182 @@
         width: 100%;
         min-width: 0;
       }
+
+      .shop-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 14px 14px 20px;
+      }
+
+      .mini-intro-wrap,
+      .info-section-wrap,
+      .shop-shell {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .header-subline {
+        font-size: 0.92rem;
+      }
+
+      .nav-btn,
+      .contact-link,
+      .info-link {
+        width: 100%;
+        justify-content: center;
+      }
+
+      nav,
+      .header-links {
+        gap: 8px;
+      }
+
+      #product-list {
+        grid-template-columns: 1fr;
+      }
+
+      .img-box {
+        height: 220px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-banner-wrap">
-      <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
-    </div>
+    <div class="header-inner">
+      <div class="header-banner-wrap">
+        <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+      </div>
 
-    <h1 class="sr-only">The Posse Shoppe</h1>
+      <h1 class="sr-only">The Posse Shoppe</h1>
+      <p class="header-subline">Custom 3D prints and laser engraving made one project at a time.</p>
 
-    <nav>
-      <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
-      <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
-    </nav>
+      <nav>
+        <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
+        <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
+      </nav>
 
-    <div class="header-links">
-      <a class="info-link" href="#what-we-do">WHAT WE DO</a>
-      <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+      <div class="header-links">
+        <a class="info-link" href="#what-we-do">WHAT WE DO</a>
+        <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+      </div>
     </div>
   </header>
+
+  <section class="mini-intro-wrap">
+    <div class="mini-intro">
+      <div class="mini-intro-card">
+        <strong>CUSTOM WORK</strong>
+        <span>Need something specific? Reach out about custom prints, engraving ideas, and project requests.</span>
+      </div>
+      <div class="mini-intro-card">
+        <strong>SMALL SHOP. PERSONAL WORK.</strong>
+        <span>Everything shown here is made by me with attention to quality, fit, finish, and realistic turnaround times.</span>
+      </div>
+      <div class="mini-intro-card">
+        <strong>ORDER REQUESTS</strong>
+        <span>Submit your order here, then I’ll follow up by email or phone to confirm details and payment.</span>
+      </div>
+    </div>
+  </section>
 
   <section class="info-section-wrap" id="what-we-do">
     <details class="info-section">
       <summary class="info-summary">
-        <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE - CLICK ME!</span>
+        <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE</span>
         <span class="info-summary-icon">▼</span>
       </summary>
 
       <div class="info-content">
-        <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
+        <div class="info-grid">
+          <div class="info-block">
+            <h3>About the Shop</h3>
+            <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
+          </div>
 
-        <h3>3D Printing</h3>
-        <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
+          <div class="info-block">
+            <h3>3D Printing</h3>
+            <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
+          </div>
 
-        <h3>Laser Engraving</h3>
-        <p>I use two different types of lasers depending on the job.</p>
-        <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
-        <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
-        <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
-        <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+          <div class="info-block">
+            <h3>Laser Engraving</h3>
+            <p>I use two different types of lasers depending on the job.</p>
+            <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
+            <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
+          </div>
 
-        <h3>A Quick Note on Orders</h3>
-        <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
+          <div class="info-block">
+            <h3>Popular Custom Work</h3>
+            <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
+            <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+          </div>
+
+          <div class="info-block" style="grid-column: 1 / -1;">
+            <h3>A Quick Note on Orders</h3>
+            <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
+          </div>
+        </div>
       </div>
     </details>
   </section>
 
-  <div class="main-layout">
-    <div id="product-list"></div>
-
-    <aside class="cart-sidebar">
-      <h2 style="margin-top:0;">Your Order</h2>
-      <div id="cart-items">Empty</div>
-      <div class="cart-total" id="cart-total">$0.00</div>
-
-      <div class="checkout-box">
-        <label for="cust-name">Your Name</label>
-        <input type="text" id="cust-name" placeholder="Enter your name" />
-
-        <label for="cust-email">Email</label>
-        <input type="email" id="cust-email" placeholder="Enter your email" />
-
-        <label for="cust-phone">Phone</label>
-        <input type="text" id="cust-phone" placeholder="Enter your phone number" />
-
-        <label for="cust-notes">Custom Requests / Notes</label>
-        <textarea id="cust-notes" placeholder="Request custom designs, custom colors, engraving changes, quantity changes, or anything else here."></textarea>
-
-        <div class="notice-box">
-          Orders submitted here are reviewed and completed <strong>offsite by email</strong>.
-          After you send your order, The Posse Shoppe will contact you to confirm details, answer custom requests, and arrange payment.
-
-          <br><br>
-          <strong>Accepted payment methods:</strong> PayPal, Venmo, Cash App, and Zelle.
-
-          <br><br>
-          You may request <strong>custom designs</strong> and <strong>colors not listed</strong>.
-          If a requested color is unavailable or a design is beyond current design capability, you will be notified by email or phone.
-        </div>
-
-        <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">SEND ORDER REQUEST</button>
-        <div id="order-status" class="status-message"></div>
+  <section class="shop-shell">
+    <div class="shop-heading">
+      <div>
+        <h2>Shop Products</h2>
+        <p>Browse available items, choose your options, and build your order request.</p>
       </div>
-    </aside>
-  </div>
+    </div>
+
+    <div class="main-layout">
+      <div class="products-column">
+        <div id="product-list"></div>
+      </div>
+
+      <aside class="cart-sidebar">
+        <h2>Your Order</h2>
+        <p class="cart-subtext">Add items from the shop, then submit your request and I’ll follow up with details.</p>
+
+        <div id="cart-items">Empty</div>
+        <div class="cart-total" id="cart-total">$0.00</div>
+
+        <div class="checkout-box">
+          <label for="cust-name">Your Name</label>
+          <input type="text" id="cust-name" placeholder="Enter your name" />
+
+          <label for="cust-email">Email</label>
+          <input type="email" id="cust-email" placeholder="Enter your email" />
+
+          <label for="cust-phone">Phone</label>
+          <input type="text" id="cust-phone" placeholder="Enter your phone number" />
+
+          <label for="cust-notes">Custom Requests / Notes</label>
+          <textarea id="cust-notes" placeholder="Request custom designs, custom colors, engraving changes, quantity changes, or anything else here."></textarea>
+
+          <div class="notice-box">
+            Orders submitted here are reviewed and completed <strong>offsite by email</strong>.
+            After you send your order, The Posse Shoppe will contact you to confirm details, answer custom requests, and arrange payment.
+
+            <br><br>
+            <strong>Accepted payment methods:</strong> PayPal, Venmo, Cash App, and Zelle.
+
+            <br><br>
+            You may request <strong>custom designs</strong> and <strong>colors not listed</strong>.
+            If a requested color is unavailable or a design is beyond current design capability, you will be notified by email or phone.
+          </div>
+
+          <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">SEND ORDER REQUEST</button>
+          <div id="order-status" class="status-message"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
 
   <script>
     let currentCategory = "3d";
@@ -668,7 +986,7 @@
       } catch (error) {
         console.error("Failed to load products:", error);
         document.getElementById("product-list").innerHTML = `
-          <div class="card">
+          <div class="card empty-card-message">
             <b>Could not load products</b>
             <p>Please try again in a minute.</p>
           </div>
@@ -698,7 +1016,7 @@
 
       if (treatAsVideo) {
         return `
-          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Video not found</div>';">
             <source src="${mediaPath}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -709,7 +1027,7 @@
         <img
           src="${mediaPath}"
           alt="${escapeHtml(item.name || "Product image")}"
-          onerror="this.onerror=null; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Image not found</div>';"
+          onerror="this.onerror=null; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Image not found</div>';"
         >
       `;
     }
@@ -1054,7 +1372,7 @@
 
       if (items.length === 0) {
         list.innerHTML = `
-          <div class="card">
+          <div class="card empty-card-message">
             <b>No products added yet</b>
             <p>Add products from the merchant page.</p>
           </div>
@@ -1068,8 +1386,8 @@
             ${buildMedia(item)}
           </div>
           <b>${escapeHtml(item.name)}</b>
-          <p><strong>$${Number(item.price).toFixed(2)}</strong></p>
-          <p>${escapeHtml(item.desc || "")}</p>
+          <p class="price-line"><strong>$${Number(item.price).toFixed(2)}</strong></p>
+          <p class="desc-line">${escapeHtml(item.desc || "")}</p>
           ${buildColorChooser(item, index)}
           <button class="add-btn" onclick="addToCart('${escapeHtml(String(item.id))}', ${index})">ADD TO ORDER</button>
         </div>
