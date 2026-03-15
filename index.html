@@ -1,9 +1,28 @@
+Replace **only** `index.html` with this full file. It keeps your current storefront behavior, includes the favicon, and adds the Open Graph / Twitter tags correctly in the `<head>`.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Posse Shoppe</title>
+
+  <meta property="og:title" content="The Posse Shoppe" />
+  <meta property="og:description" content="Custom 3D prints and laser engraving." />
+  <meta property="og:image" content="https://theposseshoppe.com/images/header.jpg" />
+  <meta property="og:image:secure_url" content="https://theposseshoppe.com/images/header.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:url" content="https://theposseshoppe.com/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Posse Shoppe" />
+  <meta name="twitter:description" content="Custom 3D prints and laser engraving." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/header.jpg" />
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+
   <style>
     :root {
       --primary: #121212;
@@ -502,6 +521,11 @@
     let cart = [];
     let allProducts = [];
 
+    function isVideoFile(filename = "") {
+      const lower = String(filename).trim().toLowerCase();
+      return lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov");
+    }
+
     function view(v) {
       currentCategory = v;
       document.getElementById("btn-3d").classList.remove("active");
@@ -543,16 +567,21 @@
 
     function buildMediaPath(item) {
       const filename = item.img || "";
-      if (item.mediaType === "video") {
+      const videoFile = isVideoFile(filename);
+      const useVideoFolder = item.mediaType === "video" || videoFile;
+
+      if (useVideoFolder) {
         return `/videos/${item.category}/${filename}`;
       }
+
       return `/images/${item.category}/${filename}`;
     }
 
     function buildMedia(item) {
       const mediaPath = escapeHtml(buildMediaPath(item));
+      const treatAsVideo = item.mediaType === "video" || isVideoFile(item.img);
 
-      if (item.mediaType === "video") {
+      if (treatAsVideo) {
         return `
           <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#666;&quot;>Video not found</div>';">
             <source src="${mediaPath}" type="video/mp4">
@@ -948,3 +977,4 @@
   </script>
 </body>
 </html>
+```
