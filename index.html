@@ -179,6 +179,40 @@
       margin-bottom: 10px;
     }
 
+    .color-dropdown-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      font: inherit;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .color-dropdown-toggle span:last-child {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .color-dropdown-panel {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      padding: 10px;
+    }
+
+    .color-dropdown-panel.open {
+      display: block;
+    }
+
     .color-checkbox-list {
       display: grid;
       gap: 8px;
@@ -545,7 +579,7 @@
             type="checkbox"
             name="product-color-${itemIndex}"
             value="${colorIndex}"
-            onchange="updateSelectedColorPreview(${itemIndex})"
+            onchange="handleColorChange(${itemIndex})"
           />
           <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
           <span>${escapeHtml(color.name)}</span>
@@ -554,23 +588,53 @@
 
       return `
         <div class="product-option-wrap">
-          <label class="option-title">Choose One or More Colors</label>
-          <div class="product-option-note">Select as many colors as you want for this item.</div>
+          <label class="option-title">Choose colors</label>
+          <div class="product-option-note">Select a max of 2 colors.</div>
 
-          <div class="color-checkbox-list">
-            ${colorRows}
+          <button type="button" class="color-dropdown-toggle" onclick="toggleColorDropdown(${itemIndex})">
+            <span id="color-toggle-text-${itemIndex}">Choose colors</span>
+            <span>▼</span>
+          </button>
+
+          <div class="color-dropdown-panel" id="color-dropdown-${itemIndex}">
+            <div class="color-checkbox-list">
+              ${colorRows}
+            </div>
+
+            <label class="option-title" for="color-notes-${itemIndex}" style="margin-top:10px;">Color Notes / Placement Notes</label>
+            <textarea
+              id="color-notes-${itemIndex}"
+              class="product-color-notes"
+              placeholder="Describe color placement"
+            ></textarea>
           </div>
-
-          <label class="option-title" for="color-notes-${itemIndex}" style="margin-top:10px;">Color Notes / Placement Notes</label>
-          <textarea
-            id="color-notes-${itemIndex}"
-            class="product-color-notes"
-            placeholder="Example: red front, white back / white text on red base / split colors left and right"
-          ></textarea>
 
           <div class="selected-color-preview" id="color-preview-${itemIndex}"></div>
         </div>
       `;
+    }
+
+    function toggleColorDropdown(itemIndex) {
+      const panel = document.getElementById(`color-dropdown-${itemIndex}`);
+      if (!panel) return;
+      panel.classList.toggle("open");
+    }
+
+    function handleColorChange(itemIndex) {
+      enforceMaxTwoColors(itemIndex);
+      updateSelectedColorPreview(itemIndex);
+      updateColorToggleText(itemIndex);
+    }
+
+    function enforceMaxTwoColors(itemIndex) {
+      const checks = Array.from(document.querySelectorAll(`input[name="product-color-${itemIndex}"]`));
+      const checked = checks.filter((checkbox) => checkbox.checked);
+
+      if (checked.length <= 2) return;
+
+      const lastChecked = checked[checked.length - 1];
+      lastChecked.checked = false;
+      alert("Please select a maximum of 2 colors.");
     }
 
     function updateSelectedColorPreview(itemIndex) {
@@ -593,6 +657,22 @@
           <span>${escapeHtml(color.name)}</span>
         </span>
       `).join("");
+    }
+
+    function updateColorToggleText(itemIndex) {
+      const items = getCurrentProducts();
+      const item = items[itemIndex];
+      const toggleText = document.getElementById(`color-toggle-text-${itemIndex}`);
+      if (!item || !toggleText) return;
+
+      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
+
+      if (!selectedColors.length) {
+        toggleText.textContent = "Choose colors";
+        return;
+      }
+
+      toggleText.textContent = selectedColors.map((color) => color.name).join(", ");
     }
 
     function getSelectedColorsForProduct(itemIndex, item) {
