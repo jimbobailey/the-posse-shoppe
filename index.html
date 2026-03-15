@@ -5,23 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Posse Shoppe</title>
 
- <meta property="og:title" content="The Posse Shoppe" />
-<meta property="og:description" content="Custom 3D prints and laser engraving." />
-<meta property="og:url" content="https://theposseshoppe.com/" />
-<meta property="og:type" content="website" />
+  <meta property="og:title" content="The Posse Shoppe" />
+  <meta property="og:description" content="Custom 3D prints and laser engraving." />
+  <meta property="og:url" content="https://theposseshoppe.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://theposseshoppe.com/images/header.png" />
+  <meta property="og:image:secure_url" content="https://theposseshoppe.com/images/header.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-<meta property="og:image" content="https://theposseshoppe.com/images/header.jpg" />
-<meta property="og:image:secure_url" content="https://theposseshoppe.com/images/header.jpg" />
-<meta property="og:image:type" content="image/jpeg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Posse Shoppe" />
+  <meta name="twitter:description" content="Custom 3D prints and laser engraving." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/header.png" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The Posse Shoppe" />
-<meta name="twitter:description" content="Custom 3D prints and laser engraving." />
-<meta name="twitter:image" content="https://theposseshoppe.com/images/header.jpg" />
-
-<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 
   <style>
     :root {
@@ -35,6 +34,10 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -115,23 +118,61 @@
       font-weight: bold;
     }
 
-    .contact-link {
+    .contact-link,
+    .info-link {
       background: rgba(0, 0, 0, 0.45);
       color: #ff8c00;
       border: 2px solid #ff8c00;
       padding: 8px 16px;
       cursor: pointer;
-      margin: 20px auto 0;
-      display: block;
-      width: fit-content;
+      display: inline-block;
       border-radius: 4px;
       font-weight: bold;
       text-decoration: none;
     }
 
-    .contact-link:hover {
+    .contact-link:hover,
+    .info-link:hover {
       background: #ff8c00;
       color: black;
+    }
+
+    .header-links {
+      margin: 20px auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .info-section-wrap {
+      max-width: 1500px;
+      margin: 20px auto 0;
+      padding: 0 20px;
+    }
+
+    .info-section {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-section h2 {
+      margin-top: 0;
+      color: #111;
+    }
+
+    .info-section h3 {
+      margin-bottom: 6px;
+      color: #111;
+    }
+
+    .info-section p {
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 16px;
     }
 
     .main-layout {
@@ -474,8 +515,31 @@
       <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
     </nav>
 
-    <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+    <div class="header-links">
+      <a class="info-link" href="#what-we-do">WHAT WE DO</a>
+      <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+    </div>
   </header>
+
+  <section class="info-section-wrap" id="what-we-do">
+    <div class="info-section">
+      <h2>What We Do at THE POSSE SHOPPE</h2>
+      <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
+
+      <h3>3D Printing</h3>
+      <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
+
+      <h3>Laser Engraving</h3>
+      <p>I use two different types of lasers depending on the job:</p>
+      <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
+      <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
+      <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
+      <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+
+      <h3>A Quick Note on Orders</h3>
+      <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
+    </div>
+  </section>
 
   <div class="main-layout">
     <div id="product-list"></div>
