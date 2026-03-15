@@ -176,11 +176,6 @@
       border: 1px solid #666;
     }
 
-    .small-btn.danger {
-      background: #a61b1b;
-      color: white;
-    }
-
     .muted {
       color: #aaa;
       font-size: 14px;
@@ -280,6 +275,20 @@
       line-height: 1.5;
     }
 
+    .media-path-box {
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #ddd;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .media-path-box strong {
+      color: var(--glow);
+    }
+
     .admin-media-tag {
       display: inline-block;
       font-size: 11px;
@@ -300,13 +309,13 @@
 
     .color-library-list,
     .product-color-picker-list {
-     display: block;
-     gap: 0;
-     max-height: none !important;
-     height: auto !important;
-     min-height: 0 !important;
-     overflow: visible !important;
-}
+      display: block;
+      gap: 0;
+      max-height: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
 
     .product-color-row {
       display: flex;
@@ -365,7 +374,7 @@
 
           <input type="hidden" id="p-id" />
 
-          <select id="p-page">
+          <select id="p-page" onchange="updateMediaPathPreview()">
             <option value="3d">3D Prints</option>
             <option value="laser">Laser Engraving</option>
           </select>
@@ -374,12 +383,17 @@
           <input type="number" id="p-price" placeholder="Price" step="0.01" />
           <textarea id="p-desc" placeholder="Description"></textarea>
 
-          <select id="p-media-type">
+          <select id="p-media-type" onchange="updateMediaPathPreview()">
             <option value="image">Image</option>
             <option value="video">MP4 Video</option>
           </select>
 
-          <input type="text" id="p-img" placeholder="Media Filename (example: dragon.jpg or dragon.mp4)" />
+          <input
+            type="text"
+            id="p-img"
+            placeholder="Media Filename (example: dragon.jpg or dragon.mp4)"
+            oninput="syncMediaTypeFromFilename(); updateMediaPathPreview();"
+          />
 
           <div class="media-note">
             Put product files in:
@@ -387,6 +401,11 @@
             <br>images/laser/
             <br>videos/3d/
             <br>videos/laser/
+          </div>
+
+          <div class="media-path-box" id="media-path-preview">
+            <strong>Current file path:</strong><br>
+            <span id="media-path-text">/images/3d/</span>
           </div>
 
           <div class="section-box">
@@ -487,6 +506,26 @@
         return true;
       }
       return false;
+    }
+
+    function syncMediaTypeFromFilename() {
+      const fileName = document.getElementById("p-img").value.trim().toLowerCase();
+      const mediaTypeField = document.getElementById("p-media-type");
+
+      if (fileName.endsWith(".mp4") || fileName.endsWith(".webm") || fileName.endsWith(".mov")) {
+        mediaTypeField.value = "video";
+      } else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif") || fileName.endsWith(".webp")) {
+        mediaTypeField.value = "image";
+      }
+    }
+
+    function updateMediaPathPreview() {
+      const category = document.getElementById("p-page").value || "3d";
+      const mediaType = document.getElementById("p-media-type").value || "image";
+      const fileName = document.getElementById("p-img").value.trim();
+      const folder = mediaType === "video" ? "/videos/" : "/images/";
+      const path = `${folder}${category}/${fileName}`;
+      document.getElementById("media-path-text").textContent = path;
     }
 
     async function loadColorLibrary() {
@@ -748,6 +787,7 @@
       toggleColorBuilder();
       renderProductColorPicker();
       renderColorEditor();
+      updateMediaPathPreview();
     }
 
     async function loadProducts() {
@@ -771,7 +811,7 @@
       const name = document.getElementById("p-name").value.trim();
       const priceValue = document.getElementById("p-price").value.trim();
       const desc = document.getElementById("p-desc").value.trim();
-      const mediaType = document.getElementById("p-media-type").value;
+      let mediaType = document.getElementById("p-media-type").value.trim();
       const img = document.getElementById("p-img").value.trim();
       const colorsEnabled = document.getElementById("p-enable-colors").checked;
 
@@ -783,6 +823,15 @@
       if (!img) {
         alert("Please enter the media filename.");
         return;
+      }
+
+      const fileNameLower = img.toLowerCase();
+      if (fileNameLower.endsWith(".mp4") || fileNameLower.endsWith(".webm") || fileNameLower.endsWith(".mov")) {
+        mediaType = "video";
+        document.getElementById("p-media-type").value = "video";
+      } else if (fileNameLower.endsWith(".jpg") || fileNameLower.endsWith(".jpeg") || fileNameLower.endsWith(".png") || fileNameLower.endsWith(".gif") || fileNameLower.endsWith(".webp")) {
+        mediaType = "image";
+        document.getElementById("p-media-type").value = "image";
       }
 
       if (colorsEnabled && editingColors.length === 0) {
@@ -841,7 +890,7 @@
       document.getElementById("p-name").value = item.name || "";
       document.getElementById("p-price").value = item.price ?? "";
       document.getElementById("p-desc").value = item.desc || "";
-      document.getElementById("p-media-type").value = item.mediaType || "image";
+      document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
       document.getElementById("p-img").value = item.img || "";
       document.getElementById("p-enable-colors").checked = !!item.hasColors;
       document.getElementById("form-title").textContent = "Edit Product";
@@ -853,6 +902,7 @@
       toggleColorBuilder();
       renderProductColorPicker();
       renderColorEditor();
+      updateMediaPathPreview();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -947,6 +997,7 @@
       await loadColorLibrary();
       clearForm();
       await loadProducts();
+      updateMediaPathPreview();
     };
   </script>
 </body>
