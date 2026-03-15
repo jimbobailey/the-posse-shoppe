@@ -170,8 +170,7 @@
       box-shadow: 0 8px 20px rgba(255, 140, 0, 0.22);
     }
 
-    .contact-link,
-    .info-link {
+    .contact-link {
       background: rgba(255, 255, 255, 0.03);
       color: #ff9a1a;
       border: 1px solid rgba(255, 140, 0, 0.65);
@@ -185,8 +184,7 @@
       transition: 0.2s ease;
     }
 
-    .contact-link:hover,
-    .info-link:hover {
+    .contact-link:hover {
       background: #ff8c00;
       color: black;
       transform: translateY(-1px);
@@ -198,41 +196,6 @@
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-    }
-
-    .mini-intro-wrap {
-      max-width: var(--max-width);
-      margin: 18px auto 0;
-      padding: 0 20px;
-    }
-
-    .mini-intro {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .mini-intro-card {
-      padding: 14px 16px;
-      border-radius: var(--radius-md);
-      background: linear-gradient(180deg, rgba(24, 24, 28, 0.96), rgba(16, 16, 19, 0.96));
-      border: 1px solid rgba(255, 140, 0, 0.16);
-      box-shadow: var(--shadow-soft);
-      min-height: 92px;
-    }
-
-    .mini-intro-card strong {
-      display: block;
-      color: var(--glow);
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      letter-spacing: 0.4px;
-    }
-
-    .mini-intro-card span {
-      color: #dddddd;
-      font-size: 0.92rem;
-      line-height: 1.45;
     }
 
     .info-section-wrap {
@@ -755,10 +718,6 @@
     }
 
     @media (max-width: 980px) {
-      .mini-intro {
-        grid-template-columns: 1fr;
-      }
-
       .info-grid {
         grid-template-columns: 1fr;
       }
@@ -784,7 +743,6 @@
         padding: 14px 14px 20px;
       }
 
-      .mini-intro-wrap,
       .info-section-wrap,
       .shop-shell {
         padding-left: 14px;
@@ -796,8 +754,7 @@
       }
 
       .nav-btn,
-      .contact-link,
-      .info-link {
+      .contact-link {
         width: 100%;
         justify-content: center;
       }
@@ -833,33 +790,15 @@
       </nav>
 
       <div class="header-links">
-        <a class="info-link" href="#what-we-do">WHAT WE DO</a>
         <a class="contact-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
       </div>
     </div>
   </header>
 
-  <section class="mini-intro-wrap">
-    <div class="mini-intro">
-      <div class="mini-intro-card">
-        <strong>CUSTOM WORK</strong>
-        <span>Need something specific? Reach out about custom prints, engraving ideas, and project requests.</span>
-      </div>
-      <div class="mini-intro-card">
-        <strong>SMALL SHOP. PERSONAL WORK.</strong>
-        <span>Everything shown here is made by me with attention to quality, fit, finish, and realistic turnaround times.</span>
-      </div>
-      <div class="mini-intro-card">
-        <strong>ORDER REQUESTS</strong>
-        <span>Submit your order here, then I’ll follow up by email or phone to confirm details and payment.</span>
-      </div>
-    </div>
-  </section>
-
   <section class="info-section-wrap" id="what-we-do">
     <details class="info-section">
       <summary class="info-summary">
-        <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE</span>
+        <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE — CLICK ME!</span>
         <span class="info-summary-icon">▼</span>
       </summary>
 
@@ -886,11 +825,6 @@
             <h3>Popular Custom Work</h3>
             <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
             <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
-          </div>
-
-          <div class="info-block" style="grid-column: 1 / -1;">
-            <h3>A Quick Note on Orders</h3>
-            <p>This is a one-man show, so I’m not always able to start on things the second they come in. I take pride in what I make, and I’ll give you a realistic timeline on when I can get your project done.</p>
           </div>
         </div>
       </div>
