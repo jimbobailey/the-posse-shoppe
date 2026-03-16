@@ -25,7 +25,6 @@
       --text-light: #f5f5f5;
       --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.28);
       --shadow-glow: 0 0 24px rgba(255, 140, 0, 0.14);
-      --radius-md: 12px;
       --radius-lg: 16px;
       --radius-pill: 999px;
       --max-width: 1500px;
@@ -213,7 +212,7 @@
       font-weight: bold;
     }
 
-    .buy-btn {
+    .request-btn {
       margin-top: auto;
       background: linear-gradient(180deg, #1d1e22 0%, #111216 100%);
       color: white;
@@ -228,13 +227,13 @@
       transition: 0.2s ease;
     }
 
-    .buy-btn:hover {
+    .request-btn:hover {
       background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
       color: black;
       transform: translateY(-1px);
     }
 
-    .help-box {
+    .empty-box {
       margin-top: 24px;
       background: rgba(255, 140, 0, 0.08);
       border: 1px solid rgba(255, 140, 0, 0.24);
@@ -282,42 +281,94 @@
   <div class="page-wrap">
     <section class="hero-box">
       <h1>STL FILES</h1>
-      <p>Sell your STL files here for personal use, commercial use, or both. This page uses the same branding look as your main site.</p>
+      <p>Browse STL files available for personal or commercial use. Request the file by email and I’ll follow up with payment details.</p>
     </section>
 
     <h2 class="section-title">Available STL Files</h2>
 
-    <section class="stl-grid">
-      <div class="stl-card">
-        <div class="stl-img-box">
-          <img src="images/header.png" alt="Sample STL File" />
-        </div>
-        <span class="license-tag">PERSONAL USE</span>
-        <h3>Sample STL Product</h3>
-        <div class="stl-price">$5.00</div>
-        <p>Replace this with your STL preview image, description, and the purchase or download link.</p>
-        <a class="buy-btn" href="#" target="_blank" rel="noopener noreferrer">BUY / DOWNLOAD</a>
-      </div>
+    <section class="stl-grid" id="stl-grid"></section>
 
-      <div class="stl-card">
-        <div class="stl-img-box">
-          <img src="images/header.png" alt="Sample Commercial STL File" />
-        </div>
-        <span class="license-tag">COMMERCIAL USE</span>
-        <h3>Sample Commercial STL</h3>
-        <div class="stl-price">$15.00</div>
-        <p>Use this for files that allow customers to print and sell the physical item under your terms.</p>
-        <a class="buy-btn" href="#" target="_blank" rel="noopener noreferrer">BUY / DOWNLOAD</a>
-      </div>
-    </section>
-
-    <div class="help-box">
-      <strong>How to add STL files:</strong><br><br>
-      Duplicate one of the STL cards above, then change:
-      the image path, title, price, description, license tag, and the button link.<br><br>
-      Best option: upload the actual STL file to a selling platform like Gumroad, Payhip, Etsy, or Shopify digital products, then paste that product URL into the button link.<br><br>
-      I do <strong>not</strong> recommend linking raw STL files directly from your website if you want real sales protection.
+    <div class="empty-box" id="stl-empty" style="display:none;">
+      No STL files have been added yet.
     </div>
   </div>
+
+  <script>
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function buildMailto(item) {
+      const licenseText = item.category === "stl-commercial" ? "Commercial Use" : "Personal Use";
+      const subject = encodeURIComponent(`STL Request - ${item.name}`);
+      const body = encodeURIComponent(
+        `Hi, I am interested in this STL file:\n\n` +
+        `Name: ${item.name}\n` +
+        `License: ${licenseText}\n` +
+        `Price: $${Number(item.price || 0).toFixed(2)}\n\n` +
+        `Please contact me with payment details.`
+      );
+      return `mailto:theposseshoppe@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    async function loadStlItems() {
+      const grid = document.getElementById("stl-grid");
+      const empty = document.getElementById("stl-empty");
+
+      try {
+        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const items = (Array.isArray(data) ? data : []).filter(
+          (item) => item.category === "stl-personal" || item.category === "stl-commercial"
+        );
+
+        if (!items.length) {
+          empty.style.display = "block";
+          grid.innerHTML = "";
+          return;
+        }
+
+        empty.style.display = "none";
+
+        grid.innerHTML = items.map((item) => {
+          const licenseLabel = item.category === "stl-commercial" ? "COMMERCIAL USE" : "PERSONAL USE";
+          const imagePath = `/images/stl/${escapeHtml(item.img || "")}`;
+          const mailtoLink = buildMailto(item);
+
+          return `
+            <div class="stl-card">
+              <div class="stl-img-box">
+                <img
+                  src="${imagePath}"
+                  alt="${escapeHtml(item.name || "STL File")}"
+                  onerror="this.onerror=null; this.src='images/header.png';"
+                />
+              </div>
+              <span class="license-tag">${licenseLabel}</span>
+              <h3>${escapeHtml(item.name || "")}</h3>
+              <div class="stl-price">$${Number(item.price || 0).toFixed(2)}</div>
+              <p>${escapeHtml(item.desc || "")}</p>
+              <a class="request-btn" href="${mailtoLink}">REQUEST THIS STL</a>
+            </div>
+          `;
+        }).join("");
+      } catch (error) {
+        console.error(error);
+        empty.style.display = "block";
+        empty.textContent = "Could not load STL files right now.";
+      }
+    }
+
+    window.onload = loadStlItems;
+  </script>
 </body>
 </html>
