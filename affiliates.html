@@ -215,7 +215,7 @@
       transform: translateY(-1px);
     }
 
-    .help-box {
+    .empty-box {
       margin-top: 24px;
       background: rgba(255, 140, 0, 0.08);
       border: 1px solid rgba(255, 140, 0, 0.24);
@@ -263,37 +263,78 @@
   <div class="page-wrap">
     <section class="hero-box">
       <h1>AFFILIATES</h1>
-      <p>Add affiliate products here with a picture, short description, and your affiliate URL.</p>
+      <p>Recommended products, tools, materials, and gear.</p>
     </section>
 
     <h2 class="section-title">Recommended Products</h2>
 
-    <section class="affiliate-grid">
-      <div class="affiliate-card">
-        <div class="affiliate-img-box">
-          <img src="images/header.png" alt="Sample Affiliate Product" />
-        </div>
-        <h3>Sample Affiliate Item</h3>
-        <p>Replace this with your affiliate product image, description, and affiliate URL.</p>
-        <a class="affiliate-btn" href="https://example.com" target="_blank" rel="noopener noreferrer sponsored">VIEW PRODUCT</a>
-      </div>
+    <section class="affiliate-grid" id="affiliate-grid"></section>
 
-      <div class="affiliate-card">
-        <div class="affiliate-img-box">
-          <img src="images/header.png" alt="Another Affiliate Product" />
-        </div>
-        <h3>Another Affiliate Item</h3>
-        <p>Use this page to list tools, parts, printers, materials, or anything else you want to recommend.</p>
-        <a class="affiliate-btn" href="https://example.com" target="_blank" rel="noopener noreferrer sponsored">VIEW PRODUCT</a>
-      </div>
-    </section>
-
-    <div class="help-box">
-      <strong>How to add affiliate products:</strong><br><br>
-      Duplicate one affiliate card above, then change:
-      the image path, product title, description, and the link URL.<br><br>
-      For each button, paste your full affiliate link into the <code>href=""</code> value.
+    <div class="empty-box" id="affiliate-empty" style="display:none;">
+      No affiliate items have been added yet.
     </div>
   </div>
+
+  <script>
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    async function loadAffiliateItems() {
+      const grid = document.getElementById("affiliate-grid");
+      const empty = document.getElementById("affiliate-empty");
+
+      try {
+        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const items = (Array.isArray(data) ? data : []).filter(
+          (item) => item.category === "affiliate"
+        );
+
+        if (!items.length) {
+          empty.style.display = "block";
+          grid.innerHTML = "";
+          return;
+        }
+
+        empty.style.display = "none";
+
+        grid.innerHTML = items.map((item) => {
+          const imagePath = `/images/affiliates/${escapeHtml(item.img || "")}`;
+          const link = item.link ? escapeHtml(item.link) : "#";
+
+          return `
+            <div class="affiliate-card">
+              <div class="affiliate-img-box">
+                <img
+                  src="${imagePath}"
+                  alt="${escapeHtml(item.name || "Affiliate Item")}"
+                  onerror="this.onerror=null; this.src='images/header.png';"
+                />
+              </div>
+              <h3>${escapeHtml(item.name || "")}</h3>
+              <p>${escapeHtml(item.desc || "")}</p>
+              <a class="affiliate-btn" href="${link}" target="_blank" rel="noopener noreferrer sponsored">VIEW PRODUCT</a>
+            </div>
+          `;
+        }).join("");
+      } catch (error) {
+        console.error(error);
+        empty.style.display = "block";
+        empty.textContent = "Could not load affiliate items right now.";
+      }
+    }
+
+    window.onload = loadAffiliateItems;
+  </script>
 </body>
 </html>
