@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affiliates | The Posse Shoppe</title>
+
+  <meta property="og:title" content="Affiliates | The Posse Shoppe" />
+  <meta property="og:description" content="Affiliate links and recommended products from The Posse Shoppe." />
+  <meta property="og:url" content="https://theposseshoppe.com/affiliates.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://theposseshoppe.com/images/header.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Affiliates | The Posse Shoppe" />
+  <meta name="twitter:description" content="Affiliate links and recommended products from The Posse Shoppe." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/header.png" />
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+
+  <style>
+    :root {
+      --glow: #ff8c00;
+      --text-main: #f3f3f3;
+      --text-light: #f5f5f5;
+      --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.28);
+      --shadow-glow: 0 0 24px rgba(255, 140, 0, 0.14);
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --max-width: 1500px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(255, 140, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, #0b0b0d 0%, #111215 35%, #0d0d0f 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      padding: 18px 20px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 140, 0, 0.28);
+      background:
+        linear-gradient(rgba(8, 8, 8, 0.88), rgba(10, 10, 10, 0.92)),
+        url("images/hex-bg.png") center center / cover no-repeat;
+      box-shadow: inset 0 -1px 0 rgba(255, 140, 0, 0.14);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header-banner-wrap {
+      max-width: 1120px;
+      margin: 0 auto 14px;
+      padding: 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 140, 0, 0.08), rgba(255, 140, 0, 0.03));
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .header-banner {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 140, 0, 0.45);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.18);
+      background: #111;
+    }
+
+    .page-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .page-btn {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ff9a1a;
+      border: 1px solid rgba(255, 140, 0, 0.65);
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+      display: inline-block;
+    }
+
+    .page-btn:hover {
+      background: #ff8c00;
+      color: black;
+      transform: translateY(-1px);
+    }
+
+    .hero-box {
+      margin-top: 18px;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(rgba(10, 10, 10, 0.94), rgba(18, 18, 18, 0.95)),
+        url("images/hex-bg.png") center center / cover no-repeat;
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .hero-box h1 {
+      margin: 0 0 8px;
+      color: var(--glow);
+      letter-spacing: 1px;
+    }
+
+    .hero-box p {
+      margin: 0;
+      color: #d7d7d7;
+      line-height: 1.5;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      color: #fff;
+      font-size: 1.35rem;
+      letter-spacing: 0.4px;
+    }
+
+    .affiliate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .affiliate-card {
+      border: 1px solid rgba(255, 140, 0, 0.14);
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(30, 31, 35, 0.98), rgba(18, 19, 22, 0.98));
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .affiliate-img-box {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(180deg, #0f1012 0%, #17181c 100%);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 140, 0, 0.12);
+    }
+
+    .affiliate-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .affiliate-card h3 {
+      margin: 0 0 8px;
+      color: #fff;
+    }
+
+    .affiliate-card p {
+      margin: 0 0 12px;
+      color: #d0d0d0;
+      line-height: 1.5;
+    }
+
+    .affiliate-btn {
+      margin-top: auto;
+      background: linear-gradient(180deg, #1d1e22 0%, #111216 100%);
+      color: white;
+      padding: 13px;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+      border-radius: 12px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+    }
+
+    .affiliate-btn:hover {
+      background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
+      color: black;
+      transform: translateY(-1px);
+    }
+
+    .help-box {
+      margin-top: 24px;
+      background: rgba(255, 140, 0, 0.08);
+      border: 1px solid rgba(255, 140, 0, 0.24);
+      color: #f2dfcb;
+      padding: 16px;
+      border-radius: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .page-wrap {
+        padding: 14px;
+      }
+
+      .affiliate-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .affiliate-img-box {
+        height: 220px;
+      }
+
+      .page-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-banner-wrap">
+        <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+      </div>
+
+      <div class="page-top">
+        <a class="page-btn" href="index.html">BACK TO SHOP</a>
+        <a class="page-btn" href="stl.html">STL FILES</a>
+        <a class="page-btn" href="mailto:theposseshoppe@gmail.com?subject=Affiliate%20Question">CONTACT US</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <section class="hero-box">
+      <h1>AFFILIATES</h1>
+      <p>Add affiliate products here with a picture, short description, and your affiliate URL.</p>
+    </section>
+
+    <h2 class="section-title">Recommended Products</h2>
+
+    <section class="affiliate-grid">
+      <div class="affiliate-card">
+        <div class="affiliate-img-box">
+          <img src="images/header.png" alt="Sample Affiliate Product" />
+        </div>
+        <h3>Sample Affiliate Item</h3>
+        <p>Replace this with your affiliate product image, description, and affiliate URL.</p>
+        <a class="affiliate-btn" href="https://example.com" target="_blank" rel="noopener noreferrer sponsored">VIEW PRODUCT</a>
+      </div>
+
+      <div class="affiliate-card">
+        <div class="affiliate-img-box">
+          <img src="images/header.png" alt="Another Affiliate Product" />
+        </div>
+        <h3>Another Affiliate Item</h3>
+        <p>Use this page to list tools, parts, printers, materials, or anything else you want to recommend.</p>
+        <a class="affiliate-btn" href="https://example.com" target="_blank" rel="noopener noreferrer sponsored">VIEW PRODUCT</a>
+      </div>
+    </section>
+
+    <div class="help-box">
+      <strong>How to add affiliate products:</strong><br><br>
+      Duplicate one affiliate card above, then change:
+      the image path, product title, description, and the link URL.<br><br>
+      For each button, paste your full affiliate link into the <code>href=""</code> value.
+    </div>
+  </div>
+</body>
+</html>
