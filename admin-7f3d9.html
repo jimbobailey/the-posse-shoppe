@@ -61,7 +61,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
-      max-width: 1400px;
+      max-width: 1500px;
       margin: 0 auto;
     }
 
@@ -298,6 +298,7 @@
       padding: 4px 8px;
       border-radius: 999px;
       margin-top: 8px;
+      margin-right: 6px;
     }
 
     .color-picker-actions {
@@ -325,6 +326,7 @@
       border: 1px solid #333;
       border-radius: 6px;
       padding: 8px 10px;
+      margin-bottom: 8px;
     }
 
     .product-color-row input[type="checkbox"] {
@@ -346,6 +348,20 @@
     .library-color-code {
       color: #aaa;
       font-size: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .type-note {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     @media (max-width: 980px) {
@@ -370,37 +386,64 @@
     <div class="admin-grid">
       <div>
         <div class="admin-form">
-          <h2 id="form-title">Add New Product</h2>
+          <h2 id="form-title">Add New Shop Product</h2>
 
           <input type="hidden" id="p-id" />
 
-          <select id="p-page" onchange="updateMediaPathPreview()">
-            <option value="3d">3D Prints</option>
-            <option value="laser">Laser Engraving</option>
+          <select id="p-type" onchange="handleTypeChange()">
+            <option value="product">Shop Product</option>
+            <option value="stl">STL File</option>
+            <option value="affiliate">Affiliate</option>
           </select>
+
+          <div id="product-category-wrap">
+            <select id="p-page" onchange="updateMediaPathPreview()">
+              <option value="3d">3D Prints</option>
+              <option value="laser">Laser Engraving</option>
+            </select>
+          </div>
+
+          <div id="stl-license-wrap" class="hidden">
+            <select id="p-stl-license" onchange="updateMediaPathPreview()">
+              <option value="stl-personal">STL - Personal Use</option>
+              <option value="stl-commercial">STL - Commercial Use</option>
+            </select>
+          </div>
 
           <input type="text" id="p-name" placeholder="Name" />
           <input type="number" id="p-price" placeholder="Price" step="0.01" />
           <textarea id="p-desc" placeholder="Description"></textarea>
 
-          <select id="p-media-type" onchange="updateMediaPathPreview()">
-            <option value="image">Image</option>
-            <option value="video">MP4 Video</option>
-          </select>
+          <div id="affiliate-link-wrap" class="hidden">
+            <input type="text" id="p-link" placeholder="Affiliate URL" />
+          </div>
+
+          <div id="media-type-wrap">
+            <select id="p-media-type" onchange="updateMediaPathPreview()">
+              <option value="image">Image</option>
+              <option value="video">MP4 Video</option>
+            </select>
+          </div>
 
           <input
             type="text"
             id="p-img"
-            placeholder="Media Filename (example: dragon.jpg or dragon.mp4)"
+            placeholder="Media Filename"
             oninput="syncMediaTypeFromFilename(); updateMediaPathPreview();"
           />
 
-          <div class="media-note">
-            Put product files in:
+          <div class="media-note" id="media-note-box">
+            Shop product files:
             <br>images/3d/
             <br>images/laser/
             <br>videos/3d/
             <br>videos/laser/
+            <br><br>
+            STL images:
+            <br>images/stl/
+            <br><br>
+            Affiliate images:
+            <br>images/affiliates/
           </div>
 
           <div class="media-path-box" id="media-path-preview">
@@ -408,39 +451,49 @@
             <span id="media-path-text">/images/3d/</span>
           </div>
 
-          <div class="section-box">
-            <h3 class="section-title">Color Library</h3>
+          <div class="type-note hidden" id="stl-note">
+            STL listings do not take payment on the site. The public button will create an email request to you for that STL.
+          </div>
 
-            <input type="hidden" id="library-edit-index" />
+          <div class="type-note hidden" id="affiliate-note">
+            Affiliate listings show an image, description, and open the affiliate URL when clicked.
+          </div>
 
-            <div class="color-add-row">
-              <input type="text" id="library-color-name" placeholder="Add your color name" />
-              <input type="color" id="library-color-hex" value="#ff8c00" />
-              <button type="button" class="small-btn" onclick="saveLibraryColor()">SAVE COLOR</button>
-              <button type="button" class="small-btn alt" onclick="resetLibraryColorForm()">CANCEL</button>
+          <div id="product-only-area">
+            <div class="section-box">
+              <h3 class="section-title">Color Library</h3>
+
+              <input type="hidden" id="library-edit-index" />
+
+              <div class="color-add-row">
+                <input type="text" id="library-color-name" placeholder="Add your color name" />
+                <input type="color" id="library-color-hex" value="#ff8c00" />
+                <button type="button" class="small-btn" onclick="saveLibraryColor()">SAVE COLOR</button>
+                <button type="button" class="small-btn alt" onclick="resetLibraryColorForm()">CANCEL</button>
+              </div>
+
+              <div id="color-library-list" class="color-library-list"></div>
             </div>
 
-            <div id="color-library-list" class="color-library-list"></div>
-          </div>
-
-          <div class="checkbox-row">
-            <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
-            <label for="p-enable-colors">Enable color options for this product</label>
-          </div>
-
-          <div id="color-builder">
-            <h3 style="margin-top:0; color:var(--glow);">Select Product Colors</h3>
-
-            <div class="color-picker-actions">
-              <button type="button" class="small-btn" onclick="selectAllColors()">SELECT ALL</button>
-              <button type="button" class="small-btn alt" onclick="clearAllColors()">CLEAR ALL</button>
+            <div class="checkbox-row">
+              <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
+              <label for="p-enable-colors">Enable color options for this product</label>
             </div>
 
-            <div id="product-color-picker-list" class="product-color-picker-list"></div>
-            <div id="color-list-editor" style="margin-top:12px;"></div>
+            <div id="color-builder">
+              <h3 style="margin-top:0; color:var(--glow);">Select Product Colors</h3>
+
+              <div class="color-picker-actions">
+                <button type="button" class="small-btn" onclick="selectAllColors()">SELECT ALL</button>
+                <button type="button" class="small-btn alt" onclick="clearAllColors()">CLEAR ALL</button>
+              </div>
+
+              <div id="product-color-picker-list" class="product-color-picker-list"></div>
+              <div id="color-list-editor" style="margin-top:12px;"></div>
+            </div>
           </div>
 
-          <button class="save-btn" onclick="saveItem()">SAVE PRODUCT</button>
+          <button class="save-btn" onclick="saveItem()">SAVE ITEM</button>
           <button class="cancel-btn" onclick="clearForm()">CLEAR / CANCEL EDIT</button>
         </div>
       </div>
@@ -508,7 +561,62 @@
       return false;
     }
 
+    function currentType() {
+      return document.getElementById("p-type").value;
+    }
+
+    function handleTypeChange() {
+      const type = currentType();
+      const isProduct = type === "product";
+      const isStl = type === "stl";
+      const isAffiliate = type === "affiliate";
+
+      document.getElementById("product-category-wrap").classList.toggle("hidden", !isProduct);
+      document.getElementById("stl-license-wrap").classList.toggle("hidden", !isStl);
+      document.getElementById("affiliate-link-wrap").classList.toggle("hidden", !isAffiliate);
+      document.getElementById("media-type-wrap").classList.toggle("hidden", !isProduct);
+
+      document.getElementById("product-only-area").classList.toggle("hidden", !isProduct);
+      document.getElementById("stl-note").classList.toggle("hidden", !isStl);
+      document.getElementById("affiliate-note").classList.toggle("hidden", !isAffiliate);
+
+      if (isProduct) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit Shop Product" : "Add New Shop Product";
+        document.getElementById("p-price").classList.remove("hidden");
+        document.getElementById("p-price").placeholder = "Price";
+        document.getElementById("p-img").placeholder = "Media Filename (example: dragon.jpg or dragon.mp4)";
+      }
+
+      if (isStl) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit STL File" : "Add New STL File";
+        document.getElementById("p-price").classList.remove("hidden");
+        document.getElementById("p-price").placeholder = "STL Price";
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-img").placeholder = "Preview Image Filename (example: dragon-stl.jpg)";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+        toggleColorBuilder();
+      }
+
+      if (isAffiliate) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit Affiliate" : "Add New Affiliate";
+        document.getElementById("p-price").classList.add("hidden");
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-img").placeholder = "Affiliate Image Filename (example: printer.jpg)";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+        toggleColorBuilder();
+      }
+
+      updateMediaPathPreview();
+    }
+
     function syncMediaTypeFromFilename() {
+      if (currentType() !== "product") {
+        document.getElementById("p-media-type").value = "image";
+        return;
+      }
+
       const fileName = document.getElementById("p-img").value.trim().toLowerCase();
       const mediaTypeField = document.getElementById("p-media-type");
 
@@ -526,11 +634,22 @@
     }
 
     function updateMediaPathPreview() {
-      const category = document.getElementById("p-page").value || "3d";
-      const mediaType = document.getElementById("p-media-type").value || "image";
+      const type = currentType();
       const fileName = document.getElementById("p-img").value.trim();
-      const folder = mediaType === "video" ? "/videos/" : "/images/";
-      const path = `${folder}${category}/${fileName}`;
+
+      let path = "";
+
+      if (type === "product") {
+        const category = document.getElementById("p-page").value || "3d";
+        const mediaType = document.getElementById("p-media-type").value || "image";
+        const folder = mediaType === "video" ? "/videos/" : "/images/";
+        path = `${folder}${category}/${fileName}`;
+      } else if (type === "stl") {
+        path = `/images/stl/${fileName}`;
+      } else {
+        path = `/images/affiliates/${fileName}`;
+      }
+
       document.getElementById("media-path-text").textContent = path;
     }
 
@@ -676,7 +795,7 @@
     }
 
     function toggleColorBuilder() {
-      const enabled = document.getElementById("p-enable-colors").checked;
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
       document.getElementById("color-builder").style.display = enabled ? "block" : "none";
 
       if (enabled) {
@@ -688,7 +807,7 @@
 
     function renderProductColorPicker() {
       const box = document.getElementById("product-color-picker-list");
-      const enabled = document.getElementById("p-enable-colors").checked;
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
 
       if (!enabled) {
         box.innerHTML = "";
@@ -755,7 +874,7 @@
 
     function renderColorEditor() {
       const box = document.getElementById("color-list-editor");
-      const enabled = document.getElementById("p-enable-colors").checked;
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
 
       if (!enabled) {
         box.innerHTML = "";
@@ -780,16 +899,20 @@
 
     function clearForm() {
       document.getElementById("p-id").value = "";
+      document.getElementById("p-type").value = "product";
       document.getElementById("p-page").value = "3d";
+      document.getElementById("p-stl-license").value = "stl-personal";
       document.getElementById("p-name").value = "";
       document.getElementById("p-price").value = "";
       document.getElementById("p-desc").value = "";
+      document.getElementById("p-link").value = "";
       document.getElementById("p-media-type").value = "image";
       document.getElementById("p-img").value = "";
       document.getElementById("p-enable-colors").checked = false;
-      document.getElementById("form-title").textContent = "Add New Product";
+      document.getElementById("form-title").textContent = "Add New Shop Product";
 
       editingColors = [];
+      handleTypeChange();
       toggleColorBuilder();
       renderProductColorPicker();
       renderColorEditor();
@@ -813,55 +936,108 @@
 
     async function saveItem() {
       const idField = document.getElementById("p-id").value.trim();
-      const category = document.getElementById("p-page").value;
+      const type = currentType();
       const name = document.getElementById("p-name").value.trim();
       const priceValue = document.getElementById("p-price").value.trim();
       const desc = document.getElementById("p-desc").value.trim();
-      let mediaType = document.getElementById("p-media-type").value.trim();
       const img = document.getElementById("p-img").value.trim();
-      const colorsEnabled = document.getElementById("p-enable-colors").checked;
+      const link = document.getElementById("p-link").value.trim();
 
-      if (!name || !priceValue) {
-        alert("Please enter at least a product name and price.");
+      if (!name) {
+        alert("Please enter a name.");
         return;
       }
 
       if (!img) {
-        alert("Please enter the media filename.");
+        alert("Please enter the image or media filename.");
         return;
       }
 
-      const fileNameLower = img.toLowerCase();
-      if (fileNameLower.endsWith(".mp4") || fileNameLower.endsWith(".webm") || fileNameLower.endsWith(".mov")) {
-        mediaType = "video";
-        document.getElementById("p-media-type").value = "video";
-      } else if (
-        fileNameLower.endsWith(".jpg") ||
-        fileNameLower.endsWith(".jpeg") ||
-        fileNameLower.endsWith(".png") ||
-        fileNameLower.endsWith(".gif") ||
-        fileNameLower.endsWith(".webp")
-      ) {
-        mediaType = "image";
-        document.getElementById("p-media-type").value = "image";
+      let item = null;
+
+      if (type === "product") {
+        let mediaType = document.getElementById("p-media-type").value.trim();
+        const category = document.getElementById("p-page").value;
+        const colorsEnabled = document.getElementById("p-enable-colors").checked;
+
+        if (!priceValue) {
+          alert("Please enter a price.");
+          return;
+        }
+
+        const fileNameLower = img.toLowerCase();
+        if (fileNameLower.endsWith(".mp4") || fileNameLower.endsWith(".webm") || fileNameLower.endsWith(".mov")) {
+          mediaType = "video";
+          document.getElementById("p-media-type").value = "video";
+        } else if (
+          fileNameLower.endsWith(".jpg") ||
+          fileNameLower.endsWith(".jpeg") ||
+          fileNameLower.endsWith(".png") ||
+          fileNameLower.endsWith(".gif") ||
+          fileNameLower.endsWith(".webp")
+        ) {
+          mediaType = "image";
+          document.getElementById("p-media-type").value = "image";
+        }
+
+        if (colorsEnabled && editingColors.length === 0) {
+          alert("You enabled color options, but no colors were selected.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category,
+          name,
+          price: Number(priceValue),
+          desc,
+          mediaType,
+          img,
+          hasColors: colorsEnabled,
+          colors: colorsEnabled ? editingColors.map((color) => ({ ...color })) : []
+        };
       }
 
-      if (colorsEnabled && editingColors.length === 0) {
-        alert("You enabled color options, but no colors were selected.");
-        return;
+      if (type === "stl") {
+        const category = document.getElementById("p-stl-license").value;
+
+        if (!priceValue) {
+          alert("Please enter an STL price.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category,
+          name,
+          price: Number(priceValue),
+          desc,
+          mediaType: "image",
+          img,
+          hasColors: false,
+          colors: []
+        };
       }
 
-      const item = {
-        id: idField || String(Date.now()),
-        category,
-        name,
-        price: Number(priceValue),
-        desc,
-        mediaType,
-        img,
-        hasColors: colorsEnabled,
-        colors: colorsEnabled ? editingColors.map((color) => ({ ...color })) : []
-      };
+      if (type === "affiliate") {
+        if (!link) {
+          alert("Please enter the affiliate URL.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category: "affiliate",
+          name,
+          price: 0,
+          desc,
+          mediaType: "image",
+          img,
+          hasColors: false,
+          colors: [],
+          link
+        };
+      }
 
       const action = idField ? "edit" : "add";
 
@@ -886,10 +1062,10 @@
 
         applyProductsFromResponse(data);
         clearForm();
-        alert(action === "add" ? "Product added." : "Product updated.");
+        alert(action === "add" ? "Item added." : "Item updated.");
       } catch (error) {
         console.error(error);
-        alert(error.message || "There was a problem saving the product.");
+        alert(error.message || "There was a problem saving the item.");
       }
     }
 
@@ -898,19 +1074,40 @@
       if (!item) return;
 
       document.getElementById("p-id").value = item.id || "";
-      document.getElementById("p-page").value = item.category || "3d";
       document.getElementById("p-name").value = item.name || "";
       document.getElementById("p-price").value = item.price ?? "";
       document.getElementById("p-desc").value = item.desc || "";
-      document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
+      document.getElementById("p-link").value = item.link || "";
       document.getElementById("p-img").value = item.img || "";
-      document.getElementById("p-enable-colors").checked = !!item.hasColors;
-      document.getElementById("form-title").textContent = "Edit Product";
 
-      editingColors = Array.isArray(item.colors)
-        ? item.colors.map((color) => normalizeColor(color)).filter(Boolean)
-        : [];
+      if (item.category === "3d" || item.category === "laser") {
+        document.getElementById("p-type").value = "product";
+        document.getElementById("p-page").value = item.category || "3d";
+        document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
+        document.getElementById("p-enable-colors").checked = !!item.hasColors;
+        editingColors = Array.isArray(item.colors)
+          ? item.colors.map((color) => normalizeColor(color)).filter(Boolean)
+          : [];
+      } else if (item.category === "stl-personal" || item.category === "stl-commercial") {
+        document.getElementById("p-type").value = "stl";
+        document.getElementById("p-stl-license").value = item.category;
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+      } else if (item.category === "affiliate") {
+        document.getElementById("p-type").value = "affiliate";
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+      } else {
+        document.getElementById("p-type").value = "product";
+        document.getElementById("p-page").value = "3d";
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+      }
 
+      handleTypeChange();
       toggleColorBuilder();
       renderProductColorPicker();
       renderColorEditor();
@@ -947,50 +1144,84 @@
           clearForm();
         }
 
-        alert("Product deleted.");
+        alert("Item deleted.");
       } catch (error) {
         console.error(error);
-        alert(error.message || "There was a problem deleting the product.");
+        alert(error.message || "There was a problem deleting the item.");
       }
+    }
+
+    function renderInventorySection(title, items, type) {
+      let html = `<h4 style="color: var(--glow); margin-top:20px;">${title}</h4>`;
+
+      if (items.length === 0) {
+        html += `<div class="muted">No items yet.</div>`;
+        return html;
+      }
+
+      items.forEach((item) => {
+        const colorSwatches = type === "product" && item.hasColors && item.colors?.length
+          ? `
+            <div class="inventory-color-row">
+              ${item.colors.map((c) => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
+            </div>
+          `
+          : "";
+
+        const priceLine = type === "affiliate"
+          ? `<div class="muted">Affiliate link item</div>`
+          : `<div class="muted">$${Number(item.price || 0).toFixed(2)}</div>`;
+
+        const mediaPath = type === "product"
+          ? `${item.mediaType === "video" ? "/videos" : "/images"}/${item.category}/${item.img || ""}`
+          : type === "stl"
+            ? `/images/stl/${item.img || ""}`
+            : `/images/affiliates/${item.img || ""}`;
+
+        const extraTag = type === "affiliate"
+          ? `<div class="admin-media-tag">AFFILIATE</div>`
+          : type === "stl"
+            ? `<div class="admin-media-tag">${item.category === "stl-commercial" ? "STL COMMERCIAL" : "STL PERSONAL"}</div>`
+            : `<div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>`;
+
+        const linkLine = type === "affiliate" && item.link
+          ? `<div class="muted" style="margin-top:6px; word-break:break-all;">${escapeHtml(item.link)}</div>`
+          : "";
+
+        html += `
+          <div class="admin-inv-card">
+            <div><strong>${escapeHtml(item.name || "Unnamed Item")}</strong></div>
+            ${priceLine}
+            <div class="muted">${escapeHtml(mediaPath)}</div>
+            ${extraTag}
+            ${linkLine}
+            ${colorSwatches}
+            <div class="admin-actions">
+              <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
+              <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
+            </div>
+          </div>
+        `;
+      });
+
+      return html;
     }
 
     function renderAdmin() {
       const list = document.getElementById("admin-inventory-list");
+
+      const shop3d = allProducts.filter((x) => x.category === "3d");
+      const shopLaser = allProducts.filter((x) => x.category === "laser");
+      const stlPersonal = allProducts.filter((x) => x.category === "stl-personal");
+      const stlCommercial = allProducts.filter((x) => x.category === "stl-commercial");
+      const affiliates = allProducts.filter((x) => x.category === "affiliate");
+
       let html = "<h3>Inventory</h3>";
-
-      ["3d", "laser"].forEach((cat) => {
-        const items = allProducts.filter((x) => x.category === cat);
-
-        html += `<h4 style="color: var(--glow); margin-top:20px;">${cat === "3d" ? "3D Prints" : "Laser Engraving"}</h4>`;
-
-        if (items.length === 0) {
-          html += `<div class="muted">No products yet.</div>`;
-        } else {
-          items.forEach((item) => {
-            const colorSwatches = item.hasColors && item.colors?.length
-              ? `
-                <div class="inventory-color-row">
-                  ${item.colors.map((c) => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
-                </div>
-              `
-              : `<div class="muted" style="margin-top:8px;">No color options</div>`;
-
-            html += `
-              <div class="admin-inv-card">
-                <div><strong>${escapeHtml(item.name || "Unnamed Product")}</strong></div>
-                <div class="muted">$${Number(item.price || 0).toFixed(2)}</div>
-                <div class="muted">${escapeHtml(item.img || "No media file set")}</div>
-                <div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>
-                ${colorSwatches}
-                <div class="admin-actions">
-                  <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
-                  <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
-                </div>
-              </div>
-            `;
-          });
-        }
-      });
+      html += renderInventorySection("3D Prints", shop3d, "product");
+      html += renderInventorySection("Laser Engraving", shopLaser, "product");
+      html += renderInventorySection("STL Files - Personal Use", stlPersonal, "stl");
+      html += renderInventorySection("STL Files - Commercial Use", stlCommercial, "stl");
+      html += renderInventorySection("Affiliates", affiliates, "affiliate");
 
       list.innerHTML = html;
     }
