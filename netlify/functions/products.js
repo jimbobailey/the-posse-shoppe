@@ -32,23 +32,43 @@ function sameColor(a, b) {
   );
 }
 
+function normalizeCategory(category) {
+  const value = cleanString(category).toLowerCase();
+
+  if (value === "laser") return "laser";
+  if (value === "stl-personal") return "stl-personal";
+  if (value === "stl-commercial") return "stl-commercial";
+  if (value === "affiliate") return "affiliate";
+
+  return "3d";
+}
+
 function normalizeProduct(product) {
+  const category = normalizeCategory(product.category);
+
   const requestedColors = toArray(product.colors)
     .map(normalizeColor)
     .filter(Boolean);
 
-  const hasColors = !!product.hasColors && requestedColors.length > 0;
+  const allowColors = category === "3d" || category === "laser";
+  const hasColors = allowColors && !!product.hasColors && requestedColors.length > 0;
 
   return {
     id: cleanString(product.id) || String(Date.now()),
-    category: cleanString(product.category) === "laser" ? "laser" : "3d",
+    category,
     name: cleanString(product.name),
     price: Number(product.price || 0),
     desc: cleanString(product.desc ?? product.description),
-    mediaType: cleanString(product.mediaType) === "video" ? "video" : "image",
+    mediaType:
+      category === "3d" || category === "laser"
+        ? cleanString(product.mediaType) === "video"
+          ? "video"
+          : "image"
+        : "image",
     img: cleanString(product.img),
     hasColors,
-    colors: hasColors ? requestedColors : []
+    colors: hasColors ? requestedColors : [],
+    link: category === "affiliate" ? cleanString(product.link) : ""
   };
 }
 
@@ -195,7 +215,7 @@ exports.handler = async (event) => {
       });
     }
 
-    // PRODUCT ACTIONS
+    // PRODUCT / STL / AFFILIATE ACTIONS
     let products = await loadProducts(store);
 
     if (body.action === "add" && body.product) {
@@ -204,7 +224,21 @@ exports.handler = async (event) => {
       if (!incoming.name) {
         return json(400, {
           success: false,
-          message: "Product name is required."
+          message: "Item name is required."
+        });
+      }
+
+      if (!incoming.img) {
+        return json(400, {
+          success: false,
+          message: "Image or media filename is required."
+        });
+      }
+
+      if (incoming.category === "affiliate" && !incoming.link) {
+        return json(400, {
+          success: false,
+          message: "Affiliate URL is required."
         });
       }
 
@@ -228,7 +262,21 @@ exports.handler = async (event) => {
       if (!incoming.name) {
         return json(400, {
           success: false,
-          message: "Product name is required."
+          message: "Item name is required."
+        });
+      }
+
+      if (!incoming.img) {
+        return json(400, {
+          success: false,
+          message: "Image or media filename is required."
+        });
+      }
+
+      if (incoming.category === "affiliate" && !incoming.link) {
+        return json(400, {
+          success: false,
+          message: "Affiliate URL is required."
         });
       }
 
@@ -245,7 +293,7 @@ exports.handler = async (event) => {
       if (!found) {
         return json(404, {
           success: false,
-          message: "Product not found for edit."
+          message: "Item not found for edit."
         });
       }
 
@@ -264,7 +312,7 @@ exports.handler = async (event) => {
       if (products.length === beforeCount) {
         return json(404, {
           success: false,
-          message: "Product not found for delete."
+          message: "Item not found for delete."
         });
       }
 
