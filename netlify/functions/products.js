@@ -36,6 +36,7 @@ function normalizeCategory(category) {
   const value = cleanString(category).toLowerCase();
 
   if (value === "laser") return "laser";
+  if (value === "boombox") return "boombox";
   if (value === "stl-personal") return "stl-personal";
   if (value === "stl-commercial") return "stl-commercial";
   if (value === "affiliate") return "affiliate";
@@ -50,7 +51,7 @@ function normalizeProduct(product) {
     .map(normalizeColor)
     .filter(Boolean);
 
-  const allowColors = category === "3d" || category === "laser";
+  const allowColors = category === "3d" || category === "laser" || category === "boombox";
   const hasColors = allowColors && !!product.hasColors && requestedColors.length > 0;
 
   return {
@@ -60,7 +61,7 @@ function normalizeProduct(product) {
     price: Number(product.price || 0),
     desc: cleanString(product.desc ?? product.description),
     mediaType:
-      category === "3d" || category === "laser"
+      category === "3d" || category === "laser" || category === "boombox"
         ? cleanString(product.mediaType) === "video"
           ? "video"
           : "image"
@@ -140,7 +141,6 @@ exports.handler = async (event) => {
 
     const body = JSON.parse(event.body || "{}");
 
-    // COLOR LIBRARY ACTIONS
     if (body.action === "addColor" && body.color) {
       const colors = await loadColorLibrary(store);
       const incoming = normalizeColor(body.color);
@@ -215,7 +215,6 @@ exports.handler = async (event) => {
       });
     }
 
-    // PRODUCT / STL / AFFILIATE ACTIONS
     let products = await loadProducts(store);
 
     if (body.action === "add" && body.product) {
