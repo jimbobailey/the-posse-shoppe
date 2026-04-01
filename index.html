@@ -911,14 +911,41 @@
       }
     }
 
-    function view(v) {
+      function view(v) {
       currentCategory = v;
+
       document.getElementById("btn-3d").classList.remove("active");
       document.getElementById("btn-laser").classList.remove("active");
       document.getElementById("btn-boombox").classList.remove("active");
+
       document.getElementById("btn-" + v).classList.add("active");
-      updateHomepageOnlySection();
-      renderShop();
+
+      // BACK TO SHOP BUTTON
+      let backBtn = document.getElementById("back-to-shop");
+
+      if (v !== "3d") {
+      if (!backBtn) {
+      const nav = document.querySelector("nav");
+
+      backBtn = document.createElement("button");
+      backBtn.id = "back-to-shop";
+      backBtn.className = "nav-btn";
+      backBtn.innerText = "BACK TO SHOP";
+
+      backBtn.onclick = function() {
+        view("3d");
+      };
+
+      nav.appendChild(backBtn);
+      }
+      } else {
+      if (backBtn) {
+      backBtn.remove();
+      }
+  }
+
+  renderShop();
+}
     }
 
     async function loadProducts() {
