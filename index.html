@@ -155,6 +155,13 @@
       letter-spacing: 0.3px;
       transition: 0.2s ease;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.2;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-btn:hover {
@@ -168,26 +175,6 @@
       font-weight: bold;
       border-color: #ffb24f;
       box-shadow: 0 8px 20px rgba(255, 140, 0, 0.22);
-    }
-
-    .contact-link {
-      background: rgba(255, 255, 255, 0.03);
-      color: #ff9a1a;
-      border: 1px solid rgba(255, 140, 0, 0.65);
-      padding: 10px 16px;
-      cursor: pointer;
-      display: inline-block;
-      border-radius: var(--radius-pill);
-      font-weight: bold;
-      text-decoration: none;
-      letter-spacing: 0.3px;
-      transition: 0.2s ease;
-    }
-
-    .contact-link:hover {
-      background: #ff8c00;
-      color: black;
-      transform: translateY(-1px);
     }
 
     .header-links {
@@ -757,8 +744,7 @@
         font-size: 0.92rem;
       }
 
-      .nav-btn,
-      .contact-link {
+      .nav-btn {
         width: 100%;
         justify-content: center;
       }
@@ -788,17 +774,17 @@
       <h1 class="sr-only">The Posse Shoppe</h1>
       <p class="header-subline">Custom 3D prints and laser engraving made one project at a time.</p>
 
-      <nav>
+      <nav id="shop-nav">
         <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
         <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
         <button class="nav-btn" id="btn-boombox" onclick="view('boombox')">BoomBox Parts</button>
       </nav>
 
-   <div class="header-links">
-  <button class="nav-btn" onclick="location.href='stl.html'">STL FILES</button>
-  <button class="nav-btn" onclick="location.href='affiliates.html'">AFFILIATES</button>
-  <button class="nav-btn" onclick="location.href='mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website'">CONTACT US</button>
-</div>>
+      <div class="header-links">
+        <a class="nav-btn" href="stl.html">STL FILES</a>
+        <a class="nav-btn" href="affiliates.html">AFFILIATES</a>
+        <a class="nav-btn" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+      </div>
     </div>
   </header>
 
@@ -838,7 +824,7 @@
     </details>
   </section>
 
-  <section class="shop-shell" id="shop-products">
+  <section class="shop-shell">
     <div class="shop-heading">
       <div>
         <h2>Shop Products</h2>
@@ -900,52 +886,44 @@
       return lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov");
     }
 
-    function updateHomepageOnlySection() {
-      const wrap = document.getElementById("what-we-do-wrap");
-      if (!wrap) return;
+    function updateHomepageOnlySections() {
+      const whatWeDoWrap = document.getElementById("what-we-do-wrap");
+      if (whatWeDoWrap) {
+        if (currentCategory === "3d") {
+          whatWeDoWrap.classList.remove("hidden");
+        } else {
+          whatWeDoWrap.classList.add("hidden");
+        }
+      }
+
+      let backBtn = document.getElementById("btn-back-to-shop");
 
       if (currentCategory === "3d") {
-        wrap.classList.remove("hidden");
+        if (backBtn) backBtn.remove();
       } else {
-        wrap.classList.add("hidden");
+        if (!backBtn) {
+          const nav = document.getElementById("shop-nav");
+          backBtn = document.createElement("button");
+          backBtn.type = "button";
+          backBtn.id = "btn-back-to-shop";
+          backBtn.className = "nav-btn";
+          backBtn.textContent = "BACK TO SHOP";
+          backBtn.onclick = function () {
+            view("3d");
+          };
+          nav.appendChild(backBtn);
+        }
       }
     }
 
-      function view(v) {
+    function view(v) {
       currentCategory = v;
-
       document.getElementById("btn-3d").classList.remove("active");
       document.getElementById("btn-laser").classList.remove("active");
       document.getElementById("btn-boombox").classList.remove("active");
-
       document.getElementById("btn-" + v).classList.add("active");
-
-      // BACK TO SHOP BUTTON
-      let backBtn = document.getElementById("back-to-shop");
-
-      if (v !== "3d") {
-      if (!backBtn) {
-      const nav = document.querySelector("nav");
-
-      backBtn = document.createElement("button");
-      backBtn.id = "back-to-shop";
-      backBtn.className = "nav-btn";
-      backBtn.innerText = "BACK TO SHOP";
-
-      backBtn.onclick = function() {
-        view("3d");
-      };
-
-      nav.appendChild(backBtn);
-      }
-      } else {
-      if (backBtn) {
-      backBtn.remove();
-      }
-  }
-
-  renderShop();
-}
+      updateHomepageOnlySections();
+      renderShop();
     }
 
     async function loadProducts() {
@@ -1386,7 +1364,7 @@
 
     window.onload = async () => {
       renderCart();
-      updateHomepageOnlySection();
+      updateHomepageOnlySections();
       await loadProducts();
     };
   </script>
