@@ -204,6 +204,10 @@
       padding: 0 20px;
     }
 
+    .info-section-wrap.hidden {
+      display: none;
+    }
+
     .info-section {
       border: 1px solid rgba(255, 140, 0, 0.2);
       border-radius: var(--radius-lg);
@@ -798,7 +802,7 @@
     </div>
   </header>
 
-  <section class="info-section-wrap" id="what-we-do">
+  <section class="info-section-wrap" id="what-we-do-wrap">
     <details class="info-section">
       <summary class="info-summary">
         <span class="info-summary-text">WHAT WE DO AT THE POSSE SHOPPE — CLICK ME!</span>
@@ -896,12 +900,24 @@
       return lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov");
     }
 
+    function updateHomepageOnlySection() {
+      const wrap = document.getElementById("what-we-do-wrap");
+      if (!wrap) return;
+
+      if (currentCategory === "3d") {
+        wrap.classList.remove("hidden");
+      } else {
+        wrap.classList.add("hidden");
+      }
+    }
+
     function view(v) {
       currentCategory = v;
       document.getElementById("btn-3d").classList.remove("active");
       document.getElementById("btn-laser").classList.remove("active");
       document.getElementById("btn-boombox").classList.remove("active");
       document.getElementById("btn-" + v).classList.add("active");
+      updateHomepageOnlySection();
       renderShop();
     }
 
@@ -1343,6 +1359,7 @@
 
     window.onload = async () => {
       renderCart();
+      updateHomepageOnlySection();
       await loadProducts();
     };
   </script>
