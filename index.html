@@ -146,33 +146,32 @@
 
     .page-btn {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 140, 0, 0.55);
-      color: white;
-      padding: 10px 18px;
+      color: #ff9a1a;
+      border: 1px solid rgba(255, 140, 0, 0.65);
+      padding: 10px 16px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
       border-radius: var(--radius-pill);
       font-weight: bold;
       letter-spacing: 0.3px;
       transition: 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
       font-family: inherit;
       font-size: 1rem;
       line-height: 1.2;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .page-btn:hover {
+      background: #ff8c00;
+      color: black;
       transform: translateY(-1px);
-      background: rgba(255, 140, 0, 0.12);
     }
 
     .page-btn.active {
-      background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
+      background: #ff8c00;
       color: black;
-      font-weight: bold;
       border-color: #ffb24f;
       box-shadow: 0 8px 20px rgba(255, 140, 0, 0.22);
     }
@@ -780,7 +779,7 @@
         <button class="page-btn" id="btn-boombox" onclick="view('boombox')">BoomBox Parts</button>
       </nav>
 
-      <div class="header-links" id="page-links">
+      <div class="header-links">
         <a class="page-btn" href="stl.html">STL FILES</a>
         <a class="page-btn" href="affiliates.html">AFFILIATES</a>
         <a class="page-btn" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
@@ -888,8 +887,6 @@
 
     function updateHomepageOnlySections() {
       const whatWeDoWrap = document.getElementById("what-we-do-wrap");
-      const pageLinks = document.getElementById("page-links");
-
       if (whatWeDoWrap) {
         if (currentCategory === "3d") {
           whatWeDoWrap.classList.remove("hidden");
@@ -901,21 +898,19 @@
       let backBtn = document.getElementById("btn-back-to-shop");
 
       if (currentCategory === "3d") {
-        if (backBtn) {
-          backBtn.remove();
-        }
+        if (backBtn) backBtn.remove();
       } else {
-        if (!backBtn && pageLinks) {
-          backBtn = document.createElement("a");
+        if (!backBtn) {
+          const nav = document.getElementById("shop-nav");
+          backBtn = document.createElement("button");
+          backBtn.type = "button";
           backBtn.id = "btn-back-to-shop";
           backBtn.className = "page-btn";
-          backBtn.href = "#";
           backBtn.textContent = "BACK TO SHOP";
-          backBtn.onclick = function (event) {
-            event.preventDefault();
+          backBtn.onclick = function () {
             view("3d");
           };
-          pageLinks.insertBefore(backBtn, pageLinks.firstChild);
+          nav.appendChild(backBtn);
         }
       }
     }
