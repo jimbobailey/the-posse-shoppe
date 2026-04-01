@@ -144,7 +144,7 @@
       flex-wrap: wrap;
     }
 
-    .nav-btn {
+    .page-btn {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 140, 0, 0.55);
       color: white;
@@ -164,12 +164,12 @@
       justify-content: center;
     }
 
-    .nav-btn:hover {
+    .page-btn:hover {
       transform: translateY(-1px);
       background: rgba(255, 140, 0, 0.12);
     }
 
-    .nav-btn.active {
+    .page-btn.active {
       background: linear-gradient(180deg, #ff9a1a 0%, #ff8c00 100%);
       color: black;
       font-weight: bold;
@@ -744,7 +744,7 @@
         font-size: 0.92rem;
       }
 
-      .nav-btn {
+      .page-btn {
         width: 100%;
         justify-content: center;
       }
@@ -775,15 +775,15 @@
       <p class="header-subline">Custom 3D prints and laser engraving made one project at a time.</p>
 
       <nav id="shop-nav">
-        <button class="nav-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
-        <button class="nav-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
-        <button class="nav-btn" id="btn-boombox" onclick="view('boombox')">BoomBox Parts</button>
+        <button class="page-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
+        <button class="page-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
+        <button class="page-btn" id="btn-boombox" onclick="view('boombox')">BoomBox Parts</button>
       </nav>
 
-      <div class="header-links">
-        <a class="nav-btn" href="stl.html">STL FILES</a>
-        <a class="nav-btn" href="affiliates.html">AFFILIATES</a>
-        <a class="nav-btn" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
+      <div class="header-links" id="page-links">
+        <a class="page-btn" href="stl.html">STL FILES</a>
+        <a class="page-btn" href="affiliates.html">AFFILIATES</a>
+        <a class="page-btn" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">CONTACT US</a>
       </div>
     </div>
   </header>
@@ -888,6 +888,8 @@
 
     function updateHomepageOnlySections() {
       const whatWeDoWrap = document.getElementById("what-we-do-wrap");
+      const pageLinks = document.getElementById("page-links");
+
       if (whatWeDoWrap) {
         if (currentCategory === "3d") {
           whatWeDoWrap.classList.remove("hidden");
@@ -899,19 +901,21 @@
       let backBtn = document.getElementById("btn-back-to-shop");
 
       if (currentCategory === "3d") {
-        if (backBtn) backBtn.remove();
+        if (backBtn) {
+          backBtn.remove();
+        }
       } else {
-        if (!backBtn) {
-          const nav = document.getElementById("shop-nav");
-          backBtn = document.createElement("button");
-          backBtn.type = "button";
+        if (!backBtn && pageLinks) {
+          backBtn = document.createElement("a");
           backBtn.id = "btn-back-to-shop";
-          backBtn.className = "nav-btn";
+          backBtn.className = "page-btn";
+          backBtn.href = "#";
           backBtn.textContent = "BACK TO SHOP";
-          backBtn.onclick = function () {
+          backBtn.onclick = function (event) {
+            event.preventDefault();
             view("3d");
           };
-          nav.appendChild(backBtn);
+          pageLinks.insertBefore(backBtn, pageLinks.firstChild);
         }
       }
     }
