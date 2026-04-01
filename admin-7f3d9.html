@@ -12,6 +12,10 @@
       --muted: #666;
       --danger: #c62828;
       --success: #167c3b;
+      --text-main: #f3f3f3;
+      --shadow-glow: 0 0 24px rgba(255, 140, 0, 0.14);
+      --radius-pill: 999px;
+      --max-width: 1500px;
     }
 
     * {
@@ -21,24 +25,39 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      background: var(--bg);
-      color: white;
+      background:
+        radial-gradient(circle at top, rgba(255, 140, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, #0b0b0d 0%, #111215 35%, #0d0d0f 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
     }
 
     header {
-      padding: 20px 20px 28px;
+      padding: 18px 20px 24px;
       text-align: center;
-      border-bottom: 2px solid var(--glow);
+      border-bottom: 1px solid rgba(255, 140, 0, 0.28);
       background:
-        linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.88)),
+        linear-gradient(rgba(8, 8, 8, 0.88), rgba(10, 10, 10, 0.92)),
         url("images/hex-bg.png") center center / cover no-repeat;
+      box-shadow: inset 0 -1px 0 rgba(255, 140, 0, 0.14);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
     }
 
     .header-banner-wrap {
       max-width: 1120px;
-      margin: 0 auto 18px;
-      padding: 14px;
-      border-radius: 12px;
+      margin: 0 auto 14px;
+      padding: 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 140, 0, 0.08), rgba(255, 140, 0, 0.03));
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      box-shadow: var(--shadow-glow);
     }
 
     .header-banner {
@@ -47,10 +66,37 @@
       max-width: 1000px;
       margin: 0 auto;
       height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255, 140, 0, 0.45);
-      box-shadow: 0 0 22px rgba(255, 140, 0, 0.22);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.18);
       background: #111;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .page-btn {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ff9a1a;
+      border: 1px solid rgba(255, 140, 0, 0.65);
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+      display: inline-block;
+    }
+
+    .page-btn:hover {
+      background: #ff8c00;
+      color: black;
+      transform: translateY(-1px);
     }
 
     .admin-shell {
@@ -69,6 +115,10 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      background: rgba(17, 17, 17, 0.8);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 18px;
     }
 
     .admin-form input,
@@ -377,8 +427,17 @@
 </head>
 <body>
   <header>
-    <div class="header-banner-wrap">
-      <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+    <div class="header-inner">
+      <div class="header-banner-wrap">
+        <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+      </div>
+
+      <div class="page-top">
+        <a class="page-btn" href="index.html">BACK TO SHOP</a>
+        <a class="page-btn" href="stl.html">STL FILES</a>
+        <a class="page-btn" href="affiliates.html">AFFILIATES</a>
+        <a class="page-btn" href="mailto:theposseshoppe@gmail.com?subject=Admin%20Question">CONTACT US</a>
+      </div>
     </div>
   </header>
 
@@ -400,6 +459,7 @@
             <select id="p-page" onchange="updateMediaPathPreview()">
               <option value="3d">3D Prints</option>
               <option value="laser">Laser Engraving</option>
+              <option value="boombox">BoomBox Parts</option>
             </select>
           </div>
 
@@ -436,8 +496,10 @@
             Shop product files:
             <br>images/3d/
             <br>images/laser/
+            <br>images/boombox/
             <br>videos/3d/
             <br>videos/laser/
+            <br>videos/boombox/
             <br><br>
             STL images:
             <br>images/stl/
@@ -1077,34 +1139,24 @@
       document.getElementById("p-name").value = item.name || "";
       document.getElementById("p-price").value = item.price ?? "";
       document.getElementById("p-desc").value = item.desc || "";
-      document.getElementById("p-link").value = item.link || "";
       document.getElementById("p-img").value = item.img || "";
+      document.getElementById("p-link").value = item.link || "";
 
-      if (item.category === "3d" || item.category === "laser") {
-        document.getElementById("p-type").value = "product";
-        document.getElementById("p-page").value = item.category || "3d";
-        document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
-        document.getElementById("p-enable-colors").checked = !!item.hasColors;
-        editingColors = Array.isArray(item.colors)
-          ? item.colors.map((color) => normalizeColor(color)).filter(Boolean)
-          : [];
+      if (item.category === "affiliate") {
+        document.getElementById("p-type").value = "affiliate";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
       } else if (item.category === "stl-personal" || item.category === "stl-commercial") {
         document.getElementById("p-type").value = "stl";
         document.getElementById("p-stl-license").value = item.category;
-        document.getElementById("p-media-type").value = "image";
-        document.getElementById("p-enable-colors").checked = false;
-        editingColors = [];
-      } else if (item.category === "affiliate") {
-        document.getElementById("p-type").value = "affiliate";
-        document.getElementById("p-media-type").value = "image";
         document.getElementById("p-enable-colors").checked = false;
         editingColors = [];
       } else {
         document.getElementById("p-type").value = "product";
-        document.getElementById("p-page").value = "3d";
-        document.getElementById("p-media-type").value = "image";
-        document.getElementById("p-enable-colors").checked = false;
-        editingColors = [];
+        document.getElementById("p-page").value = item.category || "3d";
+        document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
+        document.getElementById("p-enable-colors").checked = !!item.hasColors;
+        editingColors = Array.isArray(item.colors) ? item.colors.map((color) => ({ ...color })) : [];
       }
 
       handleTypeChange();
@@ -1138,12 +1190,11 @@
           throw new Error(data.message || `HTTP ${response.status}`);
         }
 
-        applyProductsFromResponse(data);
-
         if (document.getElementById("p-id").value === String(id)) {
           clearForm();
         }
 
+        applyProductsFromResponse(data);
         alert("Item deleted.");
       } catch (error) {
         console.error(error);
@@ -1151,78 +1202,68 @@
       }
     }
 
-    function renderInventorySection(title, items, type) {
-      let html = `<h4 style="color: var(--glow); margin-top:20px;">${title}</h4>`;
+    function categoryLabel(category) {
+      if (category === "3d") return "3D Prints";
+      if (category === "laser") return "Laser Engraving";
+      if (category === "boombox") return "BoomBox Parts";
+      if (category === "stl-personal") return "STL - Personal Use";
+      if (category === "stl-commercial") return "STL - Commercial Use";
+      if (category === "affiliate") return "Affiliates";
+      return category;
+    }
 
-      if (items.length === 0) {
-        html += `<div class="muted">No items yet.</div>`;
-        return html;
+    function renderInventorySection(items, title) {
+      if (!items.length) {
+        return `<h4 style="color: var(--glow); margin-top:20px;">${escapeHtml(title)}</h4><div class="muted">No items in this section yet.</div>`;
       }
 
-      items.forEach((item) => {
-        const colorSwatches = type === "product" && item.hasColors && item.colors?.length
-          ? `
-            <div class="inventory-color-row">
-              ${item.colors.map((c) => `<div class="inventory-mini-swatch" title="${escapeHtml(c.name)}" style="background:${escapeHtml(c.hex)};"></div>`).join("")}
-            </div>
-          `
-          : "";
-
-        const priceLine = type === "affiliate"
-          ? `<div class="muted">Affiliate link item</div>`
-          : `<div class="muted">$${Number(item.price || 0).toFixed(2)}</div>`;
-
-        const mediaPath = type === "product"
-          ? `${item.mediaType === "video" ? "/videos" : "/images"}/${item.category}/${item.img || ""}`
-          : type === "stl"
-            ? `/images/stl/${item.img || ""}`
-            : `/images/affiliates/${item.img || ""}`;
-
-        const extraTag = type === "affiliate"
-          ? `<div class="admin-media-tag">AFFILIATE</div>`
-          : type === "stl"
-            ? `<div class="admin-media-tag">${item.category === "stl-commercial" ? "STL COMMERCIAL" : "STL PERSONAL"}</div>`
-            : `<div class="admin-media-tag">${item.mediaType === "video" ? "MP4 VIDEO" : "IMAGE"}</div>`;
-
-        const linkLine = type === "affiliate" && item.link
-          ? `<div class="muted" style="margin-top:6px; word-break:break-all;">${escapeHtml(item.link)}</div>`
-          : "";
-
-        html += `
+      return `
+        <h4 style="color: var(--glow); margin-top:20px;">${escapeHtml(title)}</h4>
+        ${items.map((item) => `
           <div class="admin-inv-card">
-            <div><strong>${escapeHtml(item.name || "Unnamed Item")}</strong></div>
-            ${priceLine}
-            <div class="muted">${escapeHtml(mediaPath)}</div>
-            ${extraTag}
-            ${linkLine}
-            ${colorSwatches}
+            <div><strong>${escapeHtml(item.name || "")}</strong></div>
+            <div class="muted">${escapeHtml(item.desc || "")}</div>
+            ${item.category !== "affiliate" ? `<div style="margin-top:6px;"><strong>$${Number(item.price || 0).toFixed(2)}</strong></div>` : ""}
+            <div class="admin-media-tag">${escapeHtml(item.mediaType || "image").toUpperCase()}</div>
+            <div class="admin-media-tag">${escapeHtml(categoryLabel(item.category || ""))}</div>
+            <div class="muted" style="margin-top:8px;">${escapeHtml(item.img || "")}</div>
+            ${item.link ? `<div class="muted" style="margin-top:6px;">${escapeHtml(item.link)}</div>` : ""}
+            ${Array.isArray(item.colors) && item.colors.length ? `
+              <div class="inventory-color-row">
+                ${item.colors.map((color) => `
+                  <div class="inventory-mini-swatch" title="${escapeHtml(color.name)}" style="background:${escapeHtml(color.hex)};"></div>
+                `).join("")}
+              </div>
+            ` : ""}
             <div class="admin-actions">
-              <button class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
-              <button class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
+              <button type="button" class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
+              <button type="button" class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
             </div>
           </div>
-        `;
-      });
-
-      return html;
+        `).join("")}
+      `;
     }
 
     function renderAdmin() {
       const list = document.getElementById("admin-inventory-list");
 
-      const shop3d = allProducts.filter((x) => x.category === "3d");
-      const shopLaser = allProducts.filter((x) => x.category === "laser");
-      const stlPersonal = allProducts.filter((x) => x.category === "stl-personal");
-      const stlCommercial = allProducts.filter((x) => x.category === "stl-commercial");
-      const affiliates = allProducts.filter((x) => x.category === "affiliate");
+      const sections = [
+        { key: "3d", title: "3D Prints" },
+        { key: "laser", title: "Laser Engraving" },
+        { key: "boombox", title: "BoomBox Parts" },
+        { key: "stl-personal", title: "STL - Personal Use" },
+        { key: "stl-commercial", title: "STL - Commercial Use" },
+        { key: "affiliate", title: "Affiliates" }
+      ];
 
-      let html = "<h3>Inventory</h3>";
-      html += renderInventorySection("3D Prints", shop3d, "product");
-      html += renderInventorySection("Laser Engraving", shopLaser, "product");
-      html += renderInventorySection("STL Files - Personal Use", stlPersonal, "stl");
-      html += renderInventorySection("STL Files - Commercial Use", stlCommercial, "stl");
-      html += renderInventorySection("Affiliates", affiliates, "affiliate");
+      let html = "<div class='admin-form'><h3 style='margin-top:0;'>Inventory</h3>";
 
+      sections.forEach((section) => {
+        const items = allProducts.filter((item) => item.category === section.key);
+        html += renderInventorySection(items, section.title);
+      });
+
+      html += "</div>";
       list.innerHTML = html;
     }
 
@@ -1236,11 +1277,11 @@
     }
 
     window.onload = async () => {
-      resetLibraryColorForm();
-      await loadColorLibrary();
-      clearForm();
-      await loadProducts();
+      handleTypeChange();
+      toggleColorBuilder();
       updateMediaPathPreview();
+      await loadColorLibrary();
+      await loadProducts();
     };
   </script>
 </body>
