@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Posse Shoppe - Music</title>
+    <title>Home of Jimenim - Music</title>
 
     <style>
         body {
@@ -17,18 +17,44 @@
 
         header {
             background: #1a1a1a;
-            padding: 20px;
+            padding: 26px 20px 24px;
             border-bottom: 3px solid orange;
         }
 
         .logo {
-            font-size: 32px;
-            font-weight: bold;
+            font-size: 38px;
+            font-weight: 900;
             color: orange;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header-subtitle {
+            color: #f5f5f5;
+            font-size: 20px;
+            margin-top: 4px;
+        }
+
+        .tagline {
+            color: #cccccc;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        .signature {
+            display: block;
+            margin-top: 8px;
+            font-size: 42px;
+            font-family: "Brush Script MT", "Segoe Script", cursive;
+            color: #ffb347;
+            text-shadow: 2px 2px 5px #000;
+            line-height: 1;
         }
 
         .nav-links {
-            margin-top: 15px;
+            margin-top: 18px;
         }
 
         .page-btn {
@@ -49,9 +75,9 @@
         }
 
         .music-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 40px auto;
-            padding: 24px;
+            padding: 20px;
             background: #1b1b1b;
             border: 2px solid orange;
             border-radius: 10px;
@@ -59,35 +85,7 @@
 
         h1 {
             color: orange;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .jimenim-header {
-            text-align: center;
-            color: orange;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .tagline {
-            color: #cccccc;
-            font-size: 18px;
-            font-style: italic;
-            font-weight: normal;
-        }
-
-        .signature {
-            display: block;
-            margin-top: 10px;
-            font-size: 42px;
-            font-family: "Brush Script MT", "Segoe Script", cursive;
-            color: #ffb347;
-            text-shadow: 2px 2px 4px #000;
-            font-weight: normal;
+            margin-bottom: 25px;
         }
 
         .song-title {
@@ -97,19 +95,17 @@
 
         .cover-art {
             width: 100%;
-            max-width: 760px;
+            max-width: 700px;
             max-height: 360px;
             object-fit: contain;
             border-radius: 10px;
             border: 2px solid orange;
             margin-bottom: 20px;
-            background: #111;
         }
 
         audio {
             width: 100%;
-            max-width: 760px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .download-btn {
@@ -131,7 +127,8 @@
 
         .music-divider {
             margin: 50px 0;
-            border: 1px solid #333;
+            border: 0;
+            border-top: 1px solid #444;
         }
 
         .note {
@@ -145,7 +142,10 @@
 <body>
 
 <header>
-    <div class="logo">THE POSSE SHOPPE MUSIC</div>
+    <div class="logo">HOME OF JIMENIM</div>
+    <div class="header-subtitle">Original Music • Real Talk • Good Times</div>
+    <div class="tagline">A legend in his own mind.</div>
+    <span class="signature">~ Jimenim</span>
 
     <div class="nav-links">
         <a class="page-btn" href="index.html">HOME</a>
@@ -155,25 +155,14 @@
 
 <div class="music-container">
 
-    <h1>HOME OF JIMENIM</h1>
-
-    <div class="jimenim-header">
-        Original Music • Real Talk • Good Times
-        <br>
-        <span class="tagline">A legend in his own mind.</span>
-        <br>
-        <span class="signature">~ Jimenim</span>
-    </div>
+    <h1>FREE MUSIC DOWNLOADS</h1>
 
     <!-- HUCKLEBERRY -->
-
     <img src="music/huckleberry-cover.png"
          alt="We'll Be Yo Huckleberry Cover"
          class="cover-art">
 
-    <div class="song-title">
-        We'll Be Yo Huckleberry
-    </div>
+    <div class="song-title">We'll Be Yo Huckleberry</div>
 
     <audio controls>
         <source src="music/well-be-yo-huckleberry.m4a" type="audio/mp4">
@@ -191,14 +180,11 @@
     <hr class="music-divider">
 
     <!-- BECAUSE I SAID SO -->
-
     <img src="music/because-i-said-so.png"
          alt="Because I Said So Cover"
          class="cover-art">
 
-    <div class="song-title">
-        Because I Said So
-    </div>
+    <div class="song-title">Because I Said So</div>
 
     <audio controls>
         <source src="music/because-i-said-so.mp3" type="audio/mpeg">
@@ -216,14 +202,11 @@
     <hr class="music-divider">
 
     <!-- DONT LET THE OLD MAN IN -->
-
     <img src="music/dont-let-the-old-man-in.png"
          alt="Don't Let The Old Man In Cover"
          class="cover-art">
 
-    <div class="song-title">
-        Don't Let The Old Man In
-    </div>
+    <div class="song-title">Don't Let The Old Man In</div>
 
     <audio controls>
         <source src="music/dont-let-the-old-man-in.mp3" type="audio/mpeg">
@@ -241,14 +224,11 @@
     <hr class="music-divider">
 
     <!-- TIME KEEPS TICKIN -->
-
     <img src="music/time-keeps-tickin.png"
          alt="Time Keeps Tickin Cover"
          class="cover-art">
 
-    <div class="song-title">
-        Time Keeps Tickin
-    </div>
+    <div class="song-title">Time Keeps Tickin</div>
 
     <audio controls>
         <source src="music/time-keeps-tickin.m4a" type="audio/mp4">
@@ -266,14 +246,11 @@
     <hr class="music-divider">
 
     <!-- GIMME BACK MY BUSINESS -->
-
     <img src="music/gimme-back-my-business.png"
          alt="Gimme Back My Business Cover"
          class="cover-art">
 
-    <div class="song-title">
-        Gimme Back My Business
-    </div>
+    <div class="song-title">Gimme Back My Business</div>
 
     <audio controls>
         <source src="music/Gimme Back my Business.mp3" type="audio/mpeg">
