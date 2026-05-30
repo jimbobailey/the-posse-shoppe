@@ -49,9 +49,9 @@
         }
 
         .music-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
-            padding: 20px;
+            padding: 24px;
             background: #1b1b1b;
             border: 2px solid orange;
             border-radius: 10px;
@@ -60,24 +60,56 @@
         h1 {
             color: orange;
             margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .jimenim-header {
+            text-align: center;
+            color: orange;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            color: #cccccc;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .signature {
+            display: block;
+            margin-top: 10px;
+            font-size: 42px;
+            font-family: "Brush Script MT", "Segoe Script", cursive;
+            color: #ffb347;
+            text-shadow: 2px 2px 4px #000;
+            font-weight: normal;
         }
 
         .song-title {
             font-size: 28px;
             margin-bottom: 20px;
         }
+
         .cover-art {
-    width: 100%;
-    max-width: 500px;
-    max-height: 280px;
-    object-fit: contain;
-    border-radius: 10px;
-    border: 2px solid orange;
-    margin-bottom: 20px;
-}
+            width: 100%;
+            max-width: 760px;
+            max-height: 360px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 2px solid orange;
+            margin-bottom: 20px;
+            background: #111;
+        }
+
         audio {
             width: 100%;
-            margin-top: 20px;
+            max-width: 760px;
+            margin-top: 10px;
         }
 
         .download-btn {
@@ -97,8 +129,13 @@
             background: #ffb84d;
         }
 
+        .music-divider {
+            margin: 50px 0;
+            border: 1px solid #333;
+        }
+
         .note {
-            margin-top: 20px;
+            margin-top: 35px;
             color: #ccc;
             font-size: 14px;
         }
@@ -118,18 +155,21 @@
 
 <div class="music-container">
 
-<h1>THE POSSE SHOPPE MUSIC</h1>
+    <h1>HOME OF JIMENIM</h1>
 
-<div class="jimenim-header">
-    Home of Jimenim
-    <br>
-    <span class="tagline">A legend in his own mind.</span>
-    <br>
-    <span class="signature">~ Jimenim</span>
-</div>
-<img src="music/huckleberry-cover.png"
-     alt="We'll Be Yo Huckleberry Cover"
-     class="cover-art">
+    <div class="jimenim-header">
+        Original Music • Real Talk • Good Times
+        <br>
+        <span class="tagline">A legend in his own mind.</span>
+        <br>
+        <span class="signature">~ Jimenim</span>
+    </div>
+
+    <!-- HUCKLEBERRY -->
+
+    <img src="music/huckleberry-cover.png"
+         alt="We'll Be Yo Huckleberry Cover"
+         class="cover-art">
 
     <div class="song-title">
         We'll Be Yo Huckleberry
@@ -147,114 +187,110 @@
        download>
        DOWNLOAD SONG
     </a>
-   <hr class="music-divider">
 
-<!-- BECAUSE I SAID SO -->
+    <hr class="music-divider">
 
-<img src="music/because-i-said-so.png"
-     alt="Because I Said So Cover"
-     class="cover-art">
+    <!-- BECAUSE I SAID SO -->
 
-<div class="song-title">
-    Because I Said So
-</div>
+    <img src="music/because-i-said-so.png"
+         alt="Because I Said So Cover"
+         class="cover-art">
 
-<audio controls>
-    <source src="music/because-i-said-so.mp3" type="audio/mpeg">
-</audio>
-
-<br>
-
-<a class="download-btn"
-   href="music/because-i-said-so.mp3"
-   download>
-   DOWNLOAD SONG
-</a>
-
-<hr class="music-divider">
-
-<!-- DONT LET THE OLD MAN IN -->
-
-<img src="music/dont-let-the-old-man-in.png"
-     alt="Dont Let The Old Man In Cover"
-     class="cover-art">
-
-<div class="song-title">
-    Don't Let The Old Man In
-</div>
-
-<audio controls>
-    <source src="music/dont-let-the-old-man-in.mp3" type="audio/mpeg">
-</audio>
-
-<br>
-
-<a class="download-btn"
-   href="music/dont-let-the-old-man-in.mp3"
-   download>
-   DOWNLOAD SONG
-</a>
-</a>
-
-<hr class="music-divider">
-
-<!-- TIME KEEPS TICKIN -->
-
-<img src="music/time-keeps-tickin.png"
-     alt="Time Keeps Tickin Cover"
-     class="cover-art">
-
-<div class="song-title">
-    Time Keeps Tickin
-</div>
-
-<audio controls>
-    <source src="music/time-keeps-tickin.m4a" type="audio/mp4">
-</audio>
-
-<br>
-
-<a class="download-btn"
-   href="music/time-keeps-tickin.m4a"
-   download>
-   DOWNLOAD SONG
-</a>
-
-<div class="note">
-    Free download from The Posse Shoppe.
-</div>
-    <div class="note">
-        Free download from The Posse Shoppe.
+    <div class="song-title">
+        Because I Said So
     </div>
+
+    <audio controls>
+        <source src="music/because-i-said-so.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br>
+
+    <a class="download-btn"
+       href="music/because-i-said-so.mp3"
+       download>
+       DOWNLOAD SONG
+    </a>
+
+    <hr class="music-divider">
+
+    <!-- DONT LET THE OLD MAN IN -->
+
+    <img src="music/dont-let-the-old-man-in.png"
+         alt="Don't Let The Old Man In Cover"
+         class="cover-art">
+
+    <div class="song-title">
+        Don't Let The Old Man In
+    </div>
+
+    <audio controls>
+        <source src="music/dont-let-the-old-man-in.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br>
+
+    <a class="download-btn"
+       href="music/dont-let-the-old-man-in.mp3"
+       download>
+       DOWNLOAD SONG
+    </a>
+
+    <hr class="music-divider">
+
+    <!-- TIME KEEPS TICKIN -->
+
+    <img src="music/time-keeps-tickin.png"
+         alt="Time Keeps Tickin Cover"
+         class="cover-art">
+
+    <div class="song-title">
+        Time Keeps Tickin
+    </div>
+
+    <audio controls>
+        <source src="music/time-keeps-tickin.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br>
+
+    <a class="download-btn"
+       href="music/time-keeps-tickin.m4a"
+       download>
+       DOWNLOAD SONG
+    </a>
+
+    <hr class="music-divider">
+
+    <!-- GIMME BACK MY BUSINESS -->
+
+    <img src="music/gimme-back-my-business.png"
+         alt="Gimme Back My Business Cover"
+         class="cover-art">
+
+    <div class="song-title">
+        Gimme Back My Business
+    </div>
+
+    <audio controls>
+        <source src="music/Gimme Back my Business.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <br>
+
+    <a class="download-btn"
+       href="music/Gimme Back my Business.mp3"
+       download>
+       DOWNLOAD SONG
+    </a>
+
     <div class="note">
-    Free download from The Posse Shoppe.
-</div>
-
-<hr class="music-divider">
-
-<!-- GIMME BACK MY BUSINESS -->
-
-<img src="music/gimme-back-my-business.png"
-     alt="Gimme Back My Business Cover"
-     class="cover-art">
-
-<div class="song-title">
-    Gimme Back My Business
-</div>
-
-<audio controls>
-    <source src="music/Gimme Back my Business.mp3" type="audio/mpeg">
-</audio>
-
-<br>
-
-<a class="download-btn"
-   href="music/Gimme Back my Business.mp3"
-   download>
-   DOWNLOAD SONG
-</a>
-
-</div>
+        Free downloads from The Posse Shoppe.
+    </div>
 
 </div>
 
