@@ -155,5 +155,22 @@ Your browser does not support the audio element.
 
 <div class="note">Free downloads from The Posse Shoppe.</div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const players = document.querySelectorAll("audio");
+
+  players.forEach(function (player) {
+    player.addEventListener("play", function () {
+      players.forEach(function (otherPlayer) {
+        if (otherPlayer !== player) {
+          otherPlayer.pause();
+        }
+      });
+    });
+  });
+});
+</script>
+
 </body>
 </html>
