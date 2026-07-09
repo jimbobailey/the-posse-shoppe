@@ -77,10 +77,14 @@
     "lyrics": "/lyrics/one-miracle.html"
   },
   {
-    "title": "Bad Ass Nilla",
-    "artist": "Jimenim",
-    "image": "/music/bad-ass-nilla.png",
-    "audio": "/music/bad-ass-nilla.mp3",
-    "lyrics": "/lyrics/bad-ass-nilla.html"
+  "title": "Bad Ass Nilla",
+  "artist": "Jimenim",
+  "image": "/music/bad-ass-nilla.png",
+  "audio": "/music/bad-ass-nilla.mp3",
+  "lyrics": "/lyrics/bad-ass-nilla.html",
+  "visual": {
+    "type": "visualizer",
+    "theme": "american-flag"
   }
+}
 ]
