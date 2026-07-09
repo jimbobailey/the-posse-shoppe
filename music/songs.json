@@ -1,0 +1,86 @@
+[
+  {
+    "title": "We'll Be Yo Huckleberry",
+    "artist": "Jimenim",
+    "image": "/music/huckleberry-cover.png",
+    "audio": "/music/well-be-yo-huckleberry.m4a",
+    "lyrics": "/lyrics/well-be-yo-huckleberry.html"
+  },
+  {
+    "title": "Because I Said So",
+    "artist": "Jimenim",
+    "image": "/music/because-i-said-so.png",
+    "audio": "/music/because-i-said-so.mp3",
+    "lyrics": "/lyrics/because-i-said-so.html"
+  },
+  {
+    "title": "Don't Let The Old Man In",
+    "artist": "Jimenim",
+    "image": "/music/dont-let-the-old-man-in.png",
+    "audio": "/music/dont-let-the-old-man-in.mp3",
+    "lyrics": "/lyrics/dont-let-the-old-man-in.html"
+  },
+  {
+    "title": "Time Keeps Tickin",
+    "artist": "Jimenim",
+    "image": "/music/time-keeps-tickin.png",
+    "audio": "/music/time-keeps-tickin.m4a",
+    "lyrics": "/lyrics/time-keeps-tickin.html"
+  },
+  {
+    "title": "Gimme Back My Business",
+    "artist": "Jimenim",
+    "image": "/music/gimme-back-my-business.png",
+    "audio": "/music/Gimme Back my Business.mp3",
+    "lyrics": "/lyrics/gimme-back-my-business.html"
+  },
+  {
+    "title": "Allergic to the Truth",
+    "artist": "Jimenim",
+    "image": "/music/allergic-to-the-truth.png",
+    "audio": "/music/allergic-to-the-truth.mp3",
+    "lyrics": "/lyrics/allergic-to-the-truth.html"
+  },
+  {
+    "title": "Even Jesus Wept",
+    "artist": "Jimenim",
+    "image": "/music/even-jesus-wept.png",
+    "audio": "/music/even-jesus-wept.mp3",
+    "lyrics": "/lyrics/even-jesus-wept.html"
+  },
+  {
+    "title": "God Will Put You Back Together",
+    "artist": "Jimenim",
+    "image": "/music/God-will-put-you-back-together.png",
+    "audio": "/music/God-will-put-you-back-together.mp3",
+    "lyrics": ""
+  },
+  {
+    "title": "It's Really a You Problem",
+    "artist": "Jimenim",
+    "image": "/music/It's really a you  problem.png",
+    "audio": "/music/It's really a you  problem.mp3",
+    "lyrics": "/lyrics/Its really a you problem.html"
+  },
+  {
+    "title": "Who Told You That",
+    "artist": "Jimenim",
+    "image": "/music/Who Told You That.png",
+    "audio": "/music/Who Told You That.mp3",
+    "lyrics": "/lyrics/who-told-you-that.html"
+  },
+  {
+    "title": "One Miracle",
+    "artist": "Jimenim",
+    "image": "/music/one miracle.png",
+    "audio": "/music/one miracle.mp3",
+    "lyrics": "/lyrics/one-miracle.html"
+  },
+  {
+    "title": "Bad Ass Nilla",
+    "artist": "Jimenim",
+    "image": "/music/bad-ass-nilla.png",
+    "audio": "/music/bad-ass-nilla.mp3",
+    "lyrics": "/lyrics/bad-ass-nilla.html"
+  }
+]
