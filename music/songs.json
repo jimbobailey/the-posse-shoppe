@@ -4,87 +4,131 @@
     "artist": "Jimenim",
     "image": "/music/huckleberry-cover.png",
     "audio": "/music/well-be-yo-huckleberry.m4a",
-    "lyrics": "/lyrics/well-be-yo-huckleberry.html"
+    "lyrics": "/lyrics/well-be-yo-huckleberry.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Because I Said So",
     "artist": "Jimenim",
     "image": "/music/because-i-said-so.png",
     "audio": "/music/because-i-said-so.mp3",
-    "lyrics": "/lyrics/because-i-said-so.html"
+    "lyrics": "/lyrics/because-i-said-so.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Don't Let The Old Man In",
     "artist": "Jimenim",
     "image": "/music/dont-let-the-old-man-in.png",
     "audio": "/music/dont-let-the-old-man-in.mp3",
-    "lyrics": "/lyrics/dont-let-the-old-man-in.html"
+    "lyrics": "/lyrics/dont-let-the-old-man-in.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Time Keeps Tickin",
     "artist": "Jimenim",
     "image": "/music/time-keeps-tickin.png",
     "audio": "/music/time-keeps-tickin.m4a",
-    "lyrics": "/lyrics/time-keeps-tickin.html"
+    "lyrics": "/lyrics/time-keeps-tickin.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Gimme Back My Business",
     "artist": "Jimenim",
     "image": "/music/gimme-back-my-business.png",
     "audio": "/music/Gimme Back my Business.mp3",
-    "lyrics": "/lyrics/gimme-back-my-business.html"
+    "lyrics": "/lyrics/gimme-back-my-business.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Allergic to the Truth",
     "artist": "Jimenim",
     "image": "/music/allergic-to-the-truth.png",
     "audio": "/music/allergic-to-the-truth.mp3",
-    "lyrics": "/lyrics/allergic-to-the-truth.html"
+    "lyrics": "/lyrics/allergic-to-the-truth.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Even Jesus Wept",
     "artist": "Jimenim",
     "image": "/music/even-jesus-wept.png",
     "audio": "/music/even-jesus-wept.mp3",
-    "lyrics": "/lyrics/even-jesus-wept.html"
+    "lyrics": "/lyrics/even-jesus-wept.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "God Will Put You Back Together",
     "artist": "Jimenim",
     "image": "/music/God-will-put-you-back-together.png",
     "audio": "/music/God-will-put-you-back-together.mp3",
-    "lyrics": ""
+    "lyrics": "",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "It's Really a You Problem",
     "artist": "Jimenim",
     "image": "/music/It's really a you  problem.png",
     "audio": "/music/It's really a you  problem.mp3",
-    "lyrics": "/lyrics/Its really a you problem.html"
+    "lyrics": "/lyrics/Its really a you problem.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "Who Told You That",
     "artist": "Jimenim",
     "image": "/music/Who Told You That.png",
     "audio": "/music/Who Told You That.mp3",
-    "lyrics": "/lyrics/who-told-you-that.html"
+    "lyrics": "/lyrics/who-told-you-that.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
     "title": "One Miracle",
     "artist": "Jimenim",
     "image": "/music/one miracle.png",
     "audio": "/music/one miracle.mp3",
-    "lyrics": "/lyrics/one-miracle.html"
+    "lyrics": "/lyrics/one-miracle.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "default"
+    }
   },
   {
-  "title": "Bad Ass Nilla",
-  "artist": "Jimenim",
-  "image": "/music/bad-ass-nilla.png",
-  "audio": "/music/bad-ass-nilla.mp3",
-  "lyrics": "/lyrics/bad-ass-nilla.html",
-  "visual": {
-    "type": "visualizer",
-    "theme": "american-flag"
+    "title": "Bad Ass Nilla",
+    "artist": "Jimenim",
+    "image": "/music/bad-ass-nilla.png",
+    "audio": "/music/bad-ass-nilla.mp3",
+    "lyrics": "/lyrics/bad-ass-nilla.html",
+    "visual": {
+      "type": "visualizer",
+      "theme": "american-flag"
+    }
   }
-}
 ]
