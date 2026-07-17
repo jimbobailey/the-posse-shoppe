@@ -127,8 +127,9 @@
     "audio": "/music/bad-ass-nilla.mp3",
     "lyrics": "/lyrics/bad-ass-nilla.html",
     "visual": {
-      "type": "visualizer",
-      "theme": "american-flag"
-    }
+  "type": "video",
+  "theme": "american-flag",
+  "background": "/music/videos/bad-ass-nilla.mp4"
+}
   }
 ]
