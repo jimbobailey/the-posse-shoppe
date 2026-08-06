@@ -1,0 +1,180 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>You've Been Converted!</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#041225;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.container{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+img{
+    width:95%;
+    max-width:900px;
+    border-radius:18px;
+    box-shadow:0 0 35px rgba(255,255,255,.20);
+}
+
+.overlay{
+
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(-12deg);
+
+    font-size:10vw;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+
+    color:rgba(255,255,255,.18);
+
+    -webkit-text-stroke:3px rgba(255,255,255,.55);
+
+    text-shadow:0 0 20px rgba(0,0,0,.60);
+
+    pointer-events:none;
+
+    animation:pulse .9s infinite alternate;
+}
+
+@keyframes pulse{
+
+from{
+transform:translate(-50%,-50%) rotate(-12deg) scale(1);
+}
+
+to{
+transform:translate(-50%,-50%) rotate(-12deg) scale(1.04);
+}
+
+}
+
+canvas{
+
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+
+<img src="gator-fan.jpg" alt="Converted">
+
+<div class="overlay">
+GOTCHA!
+</div>
+
+</div>
+
+<script>
+
+// --------------------
+// Confetti
+// --------------------
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+const colors=[
+"#ff8c00",
+"#005bbb",
+"#ffffff",
+"#ffd700"
+];
+
+const pieces=[];
+
+for(let i=0;i<220;i++){
+
+pieces.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+
+size:Math.random()*7+3,
+
+dx:(Math.random()*2)-1,
+dy:(Math.random()*3)+2,
+
+color:colors[Math.floor(Math.random()*colors.length)]
+
+});
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+for(const p of pieces){
+
+ctx.fillStyle=p.color;
+
+ctx.fillRect(p.x,p.y,p.size,p.size);
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.y>canvas.height){
+
+p.y=-10;
+p.x=Math.random()*canvas.width;
+
+}
+
+}
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
+```
