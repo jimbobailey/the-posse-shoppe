@@ -1,6 +1,3 @@
-Understood. Going forward, I'll provide the **entire file** whenever you ask for a change.
-
-Here's the complete page with **only one change**: **"Jimenim's Troll Page"** has been added as a heading at the top. Nothing else has been changed.
 
 ```html
 <!DOCTYPE html>
@@ -29,21 +26,40 @@ body{
     position:relative;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
-    height:100vh;
+    justify-content:flex-start;
+    min-height:100vh;
+    padding:20px 0;
 }
 
 .pageTitle{
+    display:inline-block;
+    margin-bottom:24px;
+    padding:14px 38px;
 
-    color:white;
-    font-size:3rem;
-    font-weight:800;
-    margin-bottom:20px;
-    text-shadow:3px 3px 8px black;
+    font-size:3.2rem;
+    font-weight:900;
+    letter-spacing:.05em;
 
+    color:#ffffff;
+
+    background:
+        linear-gradient(180deg,#ff9d00 0%,#ff6a00 100%);
+
+    border:4px solid #ffffff;
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 0 #8a2f00,
+        0 14px 25px rgba(0,0,0,.55),
+        0 0 28px rgba(255,122,0,.45);
+
+    text-shadow:
+        3px 3px 0 #003b73,
+        5px 5px 8px rgba(0,0,0,.7);
+
+    transform:rotate(-2deg);
 }
-
 .imageContainer{
 
     position:relative;
