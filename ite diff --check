@@ -1,0 +1,58 @@
+[1mdiff --git a/lyrics/get-me-out-of-my-way.html b/lyrics/get-me-out-of-my-way.html[m
+[1mindex 6554fa7..8aa586d 100644[m
+[1m--- a/lyrics/get-me-out-of-my-way.html[m
+[1m+++ b/lyrics/get-me-out-of-my-way.html[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'><title>Get me out of my way - Lyrics</title><style>body{background:#111;color:#fff;font-family:Arial,sans-serif;margin:0;padding:20px}.container{max-width:900px;margin:auto;background:#1b1b1b;border:2px solid orange;border-radius:10px;padding:25px}h1{color:orange;text-align:center}.back{display:inline-block;margin-bottom:20px;padding:10px 18px;background:#222;color:#fff;text-decoration:none;border:2px solid orange;border-radius:6px}.back:hover{background:orange;color:black}.lyrics{white-space:pre-wrap;line-height:1.7;font-size:18px}</style></head><body><div class='container'><a class='back' href='../spiritual.html'>← Back</a><h1>Get me out of my way</h1><div class='lyrics'>Lord, I keep praying for what I think I need.[m
+[32m+[m[32m<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1.0'><title>Get me out of my way - Lyrics</title><style>body{background:#111;color:#fff;font-family:Arial,sans-serif;margin:0;padding:20px}.container{max-width:900px;margin:auto;background:#1b1b1b;border:2px solid orange;border-radius:10px;padding:25px}h1{color:orange;text-align:center}.back{display:inline-block;margin-bottom:20px;padding:10px 18px;background:#222;color:#fff;text-decoration:none;border:2px solid orange;border-radius:6px}.back:hover{background:orange;color:black}.lyrics{white-space:pre-wrap;line-height:1.7;font-size:18px}</style></head><body><div class='container'><a class='back' href='../spiritual.html'>â† Back</a><h1>Get me out of my way</h1><div class='lyrics'>Lord, I keep praying for what I think I need.[m
+ I keep chasing what looks right to me.[m
+ But You can see what I never see.[m
+ So move my wants, and let Your will lead.[m
+[1mdiff --git a/spiritual.html b/spiritual.html[m
+[1mindex 419683d..65fedb7 100644[m
+[1m--- a/spiritual.html[m
+[1m+++ b/spiritual.html[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-<!DOCTYPE html>[m
+[32m+[m[32m﻿<!DOCTYPE html>[m
+ <html lang="en">[m
+ <head>[m
+ <meta charset="UTF-8">[m
+[36m@@ -30,7 +30,7 @@[m [maudio{width:100%;}[m
+ [m
+ <header>[m
+ <div class="logo">HOME OF JIMENIM</div>[m
+[31m-<div class="sub">Original Music • Real Talk • Good Times</div>[m
+[32m+[m[32m<div class="sub">Original Music â€¢ Real Talk â€¢ Good Times</div>[m
+ <div><em>A legend in his own mind.</em></div>[m
+ <div class="sig">~ Jimenim</div>[m
+ <br>[m
+[36m@@ -41,7 +41,7 @@[m [maudio{width:100%;}[m
+ [m
+ <div class="music-container">[m
+ <h1>SPIRITUAL MUSIC</h1>[m
+[31m-<div class="sub">Faith • Hope • Worship</div>[m
+[32m+[m[32m<div class="sub">Faith â€¢ Hope â€¢ Worship</div>[m
+ <div><em>Music that points upward.</em></div>[m
+ <br>[m
+ [m
+[36m@@ -67,18 +67,8 @@[m [mYour browser does not support the audio element.[m
+ <a class="download-btn" href="music/i-want-the-fire.mp3" download>DOWNLOAD SONG</a>[m
+ <a class="lyrics-btn" href="lyrics/i-want-the-fire.html">VIEW LYRICS</a>[m
+ [m
+[31m-<!-- Get me out of my way -->[m
+[31m-<img src="music/get-me-out-of-my-way.png" alt="Get me out of my way" class="cover-art">[m
+[31m-<div class="song-title">Get me out of my way</div>[m
+[31m-<video controls preload="metadata" style="width:100%;max-width:800px;border-radius:10px;border:2px solid orange;margin:10px 0 20px 0;">[m
+[31m-<source src="music/get-me-out-of-my-way.mp4" type="video/mp4">[m
+[31m-Your browser does not support the video element.[m
+[31m-</video>[m
+[31m-<a class="download-btn" href="music/get-me-out-of-my-way.mp4" download>DOWNLOAD VIDEO</a>[m
+[31m-<a class="lyrics-btn" href="lyrics/get-me-out-of-my-way.html">VIEW LYRICS</a>[m
+[31m-<hr class="music-divider">[m
+[31m-[m
+ <div class="note">Free spiritual music downloads from The Posse Shoppe.</div>[m
+ </div>[m
+ </body>[m
+ </html>[m
+[41m+[m
