@@ -1,14 +1,4 @@
 const { getStore, connectLambda } = require("@netlify/blobs");
-const crypto = require("crypto");
-
-// Admin password is stored in Netlify: Site configuration > Environment variables > ADMIN_PASSWORD
-function passwordOk(given) {
-  const expected = String(process.env.ADMIN_PASSWORD || "");
-  if (!expected) return false;
-  const a = crypto.createHash("sha256").update(String(given || "")).digest();
-  const b = crypto.createHash("sha256").update(expected).digest();
-  return crypto.timingSafeEqual(a, b);
-}
 
 function toArray(value) {
   return Array.isArray(value) ? value : [];
@@ -150,20 +140,6 @@ exports.handler = async (event) => {
     }
 
     const body = JSON.parse(event.body || "{}");
-
-    if (!process.env.ADMIN_PASSWORD) {
-      return json(503, {
-        success: false,
-        message: "The admin password has not been set up in Netlify yet."
-      });
-    }
-
-    if (!passwordOk(body.password)) {
-      return json(401, {
-        success: false,
-        message: "Wrong admin password. Reload the page and try again."
-      });
-    }
 
     if (body.action === "addColor" && body.color) {
       const colors = await loadColorLibrary(store);
