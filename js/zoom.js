@@ -3,6 +3,17 @@
   const SEL = ".img-box img, .img-box video, .stl-img-box img, .affiliate-img-box img";
   const canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  // Fill each photo box with a blurred copy of its own photo behind the full photo.
+  const BOXES = ".img-box, .stl-img-box, .affiliate-img-box, .adm-item-img";
+  function setFill(img) {
+    const b = img.closest && img.closest(BOXES);
+    if (!b || img.tagName !== "IMG") return;
+    const src = img.currentSrc || img.src;
+    if (src) b.style.setProperty("--ph", 'url("' + src.replace(/"/g, "%22") + '")');
+  }
+  document.addEventListener("load", (e) => { if (e.target && e.target.tagName === "IMG") setFill(e.target); }, true);
+  document.querySelectorAll(BOXES.split(",").map((s) => s.trim() + " img").join(",")).forEach((i) => { if (i.complete) setFill(i); });
+
   const pop = document.createElement("div");
   pop.className = "zoom-pop";
   pop.setAttribute("aria-hidden", "true");
