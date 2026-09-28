@@ -132,6 +132,11 @@ exports.handler = async (event) => {
   try {
     const type = cleanString(event.queryStringParameters?.type).toLowerCase();
 
+    if (event.httpMethod === "GET" && type === "songmoves") {
+      const moves = (await store.get("songMoves", { type: "json" })) || {};
+      return json(200, moves && typeof moves === "object" && !Array.isArray(moves) ? moves : {});
+    }
+
     if (event.httpMethod === "GET" && type === "colors") {
       const colors = await loadColorLibrary(store);
       return json(200, colors);
@@ -167,6 +172,23 @@ exports.handler = async (event) => {
 
     if (body.action === "verify") {
       return json(200, { success: true });
+    }
+
+    if (body.action === "moveSong") {
+      const key = cleanString(body.key).toLowerCase();
+      const to = cleanString(body.to).toLowerCase();
+      const home = cleanString(body.home).toLowerCase();
+      if (!key.startsWith("/") || key.length > 300 || !["music", "spiritual"].includes(to)) {
+        return json(400, { success: false, message: "That song couldn't be moved." });
+      }
+      let moves = (await store.get("songMoves", { type: "json" })) || {};
+      if (!moves || typeof moves !== "object" || Array.isArray(moves)) moves = {};
+      if (to === home) delete moves[key]; else moves[key] = to;
+      if (Object.keys(moves).length > 1000) {
+        return json(400, { success: false, message: "Too many moved songs." });
+      }
+      await store.set("songMoves", JSON.stringify(moves));
+      return json(200, { success: true, moves });
     }
 
     if (body.action === "addColor" && body.color) {

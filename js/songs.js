@@ -150,17 +150,42 @@
     seeking = false;
   });
 
-  function init() {
-  const from = grid.getAttribute("data-source");
-  if (from) {
-    fetch(from, { cache: "no-store" })
-      .then(r => r.text())
-      .then(t => { SONGS = readFrom(new DOMParser().parseFromString(t, "text/html"), false); render(); })
-      .catch(() => { grid.innerHTML = '<p class="note">Could not load songs right now.</p>'; });
-  } else {
-    SONGS = readFrom(document, true);
-    render();
+  function keyOf(s) { return abs(s.audio || s.download || "").toLowerCase(); }
+
+  function fetchSongs(url) {
+    return fetch(url, { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(t => readFrom(new DOMParser().parseFromString(t, "text/html"), false));
   }
+
+  async function init() {
+    const page = grid.getAttribute("data-page") || "music";
+    const other = page === "music" ? "spiritual" : "music";
+    const from = grid.getAttribute("data-source");
+    let own = [];
+    try {
+      own = from ? await fetchSongs(from) : readFrom(document, true);
+    } catch (e) {
+      grid.innerHTML = '<p class="note">Could not load songs right now.</p>';
+      return;
+    }
+    // show what we have right away, then apply any moves made from the admin page
+    SONGS = own; render();
+    try {
+      const [moves, others] = await Promise.all([
+        fetch("/.netlify/functions/products?type=songmoves", { cache: "no-store" }).then(r => r.ok ? r.json() : {}),
+        fetchSongs("/" + other + ".html").catch(() => [])
+      ]);
+      if (!moves || typeof moves !== "object" || !Object.keys(moves).length) return;
+      const seen = new Set();
+      const list = own.filter(s => moves[keyOf(s)] !== other)
+        .concat(others.filter(s => moves[keyOf(s)] === page))
+        .filter(s => { const k = keyOf(s); if (seen.has(k)) return false; seen.add(k); return true; });
+      const playing = current >= 0 ? keyOf(SONGS[current]) : null;
+      SONGS = list;
+      current = playing ? SONGS.findIndex(s => keyOf(s) === playing) : -1;
+      render(); setPlayingUI();
+    } catch (e) { /* keep the page's own songs */ }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

@@ -20,6 +20,8 @@
   let pickedColors = [];   // colors chosen in the editor
   let photoUrl = "";       // uploaded photo URL for the editor
   let libEditIndex = -1;
+  let songs = null;        // [{title, image, key, home}]
+  let moves = {};
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -113,10 +115,12 @@
   /* ---------- render ---------- */
   function render() {
     document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
-    const isColors = tab === "colors";
-    $("items-view").hidden = isColors;
+    const isColors = tab === "colors", isSongs = tab === "songs";
+    $("items-view").hidden = isColors || isSongs;
     $("colors-view").hidden = !isColors;
+    $("songs-view").hidden = !isSongs;
     if (isColors) { renderLibrary(); return; }
+    if (isSongs) { renderSongs(); return; }
 
     $("add-label").textContent = "Add " + TABS[tab].label;
     const list = products.filter((p) => TABS[tab].cats.includes(p.category));
@@ -151,6 +155,81 @@
         <button type="button" class="btn btn-link" data-libedit="${i}">Edit</button>
         <button type="button" class="btn btn-link adm-del" data-libdel="${i}">Delete</button>
       </div>`).join("");
+  }
+
+  /* ---------- songs (move between Music and Spiritual) ---------- */
+  function absPath(p) { p = String(p || "").trim(); if (!p) return ""; if (/^(https?:)?\/\//.test(p) || p.startsWith("/")) return p; return "/" + p.replace(/^\.\//, ""); }
+
+  function parseSongs(html, home) {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const tpl = doc.getElementById("song-source");
+    const nodes = [];
+    const walk = (list) => list.forEach((n) => { if (n.nodeType === 1) { nodes.push(n); if (!n.matches("img, audio, a")) walk(Array.from(n.childNodes)); } });
+    if (tpl) walk(Array.from((tpl.content || tpl).childNodes));
+    doc.querySelectorAll("body img.cover-art").forEach((img) => { if (!nodes.includes(img)) walk(Array.from(img.parentNode.childNodes)); });
+    const out = [];
+    let cur = null;
+    nodes.forEach((el) => {
+      if (el.matches("img.cover-art")) { cur = { title: el.getAttribute("alt") || "", image: absPath(el.getAttribute("src")), audio: "", home }; out.push(cur); return; }
+      if (!cur) return;
+      if (el.matches(".song-title")) cur.title = el.textContent.trim() || cur.title;
+      else if (el.matches("audio")) { const src = el.querySelector("source"); if (src) cur.audio = src.getAttribute("src"); }
+      else if (el.matches("source")) cur.audio = el.getAttribute("src");
+      else if (el.matches("a.download-btn") && !cur.audio) cur.audio = el.getAttribute("href");
+    });
+    const seen = new Set();
+    return out.filter((s) => s.audio).map((s) => ({ ...s, key: absPath(s.audio).toLowerCase() }))
+      .filter((s) => { if (seen.has(s.key)) return false; seen.add(s.key); return true; });
+  }
+
+  async function loadSongs() {
+    const get = (u) => fetch(u, { cache: "no-store" }).then((r) => { if (!r.ok) throw new Error(); return r.text(); });
+    const [m, sp, mv] = await Promise.all([
+      get("/music.html"), get("/spiritual.html"),
+      fetch(API + "?type=songmoves", { cache: "no-store" }).then((r) => r.json()).catch(() => ({}))
+    ]);
+    songs = parseSongs(m, "music").concat(parseSongs(sp, "spiritual"));
+    moves = mv && typeof mv === "object" ? mv : {};
+  }
+
+  function songPage(s) { return moves[s.key] || s.home; }
+
+  async function renderSongs() {
+    if (!songs) {
+      $("songs-music").innerHTML = $("songs-spiritual").innerHTML = '<div class="adm-empty">Loading songs…</div>';
+      try { await loadSongs(); } catch (e) {
+        $("songs-music").innerHTML = '<div class="adm-empty">Couldn\'t load your songs. Check your internet and try again.</div>';
+        $("songs-spiritual").innerHTML = "";
+        songs = null;
+        return;
+      }
+    }
+    ["music", "spiritual"].forEach((pg) => {
+      const list = songs.filter((s) => songPage(s) === pg);
+      $("count-" + pg).textContent = list.length + (list.length === 1 ? " song" : " songs");
+      const to = pg === "music" ? "spiritual" : "music";
+      $("songs-" + pg).innerHTML = list.length ? list.map((s) => `
+        <div class="adm-song">
+          <img src="${esc(encodeURI(s.image))}" alt="" loading="lazy">
+          <div class="adm-song-title">${esc(s.title)}</div>
+          <button type="button" class="btn ${to === "spiritual" ? "btn-fire" : "btn-volt"}" data-move="${esc(s.key)}" data-to="${to}">Move to ${to === "music" ? "Music" : "Spiritual"}</button>
+        </div>`).join("") : '<div class="adm-empty">No songs here.</div>';
+    });
+  }
+
+  async function moveSong(key, to, btn) {
+    const s = songs.find((x) => x.key === key);
+    if (!s) return;
+    btn.disabled = true;
+    btn.textContent = "Moving…";
+    try {
+      const data = await post(API, { action: "moveSong", key, to, home: s.home });
+      moves = data.moves || moves;
+      renderSongs();
+      toast(`"${s.title}" moved to ${to === "music" ? "Music" : "Spiritual"}.`);
+    } catch (err) {
+      if (err.message !== "signed-out") { toast(err.message, true); renderSongs(); }
+    }
   }
 
   /* ---------- editor ---------- */
@@ -394,6 +473,7 @@
     if (e.target.id === "pick-all") { pickedColors = ($("ed-colors")._all || []).map((c) => ({ ...c })); renderColorPick(); }
     if (e.target.id === "pick-none") { pickedColors = []; renderColorPick(); }
   });
+  $("songs-view").addEventListener("click", (e) => { const b = e.target.closest("[data-move]"); if (b) moveSong(b.dataset.move, b.dataset.to, b); });
   $("lib-save").addEventListener("click", saveLib);
   $("lib-cancel").addEventListener("click", resetLib);
   $("lib-list").addEventListener("click", (e) => {
