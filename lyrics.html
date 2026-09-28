@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrics - Jimenim Music</title>
+  <meta name="description" content="Original music by Jimenim. Real talk, good times. Free downloads and lyrics.">
+  <meta property="og:title" content="Lyrics - Jimenim Music">
+  <meta property="og:description" content="Original music by Jimenim. Real talk, good times. Free downloads and lyrics.">
+  <meta property="og:url" content="https://theposseshoppe.com/lyrics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://theposseshoppe.com/images/jimenim-music-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lyrics - Jimenim Music">
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/jimenim-music-og.jpg">
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3v12.5a3.5 3.5 0 1 1-2-3.16V7.3l-8 1.6v8.6a3.5 3.5 0 1 1-2-3.16V5.5z"/></svg></span><span class="brand-name">Jimenim <span class="hot">Music</span></span></a>
+      <nav class="toplinks"><a href="index.html" class="current">Music</a><a href="spiritual.html">Spiritual</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+    </div>
+  </header>
+
+<div class="container">
+  <a class="back" id="lv-back" href="/index.html">‹ Back to Music</a>
+  <h1 id="lv-title">Lyrics</h1>
+  <div class="lyrics" id="lv-lyrics">Loading…</div>
+</div>
+<footer class="site-footer">
+    <a href="index.html">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="spiritual.html">Spiritual</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
+    <div style="margin-top:12px;">© Jimenim Music · The Posse Shoppe</div>
+  </footer>
+<script>
+(function () {
+  const f = new URLSearchParams(location.search).get("f") || "";
+  const ok = /^\/lyrics\/[^?#]+\.html$/i.test(f) && !f.includes("..");
+  const box = document.getElementById("lv-lyrics");
+  if (!ok) { box.textContent = "Lyrics not found."; return; }
+  fetch(encodeURI(f), { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(t => {
+      const d = new DOMParser().parseFromString(t, "text/html");
+      const h = d.querySelector("h1");
+      const l = d.querySelector(".lyrics");
+      const title = h ? h.textContent.trim() : "Lyrics";
+      document.getElementById("lv-title").textContent = title;
+      document.title = title + " - Lyrics - Jimenim Music";
+      box.textContent = l ? l.textContent.replace(/\*\*(\[[^\]\n]+\])\*\*/g, "$1").trim() : "Lyrics not found.";
+      const back = d.querySelector("a.back, a.back-btn");
+      if (back && /spiritual/i.test(back.getAttribute("href") || "")) {
+        const b = document.getElementById("lv-back");
+        b.href = "/spiritual.html"; b.textContent = "‹ Back to Spiritual";
+        document.querySelectorAll(".toplinks a").forEach(a => a.classList.toggle("current", /spiritual/.test(a.getAttribute("href"))));
+      }
+    })
+    .catch(() => { box.innerHTML = 'Could not load these lyrics. <a href="' + encodeURI(f) + '">Open them here</a>.'; });
+})();
+</script>
+
+</body>
+</html>

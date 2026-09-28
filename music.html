@@ -16,14 +16,13 @@
   <meta name="twitter:title" content="Jimenim Music">
   <meta name="twitter:image" content="https://theposseshoppe.com/images/jimenim-music-og.jpg">
   <link rel="icon" type="image/jpeg" href="/images/favicon.jpg">
-  <link rel="preload" href="/images/jimenim-music.jpg" as="image">
   <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3v12.5a3.5 3.5 0 1 1-2-3.16V7.3l-8 1.6v8.6a3.5 3.5 0 1 1-2-3.16V5.5z"/></svg></span><span class="brand-name">Jimenim <span class="hot">Music</span></span></a>
-      <nav class="toplinks"><a href="index.html" class="current">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+      <nav class="toplinks"><a href="index.html" class="current">Music</a><a href="spiritual.html">Spiritual</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
     </div>
   </header>
 
@@ -92,186 +91,198 @@
   <audio id="audio" preload="none"></audio>
 </div>
 
-<script>
-  const SONGS = [
-  {
-    "title": "We'll Be Yo Huckleberry",
-    "image": "/music/huckleberry-cover.png",
-    "audio": "/music/well-be-yo-huckleberry.m4a",
-    "lyrics": "/lyrics/well-be-yo-huckleberry.html"
-  },
-  {
-    "title": "Because I Said So",
-    "image": "/music/because-i-said-so.png",
-    "audio": "/music/because-I-said-so.mp3",
-    "lyrics": "/lyrics/because-i-said-so.html"
-  },
-  {
-    "title": "Don't Let The Old Man In",
-    "image": "/music/dont-let-the-old-man-in.png",
-    "audio": "/music/dont-let-the-old-man-in.mp3",
-    "lyrics": "/lyrics/dont-let-the-old-man-in.html"
-  },
-  {
-    "title": "Time Keeps Tickin",
-    "image": "/music/time-keeps-tickin.png",
-    "audio": "/music/time-keeps-tickin.m4a",
-    "lyrics": "/lyrics/time-keeps-tickin.html"
-  },
-  {
-    "title": "Gimme Back My Business",
-    "image": "/music/gimme-back-my-business.png",
-    "audio": "/music/Gimme Back my Business.mp3",
-    "lyrics": "/lyrics/gimme-back-my-business.html"
-  },
-  {
-    "title": "Allergic to the Truth",
-    "image": "/music/allergic-to-the-truth.png",
-    "audio": "/music/allergic-to-the-truth.mp3",
-    "lyrics": "/lyrics/allergic-to-the-truth.html"
-  },
-  {
-    "title": "Even Jesus Wept",
-    "image": "/music/even-jesus-wept.png",
-    "audio": "/music/even-jesus-wept.mp3",
-    "lyrics": "/lyrics/even-jesus-wept.html"
-  },
-  {
-    "title": "God Will Put You Back Together",
-    "image": "/music/God-will-put-you-back-together.png",
-    "audio": "/music/God-will-put-you-back-together.mp3",
-    "lyrics": null
-  },
-  {
-    "title": "It's Really a You Problem",
-    "image": "/music/It's really a you  problem.png",
-    "audio": "/music/It's really a you  problem.mp3",
-    "lyrics": "/lyrics/Its really a you problem.html"
-  },
-  {
-    "title": "Who Told You That",
-    "image": "/music/Who Told You That.png",
-    "audio": "/music/Who Told You That.mp3",
-    "lyrics": "/lyrics/who-told-you-that.html"
-  },
-  {
-    "title": "One Miracle",
-    "image": "/music/one miracle.png",
-    "audio": "/music/one miracle.mp3",
-    "lyrics": "/lyrics/one-miracle.html"
-  },
-  {
-    "title": "Bad Ass Nilla",
-    "image": "/music/bad-ass-nilla.png",
-    "audio": "/music/bad-ass-nilla.mp3",
-    "lyrics": "/lyrics/bad-ass-nilla.html"
-  },
-  {
-    "title": "Rest of my Life",
-    "image": "/music/rest-of-my-life.png",
-    "audio": "/music/rest-of-my-life.mp3",
-    "lyrics": "/lyrics/rest-of-my-life.html"
-  },
-  {
-    "title": "shotgun saint",
-    "image": "/music/shotgun-saint.png",
-    "audio": "/music/shotgun-saint.mp3",
-    "lyrics": "/lyrics/shotgun-saint.html"
-  }
-];
+<template id="song-source">
+<div class="music-container">
+<img src="music/huckleberry-cover.png" alt="We'll Be Yo Huckleberry" class="cover-art">
+<div class="song-title">We'll Be Yo Huckleberry</div>
+<audio controls>
+<source src="music/well-be-yo-huckleberry.m4a" type="audio/mp4">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/well-be-yo-huckleberry.m4a" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/well-be-yo-huckleberry.html">VIEW LYRICS</a>
 
-  const grid = document.getElementById("song-grid");
-  const audio = document.getElementById("audio");
-  const player = document.getElementById("player");
-  let current = -1;
+<hr class="music-divider">
 
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
-  function url(p) { return encodeURI(p).replace(/'/g, "%27"); }
+<img src="music/because-i-said-so.png" alt="Because I Said So" class="cover-art">
+<div class="song-title">Because I Said So</div>
+<audio controls>
+<source src="music/because-I-said-so.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/because-I-said-so.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/because-i-said-so.html">VIEW LYRICS</a>
 
-  grid.innerHTML = SONGS.map((s, i) => `
-    <article class="song" id="song-${i}">
-      <button class="song-art" type="button" onclick="playSong(${i})" aria-label="Play ${esc(s.title)}">
-        <img src="${url(s.image)}" alt="${esc(s.title)}" loading="lazy">
-        <span class="song-play">
-          <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg>
-          <span class="eq"><i></i><i></i><i></i></span>
-        </span>
-      </button>
-      <div class="song-body">
-        <div>
-          <h3 class="song-title">${esc(s.title)}</h3>
-          <div class="song-artist">Jimenim</div>
-        </div>
-        <div class="song-links">
-          ${s.lyrics ? `<a class="chip" href="${url(s.lyrics)}">Lyrics</a>` : ""}
-          <a class="chip chip-fire" href="${url(s.audio)}" download>Download</a>
-        </div>
-      </div>
-    </article>
-  `).join("");
+<hr class="music-divider">
 
-  function fmt(t) {
-    if (!isFinite(t) || t < 0) return "0:00";
-    const m = Math.floor(t / 60), s = Math.floor(t % 60);
-    return m + ":" + String(s).padStart(2, "0");
-  }
+<img src="music/dont-let-the-old-man-in.png" alt="Don't Let The Old Man In" class="cover-art">
+<div class="song-title">Don't Let The Old Man In</div>
+<audio controls>
+<source src="music/dont-let-the-old-man-in.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/dont-let-the-old-man-in.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/dont-let-the-old-man-in.html">VIEW LYRICS</a>
 
-  function setPlayingUI() {
-    const playing = !audio.paused;
-    document.getElementById("ic-play").style.display = playing ? "none" : "";
-    document.getElementById("ic-pause").style.display = playing ? "" : "none";
-    document.querySelectorAll(".song").forEach((el, i) => {
-      el.classList.toggle("is-current", i === current);
-      el.classList.toggle("is-playing", i === current && playing);
-    });
-  }
+<hr class="music-divider">
 
-  function playSong(i) {
-    if (i === current) { togglePlay(); return; }
-    current = i;
-    const s = SONGS[i];
-    audio.src = url(s.audio);
-    document.getElementById("p-art").src = url(s.image);
-    document.getElementById("p-title").textContent = s.title;
-    const ly = document.getElementById("p-lyrics");
-    if (s.lyrics) { ly.href = url(s.lyrics); ly.style.display = ""; } else { ly.style.display = "none"; }
-    document.getElementById("p-dl").href = url(s.audio);
-    player.classList.add("show");
-    document.body.classList.add("has-player");
-    audio.play().catch(() => {});
-    setPlayingUI();
-  }
+<img src="music/time-keeps-tickin.png" alt="Time Keeps Tickin" class="cover-art">
+<div class="song-title">Time Keeps Tickin</div>
+<audio controls>
+<source src="music/time-keeps-tickin.m4a" type="audio/mp4">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/time-keeps-tickin.m4a" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/time-keeps-tickin.html">VIEW LYRICS</a>
 
-  function togglePlay() {
-    if (current < 0) { playSong(0); return; }
-    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
-  }
+<hr class="music-divider">
 
-  function step(d) {
-    const n = current < 0 ? 0 : (current + d + SONGS.length) % SONGS.length;
-    current = -2; // force load
-    playSong(n);
-  }
+<img src="music/gimme-back-my-business.png" alt="Gimme Back My Business" class="cover-art">
+<div class="song-title">Gimme Back My Business</div>
+<audio controls>
+<source src="music/Gimme Back my Business.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/Gimme Back my Business.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/gimme-back-my-business.html">VIEW LYRICS</a>
 
-  const seek = document.getElementById("p-seek");
-  let seeking = false;
-  audio.addEventListener("timeupdate", () => {
-    document.getElementById("p-cur").textContent = fmt(audio.currentTime);
-    if (!seeking && audio.duration) seek.value = Math.round(audio.currentTime / audio.duration * 1000);
-    seek.style.setProperty("--pct", (seek.value / 10) + "%");
-  });
-  audio.addEventListener("loadedmetadata", () => { document.getElementById("p-dur").textContent = fmt(audio.duration); });
-  audio.addEventListener("play", setPlayingUI);
-  audio.addEventListener("pause", setPlayingUI);
-  audio.addEventListener("ended", () => step(1));
-  seek.addEventListener("input", () => { seeking = true; seek.style.setProperty("--pct", (seek.value / 10) + "%"); });
-  seek.addEventListener("change", () => {
-    if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
-    seeking = false;
-  });
-</script>
+<hr class="music-divider">
+
+<img src="music/allergic-to-the-truth.png" alt="Allergic to the Truth" class="cover-art">
+<div class="song-title">Allergic to the Truth</div>
+<audio controls>
+<source src="music/allergic-to-the-truth.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/allergic-to-the-truth.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/allergic-to-the-truth.html">VIEW LYRICS</a>
+
+
+<hr class="music-divider">
+
+<img src="music/even-jesus-wept.png" alt="Even Jesus Wept" class="cover-art">
+<div class="song-title">Even Jesus Wept</div>
+<audio controls>
+<source src="music/even-jesus-wept.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/even-jesus-wept.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/even-jesus-wept.html">VIEW LYRICS</a>
+
+
+
+<hr class="music-divider">
+
+<img src="music/God-will-put-you-back-together.png" alt="God Will Put You Back Together" class="cover-art">
+<div class="song-title">God Will Put You Back Together</div>
+<audio controls>
+<source src="music/God-will-put-you-back-together.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/God-will-put-you-back-together.mp3" download>DOWNLOAD SONG</a>
+
+
+
+<hr class="music-divider">
+
+<img src="music/It's really a you  problem.png" alt="It's Really a You Problem" class="cover-art">
+<div class="song-title">It's Really a You Problem</div>
+<audio controls>
+<source src="music/It's really a you  problem.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/It's really a you  problem.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/Its really a you problem.html">VIEW LYRICS</a>
+
+
+
+<hr class="music-divider">
+
+<img src="music/Who Told You That.png" alt="Who Told You That" class="cover-art">
+<div class="song-title">Who Told You That</div>
+
+<audio controls>
+<source src="music/Who Told You That.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<br>
+
+<a class="download-btn" href="music/Who Told You That.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/who-told-you-that.html">VIEW LYRICS</a>
+
+
+
+<hr class="music-divider">
+
+<img src="music/one miracle.png" alt="One Miracle" class="cover-art">
+<div class="song-title">One Miracle</div>
+
+<audio controls>
+<source src="music/one miracle.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<br>
+
+<a class="download-btn" href="music/one miracle.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/one-miracle.html">VIEW LYRICS</a>
+
+
+
+<hr class="music-divider">
+
+<img src="music/bad-ass-nilla.png" alt="Bad Ass Nilla" class="cover-art">
+<div class="song-title">Bad Ass Nilla</div>
+
+<audio controls>
+<source src="music/bad-ass-nilla.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<br>
+
+<a class="download-btn" href="music/bad-ass-nilla.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/bad-ass-nilla.html">VIEW LYRICS</a>
+
+
+<!-- Rest of my Life -->
+<img src="music/rest-of-my-life.png" alt="Rest of my Life" class="cover-art" style="width:100%;max-width:750px;height:auto;display:block;margin:0 auto;">
+<div class="song-title">Rest of my Life</div>
+<audio controls>
+<source src="music/rest-of-my-life.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/rest-of-my-life.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/rest-of-my-life.html">VIEW LYRICS</a>
+<hr class="music-divider">
+
+<!-- shotgun saint -->
+<img src="music/shotgun-saint.png" alt="shotgun saint" class="cover-art" style="width:100%;max-width:750px;height:auto;display:block;margin:0 auto;">
+<div class="song-title">shotgun saint</div>
+<audio controls>
+<source src="music/shotgun-saint.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<a class="download-btn" href="music/shotgun-saint.mp3" download>DOWNLOAD SONG</a>
+<a class="lyrics-btn" href="lyrics/shotgun-saint.html">VIEW LYRICS</a>
+<hr class="music-divider">
+
+<div class="note">Free downloads from The Posse Shoppe.</div>
+</div>
+</template>
+<script src="/js/songs.js"></script>
 
 </body>
 </html>
