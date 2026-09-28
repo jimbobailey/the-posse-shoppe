@@ -3,3 +3,9 @@
 
 [functions]
   directory = "netlify/functions"
+
+# Photos uploaded from the admin page
+[[redirects]]
+  from = "/uploads/*"
+  to = "/.netlify/functions/media/:splat"
+  status = 200

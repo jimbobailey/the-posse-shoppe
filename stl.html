@@ -91,7 +91,7 @@
 
         grid.innerHTML = items.map((item) => {
           const licenseLabel = item.category === "stl-commercial" ? "COMMERCIAL USE" : "PERSONAL USE";
-          const imagePath = `/images/stl/${escapeHtml(item.img || "")}`;
+          const imagePath = /^(\/|https?:)/i.test(item.img || "") ? escapeHtml(item.img) : `/images/stl/${escapeHtml(item.img || "")}`;
           const mailtoLink = buildMailto(item);
 
           return `

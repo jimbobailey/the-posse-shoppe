@@ -209,6 +209,7 @@
 
     function buildMediaPath(item) {
       const filename = item.img || "";
+      if (/^(\/|https?:)/i.test(filename)) return filename;
       const videoFile = isVideoFile(filename);
       const useVideoFolder = item.mediaType === "video" || videoFile;
 

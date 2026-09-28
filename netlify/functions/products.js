@@ -165,6 +165,10 @@ exports.handler = async (event) => {
       });
     }
 
+    if (body.action === "verify") {
+      return json(200, { success: true });
+    }
+
     if (body.action === "addColor" && body.color) {
       const colors = await loadColorLibrary(store);
       const incoming = normalizeColor(body.color);

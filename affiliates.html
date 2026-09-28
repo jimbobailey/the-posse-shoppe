@@ -77,7 +77,7 @@
         empty.style.display = "none";
 
         grid.innerHTML = items.map((item) => {
-          const imagePath = `/images/affiliates/${escapeHtml(item.img || "")}`;
+          const imagePath = /^(\/|https?:)/i.test(item.img || "") ? escapeHtml(item.img) : `/images/affiliates/${escapeHtml(item.img || "")}`;
           const link = item.link ? escapeHtml(item.link) : "#";
 
           return `

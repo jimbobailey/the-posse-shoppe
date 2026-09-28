@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Posse Shoppe Admin</title>
+  <style>
+    :root {
+      --primary: #121212;
+      --glow: #ff8c00;
+      --bg: #000000;
+      --muted: #666;
+      --danger: #c62828;
+      --success: #167c3b;
+      --text-main: #f3f3f3;
+      --shadow-glow: 0 0 24px rgba(255, 140, 0, 0.14);
+      --radius-pill: 999px;
+      --max-width: 1500px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(255, 140, 0, 0.08), transparent 30%),
+        linear-gradient(180deg, #0b0b0d 0%, #111215 35%, #0d0d0f 100%);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      padding: 18px 20px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 140, 0, 0.28);
+      background:
+        linear-gradient(rgba(8, 8, 8, 0.88), rgba(10, 10, 10, 0.92)),
+        url("images/hex-bg.png") center center / cover no-repeat;
+      box-shadow: inset 0 -1px 0 rgba(255, 140, 0, 0.14);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header-banner-wrap {
+      max-width: 1120px;
+      margin: 0 auto 14px;
+      padding: 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 140, 0, 0.08), rgba(255, 140, 0, 0.03));
+      border: 1px solid rgba(255, 140, 0, 0.12);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .header-banner {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 140, 0, 0.45);
+      box-shadow: 0 0 22px rgba(255, 140, 0, 0.18);
+      background: #111;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .page-btn {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ff9a1a;
+      border: 1px solid rgba(255, 140, 0, 0.65);
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease;
+      display: inline-block;
+    }
+
+    .page-btn:hover {
+      background: #ff8c00;
+      color: black;
+      transform: translateY(-1px);
+    }
+
+    .admin-shell {
+      padding: 40px 20px;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .admin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(17, 17, 17, 0.8);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+      width: 100%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid var(--glow);
+      color: white;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .admin-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .section-box {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 6px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      color: var(--glow);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .admin-inv-card {
+      background: #222;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .edit-btn {
+      background: #ff8c00;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .delete-btn {
+      background: #d62828;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .save-btn {
+      background: var(--glow);
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      color: black;
+    }
+
+    .cancel-btn {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .small-btn {
+      background: var(--glow);
+      color: black;
+      border: none;
+      padding: 10px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .small-btn.alt {
+      background: #3a3a3a;
+      color: white;
+      border: 1px solid #666;
+    }
+
+    .muted {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+      transform: scale(1.2);
+    }
+
+    #color-builder {
+      display: none;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .color-add-row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr auto auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .color-add-row input[type="color"] {
+      height: 42px;
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid var(--glow);
+      background: #222;
+    }
+
+    .color-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #000 inset;
+      flex-shrink: 0;
+    }
+
+    .remove-color-btn {
+      margin-left: auto;
+      background: #a61b1b;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .inventory-color-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .inventory-mini-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+
+    .media-note {
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .media-path-box {
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      color: #ddd;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .media-path-box strong {
+      color: var(--glow);
+    }
+
+    .admin-media-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      background: #444;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-top: 8px;
+      margin-right: 6px;
+    }
+
+    .color-picker-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .color-library-list,
+    .product-color-picker-list {
+      display: block;
+      gap: 0;
+      max-height: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+
+    .product-color-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+
+    .product-color-row input[type="checkbox"] {
+      width: auto;
+      transform: scale(1.15);
+      accent-color: var(--glow);
+    }
+
+    .product-color-name {
+      font-weight: bold;
+    }
+
+    .library-color-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .library-color-code {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .type-note {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 980px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .color-add-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-banner-wrap">
+        <img src="images/header.png" alt="The Posse Shoppe" class="header-banner" />
+      </div>
+
+      <div class="page-top">
+        <a class="page-btn" href="index.html">BACK TO SHOP</a>
+        <a class="page-btn" href="stl.html">STL FILES</a>
+        <a class="page-btn" href="affiliates.html">AFFILIATES</a>
+        <a class="page-btn" href="mailto:theposseshoppe@gmail.com?subject=Admin%20Question">CONTACT US</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-shell">
+    <div class="admin-grid">
+      <div>
+        <div class="admin-form">
+          <h2 id="form-title">Add New Shop Product</h2>
+
+          <input type="hidden" id="p-id" />
+
+          <select id="p-type" onchange="handleTypeChange()">
+            <option value="product">Shop Product</option>
+            <option value="stl">STL File</option>
+            <option value="affiliate">Affiliate</option>
+          </select>
+
+          <div id="product-category-wrap">
+            <select id="p-page" onchange="updateMediaPathPreview()">
+              <option value="3d">3D Prints</option>
+              <option value="laser">Laser Engraving</option>
+              <option value="boombox">BoomBox Parts</option>
+            </select>
+          </div>
+
+          <div id="stl-license-wrap" class="hidden">
+            <select id="p-stl-license" onchange="updateMediaPathPreview()">
+              <option value="stl-personal">STL - Personal Use</option>
+              <option value="stl-commercial">STL - Commercial Use</option>
+            </select>
+          </div>
+
+          <input type="text" id="p-name" placeholder="Name" />
+          <input type="number" id="p-price" placeholder="Price" step="0.01" />
+          <textarea id="p-desc" placeholder="Description"></textarea>
+
+          <div id="affiliate-link-wrap" class="hidden">
+            <input type="text" id="p-link" placeholder="Affiliate URL" />
+          </div>
+
+          <div id="media-type-wrap">
+            <select id="p-media-type" onchange="updateMediaPathPreview()">
+              <option value="image">Image</option>
+              <option value="video">MP4 Video</option>
+            </select>
+          </div>
+
+          <input
+            type="text"
+            id="p-img"
+            placeholder="Media Filename"
+            oninput="syncMediaTypeFromFilename(); updateMediaPathPreview();"
+          />
+
+          <div class="media-note" id="media-note-box">
+            Shop product files:
+            <br>images/3d/
+            <br>images/laser/
+            <br>images/boombox/
+            <br>videos/3d/
+            <br>videos/laser/
+            <br>videos/boombox/
+            <br><br>
+            STL images:
+            <br>images/stl/
+            <br><br>
+            Affiliate images:
+            <br>images/affiliates/
+          </div>
+
+          <div class="media-path-box" id="media-path-preview">
+            <strong>Current file path:</strong><br>
+            <span id="media-path-text">/images/3d/</span>
+          </div>
+
+          <div class="type-note hidden" id="stl-note">
+            STL listings do not take payment on the site. The public button will create an email request to you for that STL.
+          </div>
+
+          <div class="type-note hidden" id="affiliate-note">
+            Affiliate listings show an image, description, and open the affiliate URL when clicked.
+          </div>
+
+          <div id="product-only-area">
+            <div class="section-box">
+              <h3 class="section-title">Color Library</h3>
+
+              <input type="hidden" id="library-edit-index" />
+
+              <div class="color-add-row">
+                <input type="text" id="library-color-name" placeholder="Add your color name" />
+                <input type="color" id="library-color-hex" value="#ff8c00" />
+                <button type="button" class="small-btn" onclick="saveLibraryColor()">SAVE COLOR</button>
+                <button type="button" class="small-btn alt" onclick="resetLibraryColorForm()">CANCEL</button>
+              </div>
+
+              <div id="color-library-list" class="color-library-list"></div>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="p-enable-colors" onchange="toggleColorBuilder()" />
+              <label for="p-enable-colors">Enable color options for this product</label>
+            </div>
+
+            <div id="color-builder">
+              <h3 style="margin-top:0; color:var(--glow);">Select Product Colors</h3>
+
+              <div class="color-picker-actions">
+                <button type="button" class="small-btn" onclick="selectAllColors()">SELECT ALL</button>
+                <button type="button" class="small-btn alt" onclick="clearAllColors()">CLEAR ALL</button>
+              </div>
+
+              <div id="product-color-picker-list" class="product-color-picker-list"></div>
+              <div id="color-list-editor" style="margin-top:12px;"></div>
+            </div>
+          </div>
+
+          <button class="save-btn" onclick="saveItem()">SAVE ITEM</button>
+          <button class="cancel-btn" onclick="clearForm()">CLEAR / CANCEL EDIT</button>
+        </div>
+      </div>
+
+      <div id="admin-inventory-list"></div>
+    </div>
+  </div>
+
+  <script>
+    let editingColors = [];
+    let allProducts = [];
+    let colorLibrary = [];
+    let selectableColors = [];
+    const adminPassword = window.prompt("Enter admin password:") || "";
+
+    function normalizeColor(color) {
+      if (!color || typeof color !== "object") return null;
+
+      const name = String(color.name || "").trim();
+      const hexRaw = String(color.hex || "").trim();
+      const hex = hexRaw ? (hexRaw.startsWith("#") ? hexRaw : "#" + hexRaw) : "";
+
+      if (!name || !hex) return null;
+
+      return { name, hex };
+    }
+
+    function sameColor(a, b) {
+      return String(a?.name || "").trim().toLowerCase() === String(b?.name || "").trim().toLowerCase()
+        && String(a?.hex || "").trim().toLowerCase() === String(b?.hex || "").trim().toLowerCase();
+    }
+
+    function editingHasColor(color) {
+      return editingColors.some((c) => sameColor(c, color));
+    }
+
+    function getSelectableColors() {
+      const merged = [];
+
+      colorLibrary.forEach((color) => {
+        const normalized = normalizeColor(color);
+        if (!normalized) return;
+        if (!merged.some((existing) => sameColor(existing, normalized))) {
+          merged.push({ ...normalized, source: "library" });
+        }
+      });
+
+      editingColors.forEach((color) => {
+        const normalized = normalizeColor(color);
+        if (!normalized) return;
+        if (!merged.some((existing) => sameColor(existing, normalized))) {
+          merged.push({ ...normalized, source: "product" });
+        }
+      });
+
+      return merged;
+    }
+
+    function applyProductsFromResponse(data) {
+      if (Array.isArray(data?.products)) {
+        allProducts = data.products;
+        renderAdmin();
+        return true;
+      }
+      return false;
+    }
+
+    function currentType() {
+      return document.getElementById("p-type").value;
+    }
+
+    function handleTypeChange() {
+      const type = currentType();
+      const isProduct = type === "product";
+      const isStl = type === "stl";
+      const isAffiliate = type === "affiliate";
+
+      document.getElementById("product-category-wrap").classList.toggle("hidden", !isProduct);
+      document.getElementById("stl-license-wrap").classList.toggle("hidden", !isStl);
+      document.getElementById("affiliate-link-wrap").classList.toggle("hidden", !isAffiliate);
+      document.getElementById("media-type-wrap").classList.toggle("hidden", !isProduct);
+
+      document.getElementById("product-only-area").classList.toggle("hidden", !isProduct);
+      document.getElementById("stl-note").classList.toggle("hidden", !isStl);
+      document.getElementById("affiliate-note").classList.toggle("hidden", !isAffiliate);
+
+      if (isProduct) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit Shop Product" : "Add New Shop Product";
+        document.getElementById("p-price").classList.remove("hidden");
+        document.getElementById("p-price").placeholder = "Price";
+        document.getElementById("p-img").placeholder = "Media Filename (example: dragon.jpg or dragon.mp4)";
+      }
+
+      if (isStl) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit STL File" : "Add New STL File";
+        document.getElementById("p-price").classList.remove("hidden");
+        document.getElementById("p-price").placeholder = "STL Price";
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-img").placeholder = "Preview Image Filename (example: dragon-stl.jpg)";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+        toggleColorBuilder();
+      }
+
+      if (isAffiliate) {
+        document.getElementById("form-title").textContent = document.getElementById("p-id").value ? "Edit Affiliate" : "Add New Affiliate";
+        document.getElementById("p-price").classList.add("hidden");
+        document.getElementById("p-media-type").value = "image";
+        document.getElementById("p-img").placeholder = "Affiliate Image Filename (example: printer.jpg)";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+        toggleColorBuilder();
+      }
+
+      updateMediaPathPreview();
+    }
+
+    function syncMediaTypeFromFilename() {
+      if (currentType() !== "product") {
+        document.getElementById("p-media-type").value = "image";
+        return;
+      }
+
+      const fileName = document.getElementById("p-img").value.trim().toLowerCase();
+      const mediaTypeField = document.getElementById("p-media-type");
+
+      if (fileName.endsWith(".mp4") || fileName.endsWith(".webm") || fileName.endsWith(".mov")) {
+        mediaTypeField.value = "video";
+      } else if (
+        fileName.endsWith(".jpg") ||
+        fileName.endsWith(".jpeg") ||
+        fileName.endsWith(".png") ||
+        fileName.endsWith(".gif") ||
+        fileName.endsWith(".webp")
+      ) {
+        mediaTypeField.value = "image";
+      }
+    }
+
+    function updateMediaPathPreview() {
+      const type = currentType();
+      const fileName = document.getElementById("p-img").value.trim();
+
+      let path = "";
+
+      if (type === "product") {
+        const category = document.getElementById("p-page").value || "3d";
+        const mediaType = document.getElementById("p-media-type").value || "image";
+        const folder = mediaType === "video" ? "/videos/" : "/images/";
+        path = `${folder}${category}/${fileName}`;
+      } else if (type === "stl") {
+        path = `/images/stl/${fileName}`;
+      } else {
+        path = `/images/affiliates/${fileName}`;
+      }
+
+      document.getElementById("media-path-text").textContent = path;
+    }
+
+    async function loadColorLibrary() {
+      try {
+        const response = await fetch("/.netlify/functions/products?type=colors", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        colorLibrary = Array.isArray(data) ? data.map(normalizeColor).filter(Boolean) : [];
+        renderColorLibrary();
+      } catch (error) {
+        console.error("Failed to load color library:", error);
+        colorLibrary = [];
+        renderColorLibrary();
+      }
+    }
+
+    function renderColorLibrary() {
+      const box = document.getElementById("color-library-list");
+
+      if (!colorLibrary.length) {
+        box.innerHTML = '<div class="muted">No colors added yet.</div>';
+        renderProductColorPicker();
+        return;
+      }
+
+      box.innerHTML = colorLibrary.map((color, index) => `
+        <div class="color-pill">
+          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+          <div class="library-color-meta">
+            <div><strong>${escapeHtml(color.name)}</strong></div>
+            <div class="library-color-code">${escapeHtml(color.hex)}</div>
+          </div>
+          <button type="button" class="edit-btn" onclick="editLibraryColor(${index})">EDIT</button>
+          <button type="button" class="remove-color-btn" onclick="deleteLibraryColor(${index})">DELETE</button>
+        </div>
+      `).join("");
+
+      renderProductColorPicker();
+    }
+
+    function resetLibraryColorForm() {
+      document.getElementById("library-edit-index").value = "";
+      document.getElementById("library-color-name").value = "";
+      document.getElementById("library-color-hex").value = "#ff8c00";
+    }
+
+    function editLibraryColor(index) {
+      const color = colorLibrary[index];
+      if (!color) return;
+
+      document.getElementById("library-edit-index").value = String(index);
+      document.getElementById("library-color-name").value = color.name || "";
+      document.getElementById("library-color-hex").value = color.hex || "#ff8c00";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function saveLibraryColor() {
+      const name = document.getElementById("library-color-name").value.trim();
+      const hex = document.getElementById("library-color-hex").value;
+      const editIndexRaw = document.getElementById("library-edit-index").value.trim();
+      const color = normalizeColor({ name, hex });
+
+      if (!color) {
+        alert("Please enter a valid color name and hex.");
+        return;
+      }
+
+      const isEdit = editIndexRaw !== "";
+      const action = isEdit ? "updateColor" : "addColor";
+      const payload = {
+        action,
+        password: adminPassword,
+        color
+      };
+
+      if (isEdit) {
+        payload.index = Number(editIndexRaw);
+      }
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        colorLibrary = Array.isArray(data.colors) ? data.colors.map(normalizeColor).filter(Boolean) : [];
+        resetLibraryColorForm();
+        renderColorLibrary();
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem saving the color.");
+      }
+    }
+
+    async function deleteLibraryColor(index) {
+      const color = colorLibrary[index];
+      if (!color) return;
+
+      const confirmed = confirm(`Delete "${color.name}" from the color library?`);
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "deleteColor",
+            password: adminPassword,
+            index
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        colorLibrary = Array.isArray(data.colors) ? data.colors.map(normalizeColor).filter(Boolean) : [];
+        editingColors = editingColors.filter((existing) => !sameColor(existing, color));
+        resetLibraryColorForm();
+        renderColorLibrary();
+        renderColorEditor();
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem deleting the color.");
+      }
+    }
+
+    function toggleColorBuilder() {
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
+      document.getElementById("color-builder").style.display = enabled ? "block" : "none";
+
+      if (enabled) {
+        renderProductColorPicker();
+      } else {
+        renderColorEditor();
+      }
+    }
+
+    function renderProductColorPicker() {
+      const box = document.getElementById("product-color-picker-list");
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
+
+      if (!enabled) {
+        box.innerHTML = "";
+        renderColorEditor();
+        return;
+      }
+
+      selectableColors = getSelectableColors();
+
+      if (!selectableColors.length) {
+        box.innerHTML = '<div class="muted">No colors in the library yet.</div>';
+        renderColorEditor();
+        return;
+      }
+
+      box.innerHTML = selectableColors.map((color, index) => {
+        const checked = editingHasColor(color) ? "checked" : "";
+        const sourceNote = color.source === "product" ? ' <span class="library-color-code">(saved on product)</span>' : "";
+
+        return `
+          <label class="product-color-row">
+            <input type="checkbox" data-color-index="${index}" ${checked} onchange="syncEditingColorsFromChecks()" />
+            <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+            <div class="library-color-meta">
+              <div class="product-color-name">${escapeHtml(color.name)}${sourceNote}</div>
+              <div class="library-color-code">${escapeHtml(color.hex)}</div>
+            </div>
+          </label>
+        `;
+      }).join("");
+
+      renderColorEditor();
+    }
+
+    function syncEditingColorsFromChecks() {
+      const checks = Array.from(document.querySelectorAll('#product-color-picker-list input[type="checkbox"]'));
+      editingColors = checks
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => {
+          const idx = Number(checkbox.getAttribute("data-color-index"));
+          return selectableColors[idx];
+        })
+        .filter(Boolean)
+        .map((color) => ({ name: color.name, hex: color.hex }));
+
+      renderColorEditor();
+    }
+
+    function selectAllColors() {
+      const checks = document.querySelectorAll('#product-color-picker-list input[type="checkbox"]');
+      checks.forEach((checkbox) => {
+        checkbox.checked = true;
+      });
+      syncEditingColorsFromChecks();
+    }
+
+    function clearAllColors() {
+      const checks = document.querySelectorAll('#product-color-picker-list input[type="checkbox"]');
+      checks.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      syncEditingColorsFromChecks();
+    }
+
+    function renderColorEditor() {
+      const box = document.getElementById("color-list-editor");
+      const enabled = document.getElementById("p-enable-colors").checked && currentType() === "product";
+
+      if (!enabled) {
+        box.innerHTML = "";
+        return;
+      }
+
+      if (!editingColors.length) {
+        box.innerHTML = '<div class="muted">No colors selected for this product.</div>';
+        return;
+      }
+
+      box.innerHTML = editingColors.map((color) => `
+        <div class="color-pill">
+          <div class="swatch" style="background:${escapeHtml(color.hex)};"></div>
+          <div>
+            <div><strong>${escapeHtml(color.name)}</strong></div>
+            <div class="muted">${escapeHtml(color.hex)}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function clearForm() {
+      document.getElementById("p-id").value = "";
+      document.getElementById("p-type").value = "product";
+      document.getElementById("p-page").value = "3d";
+      document.getElementById("p-stl-license").value = "stl-personal";
+      document.getElementById("p-name").value = "";
+      document.getElementById("p-price").value = "";
+      document.getElementById("p-desc").value = "";
+      document.getElementById("p-link").value = "";
+      document.getElementById("p-media-type").value = "image";
+      document.getElementById("p-img").value = "";
+      document.getElementById("p-enable-colors").checked = false;
+      document.getElementById("form-title").textContent = "Add New Shop Product";
+
+      editingColors = [];
+      handleTypeChange();
+      toggleColorBuilder();
+      renderProductColorPicker();
+      renderColorEditor();
+      updateMediaPathPreview();
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        allProducts = Array.isArray(data) ? data : [];
+        renderAdmin();
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      }
+    }
+
+    async function saveItem() {
+      const idField = document.getElementById("p-id").value.trim();
+      const type = currentType();
+      const name = document.getElementById("p-name").value.trim();
+      const priceValue = document.getElementById("p-price").value.trim();
+      const desc = document.getElementById("p-desc").value.trim();
+      const img = document.getElementById("p-img").value.trim();
+      const link = document.getElementById("p-link").value.trim();
+
+      if (!name) {
+        alert("Please enter a name.");
+        return;
+      }
+
+      if (!img) {
+        alert("Please enter the image or media filename.");
+        return;
+      }
+
+      let item = null;
+
+      if (type === "product") {
+        let mediaType = document.getElementById("p-media-type").value.trim();
+        const category = document.getElementById("p-page").value;
+        const colorsEnabled = document.getElementById("p-enable-colors").checked;
+
+        if (!priceValue) {
+          alert("Please enter a price.");
+          return;
+        }
+
+        const fileNameLower = img.toLowerCase();
+        if (fileNameLower.endsWith(".mp4") || fileNameLower.endsWith(".webm") || fileNameLower.endsWith(".mov")) {
+          mediaType = "video";
+          document.getElementById("p-media-type").value = "video";
+        } else if (
+          fileNameLower.endsWith(".jpg") ||
+          fileNameLower.endsWith(".jpeg") ||
+          fileNameLower.endsWith(".png") ||
+          fileNameLower.endsWith(".gif") ||
+          fileNameLower.endsWith(".webp")
+        ) {
+          mediaType = "image";
+          document.getElementById("p-media-type").value = "image";
+        }
+
+        if (colorsEnabled && editingColors.length === 0) {
+          alert("You enabled color options, but no colors were selected.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category,
+          name,
+          price: Number(priceValue),
+          desc,
+          mediaType,
+          img,
+          hasColors: colorsEnabled,
+          colors: colorsEnabled ? editingColors.map((color) => ({ ...color })) : []
+        };
+      }
+
+      if (type === "stl") {
+        const category = document.getElementById("p-stl-license").value;
+
+        if (!priceValue) {
+          alert("Please enter an STL price.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category,
+          name,
+          price: Number(priceValue),
+          desc,
+          mediaType: "image",
+          img,
+          hasColors: false,
+          colors: []
+        };
+      }
+
+      if (type === "affiliate") {
+        if (!link) {
+          alert("Please enter the affiliate URL.");
+          return;
+        }
+
+        item = {
+          id: idField || String(Date.now()),
+          category: "affiliate",
+          name,
+          price: 0,
+          desc,
+          mediaType: "image",
+          img,
+          hasColors: false,
+          colors: [],
+          link
+        };
+      }
+
+      const action = idField ? "edit" : "add";
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action,
+            password: adminPassword,
+            product: item
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        applyProductsFromResponse(data);
+        clearForm();
+        alert(action === "add" ? "Item added." : "Item updated.");
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem saving the item.");
+      }
+    }
+
+    function editItem(id) {
+      const item = allProducts.find((x) => String(x.id) === String(id));
+      if (!item) return;
+
+      document.getElementById("p-id").value = item.id || "";
+      document.getElementById("p-name").value = item.name || "";
+      document.getElementById("p-price").value = item.price ?? "";
+      document.getElementById("p-desc").value = item.desc || "";
+      document.getElementById("p-img").value = item.img || "";
+      document.getElementById("p-link").value = item.link || "";
+
+      if (item.category === "affiliate") {
+        document.getElementById("p-type").value = "affiliate";
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+      } else if (item.category === "stl-personal" || item.category === "stl-commercial") {
+        document.getElementById("p-type").value = "stl";
+        document.getElementById("p-stl-license").value = item.category;
+        document.getElementById("p-enable-colors").checked = false;
+        editingColors = [];
+      } else {
+        document.getElementById("p-type").value = "product";
+        document.getElementById("p-page").value = item.category || "3d";
+        document.getElementById("p-media-type").value = item.mediaType === "video" ? "video" : "image";
+        document.getElementById("p-enable-colors").checked = !!item.hasColors;
+        editingColors = Array.isArray(item.colors) ? item.colors.map((color) => ({ ...color })) : [];
+      }
+
+      handleTypeChange();
+      toggleColorBuilder();
+      renderProductColorPicker();
+      renderColorEditor();
+      updateMediaPathPreview();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function deleteItem(id) {
+      const confirmed = confirm("Delete this listing?");
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch("/.netlify/functions/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "delete",
+            password: adminPassword,
+            id
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        if (document.getElementById("p-id").value === String(id)) {
+          clearForm();
+        }
+
+        applyProductsFromResponse(data);
+        alert("Item deleted.");
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "There was a problem deleting the item.");
+      }
+    }
+
+    function categoryLabel(category) {
+      if (category === "3d") return "3D Prints";
+      if (category === "laser") return "Laser Engraving";
+      if (category === "boombox") return "BoomBox Parts";
+      if (category === "stl-personal") return "STL - Personal Use";
+      if (category === "stl-commercial") return "STL - Commercial Use";
+      if (category === "affiliate") return "Affiliates";
+      return category;
+    }
+
+    function renderInventorySection(items, title) {
+      if (!items.length) {
+        return `<h4 style="color: var(--glow); margin-top:20px;">${escapeHtml(title)}</h4><div class="muted">No items in this section yet.</div>`;
+      }
+
+      return `
+        <h4 style="color: var(--glow); margin-top:20px;">${escapeHtml(title)}</h4>
+        ${items.map((item) => `
+          <div class="admin-inv-card">
+            <div><strong>${escapeHtml(item.name || "")}</strong></div>
+            <div class="muted">${escapeHtml(item.desc || "")}</div>
+            ${item.category !== "affiliate" ? `<div style="margin-top:6px;"><strong>$${Number(item.price || 0).toFixed(2)}</strong></div>` : ""}
+            <div class="admin-media-tag">${escapeHtml(item.mediaType || "image").toUpperCase()}</div>
+            <div class="admin-media-tag">${escapeHtml(categoryLabel(item.category || ""))}</div>
+            <div class="muted" style="margin-top:8px;">${escapeHtml(item.img || "")}</div>
+            ${item.link ? `<div class="muted" style="margin-top:6px;">${escapeHtml(item.link)}</div>` : ""}
+            ${Array.isArray(item.colors) && item.colors.length ? `
+              <div class="inventory-color-row">
+                ${item.colors.map((color) => `
+                  <div class="inventory-mini-swatch" title="${escapeHtml(color.name)}" style="background:${escapeHtml(color.hex)};"></div>
+                `).join("")}
+              </div>
+            ` : ""}
+            <div class="admin-actions">
+              <button type="button" class="edit-btn" onclick="editItem('${escapeHtml(String(item.id))}')">EDIT</button>
+              <button type="button" class="delete-btn" onclick="deleteItem('${escapeHtml(String(item.id))}')">DELETE</button>
+            </div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function renderAdmin() {
+      const list = document.getElementById("admin-inventory-list");
+
+      const sections = [
+        { key: "3d", title: "3D Prints" },
+        { key: "laser", title: "Laser Engraving" },
+        { key: "boombox", title: "BoomBox Parts" },
+        { key: "stl-personal", title: "STL - Personal Use" },
+        { key: "stl-commercial", title: "STL - Commercial Use" },
+        { key: "affiliate", title: "Affiliates" }
+      ];
+
+      let html = "<div class='admin-form'><h3 style='margin-top:0;'>Inventory</h3>";
+
+      sections.forEach((section) => {
+        const items = allProducts.filter((item) => item.category === section.key);
+        html += renderInventorySection(items, section.title);
+      });
+
+      html += "</div>";
+      list.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    window.onload = async () => {
+      handleTypeChange();
+      toggleColorBuilder();
+      updateMediaPathPreview();
+      await loadColorLibrary();
+      await loadProducts();
+    };
+  </script>
+</body>
+</html>
