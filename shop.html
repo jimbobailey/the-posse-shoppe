@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Posse Shoppe</title>
+
+  <meta property="og:title" content="The Posse Shoppe" />
+  <meta property="og:description" content="Custom 3D prints and laser engraving." />
+  <meta property="og:url" content="https://theposseshoppe.com/shop.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://theposseshoppe.com/images/header.png" />
+  <meta property="og:image:secure_url" content="https://theposseshoppe.com/images/header.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Posse Shoppe" />
+  <meta name="twitter:description" content="Custom 3D prints and laser engraving." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/header.png" />
+
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="shop.html"><span class="brand-mark">TPS</span><span class="brand-name">The Posse <span class="hot">Shoppe</span></span></a>
+      <nav class="toplinks"><a href="index.html">Music</a><a href="shop.html" class="current">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Custom 3D Prints · Laser Engraving</div>
+    <h1><span class="chrome">The Posse</span> <span class="fire-text">Shoppe</span></h1>
+    <p class="lead">Custom 3D prints and laser engraving, made one project at a time in a small home shop.</p>
+    <nav id="shop-nav">
+      <button class="page-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
+      <button class="page-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
+      <button class="page-btn" id="btn-boombox" onclick="view('boombox')">Boombox Builds</button>
+    </nav>
+    <div class="hero-actions" style="margin-top:16px;">
+      <a class="btn btn-link" href="#shop">Shop now ›</a>
+      <a class="btn btn-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Custom request ›</a>
+    </div>
+  </section>
+
+  <section class="info-section-wrap" id="what-we-do-wrap">
+    <div class="section-head"><h2><span class="chrome">What We</span> <span class="volt-text">Do</span></h2><svg class="bolt-line" viewBox="0 0 180 14" aria-hidden="true"><defs><linearGradient id="bl" x1="0" x2="1"><stop offset="0" stop-color="#2fa8ff" stop-opacity="0"/><stop offset=".3" stop-color="#2fa8ff"/><stop offset=".7" stop-color="#ff7a18"/><stop offset="1" stop-color="#ff7a18" stop-opacity="0"/></linearGradient></defs><path d="M0 7H72l8-6-3 8 12-5-7 9 9-6h89" fill="none" stroke="url(#bl)" stroke-width="2" stroke-linejoin="round"/></svg><p>Everything you see here is made in-house, start to finish.</p></div>
+        <div class="info-grid">
+          <div class="info-block">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
+            <h3>About the Shop</h3>
+            <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
+          </div>
+
+          <div class="info-block">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg></div>
+            <h3>3D Printing</h3>
+            <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
+          </div>
+
+          <div class="info-block">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+            <h3>Laser Engraving</h3>
+            <p>I use two different types of lasers depending on the job.</p>
+            <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
+            <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
+          </div>
+
+          <div class="info-block">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
+            <h3>Popular Custom Work</h3>
+            <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
+            <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
+          </div>
+        </div>
+      
+  </section>
+
+  <section class="shop-shell" id="shop">
+    <div class="section-head"><h2><span class="chrome">Shop</span> <span class="fire-text">Products</span></h2><svg class="bolt-line" viewBox="0 0 180 14" aria-hidden="true"><defs><linearGradient id="bl" x1="0" x2="1"><stop offset="0" stop-color="#2fa8ff" stop-opacity="0"/><stop offset=".3" stop-color="#2fa8ff"/><stop offset=".7" stop-color="#ff7a18"/><stop offset="1" stop-color="#ff7a18" stop-opacity="0"/></linearGradient></defs><path d="M0 7H72l8-6-3 8 12-5-7 9 9-6h89" fill="none" stroke="url(#bl)" stroke-width="2" stroke-linejoin="round"/></svg><p>Browse available items, choose your options, and build your order request.</p></div>
+
+    <div class="main-layout">
+      <div class="products-column">
+        <div id="product-list"></div>
+      </div>
+
+      <aside class="cart-sidebar">
+        <h2>Your Order</h2>
+        <p class="cart-subtext">Add items from the shop, then submit your request and I’ll follow up with details.</p>
+
+        <div id="cart-items">Empty</div>
+        <div class="cart-total" id="cart-total">$0.00</div>
+
+        <div class="checkout-box">
+          <label for="cust-name">Your Name</label>
+          <input type="text" id="cust-name" placeholder="Enter your name" />
+
+          <label for="cust-email">Email</label>
+          <input type="email" id="cust-email" placeholder="Enter your email" />
+
+          <label for="cust-phone">Phone</label>
+          <input type="text" id="cust-phone" placeholder="Enter your phone number" />
+
+          <label for="cust-notes">Custom Requests / Notes</label>
+          <textarea id="cust-notes" placeholder="Request custom designs, custom colors, engraving changes, quantity changes, or anything else here."></textarea>
+
+          <div class="notice-box">
+            Orders submitted here are reviewed and completed <strong>offsite by email</strong>.
+            After you send your order, The Posse Shoppe will contact you to confirm details, answer custom requests, and arrange payment.
+
+            <br><br>
+            <strong>Accepted payment methods:</strong> PayPal, Venmo, Cash App, and Zelle.
+
+            <br><br>
+            You may request <strong>custom designs</strong> and <strong>colors not listed</strong>.
+            If a requested color is unavailable or a design is beyond current design capability, you will be notified by email or phone.
+          </div>
+
+          <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">Send Order Request</button>
+          <div id="order-status" class="status-message"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    let currentCategory = "3d";
+    let cart = [];
+    let allProducts = [];
+
+    function isVideoFile(filename = "") {
+      const lower = String(filename).trim().toLowerCase();
+      return lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov");
+    }
+
+    function updateHomepageOnlySections() {
+      const whatWeDoWrap = document.getElementById("what-we-do-wrap");
+      if (whatWeDoWrap) {
+        if (currentCategory === "3d") {
+          whatWeDoWrap.classList.remove("hidden");
+        } else {
+          whatWeDoWrap.classList.add("hidden");
+        }
+      }
+
+      let backBtn = document.getElementById("btn-back-to-shop");
+
+      if (currentCategory === "3d") {
+        if (backBtn) backBtn.remove();
+      } else {
+        if (!backBtn) {
+          const nav = document.getElementById("shop-nav");
+          backBtn = document.createElement("button");
+          backBtn.type = "button";
+          backBtn.id = "btn-back-to-shop";
+          backBtn.className = "page-btn";
+          backBtn.textContent = "‹ Back to Shop";
+          backBtn.onclick = function () {
+            view("3d");
+          };
+          nav.appendChild(backBtn);
+        }
+      }
+    }
+
+    function view(v) {
+      currentCategory = v;
+      document.getElementById("btn-3d").classList.remove("active");
+      document.getElementById("btn-laser").classList.remove("active");
+      document.getElementById("btn-boombox").classList.remove("active");
+      document.getElementById("btn-" + v).classList.add("active");
+      updateHomepageOnlySections();
+      renderShop();
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        allProducts = Array.isArray(data)
+          ? data
+          : Array.isArray(data.products)
+            ? data.products
+            : [];
+
+        renderShop();
+      } catch (error) {
+        console.error("Failed to load products:", error);
+        document.getElementById("product-list").innerHTML = `
+          <div class="card empty-card-message">
+            <b>Could not load products</b>
+            <p>Please try again in a minute.</p>
+          </div>
+        `;
+      }
+    }
+
+    function getCurrentProducts() {
+      return allProducts.filter((product) => product.category === currentCategory);
+    }
+
+    function buildMediaPath(item) {
+      const filename = item.img || "";
+      const videoFile = isVideoFile(filename);
+      const useVideoFolder = item.mediaType === "video" || videoFile;
+
+      if (useVideoFolder) {
+        return `/videos/${item.category}/${filename}`;
+      }
+
+      return `/images/${item.category}/${filename}`;
+    }
+
+    function buildMedia(item) {
+      const mediaPath = escapeHtml(buildMediaPath(item));
+      const treatAsVideo = item.mediaType === "video" || isVideoFile(item.img);
+
+      if (treatAsVideo) {
+        return `
+          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Video not found</div>';">
+            <source src="${mediaPath}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      }
+
+      return `
+        <img
+          src="${mediaPath}"
+          alt="${escapeHtml(item.name || "Product image")}"
+          onerror="this.onerror=null; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Image not found</div>';"
+        >
+      `;
+    }
+
+    function buildColorChooser(item, itemIndex) {
+      if (!item.hasColors || !item.colors || !item.colors.length) return "";
+
+      const colorRows = item.colors.map((color, colorIndex) => `
+        <label class="color-checkbox-row">
+          <input
+            type="checkbox"
+            name="product-color-${itemIndex}"
+            value="${colorIndex}"
+            onchange="handleColorChange(${itemIndex})"
+          />
+          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
+          <span>${escapeHtml(color.name)}</span>
+        </label>
+      `).join("");
+
+      return `
+        <div class="product-option-wrap">
+          <label class="option-title">Choose colors</label>
+          <div class="product-option-note">Select a max of 2 colors.</div>
+
+          <button type="button" class="color-dropdown-toggle" onclick="toggleColorDropdown(${itemIndex})">
+            <span id="color-toggle-text-${itemIndex}">Choose colors</span>
+            <span>▼</span>
+          </button>
+
+          <div class="color-dropdown-panel" id="color-dropdown-${itemIndex}">
+            <div class="color-checkbox-list">
+              ${colorRows}
+            </div>
+
+            <label class="option-title" for="color-notes-${itemIndex}" style="margin-top:10px;">Color Notes / Placement Notes</label>
+            <textarea
+              id="color-notes-${itemIndex}"
+              class="product-color-notes"
+              placeholder="Describe color placement"
+            ></textarea>
+          </div>
+
+          <div class="selected-color-preview" id="color-preview-${itemIndex}"></div>
+        </div>
+      `;
+    }
+
+    function toggleColorDropdown(itemIndex) {
+      const panel = document.getElementById(`color-dropdown-${itemIndex}`);
+      if (!panel) return;
+      panel.classList.toggle("open");
+    }
+
+    function handleColorChange(itemIndex) {
+      enforceMaxTwoColors(itemIndex);
+      updateSelectedColorPreview(itemIndex);
+      updateColorToggleText(itemIndex);
+    }
+
+    function enforceMaxTwoColors(itemIndex) {
+      const checks = Array.from(document.querySelectorAll(`input[name="product-color-${itemIndex}"]`));
+      const checked = checks.filter((checkbox) => checkbox.checked);
+
+      if (checked.length <= 2) return;
+
+      const lastChecked = checked[checked.length - 1];
+      lastChecked.checked = false;
+      alert("Please select a maximum of 2 colors.");
+    }
+
+    function updateSelectedColorPreview(itemIndex) {
+      const items = getCurrentProducts();
+      const item = items[itemIndex];
+      const preview = document.getElementById(`color-preview-${itemIndex}`);
+
+      if (!item || !preview || !item.colors || !item.colors.length) return;
+
+      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
+
+      if (!selectedColors.length) {
+        preview.innerHTML = "";
+        return;
+      }
+
+      preview.innerHTML = selectedColors.map((color) => `
+        <span class="selected-color-chip">
+          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
+          <span>${escapeHtml(color.name)}</span>
+        </span>
+      `).join("");
+    }
+
+    function updateColorToggleText(itemIndex) {
+      const items = getCurrentProducts();
+      const item = items[itemIndex];
+      const toggleText = document.getElementById(`color-toggle-text-${itemIndex}`);
+      if (!item || !toggleText) return;
+
+      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
+
+      if (!selectedColors.length) {
+        toggleText.textContent = "Choose colors";
+        return;
+      }
+
+      toggleText.textContent = selectedColors.map((color) => color.name).join(", ");
+    }
+
+    function getSelectedColorsForProduct(itemIndex, item) {
+      const checks = document.querySelectorAll(`input[name="product-color-${itemIndex}"]:checked`);
+      return Array.from(checks)
+        .map((checkbox) => item.colors[Number(checkbox.value)])
+        .filter(Boolean)
+        .map((color) => ({ name: color.name, hex: color.hex }));
+    }
+
+    function getColorNotesForProduct(itemIndex) {
+      const field = document.getElementById(`color-notes-${itemIndex}`);
+      return field ? field.value.trim() : "";
+    }
+
+    function addToCart(itemId, itemIndex) {
+      const items = getCurrentProducts();
+      const item = items.find((x) => String(x.id) === String(itemId));
+      if (!item) return;
+
+      let selectedColors = [];
+      let colorNotes = "";
+
+      if (item.hasColors && item.colors && item.colors.length) {
+        selectedColors = getSelectedColorsForProduct(itemIndex, item);
+        colorNotes = getColorNotesForProduct(itemIndex);
+
+        if (!selectedColors.length) {
+          alert("Please select at least one color for this item.");
+          return;
+        }
+      }
+
+      const colorKey = selectedColors
+        .map((color) => `${color.name}|${color.hex}`)
+        .sort()
+        .join("||");
+
+      const noteKey = colorNotes.trim().toLowerCase();
+
+      const existingIndex = cart.findIndex((cartItem) =>
+        String(cartItem.id) === String(item.id) &&
+        cartItem.category === item.category &&
+        (cartItem.colorKey || "") === colorKey &&
+        (cartItem.noteKey || "") === noteKey
+      );
+
+      if (existingIndex !== -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({
+          id: item.id,
+          category: item.category,
+          name: item.name,
+          price: Number(item.price),
+          qty: 1,
+          selectedColors,
+          colorNotes,
+          colorKey,
+          noteKey
+        });
+      }
+
+      renderCart();
+    }
+
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+
+      renderCart();
+    }
+
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+
+      if (!cart.length) {
+        cartItems.innerHTML = "Empty";
+        cartTotal.textContent = "$0.00";
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.innerHTML = cart.map((item, index) => {
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+
+        const selectedColorNames = Array.isArray(item.selectedColors) && item.selectedColors.length
+          ? item.selectedColors.map((color) => escapeHtml(color.name)).join(", ")
+          : "";
+
+        return `
+          <div class="cart-item">
+            <div class="cart-item-top">
+              <div>
+                <strong>${escapeHtml(item.name)}</strong>
+                ${selectedColorNames ? `<div class="cart-color-line"><strong>Colors:</strong> ${selectedColorNames}</div>` : ""}
+                ${item.colorNotes ? `<div class="cart-item-subline"><strong>Notes:</strong> ${escapeHtml(item.colorNotes)}</div>` : ""}
+              </div>
+              <div><strong>$${lineTotal.toFixed(2)}</strong></div>
+            </div>
+
+            <div class="cart-controls">
+              <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+              <button class="remove-cart-btn" onclick="removeCartItem(${index})">REMOVE</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      cartTotal.textContent = `Estimated Total: $${total.toFixed(2)}`;
+    }
+
+    function showOrderStatus(type, message) {
+      const box = document.getElementById("order-status");
+      box.className = `status-message ${type}`;
+      box.innerHTML = message;
+    }
+
+    function clearOrderForm() {
+      document.getElementById("cust-name").value = "";
+      document.getElementById("cust-email").value = "";
+      document.getElementById("cust-phone").value = "";
+      document.getElementById("cust-notes").value = "";
+    }
+
+    async function submitOrder() {
+      const name = document.getElementById("cust-name").value.trim();
+      const email = document.getElementById("cust-email").value.trim();
+      const phone = document.getElementById("cust-phone").value.trim();
+      const notes = document.getElementById("cust-notes").value.trim();
+      const submitBtn = document.getElementById("submit-order-btn");
+
+      if (!cart.length) {
+        showOrderStatus("error", "Please add at least one item to your order.");
+        return;
+      }
+
+      if (!name) {
+        showOrderStatus("error", "Please enter your name.");
+        return;
+      }
+
+      if (!email && !phone) {
+        showOrderStatus("error", "Please enter an email address, a phone number, or both.");
+        return;
+      }
+
+      const orderTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      const payload = {
+        customer: { name, email, phone },
+        notes,
+        paymentMethods: ["PayPal", "Venmo", "Cash App", "Zelle"],
+        offsiteFulfillment: true,
+        items: cart.map((item) => ({
+          name: item.name,
+          category: item.category,
+          qty: item.qty,
+          price: item.price,
+          selectedColor: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.name).join(", ") : "",
+          colorHex: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.hex).join(", ") : "",
+          selectedColors: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => ({
+            name: color.name,
+            hex: color.hex
+          })) : [],
+          colorNotes: item.colorNotes || ""
+        })),
+        total: Number(orderTotal.toFixed(2))
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "SENDING...";
+      showOrderStatus("success", "Sending your order request...");
+
+      try {
+        const response = await fetch("/.netlify/functions/submit-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        let data = {};
+        try {
+          data = await response.json();
+        } catch {
+          data = {};
+        }
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
+
+        cart = [];
+        renderCart();
+        clearOrderForm();
+
+        showOrderStatus(
+          "success",
+          "Your order request was sent successfully.<br><br>" +
+          "Please expect an email from The Posse Shoppe to confirm details, custom requests, and payment options. " +
+          "Orders are completed offsite. You may pay with PayPal, Venmo, Cash App, or Zelle."
+        );
+      } catch (error) {
+        showOrderStatus(
+          "error",
+          "There was a problem sending your order.<br><br>" +
+          escapeHtml(error && error.message ? error.message : "Unknown error")
+        );
+        console.error(error);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Order Request";
+      }
+    }
+
+    function renderShop() {
+      const list = document.getElementById("product-list");
+      const items = getCurrentProducts();
+
+      if (items.length === 0) {
+        list.innerHTML = `
+          <div class="card empty-card-message">
+            <b>No products added yet</b>
+            <p>Add products from the merchant page.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = items.map((item, index) => `
+        <div class="card">
+          <div class="img-box">
+            ${buildMedia(item)}
+          </div>
+          <b>${escapeHtml(item.name)}</b>
+          <p class="price-line"><strong>$${Number(item.price).toFixed(2)}</strong></p>
+          <p class="desc-line">${escapeHtml(item.desc || "")}</p>
+          ${buildColorChooser(item, index)}
+          <button class="add-btn" onclick="addToCart('${escapeHtml(String(item.id))}', ${index})">Add to Order</button>
+        </div>
+      `).join("");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    window.onload = async () => {
+      renderCart();
+      updateHomepageOnlySections();
+      await loadProducts();
+    };
+  </script>
+  <footer class="site-footer">
+    <a href="index.html">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="spiritual.html">Spiritual</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
+    <div style="margin-top:12px;">© Jimenim Music · The Posse Shoppe</div>
+  </footer>
+</body>
+</html>

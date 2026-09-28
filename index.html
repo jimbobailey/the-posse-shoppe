@@ -1,1068 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Posse Shoppe</title>
-
-  <meta property="og:title" content="The Posse Shoppe" />
-  <meta property="og:description" content="Custom 3D prints and laser engraving." />
-  <meta property="og:url" content="https://theposseshoppe.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://theposseshoppe.com/images/header.png" />
-  <meta property="og:image:secure_url" content="https://theposseshoppe.com/images/header.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Posse Shoppe" />
-  <meta name="twitter:description" content="Custom 3D prints and laser engraving." />
-  <meta name="twitter:image" content="https://theposseshoppe.com/images/header.png" />
-
-  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --surface-2: #eef2f8;
-      --ink: #0b1a2e;
-      --ink-2: #46566c;
-      --ink-3: #7b889a;
-      --line: #e1e7ef;
-      --navy: #0a2540;
-      --blue: #1668e3;
-      --blue-2: #0f55c2;
-      --sky: #3fa9f5;
-      --ice: #e8f2ff;
-      --ice-2: #d5e7ff;
-      --danger: #d63a3a;
-      --radius: 20px;
-      --shadow: 0 1px 2px rgba(10, 37, 64, 0.05), 0 8px 24px rgba(10, 37, 64, 0.06);
-      --shadow-lg: 0 2px 6px rgba(10, 37, 64, 0.06), 0 22px 50px rgba(10, 37, 64, 0.12);
-      --max: 1200px;
-      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--font);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--blue); text-decoration: none; }
-    img { max-width: 100%; }
-
-    /* Top bar */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(10, 37, 64, 0.08);
-    }
-    .topbar-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 22px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 17px;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #0a2540 0%, #1668e3 60%, #3fa9f5 100%);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 4px 10px rgba(22, 104, 227, 0.3);
-    }
-    .toplinks {
-      display: flex;
-      gap: 2px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .toplinks::-webkit-scrollbar { display: none; }
-    .toplinks a {
-      color: var(--ink-2);
-      font-size: 14px;
-      padding: 7px 13px;
-      border-radius: 999px;
-      white-space: nowrap;
-      transition: background 0.2s, color 0.2s;
-    }
-    .toplinks a:hover { color: var(--ink); background: rgba(10, 37, 64, 0.05); }
-    .toplinks a.current { color: var(--blue); background: var(--ice); font-weight: 500; }
-
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 84px 22px 44px;
-      background:
-        radial-gradient(900px 380px at 50% -8%, #d6e8ff 0%, rgba(214, 232, 255, 0) 70%),
-        radial-gradient(600px 300px at 85% 10%, rgba(63, 169, 245, 0.12) 0%, rgba(63, 169, 245, 0) 70%);
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--blue);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .hero h1 {
-      font-size: clamp(40px, 6.2vw, 76px);
-      line-height: 1.03;
-      letter-spacing: -0.038em;
-      margin: 0 auto;
-      max-width: 940px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .grad {
-      background: linear-gradient(90deg, #0a2540 0%, #1668e3 50%, #3fa9f5 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .lead {
-      font-size: clamp(18px, 2.2vw, 22px);
-      color: var(--ink-2);
-      max-width: 680px;
-      margin: 20px auto 0;
-      letter-spacing: -0.01em;
-      line-height: 1.45;
-    }
-    .hero-actions {
-      margin-top: 28px;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      font: inherit;
-      font-size: 16px;
-      font-weight: 500;
-      border: 0;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 6px 16px rgba(22, 104, 227, 0.28); }
-    .btn-primary:hover { background: var(--blue-2); transform: translateY(-1px); }
-    .btn-soft { background: var(--ice); color: var(--blue); }
-    .btn-soft:hover { background: var(--ice-2); }
-    .btn-link { background: transparent; color: var(--blue); padding-left: 8px; padding-right: 8px; }
-    .btn-link:hover { text-decoration: underline; }
-
-    /* Section heads */
-    .section-head { text-align: center; margin: 56px 0 28px; }
-    .section-head h2 {
-      font-size: clamp(28px, 3.6vw, 42px);
-      letter-spacing: -0.028em;
-      line-height: 1.1;
-      margin: 0;
-    }
-    .section-head p { color: var(--ink-2); margin: 10px auto 0; font-size: 17px; max-width: 620px; }
-
-    .site-footer {
-      border-top: 1px solid var(--line);
-      margin-top: 72px;
-      padding: 28px 22px 44px;
-      color: var(--ink-3);
-      font-size: 13px;
-      text-align: center;
-    }
-    .site-footer a { color: var(--ink-2); margin: 0 8px; }
-    .site-footer a:hover { color: var(--blue); }
-
-    @media (max-width: 720px) {
-      .topbar-inner { height: auto; padding: 10px 14px 8px; flex-direction: column; align-items: stretch; gap: 6px; }
-      .toplinks { margin: 0 -6px; }
-      .hero { padding: 52px 16px 30px; }
-    }
-
-    /* Category switcher */
-    #shop-nav {
-      display: inline-flex;
-      gap: 4px;
-      padding: 5px;
-      margin-top: 30px;
-      background: var(--surface);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .page-btn {
-      border: 0;
-      background: transparent;
-      color: var(--ink-2);
-      font: inherit;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 10px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    }
-    .page-btn:hover { color: var(--ink); background: var(--surface-2); }
-    .page-btn.active {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(22, 104, 227, 0.3);
-    }
-
-    /* What we do */
-    .info-section-wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
-    .info-section-wrap.hidden { display: none; }
-    .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-    .info-block {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow);
-    }
-    .info-ico {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
-      background: var(--ice);
-      color: var(--blue);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-    }
-    .info-ico svg { width: 22px; height: 22px; }
-    .info-block h3 { margin: 0 0 8px; font-size: 21px; letter-spacing: -0.015em; }
-    .info-block p { margin: 0 0 10px; color: var(--ink-2); font-size: 15.5px; line-height: 1.6; }
-    .info-block p:last-child { margin-bottom: 0; }
-    .info-block strong { color: var(--ink); font-weight: 600; }
-
-    /* Shop */
-    .shop-shell { max-width: var(--max); margin: 0 auto; padding: 0 22px; scroll-margin-top: 80px; }
-    .main-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 370px;
-      gap: 28px;
-      align-items: start;
-    }
-    .products-column { min-width: 0; }
-    #product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 22px;
-    }
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 16px 16px 18px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-    .card b { display: block; font-size: 18px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.3; margin: 2px 4px 4px; }
-    .card p { margin-left: 4px; margin-right: 4px; }
-    .empty-card-message { grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--ink-2); }
-    .empty-card-message:hover { transform: none; box-shadow: var(--shadow); }
-    .price-line { margin: 0 0 6px; color: var(--blue); font-size: 16px; }
-    .price-line strong { font-weight: 600; }
-    .desc-line { margin: 0; color: var(--ink-2); font-size: 14.5px; line-height: 1.55; }
-    .img-box {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-height: 280px;
-      background: linear-gradient(180deg, #f8fbff 0%, #eaf1fb 100%);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 14px;
-    }
-    .img-box img, .img-box video { width: 100%; height: 100%; object-fit: contain; }
-
-    .product-option-wrap { margin-top: 14px; }
-    .product-option-wrap label.option-title { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; color: var(--ink); }
-    .product-option-note { font-size: 12.5px; color: var(--ink-3); margin-bottom: 8px; }
-    .color-dropdown-toggle {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 14px;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      background: var(--surface-2);
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .color-dropdown-toggle:hover { border-color: var(--ice-2); }
-    .color-dropdown-toggle span:last-child { font-size: 11px; color: var(--ink-3); }
-    .color-dropdown-panel {
-      display: none;
-      margin-top: 8px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--surface);
-      padding: 12px;
-    }
-    .color-dropdown-panel.open { display: block; }
-    .color-checkbox-list { display: grid; gap: 8px; margin-bottom: 10px; }
-    .color-checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--ink); }
-    .color-checkbox-row input[type="checkbox"] { width: auto; margin: 0; accent-color: var(--blue); }
-    .inline-swatch { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(10, 37, 64, 0.18); display: inline-block; flex-shrink: 0; }
-    .selected-color-preview { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .selected-color-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 4px 10px; border-radius: 999px;
-      background: var(--ice); color: var(--ink); font-size: 13px;
-    }
-
-    .add-btn {
-      margin-top: auto;
-      width: 100%;
-      padding: 12px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--ice);
-      color: var(--blue);
-      font: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .card .add-btn { margin-top: auto; }
-    .card .desc-line { margin-bottom: 16px; }
-    .add-btn:hover { background: var(--blue); color: #fff; }
-
-    /* Order panel */
-    .cart-sidebar {
-      position: sticky;
-      top: 78px;
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 26px;
-      box-shadow: var(--shadow-lg);
-    }
-    .cart-sidebar h2 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.02em; }
-    .cart-subtext { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
-    #cart-items { color: var(--ink-3); font-size: 14px; }
-    .cart-item { background: var(--surface-2); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; color: var(--ink); }
-    .cart-item-top { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
-    .cart-item-subline, .cart-color-line { margin-top: 4px; font-size: 13.5px; color: var(--ink-2); line-height: 1.4; }
-    .cart-controls { display: flex; gap: 6px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
-    .qty-btn, .remove-cart-btn {
-      border: 0; border-radius: 999px; cursor: pointer;
-      padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600;
-    }
-    .qty-btn { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
-    .qty-btn:hover { box-shadow: inset 0 0 0 1px var(--blue); color: var(--blue); }
-    .remove-cart-btn { background: transparent; color: var(--danger); margin-left: auto; }
-    .remove-cart-btn:hover { background: #fdecec; }
-    .cart-total {
-      font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
-      margin: 14px 0 6px; padding-top: 14px;
-      border-top: 1px solid var(--line); color: var(--ink);
-    }
-    .checkout-box label { font-weight: 600; display: block; margin: 14px 0 6px; color: var(--ink); font-size: 13px; }
-    .checkout-box input, .checkout-box textarea, .product-color-notes {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      font: inherit;
-      font-size: 15px;
-      background: var(--surface-2);
-      color: var(--ink);
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .product-color-notes { font-size: 14px; min-height: 70px; resize: vertical; }
-    .checkout-box input:focus, .checkout-box textarea:focus, .product-color-notes:focus {
-      outline: none; background: #fff; border-color: var(--blue);
-      box-shadow: 0 0 0 4px rgba(22, 104, 227, 0.15);
-    }
-    .checkout-box input::placeholder, .checkout-box textarea::placeholder, .product-color-notes::placeholder { color: var(--ink-3); }
-    .checkout-box textarea { min-height: 96px; resize: vertical; }
-    .notice-box {
-      background: var(--ice);
-      color: #1d3a60;
-      padding: 14px 16px;
-      border-radius: 14px;
-      margin-top: 16px;
-      font-size: 13.5px;
-      line-height: 1.55;
-    }
-    .notice-box strong { color: var(--navy); }
-    .submit-order-btn {
-      width: 100%; margin-top: 16px; padding: 15px;
-      border: 0; border-radius: 999px;
-      background: var(--blue); color: #fff;
-      font: inherit; font-size: 16px; font-weight: 600; letter-spacing: 0.01em;
-      cursor: pointer; box-shadow: 0 8px 20px rgba(22, 104, 227, 0.3);
-      transition: background 0.2s, transform 0.2s;
-    }
-    .submit-order-btn:hover { background: var(--blue-2); transform: translateY(-1px); }
-    .submit-order-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .status-message { margin-top: 12px; padding: 12px 14px; border-radius: 12px; display: none; font-size: 14px; line-height: 1.45; word-break: break-word; }
-    .status-message.success { display: block; background: #e9f8ef; color: #14532d; }
-    .status-message.error { display: block; background: #fdecec; color: #7f1d1d; }
-
-    @media (max-width: 1000px) {
-      .main-layout { grid-template-columns: 1fr; }
-      .cart-sidebar { position: static; }
-    }
-    @media (max-width: 720px) {
-      .info-grid { grid-template-columns: 1fr; }
-      .info-section-wrap, .shop-shell { padding-left: 16px; padding-right: 16px; }
-      .info-block { padding: 24px; }
-      #product-list { grid-template-columns: 1fr; }
-      #shop-nav { border-radius: 24px; gap: 2px; padding: 4px; }
-      .page-btn { padding: 9px 11px; font-size: 13.5px; }
-    }
-
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jimenim Music</title>
+  <meta name="description" content="Original music by Jimenim. Real talk, good times. Free downloads and lyrics.">
+  <meta property="og:title" content="Jimenim Music">
+  <meta property="og:description" content="Original music by Jimenim. Real talk, good times. Free downloads and lyrics.">
+  <meta property="og:url" content="https://theposseshoppe.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://theposseshoppe.com/images/jimenim-music-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jimenim Music">
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/jimenim-music-og.jpg">
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg">
+  <link rel="preload" href="/images/jimenim-music.jpg" as="image">
+  <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="index.html"><span class="brand-mark">TPS</span>The Posse Shoppe</a>
-      <nav class="toplinks"><a href="index.html" class="current">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="music.html">Music</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 3v12.5a3.5 3.5 0 1 1-2-3.16V7.3l-8 1.6v8.6a3.5 3.5 0 1 1-2-3.16V5.5z"/></svg></span><span class="brand-name">Jimenim <span class="hot">Music</span></span></a>
+      <nav class="toplinks"><a href="index.html" class="current">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="eyebrow">Custom 3D Prints · Laser Engraving</div>
-    <h1 class="grad-wrap">The Posse Shoppe.<br><span class="grad">Made one project at a time.</span></h1>
-    <p class="lead">Custom 3D prints and laser engraving, made by hand in a small home shop. Pick something below or ask for something one-of-a-kind.</p>
-    <nav id="shop-nav">
-      <button class="page-btn active" id="btn-3d" onclick="view('3d')">3D Prints</button>
-      <button class="page-btn" id="btn-laser" onclick="view('laser')">Laser Engraving</button>
-      <button class="page-btn" id="btn-boombox" onclick="view('boombox')">Boombox Builds</button>
-    </nav>
-    <div class="hero-actions" style="margin-top:18px;">
-      <a class="btn btn-link" href="#shop">Shop now ›</a>
-      <a class="btn btn-link" href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Custom request ›</a>
+<section class="banner-hero">
+  <h1 class="sr-only">Jimenim Music</h1>
+  <div class="banner"><img src="/images/jimenim-music.jpg" alt="Jimenim Music" width="1672" height="941"></div>
+  <div class="banner-copy">
+    <p class="tagline"><span class="chrome">Original Music</span><span class="sep">/</span><span class="fire-text">Real Talk</span><span class="sep">/</span><span class="chrome">Good Times</span></p>
+    <p class="legend"><em>A legend in his own mind.</em> <span class="sig">~ Jimenim</span></p>
+    <div class="hero-actions">
+      <button class="btn btn-fire" type="button" onclick="playSong(0)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>
+        Play All
+      </button>
+      <a class="btn btn-volt" href="spiritual.html">Spiritual</a>
     </div>
-  </section>
-
-  <section class="info-section-wrap" id="what-we-do-wrap">
-    <div class="section-head"><h2>What we do.</h2><p>Everything you see here is made in-house, start to finish.</p></div>
-        <div class="info-grid">
-          <div class="info-block">
-            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
-            <h3>About the Shop</h3>
-            <p>I run a small shop from my home focusing on two things: 3D Printing and Laser Engraving. Everything you see here is made by me.</p>
-          </div>
-
-          <div class="info-block">
-            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg></div>
-            <h3>3D Printing</h3>
-            <p>The items in the shop are just the start. If you have a specific part or a project you need printed that isn't listed here, feel free to reach out. I can’t promise I can do every single job, but send me a message with what you’re looking for and I’ll let you know if it’s something I can handle.</p>
-          </div>
-
-          <div class="info-block">
-            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M8 6h8"/><path d="m12 10-3 8h6z"/><path d="M5 21h14"/></svg></div>
-            <h3>Laser Engraving</h3>
-            <p>I use two different types of lasers depending on the job.</p>
-            <p><strong>Wood, Acrylic, Leather, and Leatherette:</strong> These are done on my CO2 laser. This machine can handle larger projects, with a working area up to 40&quot; x 63&quot;.</p>
-            <p><strong>Metal:</strong> For metal items, I use a Fiber laser with an 11&quot; x 11&quot; capacity.</p>
-          </div>
-
-          <div class="info-block">
-            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
-            <h3>Popular Custom Work</h3>
-            <p>One of my most popular items is custom Trucker Caps. I engrave the designs onto adhesive-backed leatherette and apply them to the hats myself using a heat press. If you’d rather do the assembly yourself, I can also sell you just the patches.</p>
-            <p>Whether it's a gift or something for your own use, I’m open to new ideas. If you’ve got a concept for an engraving or a custom patch, hit me up and we’ll see if it’ll work.</p>
-          </div>
-        </div>
-      
-  </section>
-
-  <section class="shop-shell" id="shop">
-    <div class="section-head"><h2>Shop.</h2><p>Browse available items, choose your options, and build your order request.</p></div>
-
-    <div class="main-layout">
-      <div class="products-column">
-        <div id="product-list"></div>
-      </div>
-
-      <aside class="cart-sidebar">
-        <h2>Your Order</h2>
-        <p class="cart-subtext">Add items from the shop, then submit your request and I’ll follow up with details.</p>
-
-        <div id="cart-items">Empty</div>
-        <div class="cart-total" id="cart-total">$0.00</div>
-
-        <div class="checkout-box">
-          <label for="cust-name">Your Name</label>
-          <input type="text" id="cust-name" placeholder="Enter your name" />
-
-          <label for="cust-email">Email</label>
-          <input type="email" id="cust-email" placeholder="Enter your email" />
-
-          <label for="cust-phone">Phone</label>
-          <input type="text" id="cust-phone" placeholder="Enter your phone number" />
-
-          <label for="cust-notes">Custom Requests / Notes</label>
-          <textarea id="cust-notes" placeholder="Request custom designs, custom colors, engraving changes, quantity changes, or anything else here."></textarea>
-
-          <div class="notice-box">
-            Orders submitted here are reviewed and completed <strong>offsite by email</strong>.
-            After you send your order, The Posse Shoppe will contact you to confirm details, answer custom requests, and arrange payment.
-
-            <br><br>
-            <strong>Accepted payment methods:</strong> PayPal, Venmo, Cash App, and Zelle.
-
-            <br><br>
-            You may request <strong>custom designs</strong> and <strong>colors not listed</strong>.
-            If a requested color is unavailable or a design is beyond current design capability, you will be notified by email or phone.
-          </div>
-
-          <button class="submit-order-btn" id="submit-order-btn" onclick="submitOrder()">Send Order Request</button>
-          <div id="order-status" class="status-message"></div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <script>
-    let currentCategory = "3d";
-    let cart = [];
-    let allProducts = [];
-
-    function isVideoFile(filename = "") {
-      const lower = String(filename).trim().toLowerCase();
-      return lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov");
-    }
-
-    function updateHomepageOnlySections() {
-      const whatWeDoWrap = document.getElementById("what-we-do-wrap");
-      if (whatWeDoWrap) {
-        if (currentCategory === "3d") {
-          whatWeDoWrap.classList.remove("hidden");
-        } else {
-          whatWeDoWrap.classList.add("hidden");
-        }
-      }
-
-      let backBtn = document.getElementById("btn-back-to-shop");
-
-      if (currentCategory === "3d") {
-        if (backBtn) backBtn.remove();
-      } else {
-        if (!backBtn) {
-          const nav = document.getElementById("shop-nav");
-          backBtn = document.createElement("button");
-          backBtn.type = "button";
-          backBtn.id = "btn-back-to-shop";
-          backBtn.className = "page-btn";
-          backBtn.textContent = "‹ Back to Shop";
-          backBtn.onclick = function () {
-            view("3d");
-          };
-          nav.appendChild(backBtn);
-        }
-      }
-    }
-
-    function view(v) {
-      currentCategory = v;
-      document.getElementById("btn-3d").classList.remove("active");
-      document.getElementById("btn-laser").classList.remove("active");
-      document.getElementById("btn-boombox").classList.remove("active");
-      document.getElementById("btn-" + v).classList.add("active");
-      updateHomepageOnlySections();
-      renderShop();
-    }
-
-    async function loadProducts() {
-      try {
-        const response = await fetch("/.netlify/functions/products", { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        allProducts = Array.isArray(data)
-          ? data
-          : Array.isArray(data.products)
-            ? data.products
-            : [];
-
-        renderShop();
-      } catch (error) {
-        console.error("Failed to load products:", error);
-        document.getElementById("product-list").innerHTML = `
-          <div class="card empty-card-message">
-            <b>Could not load products</b>
-            <p>Please try again in a minute.</p>
-          </div>
-        `;
-      }
-    }
-
-    function getCurrentProducts() {
-      return allProducts.filter((product) => product.category === currentCategory);
-    }
-
-    function buildMediaPath(item) {
-      const filename = item.img || "";
-      const videoFile = isVideoFile(filename);
-      const useVideoFolder = item.mediaType === "video" || videoFile;
-
-      if (useVideoFolder) {
-        return `/videos/${item.category}/${filename}`;
-      }
-
-      return `/images/${item.category}/${filename}`;
-    }
-
-    function buildMedia(item) {
-      const mediaPath = escapeHtml(buildMediaPath(item));
-      const treatAsVideo = item.mediaType === "video" || isVideoFile(item.img);
-
-      if (treatAsVideo) {
-        return `
-          <video controls muted preload="metadata" playsinline onerror="this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Video not found</div>';">
-            <source src="${mediaPath}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        `;
-      }
-
-      return `
-        <img
-          src="${mediaPath}"
-          alt="${escapeHtml(item.name || "Product image")}"
-          onerror="this.onerror=null; this.closest('.img-box').innerHTML='<div style=&quot;padding:20px;text-align:center;color:#999;&quot;>Image not found</div>';"
-        >
-      `;
-    }
-
-    function buildColorChooser(item, itemIndex) {
-      if (!item.hasColors || !item.colors || !item.colors.length) return "";
-
-      const colorRows = item.colors.map((color, colorIndex) => `
-        <label class="color-checkbox-row">
-          <input
-            type="checkbox"
-            name="product-color-${itemIndex}"
-            value="${colorIndex}"
-            onchange="handleColorChange(${itemIndex})"
-          />
-          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
-          <span>${escapeHtml(color.name)}</span>
-        </label>
-      `).join("");
-
-      return `
-        <div class="product-option-wrap">
-          <label class="option-title">Choose colors</label>
-          <div class="product-option-note">Select a max of 2 colors.</div>
-
-          <button type="button" class="color-dropdown-toggle" onclick="toggleColorDropdown(${itemIndex})">
-            <span id="color-toggle-text-${itemIndex}">Choose colors</span>
-            <span>▼</span>
-          </button>
-
-          <div class="color-dropdown-panel" id="color-dropdown-${itemIndex}">
-            <div class="color-checkbox-list">
-              ${colorRows}
-            </div>
-
-            <label class="option-title" for="color-notes-${itemIndex}" style="margin-top:10px;">Color Notes / Placement Notes</label>
-            <textarea
-              id="color-notes-${itemIndex}"
-              class="product-color-notes"
-              placeholder="Describe color placement"
-            ></textarea>
-          </div>
-
-          <div class="selected-color-preview" id="color-preview-${itemIndex}"></div>
-        </div>
-      `;
-    }
-
-    function toggleColorDropdown(itemIndex) {
-      const panel = document.getElementById(`color-dropdown-${itemIndex}`);
-      if (!panel) return;
-      panel.classList.toggle("open");
-    }
-
-    function handleColorChange(itemIndex) {
-      enforceMaxTwoColors(itemIndex);
-      updateSelectedColorPreview(itemIndex);
-      updateColorToggleText(itemIndex);
-    }
-
-    function enforceMaxTwoColors(itemIndex) {
-      const checks = Array.from(document.querySelectorAll(`input[name="product-color-${itemIndex}"]`));
-      const checked = checks.filter((checkbox) => checkbox.checked);
-
-      if (checked.length <= 2) return;
-
-      const lastChecked = checked[checked.length - 1];
-      lastChecked.checked = false;
-      alert("Please select a maximum of 2 colors.");
-    }
-
-    function updateSelectedColorPreview(itemIndex) {
-      const items = getCurrentProducts();
-      const item = items[itemIndex];
-      const preview = document.getElementById(`color-preview-${itemIndex}`);
-
-      if (!item || !preview || !item.colors || !item.colors.length) return;
-
-      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
-
-      if (!selectedColors.length) {
-        preview.innerHTML = "";
-        return;
-      }
-
-      preview.innerHTML = selectedColors.map((color) => `
-        <span class="selected-color-chip">
-          <span class="inline-swatch" style="background:${escapeHtml(color.hex)};"></span>
-          <span>${escapeHtml(color.name)}</span>
-        </span>
-      `).join("");
-    }
-
-    function updateColorToggleText(itemIndex) {
-      const items = getCurrentProducts();
-      const item = items[itemIndex];
-      const toggleText = document.getElementById(`color-toggle-text-${itemIndex}`);
-      if (!item || !toggleText) return;
-
-      const selectedColors = getSelectedColorsForProduct(itemIndex, item);
-
-      if (!selectedColors.length) {
-        toggleText.textContent = "Choose colors";
-        return;
-      }
-
-      toggleText.textContent = selectedColors.map((color) => color.name).join(", ");
-    }
-
-    function getSelectedColorsForProduct(itemIndex, item) {
-      const checks = document.querySelectorAll(`input[name="product-color-${itemIndex}"]:checked`);
-      return Array.from(checks)
-        .map((checkbox) => item.colors[Number(checkbox.value)])
-        .filter(Boolean)
-        .map((color) => ({ name: color.name, hex: color.hex }));
-    }
-
-    function getColorNotesForProduct(itemIndex) {
-      const field = document.getElementById(`color-notes-${itemIndex}`);
-      return field ? field.value.trim() : "";
-    }
-
-    function addToCart(itemId, itemIndex) {
-      const items = getCurrentProducts();
-      const item = items.find((x) => String(x.id) === String(itemId));
-      if (!item) return;
-
-      let selectedColors = [];
-      let colorNotes = "";
-
-      if (item.hasColors && item.colors && item.colors.length) {
-        selectedColors = getSelectedColorsForProduct(itemIndex, item);
-        colorNotes = getColorNotesForProduct(itemIndex);
-
-        if (!selectedColors.length) {
-          alert("Please select at least one color for this item.");
-          return;
-        }
-      }
-
-      const colorKey = selectedColors
-        .map((color) => `${color.name}|${color.hex}`)
-        .sort()
-        .join("||");
-
-      const noteKey = colorNotes.trim().toLowerCase();
-
-      const existingIndex = cart.findIndex((cartItem) =>
-        String(cartItem.id) === String(item.id) &&
-        cartItem.category === item.category &&
-        (cartItem.colorKey || "") === colorKey &&
-        (cartItem.noteKey || "") === noteKey
-      );
-
-      if (existingIndex !== -1) {
-        cart[existingIndex].qty += 1;
-      } else {
-        cart.push({
-          id: item.id,
-          category: item.category,
-          name: item.name,
-          price: Number(item.price),
-          qty: 1,
-          selectedColors,
-          colorNotes,
-          colorKey,
-          noteKey
-        });
-      }
-
-      renderCart();
-    }
-
-    function changeQty(index, delta) {
-      if (!cart[index]) return;
-      cart[index].qty += delta;
-
-      if (cart[index].qty <= 0) {
-        cart.splice(index, 1);
-      }
-
-      renderCart();
-    }
-
-    function removeCartItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
-
-    function renderCart() {
-      const cartItems = document.getElementById("cart-items");
-      const cartTotal = document.getElementById("cart-total");
-
-      if (!cart.length) {
-        cartItems.innerHTML = "Empty";
-        cartTotal.textContent = "$0.00";
-        return;
-      }
-
-      let total = 0;
-
-      cartItems.innerHTML = cart.map((item, index) => {
-        const lineTotal = item.price * item.qty;
-        total += lineTotal;
-
-        const selectedColorNames = Array.isArray(item.selectedColors) && item.selectedColors.length
-          ? item.selectedColors.map((color) => escapeHtml(color.name)).join(", ")
-          : "";
-
-        return `
-          <div class="cart-item">
-            <div class="cart-item-top">
-              <div>
-                <strong>${escapeHtml(item.name)}</strong>
-                ${selectedColorNames ? `<div class="cart-color-line"><strong>Colors:</strong> ${selectedColorNames}</div>` : ""}
-                ${item.colorNotes ? `<div class="cart-item-subline"><strong>Notes:</strong> ${escapeHtml(item.colorNotes)}</div>` : ""}
-              </div>
-              <div><strong>$${lineTotal.toFixed(2)}</strong></div>
-            </div>
-
-            <div class="cart-controls">
-              <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
-              <span>${item.qty}</span>
-              <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
-              <button class="remove-cart-btn" onclick="removeCartItem(${index})">REMOVE</button>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      cartTotal.textContent = `Estimated Total: $${total.toFixed(2)}`;
-    }
-
-    function showOrderStatus(type, message) {
-      const box = document.getElementById("order-status");
-      box.className = `status-message ${type}`;
-      box.innerHTML = message;
-    }
-
-    function clearOrderForm() {
-      document.getElementById("cust-name").value = "";
-      document.getElementById("cust-email").value = "";
-      document.getElementById("cust-phone").value = "";
-      document.getElementById("cust-notes").value = "";
-    }
-
-    async function submitOrder() {
-      const name = document.getElementById("cust-name").value.trim();
-      const email = document.getElementById("cust-email").value.trim();
-      const phone = document.getElementById("cust-phone").value.trim();
-      const notes = document.getElementById("cust-notes").value.trim();
-      const submitBtn = document.getElementById("submit-order-btn");
-
-      if (!cart.length) {
-        showOrderStatus("error", "Please add at least one item to your order.");
-        return;
-      }
-
-      if (!name) {
-        showOrderStatus("error", "Please enter your name.");
-        return;
-      }
-
-      if (!email && !phone) {
-        showOrderStatus("error", "Please enter an email address, a phone number, or both.");
-        return;
-      }
-
-      const orderTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-      const payload = {
-        customer: { name, email, phone },
-        notes,
-        paymentMethods: ["PayPal", "Venmo", "Cash App", "Zelle"],
-        offsiteFulfillment: true,
-        items: cart.map((item) => ({
-          name: item.name,
-          category: item.category,
-          qty: item.qty,
-          price: item.price,
-          selectedColor: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.name).join(", ") : "",
-          colorHex: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => color.hex).join(", ") : "",
-          selectedColors: Array.isArray(item.selectedColors) ? item.selectedColors.map((color) => ({
-            name: color.name,
-            hex: color.hex
-          })) : [],
-          colorNotes: item.colorNotes || ""
-        })),
-        total: Number(orderTotal.toFixed(2))
-      };
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "SENDING...";
-      showOrderStatus("success", "Sending your order request...");
-
-      try {
-        const response = await fetch("/.netlify/functions/submit-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
-
-        let data = {};
-        try {
-          data = await response.json();
-        } catch {
-          data = {};
-        }
-
-        if (!response.ok || !data.success) {
-          throw new Error(data.message || `HTTP ${response.status}`);
-        }
-
-        cart = [];
-        renderCart();
-        clearOrderForm();
-
-        showOrderStatus(
-          "success",
-          "Your order request was sent successfully.<br><br>" +
-          "Please expect an email from The Posse Shoppe to confirm details, custom requests, and payment options. " +
-          "Orders are completed offsite. You may pay with PayPal, Venmo, Cash App, or Zelle."
-        );
-      } catch (error) {
-        showOrderStatus(
-          "error",
-          "There was a problem sending your order.<br><br>" +
-          escapeHtml(error && error.message ? error.message : "Unknown error")
-        );
-        console.error(error);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send Order Request";
-      }
-    }
-
-    function renderShop() {
-      const list = document.getElementById("product-list");
-      const items = getCurrentProducts();
-
-      if (items.length === 0) {
-        list.innerHTML = `
-          <div class="card empty-card-message">
-            <b>No products added yet</b>
-            <p>Add products from the merchant page.</p>
-          </div>
-        `;
-        return;
-      }
-
-      list.innerHTML = items.map((item, index) => `
-        <div class="card">
-          <div class="img-box">
-            ${buildMedia(item)}
-          </div>
-          <b>${escapeHtml(item.name)}</b>
-          <p class="price-line"><strong>$${Number(item.price).toFixed(2)}</strong></p>
-          <p class="desc-line">${escapeHtml(item.desc || "")}</p>
-          ${buildColorChooser(item, index)}
-          <button class="add-btn" onclick="addToCart('${escapeHtml(String(item.id))}', ${index})">Add to Order</button>
-        </div>
-      `).join("");
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
-    }
-
-    window.onload = async () => {
-      renderCart();
-      updateHomepageOnlySections();
-      await loadProducts();
-    };
-  </script>
-  <footer class="site-footer">
-    <a href="index.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="music.html">Music</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
-    <div style="margin-top:10px;">© The Posse Shoppe · Custom 3D prints and laser engraving</div>
+  </div>
+</section>
+
+<main class="music-wrap">
+  <div class="section-head">
+    <h2><span class="chrome">Free Music</span> <span class="fire-text">Downloads</span></h2>
+    <svg class="bolt-line" viewBox="0 0 180 14" aria-hidden="true"><defs><linearGradient id="bl" x1="0" x2="1"><stop offset="0" stop-color="#2fa8ff" stop-opacity="0"/><stop offset=".3" stop-color="#2fa8ff"/><stop offset=".7" stop-color="#ff7a18"/><stop offset="1" stop-color="#ff7a18" stop-opacity="0"/></linearGradient></defs><path d="M0 7H72l8-6-3 8 12-5-7 9 9-6h89" fill="none" stroke="url(#bl)" stroke-width="2" stroke-linejoin="round"/></svg>
+    <p>Tap any song to play it. Download it free or read along with the lyrics.</p>
+  </div>
+  <div class="song-grid" id="song-grid"></div>
+  <p class="note">Free downloads from The Posse Shoppe.</p>
+</main>
+
+<footer class="site-footer">
+    <a href="index.html">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="spiritual.html">Spiritual</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
+    <div style="margin-top:12px;">© Jimenim Music · The Posse Shoppe</div>
   </footer>
+
+<div class="player" id="player" aria-live="polite">
+  <div class="player-inner">
+    <img class="player-art" id="p-art" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+    <div class="player-meta">
+      <div class="player-title" id="p-title">Pick a song</div>
+      <div class="player-artist">Jimenim</div>
+    </div>
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="pbtn" type="button" onclick="step(-1)" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 6.2v11.6a1 1 0 0 1-1.54.84L10 13.2a1.4 1.4 0 0 1 0-2.4l8.46-5.44A1 1 0 0 1 20 6.2z"/></svg>
+        </button>
+        <button class="pbtn pbtn-main" type="button" id="p-toggle" onclick="togglePlay()" aria-label="Play">
+          <svg id="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg>
+          <svg id="ic-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="pbtn" type="button" onclick="step(1)" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 6.2v11.6a1 1 0 0 0 1.54.84L14 13.2a1.4 1.4 0 0 0 0-2.4L5.54 5.36A1 1 0 0 0 4 6.2z"/></svg>
+        </button>
+      </div>
+      <div class="player-progress">
+        <span id="p-cur">0:00</span>
+        <input type="range" id="p-seek" min="0" max="1000" value="0" aria-label="Seek">
+        <span id="p-dur">0:00</span>
+      </div>
+    </div>
+    <div class="player-actions">
+      <a class="chip" id="p-lyrics" href="#">Lyrics</a>
+      <a class="chip chip-fire" id="p-dl" href="#" download>Download</a>
+    </div>
+  </div>
+  <audio id="audio" preload="none"></audio>
+</div>
+
+<script>
+  const SONGS = [
+  {
+    "title": "We'll Be Yo Huckleberry",
+    "image": "/music/huckleberry-cover.png",
+    "audio": "/music/well-be-yo-huckleberry.m4a",
+    "lyrics": "/lyrics/well-be-yo-huckleberry.html"
+  },
+  {
+    "title": "Because I Said So",
+    "image": "/music/because-i-said-so.png",
+    "audio": "/music/because-I-said-so.mp3",
+    "lyrics": "/lyrics/because-i-said-so.html"
+  },
+  {
+    "title": "Don't Let The Old Man In",
+    "image": "/music/dont-let-the-old-man-in.png",
+    "audio": "/music/dont-let-the-old-man-in.mp3",
+    "lyrics": "/lyrics/dont-let-the-old-man-in.html"
+  },
+  {
+    "title": "Time Keeps Tickin",
+    "image": "/music/time-keeps-tickin.png",
+    "audio": "/music/time-keeps-tickin.m4a",
+    "lyrics": "/lyrics/time-keeps-tickin.html"
+  },
+  {
+    "title": "Gimme Back My Business",
+    "image": "/music/gimme-back-my-business.png",
+    "audio": "/music/Gimme Back my Business.mp3",
+    "lyrics": "/lyrics/gimme-back-my-business.html"
+  },
+  {
+    "title": "Allergic to the Truth",
+    "image": "/music/allergic-to-the-truth.png",
+    "audio": "/music/allergic-to-the-truth.mp3",
+    "lyrics": "/lyrics/allergic-to-the-truth.html"
+  },
+  {
+    "title": "Even Jesus Wept",
+    "image": "/music/even-jesus-wept.png",
+    "audio": "/music/even-jesus-wept.mp3",
+    "lyrics": "/lyrics/even-jesus-wept.html"
+  },
+  {
+    "title": "God Will Put You Back Together",
+    "image": "/music/God-will-put-you-back-together.png",
+    "audio": "/music/God-will-put-you-back-together.mp3",
+    "lyrics": null
+  },
+  {
+    "title": "It's Really a You Problem",
+    "image": "/music/It's really a you  problem.png",
+    "audio": "/music/It's really a you  problem.mp3",
+    "lyrics": "/lyrics/Its really a you problem.html"
+  },
+  {
+    "title": "Who Told You That",
+    "image": "/music/Who Told You That.png",
+    "audio": "/music/Who Told You That.mp3",
+    "lyrics": "/lyrics/who-told-you-that.html"
+  },
+  {
+    "title": "One Miracle",
+    "image": "/music/one miracle.png",
+    "audio": "/music/one miracle.mp3",
+    "lyrics": "/lyrics/one-miracle.html"
+  },
+  {
+    "title": "Bad Ass Nilla",
+    "image": "/music/bad-ass-nilla.png",
+    "audio": "/music/bad-ass-nilla.mp3",
+    "lyrics": "/lyrics/bad-ass-nilla.html"
+  },
+  {
+    "title": "Rest of my Life",
+    "image": "/music/rest-of-my-life.png",
+    "audio": "/music/rest-of-my-life.mp3",
+    "lyrics": "/lyrics/rest-of-my-life.html"
+  },
+  {
+    "title": "shotgun saint",
+    "image": "/music/shotgun-saint.png",
+    "audio": "/music/shotgun-saint.mp3",
+    "lyrics": "/lyrics/shotgun-saint.html"
+  }
+];
+
+  const grid = document.getElementById("song-grid");
+  const audio = document.getElementById("audio");
+  const player = document.getElementById("player");
+  let current = -1;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+  function url(p) { return encodeURI(p).replace(/'/g, "%27"); }
+
+  grid.innerHTML = SONGS.map((s, i) => `
+    <article class="song" id="song-${i}">
+      <button class="song-art" type="button" onclick="playSong(${i})" aria-label="Play ${esc(s.title)}">
+        <img src="${url(s.image)}" alt="${esc(s.title)}" loading="lazy">
+        <span class="song-play">
+          <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg>
+          <span class="eq"><i></i><i></i><i></i></span>
+        </span>
+      </button>
+      <div class="song-body">
+        <div>
+          <h3 class="song-title">${esc(s.title)}</h3>
+          <div class="song-artist">Jimenim</div>
+        </div>
+        <div class="song-links">
+          ${s.lyrics ? `<a class="chip" href="${url(s.lyrics)}">Lyrics</a>` : ""}
+          <a class="chip chip-fire" href="${url(s.audio)}" download>Download</a>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  function fmt(t) {
+    if (!isFinite(t) || t < 0) return "0:00";
+    const m = Math.floor(t / 60), s = Math.floor(t % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  function setPlayingUI() {
+    const playing = !audio.paused;
+    document.getElementById("ic-play").style.display = playing ? "none" : "";
+    document.getElementById("ic-pause").style.display = playing ? "" : "none";
+    document.querySelectorAll(".song").forEach((el, i) => {
+      el.classList.toggle("is-current", i === current);
+      el.classList.toggle("is-playing", i === current && playing);
+    });
+  }
+
+  function playSong(i) {
+    if (i === current) { togglePlay(); return; }
+    current = i;
+    const s = SONGS[i];
+    audio.src = url(s.audio);
+    document.getElementById("p-art").src = url(s.image);
+    document.getElementById("p-title").textContent = s.title;
+    const ly = document.getElementById("p-lyrics");
+    if (s.lyrics) { ly.href = url(s.lyrics); ly.style.display = ""; } else { ly.style.display = "none"; }
+    document.getElementById("p-dl").href = url(s.audio);
+    player.classList.add("show");
+    document.body.classList.add("has-player");
+    audio.play().catch(() => {});
+    setPlayingUI();
+  }
+
+  function togglePlay() {
+    if (current < 0) { playSong(0); return; }
+    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+  }
+
+  function step(d) {
+    const n = current < 0 ? 0 : (current + d + SONGS.length) % SONGS.length;
+    current = -2; // force load
+    playSong(n);
+  }
+
+  const seek = document.getElementById("p-seek");
+  let seeking = false;
+  audio.addEventListener("timeupdate", () => {
+    document.getElementById("p-cur").textContent = fmt(audio.currentTime);
+    if (!seeking && audio.duration) seek.value = Math.round(audio.currentTime / audio.duration * 1000);
+    seek.style.setProperty("--pct", (seek.value / 10) + "%");
+  });
+  audio.addEventListener("loadedmetadata", () => { document.getElementById("p-dur").textContent = fmt(audio.duration); });
+  audio.addEventListener("play", setPlayingUI);
+  audio.addEventListener("pause", setPlayingUI);
+  audio.addEventListener("ended", () => step(1));
+  seek.addEventListener("input", () => { seeking = true; seek.style.setProperty("--pct", (seek.value / 10) + "%"); });
+  seek.addEventListener("change", () => {
+    if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
+    seeking = false;
+  });
+</script>
+
 </body>
 </html>
