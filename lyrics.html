@@ -37,7 +37,8 @@
   </footer>
 <script>
 (function () {
-  const f = new URLSearchParams(location.search).get("f") || "";
+  let f = new URLSearchParams(location.search).get("f") || "";
+  if (f && !/\.html$/i.test(f)) f += ".html";
   const ok = /^\/lyrics\/[^?#]+\.html$/i.test(f) && !f.includes("..");
   const box = document.getElementById("lv-lyrics");
   if (!ok) { box.textContent = "Lyrics not found."; return; }
@@ -47,7 +48,7 @@
       const d = new DOMParser().parseFromString(t, "text/html");
       const h = d.querySelector("h1");
       const l = d.querySelector(".lyrics");
-      const title = h ? h.textContent.trim() : "Lyrics";
+      const title = new URLSearchParams(location.search).get("t") || (h ? h.textContent.trim() : "Lyrics");
       document.getElementById("lv-title").textContent = title;
       document.title = title + " - Lyrics - Jimenim Music";
       box.textContent = l ? l.textContent.replace(/\*\*(\[[^\]\n]+\])\*\*/g, "$1").trim() : "Lyrics not found.";

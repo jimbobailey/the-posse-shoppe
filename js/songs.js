@@ -66,7 +66,7 @@
     });
   }
 
-  function lyricsLink(p) { return "/lyrics.html?f=" + encodeURIComponent(abs(p)); }
+  function lyricsLink(p, t) { return "/lyrics.html?f=" + encodeURIComponent(abs(p)) + (t ? "&t=" + encodeURIComponent(t) : ""); }
 
   function render() {
     grid.innerHTML = SONGS.map((s, i) => `
@@ -84,7 +84,7 @@
             <div class="song-artist">Jimenim</div>
           </div>
           <div class="song-links">
-            ${s.lyrics ? `<a class="chip" href="${lyricsLink(s.lyrics)}">Lyrics</a>` : ""}
+            ${s.lyrics ? `<a class="chip" href="${lyricsLink(s.lyrics, s.title)}">Lyrics</a>` : ""}
             <a class="chip chip-fire" href="${url(s.download || s.audio)}" download>Download</a>
           </div>
         </div>
@@ -114,7 +114,7 @@
     document.getElementById("p-art").src = url(s.image);
     document.getElementById("p-title").textContent = s.title;
     const ly = document.getElementById("p-lyrics");
-    if (s.lyrics) { ly.href = lyricsLink(s.lyrics); ly.style.display = ""; } else { ly.style.display = "none"; }
+    if (s.lyrics) { ly.href = lyricsLink(s.lyrics, s.title); ly.style.display = ""; } else { ly.style.display = "none"; }
     document.getElementById("p-dl").href = url(s.download || s.audio);
     player.classList.add("show");
     document.body.classList.add("has-player");
