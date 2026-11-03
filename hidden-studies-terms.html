@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Hidden Studies</title>
+  <meta name="description" content="Terms of Service for Hidden Studies and the Hidden Studies Uploader app." />
+
+  <meta property="og:title" content="Hidden Studies" />
+  <meta property="og:description" content="Studies that got buried. Trials nobody finished. We dig them up. Links to every real study." />
+  <meta property="og:url" content="https://theposseshoppe.com/hidden-studies-terms" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://theposseshoppe.com/images/hidden-studies/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hidden Studies" />
+  <meta name="twitter:description" content="Studies that got buried. Trials nobody finished. We dig them up." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/hidden-studies/og.jpg" />
+
+  <link rel="icon" type="image/jpeg" href="/images/hidden-studies/logo.jpg" />
+  <link rel="stylesheet" href="/css/site.css">
+  <style>
+    :root { --hs-blue: #22b4ff; --hs-pink: #f03ce6; --hs-navy: #00003a; --hs-green: #3cf0a0; }
+    .hs-wrap { max-width: 980px; margin: 0 auto; padding: 0 18px; }
+    .hs-hero { text-align: center; padding: 44px 0 10px; }
+    .hs-logo { width: min(300px, 70vw); border-radius: 50%; display: block; margin: 0 auto;
+      box-shadow: 0 0 0 1px rgba(34,180,255,.35), 0 0 60px rgba(240,60,230,.25), 0 0 120px rgba(34,180,255,.18); }
+    .hs-hero h1 { font-family: var(--display); font-weight: 400; letter-spacing: .03em; margin: 26px 0 0;
+      font-size: clamp(54px, 10vw, 104px); line-height: .92;
+      background: linear-gradient(90deg, var(--hs-blue), #b07bff 50%, var(--hs-pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hs-tag { font-size: clamp(17px, 2.4vw, 21px); color: var(--ink); margin: 14px auto 0; max-width: 640px; font-weight: 600; }
+    .hs-sub { color: var(--ink-2); max-width: 640px; margin: 10px auto 0; }
+    .hs-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+    .hs-btn { display: inline-block; padding: 12px 20px; border-radius: 999px; font-weight: 700; font-size: 15px; color: #fff;
+      border: 1px solid rgba(34,180,255,.6); background: rgba(34,180,255,.12); }
+    .hs-btn.pink { border-color: rgba(240,60,230,.6); background: rgba(240,60,230,.12); }
+    .hs-btn:hover { box-shadow: 0 0 24px rgba(34,180,255,.35); }
+
+    .hs-h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 52px); letter-spacing: .03em; margin: 64px 0 6px; text-align: center; }
+    .hs-h2 .b { color: var(--hs-blue); } .hs-h2 .p { color: var(--hs-pink); }
+    .hs-intro { text-align: center; color: var(--ink-2); max-width: 680px; margin: 0 auto 26px; }
+
+    .hs-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .hs-step, .hs-card, .hs-box { background: linear-gradient(180deg, rgba(0,0,58,.55), rgba(15,17,22,.9)); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+    .hs-step b { display: block; font-size: 17px; margin-bottom: 6px; }
+    .hs-step .n { font-family: var(--display); font-size: 34px; color: var(--hs-green); line-height: 1; }
+    .hs-step p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+    .hs-filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+    .hs-filters button { font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+    .hs-filters button.on { color: #fff; border-color: var(--hs-blue); background: rgba(34,180,255,.15); }
+    .hs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+    .hs-card { display: flex; flex-direction: column; gap: 10px; }
+    .hs-card .top { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .hs-pill { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); }
+    .hs-pill.published { color: var(--hs-blue); border-color: rgba(34,180,255,.5); }
+    .hs-pill.ongoing { color: var(--hs-green); border-color: rgba(60,240,160,.5); }
+    .hs-pill.unpublished { color: #ffcc55; border-color: rgba(255,204,85,.5); }
+    .hs-pill.abandoned { color: #ff7a7a; border-color: rgba(255,122,122,.5); }
+    .hs-pill.case { color: #c9a7ff; border-color: rgba(201,167,255,.5); }
+    .hs-card h3 { margin: 2px 0 0; font-size: 21px; line-height: 1.25; }
+    .hs-facts { margin: 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-2); }
+    .hs-facts li { padding: 3px 0; } .hs-facts b { color: var(--ink); font-weight: 600; }
+    .hs-result { font-size: 15px; color: var(--ink); background: rgba(255,255,255,.03); border-left: 3px solid var(--hs-pink); padding: 10px 12px; border-radius: 8px; margin: 0; }
+    .hs-rating { font-size: 14px; color: var(--ink-2); margin: 0; }
+    .hs-rating b { text-transform: uppercase; letter-spacing: .05em; }
+    .r-strong { color: var(--hs-green); } .r-moderate { color: var(--hs-blue); } .r-early { color: #ffcc55; } .r-weak, .r-single { color: #ff7a7a; }
+    .hs-links { display: flex; flex-direction: column; gap: 6px; margin-top: auto; padding-top: 6px; }
+    .hs-links a { color: var(--hs-blue); font-weight: 600; font-size: 15px; word-break: break-word; }
+    .hs-links a::after { content: " \2197"; }
+    .hs-links a.tt { color: var(--hs-pink); }
+    .hs-empty { text-align: center; color: var(--ink-3); padding: 30px; }
+
+    .hs-box h3 { margin: 0 0 8px; font-size: 20px; }
+    .hs-box p, .hs-box li { color: var(--ink-2); font-size: 15px; }
+    .hs-box ol { margin: 8px 0 0; padding-left: 20px; }
+    .hs-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .hs-warn { color: #ffcc55 !important; font-weight: 600; }
+
+    .hs-form label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .hs-form input[type=text] { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 1px solid rgba(34,180,255,.4); border-radius: 12px; padding: 12px 14px; }
+    .hs-form input[type=text]:focus { outline: none; box-shadow: 0 0 0 3px rgba(34,180,255,.25); }
+    .hs-form button { margin-top: 12px; font: inherit; font-weight: 700; font-size: 16px; color: #fff; background: linear-gradient(90deg, #1a8fe0, #c035c0); border: 0; border-radius: 999px; padding: 12px 22px; cursor: pointer; }
+    .hs-form small { display: block; color: var(--ink-3); margin-top: 8px; }
+    .hs-thanks { display: none; color: var(--hs-green); font-weight: 700; margin-top: 12px; }
+    .hs-hide { position: absolute; left: -5000px; }
+
+    .hs-note { max-width: 640px; margin: 26px auto 0; text-align: left; font-size: 15px; color: var(--ink-2); background: rgba(60,240,160,.06); border: 1px solid rgba(60,240,160,.3); border-radius: 14px; padding: 14px 16px; }
+    .hs-note b { display: block; color: var(--hs-green); margin-bottom: 4px; }
+    .hs-disclaimer { margin-top: 56px; text-align: center; color: var(--ink-3); font-size: 14px; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .hs-disclaimer b { color: var(--ink-2); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="shop.html"><span class="brand-mark">TPS</span><span class="brand-name">The Posse <span class="hot">Shoppe</span></span></a>
+      <nav class="toplinks"><a href="index.html">Music</a><a href="spiritual.html">Spiritual</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="/hidden-studies">Hidden Studies</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+    </div>
+  </header>
+
+  <main class="hs-wrap" style="max-width:760px;">
+    <h1 class="hs-h2" style="text-align:left;margin-top:40px;">Terms of Service</h1>
+    <p style="color:var(--ink-3);">Last updated: November 3, 2026</p>
+    <div class="hs-legal">
+<p>These terms cover <b>Hidden Studies</b> (the TikTok account @hidden_studies, the Hidden Studies page on theposseshoppe.com, and the "Hidden Studies Uploader" app). Hidden Studies is run by one person, Jimenim, as a personal project.</p>
+<h2>What Hidden Studies is</h2>
+<p>Hidden Studies shares short summaries of published studies, ongoing trials, finished-but-unpublished trials and abandoned trials, with links to the original sources. It is for information only. It is not medical advice, and it does not recommend that anyone take, start or stop any treatment, supplement or medicine. Talk to your doctor about your own health.</p>
+<h2>Accuracy</h2>
+<p>Research is gathered with the help of AI tools and checked by a person, but mistakes can happen. Always open the original study and read it yourself. Hidden Studies is provided "as is," without any promise that it is complete or error-free.</p>
+<h2>The Hidden Studies Uploader app</h2>
+<p>The Hidden Studies Uploader is a private tool used only by the owner of @hidden_studies. It sends videos the owner made to the owner's own TikTok inbox as drafts. The owner reviews every draft and posts it by hand inside TikTok. The app does not post for anyone else and is not offered to the public.</p>
+<h2>Topic suggestions</h2>
+<p>If you send a topic through the suggestion box, please send only the topic. Don't include your name, contact details or personal health information. Suggestions may be used to pick future research topics.</p>
+<h2>Links to other sites</h2>
+<p>Hidden Studies links to studies and trial registries run by other organizations. We don't control those sites and aren't responsible for their content.</p>
+<h2>Changes</h2>
+<p>These terms may be updated. The date at the top shows the latest version.</p>
+<h2>Contact</h2>
+<p>Questions: <a href="mailto:theposseshoppe@gmail.com?subject=Hidden%20Studies">theposseshoppe@gmail.com</a></p>
+</div>
+  </main>
+  <style>.hs-legal h2{font-size:20px;margin:28px 0 8px;} .hs-legal p,.hs-legal li{color:var(--ink-2);font-size:16px;} .hs-legal a{color:var(--hs-blue);}</style>
+  <footer class="site-footer">
+    <a href="index.html">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="spiritual.html">Spiritual</a><a href="/hidden-studies">Hidden Studies</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
+    <div style="margin-top:12px;">© Jimenim Music · The Posse Shoppe</div>
+  </footer>
+
+  <script src="/js/zoom.js"></script>
+</body>
+</html>
