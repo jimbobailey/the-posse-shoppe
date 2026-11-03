@@ -1,0 +1,22 @@
+{
+  "updated": "2026-11-02",
+  "studies": [
+    {
+      "id": "plaque-02-nattokinase",
+      "topic": "Arterial Plaque",
+      "title": "Nattokinase and Arterial Plaque",
+      "status": "published",
+      "tested": "Nattokinase, an enzyme from natto (fermented soybeans), 6,000 FU a day",
+      "who": "1,062 participants",
+      "length": "26 weeks",
+      "result": "The study reported a reduction in common carotid IMT (the thickness of the artery wall in the neck) and in plaque size.",
+      "rating": "early",
+      "rating_note": "Hermes rates this evidence as early: promising, not proven.",
+      "links": [
+        {"label": "The study (1,062 participants)", "url": "https://www.researchgate.net/publication/362469939_Effective_management_of_atherosclerosis_progress_and_hyperlipidemia_with_nattokinase_A_clinical_study_with_1062_participants"},
+        {"label": "Ongoing trial: nattokinase and inflammation markers", "url": "https://clinicaltrials.gov/study/NCT06183307"}
+      ],
+      "tiktok": ""
+    }
+  ]
+}

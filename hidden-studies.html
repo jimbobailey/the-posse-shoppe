@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Studies | The Posse Shoppe</title>
+  <meta name="description" content="Health studies most people never heard of: published, ongoing, unfinished and abandoned trials, dug up by my AI research agent Hermes. Real links to every study. Info only, not medical advice." />
+
+  <meta property="og:title" content="Hidden Studies" />
+  <meta property="og:description" content="Studies that got buried. Trials nobody finished. We dig them up. Links to every real study." />
+  <meta property="og:url" content="https://theposseshoppe.com/hidden-studies" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://theposseshoppe.com/images/hidden-studies/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hidden Studies" />
+  <meta name="twitter:description" content="Studies that got buried. Trials nobody finished. We dig them up." />
+  <meta name="twitter:image" content="https://theposseshoppe.com/images/hidden-studies/og.jpg" />
+
+  <link rel="icon" type="image/jpeg" href="/images/hidden-studies/logo.jpg" />
+  <link rel="stylesheet" href="/css/site.css">
+  <style>
+    :root { --hs-blue: #22b4ff; --hs-pink: #f03ce6; --hs-navy: #00003a; --hs-green: #3cf0a0; }
+    .hs-wrap { max-width: 980px; margin: 0 auto; padding: 0 18px; }
+    .hs-hero { text-align: center; padding: 44px 0 10px; }
+    .hs-logo { width: min(300px, 70vw); border-radius: 50%; display: block; margin: 0 auto;
+      box-shadow: 0 0 0 1px rgba(34,180,255,.35), 0 0 60px rgba(240,60,230,.25), 0 0 120px rgba(34,180,255,.18); }
+    .hs-hero h1 { font-family: var(--display); font-weight: 400; letter-spacing: .03em; margin: 26px 0 0;
+      font-size: clamp(54px, 10vw, 104px); line-height: .92;
+      background: linear-gradient(90deg, var(--hs-blue), #b07bff 50%, var(--hs-pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hs-tag { font-size: clamp(17px, 2.4vw, 21px); color: var(--ink); margin: 14px auto 0; max-width: 640px; font-weight: 600; }
+    .hs-sub { color: var(--ink-2); max-width: 640px; margin: 10px auto 0; }
+    .hs-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+    .hs-btn { display: inline-block; padding: 12px 20px; border-radius: 999px; font-weight: 700; font-size: 15px; color: #fff;
+      border: 1px solid rgba(34,180,255,.6); background: rgba(34,180,255,.12); }
+    .hs-btn.pink { border-color: rgba(240,60,230,.6); background: rgba(240,60,230,.12); }
+    .hs-btn:hover { box-shadow: 0 0 24px rgba(34,180,255,.35); }
+
+    .hs-h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 52px); letter-spacing: .03em; margin: 64px 0 6px; text-align: center; }
+    .hs-h2 .b { color: var(--hs-blue); } .hs-h2 .p { color: var(--hs-pink); }
+    .hs-intro { text-align: center; color: var(--ink-2); max-width: 680px; margin: 0 auto 26px; }
+
+    .hs-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .hs-step, .hs-card, .hs-box { background: linear-gradient(180deg, rgba(0,0,58,.55), rgba(15,17,22,.9)); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+    .hs-step b { display: block; font-size: 17px; margin-bottom: 6px; }
+    .hs-step .n { font-family: var(--display); font-size: 34px; color: var(--hs-green); line-height: 1; }
+    .hs-step p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+    .hs-filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+    .hs-filters button { font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+    .hs-filters button.on { color: #fff; border-color: var(--hs-blue); background: rgba(34,180,255,.15); }
+    .hs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+    .hs-card { display: flex; flex-direction: column; gap: 10px; }
+    .hs-card .top { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .hs-pill { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); }
+    .hs-pill.published { color: var(--hs-blue); border-color: rgba(34,180,255,.5); }
+    .hs-pill.ongoing { color: var(--hs-green); border-color: rgba(60,240,160,.5); }
+    .hs-pill.unpublished { color: #ffcc55; border-color: rgba(255,204,85,.5); }
+    .hs-pill.abandoned { color: #ff7a7a; border-color: rgba(255,122,122,.5); }
+    .hs-pill.case { color: #c9a7ff; border-color: rgba(201,167,255,.5); }
+    .hs-card h3 { margin: 2px 0 0; font-size: 21px; line-height: 1.25; }
+    .hs-facts { margin: 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-2); }
+    .hs-facts li { padding: 3px 0; } .hs-facts b { color: var(--ink); font-weight: 600; }
+    .hs-result { font-size: 15px; color: var(--ink); background: rgba(255,255,255,.03); border-left: 3px solid var(--hs-pink); padding: 10px 12px; border-radius: 8px; margin: 0; }
+    .hs-rating { font-size: 14px; color: var(--ink-2); margin: 0; }
+    .hs-rating b { text-transform: uppercase; letter-spacing: .05em; }
+    .r-strong { color: var(--hs-green); } .r-moderate { color: var(--hs-blue); } .r-early { color: #ffcc55; } .r-weak, .r-single { color: #ff7a7a; }
+    .hs-links { display: flex; flex-direction: column; gap: 6px; margin-top: auto; padding-top: 6px; }
+    .hs-links a { color: var(--hs-blue); font-weight: 600; font-size: 15px; word-break: break-word; }
+    .hs-links a::after { content: " \2197"; }
+    .hs-links a.tt { color: var(--hs-pink); }
+    .hs-empty { text-align: center; color: var(--ink-3); padding: 30px; }
+
+    .hs-box h3 { margin: 0 0 8px; font-size: 20px; }
+    .hs-box p, .hs-box li { color: var(--ink-2); font-size: 15px; }
+    .hs-box ol { margin: 8px 0 0; padding-left: 20px; }
+    .hs-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .hs-warn { color: #ffcc55 !important; font-weight: 600; }
+
+    .hs-form label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .hs-form input[type=text] { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 1px solid rgba(34,180,255,.4); border-radius: 12px; padding: 12px 14px; }
+    .hs-form input[type=text]:focus { outline: none; box-shadow: 0 0 0 3px rgba(34,180,255,.25); }
+    .hs-form button { margin-top: 12px; font: inherit; font-weight: 700; font-size: 16px; color: #fff; background: linear-gradient(90deg, #1a8fe0, #c035c0); border: 0; border-radius: 999px; padding: 12px 22px; cursor: pointer; }
+    .hs-form small { display: block; color: var(--ink-3); margin-top: 8px; }
+    .hs-thanks { display: none; color: var(--hs-green); font-weight: 700; margin-top: 12px; }
+    .hs-hide { position: absolute; left: -5000px; }
+
+    .hs-disclaimer { margin-top: 56px; text-align: center; color: var(--ink-3); font-size: 14px; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .hs-disclaimer b { color: var(--ink-2); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="shop.html"><span class="brand-mark">TPS</span><span class="brand-name">The Posse <span class="hot">Shoppe</span></span></a>
+      <nav class="toplinks"><a href="index.html">Music</a><a href="spiritual.html">Spiritual</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a></nav>
+    </div>
+  </header>
+
+  <main class="hs-wrap">
+    <section class="hs-hero">
+      <img class="hs-logo" src="/images/hidden-studies/logo.jpg" alt="Hidden Studies logo: a DNA strand under a magnifying glass" width="300" height="300" />
+      <h1>Hidden Studies</h1>
+      <p class="hs-tag">Studies that got buried. Trials nobody finished. We dig them up.</p>
+      <p class="hs-sub">I'm Jimenim, a real, retired guy. My AI research agent Hermes digs through published studies, trials still running, trials that finished but never got published, and trials that got abandoned. Every study he finds is listed here with a link to the real thing.</p>
+      <div class="hs-btns">
+        <a class="hs-btn" href="#studies">See the studies</a>
+        <a class="hs-btn pink" href="#suggest">Suggest a topic</a>
+        <a class="hs-btn" href="https://www.tiktok.com/@hidden_studies" target="_blank" rel="noopener">@hidden_studies on TikTok</a>
+      </div>
+    </section>
+
+    <h2 class="hs-h2"><span class="b">How</span> it <span class="p">works</span></h2>
+    <div class="hs-steps">
+      <div class="hs-step"><span class="n">1</span><b>You pick the topic</b><p>Comment on TikTok or use the box below. The most asked-for topics become Hermes's next missions.</p></div>
+      <div class="hs-step"><span class="n">2</span><b>Hermes digs</b><p>He searches published studies, ongoing trials, finished-but-unpublished trials and abandoned ones.</p></div>
+      <div class="hs-step"><span class="n">3</span><b>I check it and post it</b><p>I read what he found and make a short video. The honest result, even when the answer is "it didn't work."</p></div>
+      <div class="hs-step"><span class="n">4</span><b>The links land here</b><p>Every study gets a card on this page with a link to the real source, so you can read it yourself.</p></div>
+    </div>
+
+    <h2 class="hs-h2" id="studies"><span class="b">The</span> <span class="p">studies</span></h2>
+    <p class="hs-intro">Newest first. The colored tag shows what kind of study it is. The rating is how strong Hermes thinks the evidence is.</p>
+    <div class="hs-filters" id="hs-filters"></div>
+    <section class="hs-grid" id="hs-grid"><div class="hs-empty">Loading studies...</div></section>
+
+    <h2 class="hs-h2"><span class="b">Got your</span> <span class="p">own AI?</span></h2>
+    <div class="hs-two">
+      <div class="hs-box">
+        <h3>Dig deeper</h3>
+        <ol>
+          <li>Pick a study above and copy its link.</li>
+          <li>Ask your AI to read it and look for newer follow-up studies or related trials.</li>
+          <li>Open every link it gives you and check that the study is real and says what it claims.</li>
+          <li>Share what you uncover in the TikTok comments.</li>
+        </ol>
+      </div>
+      <div class="hs-box">
+        <h3>Why the real link matters</h3>
+        <p>AI can make mistakes, including Hermes. It can mix up numbers or invent sources that don't exist. That's why every card here links to the original study.</p>
+        <p class="hs-warn">Always open the real study before you believe it, share it, or act on it.</p>
+      </div>
+    </div>
+
+    <h2 class="hs-h2" id="suggest"><span class="b">Suggest</span> a <span class="p">topic</span></h2>
+    <div class="hs-box" style="max-width:640px;margin:0 auto;">
+      <form class="hs-form" name="hidden-studies-topic" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="hs-form">
+        <input type="hidden" name="form-name" value="hidden-studies-topic" />
+        <p class="hs-hide"><label>Leave this empty <input name="bot-field" /></label></p>
+        <label for="hs-topic">What should Hermes dig into next?</label>
+        <input type="text" id="hs-topic" name="topic" maxlength="120" required placeholder="Example: magnesium and sleep" autocomplete="off" />
+        <small>Just the topic, please. Don't include your name, email or any personal health details. We don't need them and don't want them.</small>
+        <button type="submit">Send to Hermes</button>
+        <div class="hs-thanks" id="hs-thanks">Got it. Thanks! Watch TikTok to see if your topic gets picked.</div>
+      </form>
+    </div>
+
+    <p class="hs-disclaimer"><b>Info only. Not medical advice. Talk to your doctor.</b><br>Hidden Studies reports what studies tested and what they found. It doesn't recommend that anyone take, start or stop anything. Some videos use AI-made pictures and an AI copy of my voice, and they're labeled as AI on TikTok.</p>
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html">Music</a><a href="shop.html">Shop</a><a href="stl.html">STL Files</a><a href="affiliates.html">Affiliates</a><a href="spiritual.html">Spiritual</a><a href="mailto:theposseshoppe@gmail.com?subject=Question%20from%20The%20Posse%20Shoppe%20Website">Contact</a>
+    <div style="margin-top:12px;">© Jimenim Music · The Posse Shoppe</div>
+  </footer>
+
+  <script>
+    const STATUS = {
+      "published": ["Published study", "published"],
+      "ongoing": ["Trial still running", "ongoing"],
+      "completed-unpublished": ["Finished, never published", "unpublished"],
+      "abandoned": ["Abandoned trial", "abandoned"],
+      "case report": ["Case report", "case"]
+    };
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    const safeUrl = u => /^https?:\/\//i.test(u || "") ? esc(u) : "";
+    let all = [], current = "All";
+
+    function card(s) {
+      const st = STATUS[s.status] || [s.status || "Study", ""];
+      const r = (s.rating || "").toLowerCase();
+      const rc = r.startsWith("single") ? "r-single" : "r-" + r;
+      const facts = [["Tested", s.tested], ["On", s.who], ["How long", s.length]].filter(f => f[1]);
+      const links = (s.links || []).filter(l => safeUrl(l.url)).map(l => `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${esc(l.label || "Read the study")}</a>`);
+      if (safeUrl(s.tiktok)) links.push(`<a class="tt" href="${safeUrl(s.tiktok)}" target="_blank" rel="noopener">Watch the video</a>`);
+      return `<article class="hs-card">
+        <div class="top"><span class="hs-pill ${st[1]}">${esc(st[0])}</span><span class="hs-pill">${esc(s.topic)}</span></div>
+        <h3>${esc(s.title)}</h3>
+        <ul class="hs-facts">${facts.map(f => `<li><b>${f[0]}:</b> ${esc(f[1])}</li>`).join("")}</ul>
+        <p class="hs-result">${esc(s.result)}</p>
+        ${r ? `<p class="hs-rating">Hermes's rating: <b class="${rc}">${esc(s.rating)}</b>${s.rating_note ? " · " + esc(s.rating_note) : ""}</p>` : ""}
+        <div class="hs-links">${links.join("")}</div>
+      </article>`;
+    }
+    function render() {
+      const grid = document.getElementById("hs-grid");
+      const list = current === "All" ? all : all.filter(s => s.topic === current);
+      grid.innerHTML = list.length ? list.map(card).join("") : '<div class="hs-empty">No studies posted for this topic yet.</div>';
+      document.querySelectorAll("#hs-filters button").forEach(b => b.classList.toggle("on", b.dataset.t === current));
+    }
+    fetch("/data/hidden-studies.json", { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        all = (d.studies || []).slice().reverse();
+        const topics = ["All", ...new Set(all.map(s => s.topic))];
+        document.getElementById("hs-filters").innerHTML = topics.length > 2 ? topics.map(t => `<button type="button" data-t="${esc(t)}">${esc(t)}</button>`).join("") : "";
+        document.querySelectorAll("#hs-filters button").forEach(b => b.onclick = () => { current = b.dataset.t; render(); });
+        render();
+      })
+      .catch(() => { document.getElementById("hs-grid").innerHTML = '<div class="hs-empty">Could not load the studies right now. Try again in a minute.</div>'; });
+
+    document.getElementById("hs-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const f = e.target, btn = f.querySelector("button");
+      btn.disabled = true; btn.textContent = "Sending...";
+      fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() })
+        .then(r => { if (!r.ok) throw new Error(r.status); f.reset(); document.getElementById("hs-thanks").style.display = "block"; btn.textContent = "Sent"; })
+        .catch(() => { btn.disabled = false; btn.textContent = "Send to Hermes"; alert("That didn't go through. Please try again."); });
+    });
+  </script>
+  <script src="/js/zoom.js"></script>
+</body>
+</html>
