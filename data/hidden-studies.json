@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02",
+  "updated": "2026-11-04",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -13,8 +13,185 @@
       "rating": "early",
       "rating_note": "Hermes rates this evidence as early: promising, not proven.",
       "links": [
-        {"label": "The study (1,062 participants)", "url": "https://www.researchgate.net/publication/362469939_Effective_management_of_atherosclerosis_progress_and_hyperlipidemia_with_nattokinase_A_clinical_study_with_1062_participants"},
-        {"label": "Ongoing trial: nattokinase and inflammation markers", "url": "https://clinicaltrials.gov/study/NCT06183307"}
+        {
+          "label": "The study (1,062 participants)",
+          "url": "https://www.researchgate.net/publication/362469939_Effective_management_of_atherosclerosis_progress_and_hyperlipidemia_with_nattokinase_A_clinical_study_with_1062_participants"
+        },
+        {
+          "label": "Ongoing trial: nattokinase and inflammation markers",
+          "url": "https://clinicaltrials.gov/study/NCT06183307"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704076407315467550"
+    },
+    {
+      "id": "arthritis-16-cherries",
+      "topic": "Arthritis",
+      "title": "Cherries and Gout Attacks",
+      "status": "published",
+      "tested": "Cherries or cherry extract eaten in the 2 days before (about half a cup, 10 to 12 cherries)",
+      "who": "633 people with gout",
+      "length": "",
+      "result": "Eating cherries in the previous 2 days was linked to a 35% lower chance of a gout attack, and 75% lower for people also taking allopurinol. This kind of study shows a link, not proof.",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The study (633 people)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3510330/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704123290876431646"
+    },
+    {
+      "id": "pots-01-exercise",
+      "topic": "POTS",
+      "title": "Exercise Lying Down for POTS",
+      "status": "published",
+      "tested": "Exercise done lying back or seated (recumbent bike, rowing, swimming), built up from 10-20 minutes to 40-45 minutes, 4 to 6 days a week",
+      "who": "People with POTS",
+      "length": "About 3 months",
+      "result": "Among people who finished the program, 71% no longer met the criteria for POTS. That number only counts the people who finished.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33482385/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704123456681495838"
+    },
+    {
+      "id": "prostate-05-pumpkin",
+      "topic": "Enlarged Prostate",
+      "title": "Pumpkin Seeds for Prostate (GRANU)",
+      "status": "published",
+      "tested": "Pumpkin seed extract, plain pumpkin seeds, or a placebo",
+      "who": "1,431 men aged 50 to 80 with enlarged prostate symptoms",
+      "length": "1 year",
+      "result": "The pumpkin seed extract did no better than the placebo. Plain pumpkin seeds did a little better (58.5% improved vs 47.3% on placebo), but that part wasn't fully blinded.",
+      "rating": "moderate",
+      "rating_note": "Mixed results.",
+      "links": [
+        {
+          "label": "The trial registry page",
+          "url": "https://www.clinicaltrialsregister.eu/ctr-search/trial/2005-000848-83/DE/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704123985268673823"
+    },
+    {
+      "id": "plaque-07-lycopene",
+      "topic": "Arterial Plaque",
+      "title": "The Tomato Trial That Never Started (SOLANUM)",
+      "status": "abandoned",
+      "tested": "Lycopene (from tomatoes), 28 mg a day",
+      "who": "Planned: people with plaque in the neck (carotid) arteries",
+      "length": "Planned: 12 months",
+      "result": "Withdrawn before anyone enrolled because of lack of funding. There are no results.",
+      "rating": "",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The trial registry page",
+          "url": "https://clinicaltrials.gov/study/NCT01102504"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704123816087276831"
+    },
+    {
+      "id": "autoimmune-01-vitamin-d",
+      "topic": "Autoimmune",
+      "title": "Vitamin D and Autoimmune Disease (VITAL)",
+      "status": "published",
+      "tested": "Vitamin D, 2,000 units a day, vs a placebo",
+      "who": "25,871 adults (men 50+, women 55+)",
+      "length": "About 5 years",
+      "result": "Fewer people on vitamin D got an autoimmune disease: 123 vs 155 on placebo, 22% fewer. The result was right on the edge of counting as real. Fish oil in the same trial made no clear difference.",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The study (25,871 people)",
+          "url": "https://www.bmj.com/content/376/bmj-2021-066452.full"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "autoimmune-02-ms-vitamin-d",
+      "topic": "Autoimmune",
+      "title": "Vitamin D Doses for MS",
+      "status": "completed-unpublished",
+      "tested": "Vitamin D, 1,000 vs 4,000 units a day, in winter",
+      "who": "89 people with relapsing remitting MS",
+      "length": "4 months",
+      "result": "Completed in April 2018, but no results were ever posted on the trial registry.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The trial registry page",
+          "url": "https://clinicaltrials.gov/study/NCT03385356"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "autoimmune-03-interval-walking",
+      "topic": "Autoimmune",
+      "title": "Interval Walking for Rheumatoid Arthritis",
+      "status": "published",
+      "tested": "Walking 3 times a week, 30 minutes, with 10 bursts of at least 1 minute at high effort",
+      "who": "12 inactive adults with rheumatoid arthritis, average age 64",
+      "length": "10 weeks",
+      "result": "Disease activity scores dropped 38% and fitness went up about 9%. Only 12 people and no comparison group.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The study (12 people)",
+          "url": "https://doi.org/10.1186/s13075-018-1624-x"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "autoimmune-04-lupus-meditation",
+      "topic": "Autoimmune",
+      "title": "Meditation and Yoga for Lupus",
+      "status": "completed-unpublished",
+      "tested": "Group sessions of meditation, yoga, group talks and deep breathing",
+      "who": "30 people with lupus",
+      "length": "About 6 weeks",
+      "result": "Completed in June 2018, but no results were ever posted on the trial registry.",
+      "rating": "reported",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The trial registry page",
+          "url": "https://clinicaltrials.gov/study/NCT03103243"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "autoimmune-05-plant-diet",
+      "topic": "Autoimmune",
+      "title": "Raw Plant Diet and Lupus",
+      "status": "case report",
+      "tested": "Mostly raw, whole-food plant diet heavy on leafy greens, with flax or chia seeds and lots of water",
+      "who": "3 women with lupus and Sjogren's",
+      "length": "",
+      "result": "The report says nearly all symptoms faded within 4 weeks, and two stayed symptom-free 6+ years with no recent medication. Only 3 people, and the lead author sells a program for this diet.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The case report",
+          "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1208074/full"
+        }
       ],
       "tiktok": ""
     }
