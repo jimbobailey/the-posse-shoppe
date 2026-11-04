@@ -194,6 +194,25 @@
         }
       ],
       "tiktok": ""
+    },
+    {
+      "id": "arthritis-28-devils-claw",
+      "topic": "Arthritis",
+      "title": "The Devil's Claw Trial",
+      "status": "abandoned",
+      "tested": "Devil's claw, 240, 960 or 1,920 mg a day, vs a placebo",
+      "who": "67 adults over 40 with knee or hip osteoarthritis",
+      "length": "16 weeks",
+      "result": "Stopped after an unexpected withdrawal of funding. 53 people finished, but the results page says zero people were analyzed, so there's no answer.",
+      "rating": "",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "The trial registry page",
+          "url": "https://clinicaltrials.gov/study/NCT00295490"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704431581993110815"
     }
   ]
 }
