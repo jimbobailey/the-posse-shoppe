@@ -289,6 +289,25 @@
         }
       ],
       "tiktok": ""
+    },
+    {
+      "id": "prostate-06-pro160",
+      "topic": "Enlarged Prostate",
+      "title": "Saw Palmetto Plus Nettle (PRO 160/120)",
+      "status": "published",
+      "tested": "160 mg saw palmetto + 120 mg nettle root, one capsule twice a day, vs a placebo",
+      "who": "257 older men with enlarged prostate symptoms",
+      "length": "24 weeks, then 24 more weeks on the herbs",
+      "result": "Symptom scores dropped 6 points with the herbs vs 4 with placebo. Side effects were about the same as placebo. A real but modest difference.",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15928959/"
+        }
+      ],
+      "tiktok": ""
     }
   ]
 }

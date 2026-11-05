@@ -124,7 +124,8 @@
     </div>
 
     <h2 class="hs-h2" id="studies"><span class="b">The</span> <span class="p">studies</span></h2>
-    <p class="hs-intro">Newest first. The colored tag shows what kind of study it is. The rating is how strong Hermes thinks the evidence is.</p>
+    <p class="hs-intro">Newest first. Every card has the original study, the video, and Hermes's full research report for that topic. The rating is how strong Hermes thinks the evidence is.</p>
+    <p class="hs-intro" style="font-size:.9em">The study link and the video were checked against the original study. Hermes's full reports are his raw AI research notes and haven't been checked line by line, so always open the real study before you trust a claim.</p>
     <div class="hs-filters" id="hs-filters"></div>
     <section class="hs-grid" id="hs-grid"><div class="hs-empty">Loading studies...</div></section>
 
@@ -178,14 +179,19 @@
     const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const safeUrl = u => /^https?:\/\//i.test(u || "") ? esc(u) : "";
     let all = [], current = "All";
+    const REPORTS = {"Arterial Plaque": "/hidden-studies-reports/arterial-plaque.pdf", "Arthritis": "/hidden-studies-reports/arthritis.pdf",
+      "Enlarged Prostate": "/hidden-studies-reports/enlarged-prostate.pdf", "POTS": "/hidden-studies-reports/pots.pdf",
+      "Autoimmune": "/hidden-studies-reports/autoimmune.pdf", "Migraines": "/hidden-studies-reports/migraines.pdf"};
 
     function card(s) {
       const st = STATUS[s.status] || [s.status || "Study", ""];
       const r = (s.rating || "").toLowerCase();
       const rc = r.startsWith("single") ? "r-single" : "r-" + r;
       const facts = [["Tested", s.tested], ["On", s.who], ["How long", s.length]].filter(f => f[1]);
-      const links = (s.links || []).filter(l => safeUrl(l.url)).map(l => `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${esc(l.label || "Read the study")}</a>`);
-      if (safeUrl(s.tiktok)) links.push(`<a class="tt" href="${safeUrl(s.tiktok)}" target="_blank" rel="noopener">Watch the video</a>`);
+      const study = (s.links || []).find(l => safeUrl(l.url));
+      const links = [`<a href="${safeUrl(study.url)}" target="_blank" rel="noopener">Read the study</a>`,
+                     `<a class="tt" href="${safeUrl(s.tiktok)}" target="_blank" rel="noopener">Watch the video</a>`];
+      if (REPORTS[s.topic]) links.push(`<a href="${REPORTS[s.topic]}" target="_blank" rel="noopener">Hermes's full report (PDF)</a>`);
       return `<article class="hs-card">
         <div class="top"><span class="hs-pill ${st[1]}">${esc(st[0])}</span><span class="hs-pill">${esc(s.topic)}</span></div>
         <h3>${esc(s.title)}</h3>
@@ -204,7 +210,7 @@
     fetch("/data/hidden-studies.json", { cache: "no-store" })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(d => {
-        all = (d.studies || []).slice().reverse();
+        all = (d.studies || []).filter(s => safeUrl(s.tiktok) && (s.links || []).some(l => safeUrl(l.url))).reverse();
         const topics = ["All", ...new Set(all.map(s => s.topic))];
         document.getElementById("hs-filters").innerHTML = topics.length > 2 ? topics.map(t => `<button type="button" data-t="${esc(t)}">${esc(t)}</button>`).join("") : "";
         document.querySelectorAll("#hs-filters button").forEach(b => b.onclick = () => { current = b.dataset.t; render(); });
