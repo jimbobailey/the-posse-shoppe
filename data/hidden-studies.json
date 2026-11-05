@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -213,6 +213,25 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704431581993110815"
+    },
+    {
+      "id": "migraines-01-butterbur",
+      "topic": "Migraines",
+      "title": "Butterbur for Migraine",
+      "status": "published",
+      "tested": "Butterbur root extract, 75 mg or 50 mg twice a day, vs a placebo",
+      "who": "245 adults with 2 to 6 migraine attacks a month",
+      "length": "4 months",
+      "result": "On 75 mg twice a day, attacks dropped 48% vs 26% on placebo. The 50 mg dose didn't beat placebo by enough to count. Raw butterbur has chemicals that can damage the liver; the trial used a specially processed extract.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15623680/"
+        }
+      ],
+      "tiktok": ""
     }
   ]
 }
