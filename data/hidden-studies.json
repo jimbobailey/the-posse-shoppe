@@ -117,7 +117,7 @@
           "url": "https://www.bmj.com/content/376/bmj-2021-066452.full"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704457152978504990"
     },
     {
       "id": "autoimmune-02-ms-vitamin-d",
@@ -136,7 +136,7 @@
           "url": "https://clinicaltrials.gov/study/NCT03385356"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704457718995717407"
     },
     {
       "id": "autoimmune-03-interval-walking",
@@ -155,7 +155,7 @@
           "url": "https://doi.org/10.1186/s13075-018-1624-x"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704457423418821919"
     },
     {
       "id": "autoimmune-04-lupus-meditation",
@@ -174,7 +174,7 @@
           "url": "https://clinicaltrials.gov/study/NCT03103243"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704457858837925151"
     },
     {
       "id": "autoimmune-05-plant-diet",
@@ -193,7 +193,7 @@
           "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1208074/full"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704457601370639647"
     },
     {
       "id": "arthritis-28-devils-claw",
@@ -229,6 +229,63 @@
         {
           "label": "Read the study",
           "url": "https://pubmed.ncbi.nlm.nih.gov/15623680/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "migraines-02-ginger",
+      "topic": "Migraines",
+      "title": "Ginger for a Migraine Attack",
+      "status": "published",
+      "tested": "Ginger extract, 400 mg, added to IV ketoprofen, vs a placebo",
+      "who": "60 adults having a migraine attack in an emergency room",
+      "length": "One attack, rated for 2 hours",
+      "result": "The ginger group did better at 1, 1.5 and 2 hours, with less pain and better function. Ginger was added to strong pain medicine, not tested on its own.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29768938/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "pots-02-compression",
+      "topic": "POTS",
+      "title": "Compression for POTS",
+      "status": "published",
+      "tested": "Compression garments: none, lower legs, belly and thighs, or full belly and legs",
+      "who": "30 adults with POTS",
+      "length": "Four 10-minute tilt tests",
+      "result": "Heart rate averaged 109 with no compression, 103 legs only, 97 belly and thighs, and 92 full belly and legs. Symptoms improved too. It was a lab test, not daily life.",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33478652/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "id": "arthritis-41-fasting",
+      "topic": "Arthritis",
+      "title": "Fasting for Rheumatoid Arthritis (NutriFast)",
+      "status": "published",
+      "tested": "A 7-day fast, then a plant-based diet for 11 weeks, vs standard healthy eating advice",
+      "who": "53 people with rheumatoid arthritis",
+      "length": "12 weeks",
+      "result": "The fasting group improved within the first week. Both groups improved by 12 weeks and the main goal showed no clear winner, but 9 in the fasting group vs 3 on the standard diet reached a big improvement (ACR50).",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36407522/"
         }
       ],
       "tiktok": ""
