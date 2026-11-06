@@ -231,7 +231,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15623680/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704777024551816479"
     },
     {
       "id": "migraines-02-ginger",
@@ -250,7 +250,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/29768938/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704777473614974239"
     },
     {
       "id": "pots-02-compression",
@@ -269,7 +269,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/33478652/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704777672634862878"
     },
     {
       "id": "arthritis-41-fasting",
@@ -288,7 +288,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/36407522/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704777823025696030"
     },
     {
       "id": "prostate-06-pro160",
@@ -307,7 +307,103 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15928959/"
         }
       ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7704778030073335070"
+    },
+    {
+      "title": "Fasting Two Days a Week for Diabetes (EARLY)",
+      "tested": "5:2 meal replacement plan vs metformin vs empagliflozin",
+      "who": "405 adults with newly found type 2 diabetes and overweight",
+      "length": "16 weeks",
+      "result": "A1c dropped 1.9 points with 5:2 fasting vs 1.6 on metformin and 1.5 on empagliflozin, and the fasting group lost the most weight (about 9.7 kg). Short trial, and people knew which group they were in.",
+      "id": "type-2-diabetes-02-fasting-two-days-a-week-for-diabetes",
+      "topic": "Type 2 Diabetes",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38904963/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Vitamin E for Fatty Liver",
+      "tested": "Vitamin E 800 units a day vs pioglitazone vs a placebo",
+      "who": "247 adults with NASH (a serious kind of fatty liver) without diabetes",
+      "length": "96 weeks",
+      "result": "Liver damage scores improved in 43% on vitamin E vs 19% on placebo. Pioglitazone (34%) didn't count as significant. Liver fat and inflammation went down, but scarring didn't improve.",
+      "id": "fatty-liver-01-vitamin-e-for-fatty-liver",
+      "topic": "Fatty Liver",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20427778/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Coffee and Liver Scarring",
+      "tested": "Coffee drinking (highest vs lowest)",
+      "who": "11 studies; 4,303 people with fatty liver in the scarring analysis",
+      "length": "",
+      "result": "No clear link between coffee and getting or having fatty liver. Among people who already had it, coffee drinkers had 35% lower odds of serious liver scarring. Observational studies, so a link, not proof.",
+      "id": "fatty-liver-02-coffee-and-liver-scarring",
+      "topic": "Fatty Liver",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34578919/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Melatonin for Migraine",
+      "tested": "Melatonin vs placebo (and vs amitriptyline)",
+      "who": "9 trials, 788 people with migraine",
+      "length": "",
+      "result": "Vs placebo, melatonin cut about 1.5 headache days, lowered pain, shortened attacks by almost 5 hours and meant less pain medicine. Amitriptyline worked better on several measures, but melatonin caused less sleepiness.",
+      "id": "migraines-03-melatonin-for-migraine",
+      "topic": "Migraines",
+      "status": "published",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41627537/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Putting Diabetes Into Remission (DiRECT)",
+      "tested": "Stopping diabetes medicines, a formula diet of 825 to 853 calories a day for 3 to 5 months, then slow food reintroduction with support",
+      "who": "306 adults aged 20 to 65, diagnosed in the last 6 years",
+      "length": "12 months",
+      "result": "46% of the program group were in remission at 12 months, off all diabetes medicine, vs 4% with usual care. 86% of people who lost 15 kg or more went into remission.",
+      "id": "type-2-diabetes-01-putting-diabetes-into-remission",
+      "topic": "Type 2 Diabetes",
+      "status": "published",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29221645/"
+        }
+      ],
       "tiktok": ""
     }
-  ]
+  ],
+  "reports": {}
 }

@@ -179,9 +179,7 @@
     const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const safeUrl = u => /^https?:\/\//i.test(u || "") ? esc(u) : "";
     let all = [], current = "All";
-    const REPORTS = {"Arterial Plaque": "/hidden-studies-reports/arterial-plaque.pdf", "Arthritis": "/hidden-studies-reports/arthritis.pdf",
-      "Enlarged Prostate": "/hidden-studies-reports/enlarged-prostate.pdf", "POTS": "/hidden-studies-reports/pots.pdf",
-      "Autoimmune": "/hidden-studies-reports/autoimmune.pdf", "Migraines": "/hidden-studies-reports/migraines.pdf"};
+    let REPORTS = {};
 
     function card(s) {
       const st = STATUS[s.status] || [s.status || "Study", ""];
@@ -191,7 +189,7 @@
       const study = (s.links || []).find(l => safeUrl(l.url));
       const links = [`<a href="${safeUrl(study.url)}" target="_blank" rel="noopener">Read the study</a>`,
                      `<a class="tt" href="${safeUrl(s.tiktok)}" target="_blank" rel="noopener">Watch the video</a>`];
-      if (REPORTS[s.topic]) links.push(`<a href="${REPORTS[s.topic]}" target="_blank" rel="noopener">Hermes's full report (PDF)</a>`);
+      links.push(REPORTS[s.topic] ? `<a href="${REPORTS[s.topic]}" target="_blank" rel="noopener">Hermes's full report (PDF)</a>` : `<span style="opacity:.6">Hermes's report: being re-checked</span>`);
       return `<article class="hs-card">
         <div class="top"><span class="hs-pill ${st[1]}">${esc(st[0])}</span><span class="hs-pill">${esc(s.topic)}</span></div>
         <h3>${esc(s.title)}</h3>
@@ -210,6 +208,7 @@
     fetch("/data/hidden-studies.json", { cache: "no-store" })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(d => {
+        REPORTS = d.reports || {};
         all = (d.studies || []).filter(s => safeUrl(s.tiktok) && (s.links || []).some(l => safeUrl(l.url))).reverse();
         const topics = ["All", ...new Set(all.map(s => s.topic))];
         document.getElementById("hs-filters").innerHTML = topics.length > 2 ? topics.map(t => `<button type="button" data-t="${esc(t)}">${esc(t)}</button>`).join("") : "";
