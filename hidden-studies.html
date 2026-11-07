@@ -124,8 +124,8 @@
     </div>
 
     <h2 class="hs-h2" id="studies"><span class="b">The</span> <span class="p">studies</span></h2>
-    <p class="hs-intro">Newest first. Every card has the original study, the video, and Hermes's full research report for that topic. The rating is how strong Hermes thinks the evidence is.</p>
-    <p class="hs-intro" style="font-size:.9em">The study link and the video were checked against the original study. Hermes's full reports are his raw AI research notes and haven't been checked line by line, so always open the real study before you trust a claim.</p>
+    <p class="hs-intro">Newest first. Every card has the original study, the video, and a list of every real study we found on that topic. The rating is how strong the evidence is.</p>
+    <p class="hs-intro" style="font-size:.9em">Every study comes straight from PubMed or ClinicalTrials.gov, and every number in the videos was checked against the study itself. Always open the real study before you trust a claim.</p>
     <div class="hs-filters" id="hs-filters"></div>
     <section class="hs-grid" id="hs-grid"><div class="hs-empty">Loading studies...</div></section>
 
@@ -189,13 +189,13 @@
       const study = (s.links || []).find(l => safeUrl(l.url));
       const links = [`<a href="${safeUrl(study.url)}" target="_blank" rel="noopener">Read the study</a>`,
                      `<a class="tt" href="${safeUrl(s.tiktok)}" target="_blank" rel="noopener">Watch the video</a>`];
-      links.push(REPORTS[s.topic] ? `<a href="${REPORTS[s.topic]}" target="_blank" rel="noopener">Hermes's full report (PDF)</a>` : `<span style="opacity:.6">Hermes's report: being re-checked</span>`);
+      links.push(REPORTS[s.topic] ? `<a href="${REPORTS[s.topic]}" target="_blank" rel="noopener">All ${esc(s.topic)} studies</a>` : `<span style="opacity:.6">Study list coming soon</span>`);
       return `<article class="hs-card">
         <div class="top"><span class="hs-pill ${st[1]}">${esc(st[0])}</span><span class="hs-pill">${esc(s.topic)}</span></div>
         <h3>${esc(s.title)}</h3>
         <ul class="hs-facts">${facts.map(f => `<li><b>${f[0]}:</b> ${esc(f[1])}</li>`).join("")}</ul>
         <p class="hs-result">${esc(s.result)}</p>
-        ${r ? `<p class="hs-rating">Hermes's rating: <b class="${rc}">${esc(s.rating)}</b>${s.rating_note ? " · " + esc(s.rating_note) : ""}</p>` : ""}
+        ${r ? `<p class="hs-rating">Evidence: <b class="${rc}">${esc(s.rating)}</b>${s.rating_note ? " · " + esc(s.rating_note) : ""}</p>` : ""}
         <div class="hs-links">${links.join("")}</div>
       </article>`;
     }

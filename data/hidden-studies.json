@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -11,7 +11,7 @@
       "length": "26 weeks",
       "result": "The study reported a reduction in common carotid IMT (the thickness of the artery wall in the neck) and in plaque size.",
       "rating": "early",
-      "rating_note": "Hermes rates this evidence as early: promising, not proven.",
+      "rating_note": "",
       "links": [
         {
           "label": "The study (1,062 participants)",
@@ -33,7 +33,7 @@
       "who": "633 people with gout",
       "length": "",
       "result": "Eating cherries in the previous 2 days was linked to a 35% lower chance of a gout attack, and 75% lower for people also taking allopurinol. This kind of study shows a link, not proof.",
-      "rating": "strong",
+      "rating": "moderate",
       "rating_note": "",
       "links": [
         {
@@ -128,7 +128,7 @@
       "who": "89 people with relapsing remitting MS",
       "length": "4 months",
       "result": "Completed in April 2018, but no results were ever posted on the trial registry.",
-      "rating": "moderate",
+      "rating": "",
       "rating_note": "",
       "links": [
         {
@@ -147,7 +147,7 @@
       "who": "12 inactive adults with rheumatoid arthritis, average age 64",
       "length": "10 weeks",
       "result": "Disease activity scores dropped 38% and fitness went up about 9%. Only 12 people and no comparison group.",
-      "rating": "moderate",
+      "rating": "early",
       "rating_note": "",
       "links": [
         {
@@ -166,7 +166,7 @@
       "who": "30 people with lupus",
       "length": "About 6 weeks",
       "result": "Completed in June 2018, but no results were ever posted on the trial registry.",
-      "rating": "reported",
+      "rating": "",
       "rating_note": "",
       "links": [
         {
@@ -185,7 +185,7 @@
       "who": "3 women with lupus and Sjogren's",
       "length": "",
       "result": "The report says nearly all symptoms faded within 4 weeks, and two stayed symptom-free 6+ years with no recent medication. Only 3 people, and the lead author sells a program for this diet.",
-      "rating": "moderate",
+      "rating": "early",
       "rating_note": "",
       "links": [
         {
@@ -280,7 +280,7 @@
       "who": "53 people with rheumatoid arthritis",
       "length": "12 weeks",
       "result": "The fasting group improved within the first week. Both groups improved by 12 weeks and the main goal showed no clear winner, but 9 in the fasting group vs 3 on the standard diet reached a big improvement (ACR50).",
-      "rating": "strong",
+      "rating": "early",
       "rating_note": "",
       "links": [
         {
@@ -299,7 +299,7 @@
       "who": "257 older men with enlarged prostate symptoms",
       "length": "24 weeks, then 24 more weeks on the herbs",
       "result": "Symptom scores dropped 6 points with the herbs vs 4 with placebo. Side effects were about the same as placebo. A real but modest difference.",
-      "rating": "strong",
+      "rating": "moderate",
       "rating_note": "",
       "links": [
         {
@@ -403,7 +403,112 @@
         }
       ],
       "tiktok": ""
+    },
+    {
+      "title": "Magnesium and Blood Pressure",
+      "tested": "Magnesium supplements (typical dose 365 mg a day) vs placebo",
+      "who": "38 randomized trials, 2,709 people",
+      "length": "At least 4 weeks (typical 12 weeks)",
+      "result": "Magnesium lowered systolic blood pressure by 2.81 points and diastolic by 2.05 vs placebo. Bigger drops in people on blood pressure medicine (7.68) and people low on magnesium (5.97). No clear effect with normal blood pressure, and the trials varied a lot.",
+      "id": "high-blood-pressure-01-magnesium-and-blood-pressure",
+      "topic": "High Blood Pressure",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41000008/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Aged Garlic Extract and Blood Pressure",
+      "tested": "Aged garlic extract vs placebo",
+      "who": "9 randomized trials, 584 people with high blood pressure",
+      "length": "",
+      "result": "Systolic blood pressure dropped 4.03 points. The diastolic drop (1.44) was borderline. Clear effects only at doses over 1,200 mg a day.",
+      "id": "high-blood-pressure-02-aged-garlic-and-blood-pressure",
+      "topic": "High Blood Pressure",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39437887/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "The DASH Diet and Heart Risk",
+      "tested": "DASH diet vs fruits and vegetables diet vs typical American diet (all meals provided)",
+      "who": "459 adults aged 22 to 75 without heart disease",
+      "length": "8 weeks",
+      "result": "DASH lowered the 10-year heart disease risk score by 10.3% and the fruits and vegetables diet by 9.9% vs the typical diet. It's a risk score from blood pressure and cholesterol, not counted heart attacks.",
+      "id": "arterial-plaque-08-the-dash-diet-and-heart-risk",
+      "topic": "Arterial Plaque",
+      "status": "published",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36459731/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Yoga vs Strength Training for Knee Arthritis",
+      "tested": "Yoga vs strengthening exercise",
+      "who": "117 adults aged 40 and up with knee osteoarthritis",
+      "length": "24 weeks (12 supervised + 12 at home)",
+      "result": "Over 12 weeks yoga reduced knee pain about the same as strengthening (not better, but just as good). By 24 weeks yoga did modestly better on several measures. Side effects were mild in both groups.",
+      "id": "arthritis-42-yoga-vs-strength-training-for-knees",
+      "topic": "Arthritis",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40198073/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Exercise for Migraine",
+      "tested": "Yoga, hard aerobic exercise, moderate steady exercise and other kinds vs medicine alone",
+      "who": "28 studies, 1,501 people with migraine",
+      "length": "",
+      "result": "Yoga, hard aerobic and moderate steady exercise beat medicine alone for migraine frequency. Only yoga clearly lowered pain. Aerobic exercise shortened attacks. The authors rated the evidence very low quality.",
+      "id": "migraines-04-exercise-for-migraine",
+      "topic": "Migraines",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38597252/"
+        }
+      ],
+      "tiktok": ""
     }
   ],
-  "reports": {}
+  "reports": {
+    "Arterial Plaque": "/hidden-studies-lists/arterial-plaque.html",
+    "Arthritis": "/hidden-studies-lists/arthritis.html",
+    "Autoimmune": "/hidden-studies-lists/autoimmune.html",
+    "Enlarged Prostate": "/hidden-studies-lists/enlarged-prostate.html",
+    "Fatty Liver": "/hidden-studies-lists/fatty-liver.html",
+    "High Blood Pressure": "/hidden-studies-lists/high-blood-pressure.html",
+    "Migraines": "/hidden-studies-lists/migraines.html",
+    "POTS": "/hidden-studies-lists/pots.html",
+    "Type 2 Diabetes": "/hidden-studies-lists/type-2-diabetes.html"
+  }
 }
