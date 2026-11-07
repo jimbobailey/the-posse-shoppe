@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06",
+  "updated": "2026-11-07",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -498,6 +498,101 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7705250788292971806"
+    },
+    {
+      "title": "Salt for POTS",
+      "tested": "Very high salt diet vs very low salt diet, 6 days each",
+      "who": "14 people with POTS and 13 healthy people, aged 23 to 49",
+      "length": "6 days on each diet",
+      "result": "High salt lowered standing heart rate and the heart-rate jump in POTS, raised blood volume and lowered standing norepinephrine. Standing heart rate was still higher than healthy people (median 117 vs 85).",
+      "id": "pots-03-salt-for-pots",
+      "topic": "POTS",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33926653/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Selenium for Hashimoto's",
+      "tested": "Selenium supplements vs control",
+      "who": "35 studies; 869 people in the TSH analysis, 2,358 in the antibody analysis",
+      "length": "",
+      "result": "Selenium lowered TSH in people not on thyroid hormone and lowered thyroid antibodies (TPOAb). Side effects were similar to control. Other thyroid hormones and thyroid size didn't change. Evidence rated moderate.",
+      "id": "autoimmune-06-selenium-for-hashimoto-s",
+      "topic": "Autoimmune",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38243784/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Soluble Fiber for Blood Sugar",
+      "tested": "Soluble fiber supplements vs control diets",
+      "who": "29 randomized trials, 1,517 adults with type 2 diabetes",
+      "length": "",
+      "result": "Soluble fiber lowered A1c by 0.63 points and also lowered fasting blood sugar, insulin and insulin resistance. Best dose about 7.6 to 8.3 g a day. The trials varied a lot.",
+      "id": "type-2-diabetes-03-fiber-for-blood-sugar",
+      "topic": "Type 2 Diabetes",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33162192/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Flaxseed for Fatty Liver",
+      "tested": "30 g flaxseed powder a day plus health advice vs health advice only",
+      "who": "50 people with fatty liver",
+      "length": "12 weeks",
+      "result": "The flaxseed group had less liver fat (by MRI), less body and belly fat and better cholesterol and triglycerides vs their own starting point. Only 50 people.",
+      "id": "fatty-liver-03-flaxseed-for-fatty-liver",
+      "topic": "Fatty Liver",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39878023/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Turmeric (Curcumin) for Osteoarthritis",
+      "tested": "Turmeric extract and curcumin vs placebo and vs anti-inflammatory pain pills",
+      "who": "15 randomized trials, 1,621 people with osteoarthritis",
+      "length": "Authors suggest more than 12 weeks",
+      "result": "Lowered pain and stiffness and improved function vs placebo, with similar side effects. About as good as anti-inflammatory pain pills, with fewer side effects. Best dose and product not settled.",
+      "id": "arthritis-43-turmeric-for-knee-arthritis",
+      "topic": "Arthritis",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34017975/"
+        }
+      ],
+      "tiktok": ""
     }
   ],
   "reports": {
