@@ -10,6 +10,6 @@ gallery-02.jpg              https://images.unsplash.com/photo-1497366811353-6870
 gallery-03.jpg              https://images.unsplash.com/photo-1778514825784-0659eaf8e7a2
 gallery-04.jpg              https://images.unsplash.com/photo-1600585154340-be6161a56a0c
 gallery-05.jpg              https://images.unsplash.com/photo-1601462904263-f2fa0c851cb9
-gallery-06.jpg              https://images.unsplash.com/photo-1660330590022-9f4ff56b63f6
+gallery-06.jpg              https://images.unsplash.com/photo-1544724569-5f546fd6f2b5
 
 Logo files (morse-electric-logo*.svg/png, favicon*) were traced from the Morse Electric business card.

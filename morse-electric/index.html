@@ -19,7 +19,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/hero-electrical-panel.jpg">
   <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -100,7 +100,7 @@
       <div class="wrap">
         <div class="hero-copy">
           <span class="eyebrow">Licensed Electrical Contractor · Marianna, FL</span>
-          <h1 id="hero-title">Powering your <span class="accent">next project.</span></h1>
+          <h1 id="hero-title">Powering Your <span class="accent">Next Project.</span></h1>
           <p class="hero-lead">Morse Electric handles electrical contracting work with care, clean workmanship and straight answers. Call and talk with owner Ben Morse directly about what you need.</p>
           <div class="hero-actions">
             <a class="btn btn-gold" href="tel:+18505731705">
@@ -111,16 +111,24 @@
           </div>
         </div>
 
-        <aside class="hero-card" aria-label="Contact Morse Electric">
-          <h2>Talk to Ben directly</h2>
-          <p>Your call goes straight to the owner.</p>
-          <a class="big-phone" href="tel:+18505731705">850-573-1705</a>
-          <dl>
-            <div><dt>Owner</dt><dd>Ben Morse</dd></div>
-            <div><dt>License</dt><dd>FL ER13014836</dd></div>
-            <div><dt>Location</dt><dd><a href="https://www.google.com/maps/dir/?api=1&amp;destination=5680+Hansford+Rd%2C+Marianna%2C+FL+32448" target="_blank" rel="noopener">5680 Hansford Rd., Marianna</a></dd></div>
-          </dl>
-        </aside>
+        <!-- REQUEST A QUOTE form. Uses Netlify Forms (free): messages show up in the
+             Netlify dashboard under Forms. -->
+        <form class="quote-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="company">
+          <h2>Request a Free Quote</h2>
+          <input type="hidden" name="form-name" value="quote-request">
+          <p class="hidden-field"><label>Leave this empty <input name="company"></label></p>
+          <div class="row">
+            <div><label for="q-first">First Name <small>(required)</small></label><input id="q-first" name="first-name" autocomplete="given-name" required></div>
+            <div><label for="q-last">Last Name <small>(required)</small></label><input id="q-last" name="last-name" autocomplete="family-name" required></div>
+          </div>
+          <label for="q-phone">Phone Number <small>(required)</small></label>
+          <input id="q-phone" name="phone" type="tel" autocomplete="tel" required>
+          <label for="q-email">Email <small>(required)</small></label>
+          <input id="q-email" name="email" type="email" autocomplete="email" required>
+          <label for="q-msg">Message <small>(required)</small></label>
+          <textarea id="q-msg" name="message" placeholder="How may we help you?" required></textarea>
+          <button class="submit" type="submit">Submit</button>
+        </form>
       </div>
 
       <div class="hero-strip">
@@ -219,11 +227,10 @@
 
     <!-- ========== WHY CHOOSE ========== -->
     <section class="section why" id="why" aria-labelledby="why-title">
-      <div class="why-bg"><img src="assets/img/why-wiring.jpg" alt="" width="1800" height="1200" loading="lazy"></div>
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Why Morse Electric</span>
-          <h2 id="why-title">Why choose Morse Electric</h2>
+          <h2 id="why-title">Why Morse Electric?</h2>
           <p>Electrical work should be done safely, explained clearly and finished right.</p>
         </div>
         <div class="why-grid">
@@ -272,7 +279,7 @@
           <figure class="reveal" tabindex="0"><img src="assets/img/gallery-03.jpg" alt="Electrical conduit runs" width="1000" height="750" loading="lazy"><figcaption>Conduit &amp; Wiring</figcaption></figure>
           <figure class="reveal" tabindex="0"><img src="assets/img/gallery-04.jpg" alt="Home exterior lit at dusk" width="1000" height="750" loading="lazy"><figcaption>Residential</figcaption></figure>
           <figure class="reveal" tabindex="0"><img src="assets/img/gallery-05.jpg" alt="Wiring inside a junction box" width="1000" height="750" loading="lazy"><figcaption>Rough-In Wiring</figcaption></figure>
-          <figure class="reveal" tabindex="0"><img src="assets/img/gallery-06.jpg" alt="Electrical service panel work" width="1000" height="750" loading="lazy"><figcaption>Service Work</figcaption></figure>
+          <figure class="reveal" tabindex="0"><img src="assets/img/gallery-06.jpg" alt="Circuit breakers and wiring in an electrical panel" width="1000" height="750" loading="lazy"><figcaption>Panel Wiring</figcaption></figure>
         </div>
       </div>
     </section>
