@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07",
+  "updated": "2026-11-09",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -593,6 +593,101 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7705469585893510431"
+    },
+    {
+      "title": "Bacopa for Memory and Attention",
+      "tested": "Standardized bacopa extract vs placebo, at least 12 weeks",
+      "who": "9 trials, 518 people",
+      "length": "12 weeks or more",
+      "result": "Faster on a timed attention test (Trail B) and quicker reaction time vs placebo. Mostly healthy adults. Authors say a large trial against an existing medicine is still needed.",
+      "id": "memory-and-dementia-01-bacopa-for-memory",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24252493/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Ginseng for Memory",
+      "tested": "Ginseng preparations vs control",
+      "who": "15 randomized trials, 671 people (healthy adults to Alzheimer's disease)",
+      "length": "",
+      "result": "Small improvement in memory, larger at high doses. No effect on overall cognition, attention or executive function. More high-quality studies needed.",
+      "id": "memory-and-dementia-02-ginseng-for-memory",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39474788/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Nattospes After Stroke",
+      "tested": "Nattospes supplement plus standard care vs standard care alone",
+      "who": "61 people in the subacute stage of ischemic stroke",
+      "length": "60 days",
+      "result": "Both groups improved; the Nattospes group showed significant improvement on modified Rankin, Orgogozo and Barthel scales, with no adverse effects reported. Small, single-blinded trial.",
+      "id": "stroke-02-nattospes-after-stroke",
+      "topic": "Stroke",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31934821/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "The MIND Diet Trial",
+      "tested": "MIND diet with mild calorie restriction vs control diet with mild calorie restriction",
+      "who": "604 older adults with a family history of dementia",
+      "length": "3 years",
+      "result": "Thinking scores improved in both groups (0.205 vs 0.170), with no significant difference. Brain MRI changes were also similar.",
+      "id": "memory-and-dementia-03-the-mind-diet-trial",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37466280/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "East Asian Herbal Medicine for Sleep After Stroke",
+      "tested": "Traditional East Asian herbal medicine alone vs control",
+      "who": "24 randomized trials, 1,942 people with insomnia after stroke",
+      "length": "",
+      "result": "Improved sleep quality and appeared safer than psychotropic drugs (except in two-week trials). Trial quality was poor and evidence was rated low or moderate.",
+      "id": "stroke-01-herbal-medicine-for-sleep-after-stroke",
+      "topic": "Stroke",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35162777/"
+        }
+      ],
+      "tiktok": ""
     }
   ],
   "reports": {
@@ -602,6 +697,7 @@
     "Enlarged Prostate": "/hidden-studies-lists/enlarged-prostate.html",
     "Fatty Liver": "/hidden-studies-lists/fatty-liver.html",
     "High Blood Pressure": "/hidden-studies-lists/high-blood-pressure.html",
+    "Memory and Dementia": "/hidden-studies-lists/memory-and-dementia.html",
     "Migraines": "/hidden-studies-lists/migraines.html",
     "POTS": "/hidden-studies-lists/pots.html",
     "Type 2 Diabetes": "/hidden-studies-lists/type-2-diabetes.html"
