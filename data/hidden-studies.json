@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -611,7 +611,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/24252493/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706270347246538015"
     },
     {
       "title": "Ginseng for Memory",
@@ -630,7 +630,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/39474788/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706270494311320863"
     },
     {
       "title": "Nattospes After Stroke",
@@ -649,7 +649,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/31934821/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706270743885008159"
     },
     {
       "title": "The MIND Diet Trial",
@@ -668,7 +668,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/37466280/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706270838781267231"
     },
     {
       "title": "East Asian Herbal Medicine for Sleep After Stroke",
@@ -685,6 +685,101 @@
         {
           "label": "Read the study",
           "url": "https://pubmed.ncbi.nlm.nih.gov/35162777/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706270616449600798"
+    },
+    {
+      "title": "Aquagenic Pruritus: What Helped 36 Patients",
+      "tested": "Ultraviolet B light therapy and oral antihistamines (case series)",
+      "who": "36 people with aquagenic pruritus",
+      "length": "",
+      "result": "UVB light gave significant relief to 8 of 14 (57%); antihistamines gave partial relief to 16 of 34. No control group. Authors advise checking everyone with this itch for polycythemia vera.",
+      "id": "aquagenic-pruritus-01-itching-from-water",
+      "topic": "Aquagenic Pruritus",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2411768/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Capsaicin Cream for Aquagenic Pruritus",
+      "tested": "Capsaicin cream 0.025%, 0.5% or 1.0% three times daily vs plain cream on other skin",
+      "who": "5 people with aquagenic pruritus",
+      "length": "4 weeks",
+      "result": "After capsaicin, contact with water no longer caused itching where capsaicin was used; areas with plain cream showed no improvement. Very small study.",
+      "id": "aquagenic-pruritus-02-capsaicin-cream-for-water-itch",
+      "topic": "Aquagenic Pruritus",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7507135/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Baking Soda Baths for Aquagenic Pruritus",
+      "tested": "Sodium bicarbonate added to bath water; emollients for the elderly form",
+      "who": "4 patients (2 aquagenic pruritus, 2 aquagenic pruritus of the elderly)",
+      "length": "",
+      "result": "The 2 aquagenic pruritus patients were helped by sodium bicarbonate baths; the 2 elderly patients responded to emollients. Case report; more cases needed.",
+      "id": "aquagenic-pruritus-03-baking-soda-baths-for-water-itch",
+      "topic": "Aquagenic Pruritus",
+      "status": "published",
+      "rating": "reported",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/2838535/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Aprepitant vs Hydroxyzine Trial (No Results Posted)",
+      "tested": "Aprepitant vs hydroxyzine (double blind) with cytoreductive therapy",
+      "who": "63 people with myeloproliferative neoplasms and persistent aquagenic pruritus",
+      "length": "Finished August 2024",
+      "result": "Completed, but no results posted on ClinicalTrials.gov.",
+      "id": "aquagenic-pruritus-04-the-water-itch-trial-with-no-results",
+      "topic": "Aquagenic Pruritus",
+      "status": "published",
+      "rating": "unfinished",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://clinicaltrials.gov/study/NCT03808805"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Mediterranean Diet with Olive Oil or Nuts for Cognition",
+      "tested": "Mediterranean diet with extra virgin olive oil or mixed nuts vs low-fat diet",
+      "who": "522 older adults at high vascular risk (PREDIMED-NAVARRA)",
+      "length": "About 6.5 years",
+      "result": "Both Mediterranean diet groups had higher MMSE and clock-drawing scores than the low-fat group. Differences were small.",
+      "id": "memory-and-dementia-04-olive-oil-nuts-and-memory",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23670794/"
         }
       ],
       "tiktok": ""
