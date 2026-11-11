@@ -783,6 +783,139 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706564347992100126"
+    },
+    {
+      "title": "Ear Vagus Nerve Stimulation for POTS",
+      "tested": "Ear (tragus) vagus nerve stimulation vs sham on the earlobe, 1 hour daily",
+      "who": "26 women with POTS",
+      "length": "2 months",
+      "result": "Heart rate rise on standing was smaller with real stimulation (17.6 vs 31.7 beats/min). Inflammatory cytokines and anti-adrenergic antibodies were lower; no device side effects. Small trial.",
+      "id": "pots-04-ear-nerve-stimulation-for-pots",
+      "topic": "POTS",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37999672/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Beta-Sitosterol for Enlarged Prostate",
+      "tested": "Beta-sitosterol 20 mg three times daily vs placebo",
+      "who": "200 men with symptomatic BPH",
+      "length": "6 months",
+      "result": "IPSS dropped 7.4 vs 2.1 points; peak urine flow rose from 9.9 to 15.2 mL/s and residual urine fell. No change in prostate size.",
+      "id": "enlarged-prostate-07-beta-sitosterol-for-the-prostate",
+      "topic": "Enlarged Prostate",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7540705/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Cranberry Powder for Prostate Symptoms",
+      "tested": "Cranberry fruit powder 250 or 500 mg daily vs placebo",
+      "who": "124 men over 45 with lower urinary tract symptoms",
+      "length": "6 months",
+      "result": "IPSS fell 3.1 (250 mg) and 4.1 (500 mg) vs 1.5 on placebo, with a dose effect; urine flow improved on 500 mg. No change in blood markers.",
+      "id": "enlarged-prostate-08-cranberry-for-prostate-symptoms",
+      "topic": "Enlarged Prostate",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26049866/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Pygeum africanum for Enlarged Prostate",
+      "tested": "Pygeum africanum extract vs placebo",
+      "who": "18 randomized trials, 1,562 men with BPH",
+      "length": "Average 64 days",
+      "result": "More than twice as likely to report improved symptoms; nocturia down 19%, residual urine down 24%, peak flow up 23%. Side effects similar to placebo. Trials were small and short.",
+      "id": "enlarged-prostate-09-pygeum-bark-for-the-prostate",
+      "topic": "Enlarged Prostate",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11869585/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "The Saw Palmetto Trial",
+      "tested": "Saw palmetto extract 160 mg twice daily vs placebo",
+      "who": "225 men over 49 with moderate-to-severe BPH symptoms",
+      "length": "1 year",
+      "result": "No significant difference in symptom scores, urine flow, prostate size, residual volume, quality of life or PSA. Side effects similar.",
+      "id": "enlarged-prostate-10-the-saw-palmetto-trial",
+      "topic": "Enlarged Prostate",
+      "status": "published",
+      "rating": "strong",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16467543/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Western Plus Chinese Medicine for Stroke Rehab",
+      "tested": "Western medicine plus Chinese medicine (acupuncture or herbs) vs Western medicine alone",
+      "who": "58 studies, 6,339 stroke patients",
+      "length": "Most studies 2 to 4 weeks",
+      "result": "Acupuncture added to standard care improved dependency and swallowing; possible benefit for depression. Short studies with high risk of bias.",
+      "id": "stroke-03-chinese-medicine-plus-rehab-after-stroke",
+      "topic": "Stroke",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34446530/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Huperzine A for Alzheimer's Disease",
+      "tested": "Huperzine A vs placebo",
+      "who": "6 trials, 454 patients with Alzheimer's disease",
+      "length": "Up to 12 weeks",
+      "result": "Improved MMSE at 6 and 12 weeks, global status, behavior and daily function, with mild side effects. Not better on HDS or WMS. Only one trial was adequate quality.",
+      "id": "memory-and-dementia-05-huperzine-a-for-alzheimer-s",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18425924/"
+        }
+      ],
+      "tiktok": ""
     }
   ],
   "reports": {
