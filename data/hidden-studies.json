@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17",
+  "updated": "2026-11-18",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -992,18 +992,98 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709235273791540510"
+    },
+    {
+      "title": "Lactobacillus plantarum for Chronic Kidney Disease",
+      "tested": "Lactobacillus plantarum probiotic daily vs placebo (double-blind)",
+      "who": "72 people with CKD stage 3 or 4",
+      "length": "6 months",
+      "result": "eGFR rose in the probiotic group and declined on placebo; no probiotic patients progressed vs 8.6% on placebo. Benefit seen with and without diabetes. Single small trial.",
+      "id": "kidney-disease-01-probiotics-for-declining-kidneys",
+      "topic": "Kidney Disease",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42697907/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Astragalus for Chronic Kidney Disease (Cochrane)",
+      "tested": "Astragalus (huang qi) alone or added to conventional therapy vs control",
+      "who": "22 studies, 1,323 people with CKD (241 on dialysis)",
+      "length": "",
+      "result": "Lowered 24-hour proteinuria and raised hemoglobin and serum albumin; kidney function results inconsistent. Low study quality; no data on dialysis or survival.",
+      "id": "kidney-disease-02-astragalus-root-for-kidney-disease",
+      "topic": "Kidney Disease",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25335553/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Mediterranean Diet and Dementia Risk (Meta-analysis)",
+      "tested": "Adherence to the Mediterranean diet (observational)",
+      "who": "23 studies",
+      "length": "",
+      "result": "Lower risk of cognitive impairment (HR 0.82), dementia (HR 0.89) and Alzheimer's (HR 0.70). Observational, with significant heterogeneity.",
+      "id": "memory-and-dementia-07-mediterranean-diet-and-dementia-risk",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39797935/"
+        }
+      ],
+      "tiktok": ""
+    },
+    {
+      "title": "Exercise and Psoriasis (Umbrella Review)",
+      "tested": "Exercise and physical activity (mostly observational)",
+      "who": "9 reviews covering psoriasis and psoriatic arthritis",
+      "length": "",
+      "result": "Vigorous activity (RR 0.76) and regular exercise (RR 0.88) linked to lower psoriasis prevalence. No review tested effects on skin severity; PsA trial evidence very low certainty.",
+      "id": "psoriasis-03-exercise-and-psoriasis",
+      "topic": "Psoriasis",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42920485/"
+        }
+      ],
+      "tiktok": ""
     }
   ],
   "reports": {
+    "Aquagenic Pruritus": "/hidden-studies-lists/aquagenic-pruritus.html",
     "Arterial Plaque": "/hidden-studies-lists/arterial-plaque.html",
     "Arthritis": "/hidden-studies-lists/arthritis.html",
     "Autoimmune": "/hidden-studies-lists/autoimmune.html",
     "Enlarged Prostate": "/hidden-studies-lists/enlarged-prostate.html",
     "Fatty Liver": "/hidden-studies-lists/fatty-liver.html",
     "High Blood Pressure": "/hidden-studies-lists/high-blood-pressure.html",
+    "Kidney Disease": "/hidden-studies-lists/kidney-disease.html",
     "Memory and Dementia": "/hidden-studies-lists/memory-and-dementia.html",
     "Migraines": "/hidden-studies-lists/migraines.html",
     "POTS": "/hidden-studies-lists/pots.html",
+    "Psoriasis": "/hidden-studies-lists/psoriasis.html",
+    "Stroke": "/hidden-studies-lists/stroke.html",
     "Type 2 Diabetes": "/hidden-studies-lists/type-2-diabetes.html"
   }
 }
