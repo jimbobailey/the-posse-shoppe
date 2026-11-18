@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-17",
   "studies": [
     {
       "id": "plaque-02-nattokinase",
@@ -839,7 +839,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/26049866/"
         }
       ],
-      "tiktok": ""
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709234394036325662"
     },
     {
       "title": "Pygeum africanum for Enlarged Prostate",
@@ -916,6 +916,82 @@
         }
       ],
       "tiktok": "https://www.tiktok.com/@hidden.studies/video/7706932472923049246"
+    },
+    {
+      "title": "Mediterranean Diet for Psoriasis (MEDIPSO)",
+      "tested": "Dietitian-guided Mediterranean diet with extra virgin olive oil vs low-fat diet advice",
+      "who": "38 adults with mild to moderate psoriasis on topical therapy",
+      "length": "16 weeks",
+      "result": "PASI fell 3.4 points vs 0.0 in the control group; 9 of 19 reached PASI 75 vs none. HbA1c also improved. Small, single-center, open-label trial.",
+      "id": "psoriasis-01-mediterranean-diet-for-psoriasis",
+      "topic": "Psoriasis",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40991259/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709234618158845215"
+    },
+    {
+      "title": "Chinese Herbal Medicine Baths for Psoriasis",
+      "tested": "Chinese herbal medicine baths added to conventional therapy vs conventional therapy alone",
+      "who": "23 randomized trials, 2,183 adults with psoriasis vulgaris",
+      "length": "Best results at 8 weeks",
+      "result": "Lower PASI, itch and DLQI with herbal baths added; best with baths above 38 °C for 20-30 minutes. Evidence rated low to moderate; results varied.",
+      "id": "psoriasis-02-herbal-baths-for-psoriasis",
+      "topic": "Psoriasis",
+      "status": "published",
+      "rating": "early",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38537444/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709235134406446366"
+    },
+    {
+      "title": "Aerobic Exercise for Thinking in Older Adults",
+      "tested": "Aerobic exercise programs vs other or no intervention",
+      "who": "11 randomized trials, people over 55 without cognitive impairment",
+      "length": "",
+      "result": "Fitness rose about 14% in 8 of 11 studies, with gains in motor function, auditory attention and delayed memory (one study). Most comparisons were not significant.",
+      "id": "memory-and-dementia-06-exercise-for-an-aging-brain",
+      "topic": "Memory and Dementia",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18425918/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709234981603675422"
+    },
+    {
+      "title": "Citicoline for Acute Ischemic Stroke (Cochrane)",
+      "tested": "Citicoline 500-2,000 mg/day vs placebo or standard care",
+      "who": "10 randomized trials, 4,281 people with acute ischemic stroke",
+      "length": "",
+      "result": "Little to no difference in death (17.3% vs 18.5%), disability, functional recovery or neurological function. All trials at high risk of bias; 6 drug-company sponsored.",
+      "id": "stroke-04-the-citicoline-stroke-review",
+      "topic": "Stroke",
+      "status": "published",
+      "rating": "moderate",
+      "rating_note": "",
+      "links": [
+        {
+          "label": "Read the study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32860632/"
+        }
+      ],
+      "tiktok": "https://www.tiktok.com/@hidden.studies/video/7709235273791540510"
     }
   ],
   "reports": {
